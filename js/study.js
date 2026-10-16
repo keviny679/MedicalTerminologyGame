@@ -3,7 +3,7 @@
 
 export const CHAPTER_FILES = [
   "01-word-anatomy", "02-body-as-a-whole", "03-integumentary", "04-musculoskeletal",
-  "05-cardiovascular",
+  "05-cardiovascular", "06-blood-lymph-immune", "07-respiratory",
 ];
 
 const KIND = { P: "part", T: "term", A: "abbr" };

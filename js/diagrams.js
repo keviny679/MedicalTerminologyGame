@@ -830,12 +830,191 @@ const vessels = {
   overlay: '<path d="M146,64 l12,10 l12,-10" class="detail"/>',
 };
 
+/* ===================================================== BLOOD, LYMPH, IMMUNE */
+
+function bloodCells() {
+  const kinds = [
+    ["rbc", "Erythrocyte (red blood cell)", 22, "#d84848"],
+    ["neutrophil", "Neutrophil", 22, "#eadcf2"],
+    ["eosinophil", "Eosinophil", 22, "#f4c2b2"],
+    ["basophil", "Basophil", 21, "#cfc2ea"],
+    ["lymphocyte", "Lymphocyte", 17, "#cfdcf2"],
+    ["monocyte", "Monocyte", 26, "#ddd6ec"],
+    ["platelet", "Platelets (thrombocytes)", 0, "#c9a0e0"],
+  ];
+  const regions = {};
+  const over = [];
+  kinds.forEach(([id, label, r, c], i) => {
+    const col = i % 4, row = Math.floor(i / 4);
+    const x = 40 + col * 76, y = 46 + row * 104;
+    const d = id === "platelet"
+      ? [[-12, -6, 5], [6, -10, 4], [12, 8, 5], [-6, 10, 4]].map(([dx, dy, rr]) => circle(x + dx, y + dy, rr)).join(" ")
+      : circle(x, y, r);
+    regions[id] = { label, short: label.split(" (")[0], d, c, tip: [x, y], lab: [x, y + 46], center: true };
+    const nuc = "#5a3a8a";
+    if (id === "rbc") over.push(`<path d="${circle(x, y, 9)}" style="fill:#f08a8a55"/>`);
+    if (id === "neutrophil") over.push(`<path d="${circle(x - 8, y - 4, 6)} ${circle(x + 2, y + 4, 6)} ${circle(x + 10, y - 3, 5)}" style="fill:${nuc}"/>`);
+    if (id === "eosinophil") {
+      over.push(`<path d="${circle(x - 7, y, 7)} ${circle(x + 7, y, 7)}" style="fill:${nuc}"/>`);
+      [[-14, -10], [12, -12], [-2, 14], [14, 10], [-14, 10], [0, -16]].forEach(([dx, dy]) => over.push(`<path d="${circle(x + dx, y + dy, 2.5)}" style="fill:#e0503a"/>`));
+    }
+    if (id === "basophil") {
+      over.push(`<path d="${circle(x, y, 9)}" style="fill:${nuc}"/>`);
+      [[-12, -8], [10, -12], [-4, 13], [13, 7], [-14, 6], [2, -15], [8, 2], [-6, -2]].forEach(([dx, dy]) => over.push(`<path d="${circle(x + dx, y + dy, 2.8)}" style="fill:#2a1a5a"/>`));
+    }
+    if (id === "lymphocyte") over.push(`<path d="${circle(x, y, 13)}" style="fill:${nuc}"/>`);
+    if (id === "monocyte") over.push(`<path d="M${x - 14},${y - 6} C${x - 10},${y - 18} ${x + 14},${y - 18} ${x + 14},${y - 2} C${x + 14},${y + 12} ${x - 6},${y + 14} ${x - 4},${y + 2} C${x - 2},${y - 6} ${x - 14},${y + 6} ${x - 14},${y - 6} Z" style="fill:${nuc}"/>`);
+  });
+  return {
+    title: "Formed elements of the blood",
+    ask: "Which blood cell is highlighted?",
+    viewBox: "0 0 320 220",
+    regions,
+    groups: { leukocytes: { label: "Leukocytes (white blood cells)", members: ["neutrophil", "eosinophil", "basophil", "lymphocyte", "monocyte"] } },
+    overlay: over.join(""),
+  };
+}
+
+const bloodTube = {
+  title: "Blood sample after spinning (centrifuged)",
+  ask: "Name the highlighted layer of the blood sample.",
+  viewBox: "0 0 200 280",
+  crop: [50, 0, 100, 280],
+  base: '<path d="M80,10 L120,10 L120,240 C120,270 80,270 80,240 Z" class="base" style="fill:#e9ecff22"/>',
+  regions: {
+    plasma: { label: "Plasma (about 55%)", c: "#f2d36b", d: "M82,40 L118,40 L118,150 L82,150 Z", tip: [100, 90], lab: [190, 90] },
+    buffy: { label: "Buffy coat (white cells and platelets)", c: "#f4f1e8", d: "M82,150 L118,150 L118,156 L82,156 Z", tip: [110, 153], lab: [190, 150] },
+    rbcs: { label: "Red blood cells (hematocrit, about 45%)", c: "#c0303a", d: "M82,156 L118,156 L118,240 C118,266 82,266 82,240 Z", tip: [100, 210], lab: [190, 210] },
+  },
+  groups: { formed: { label: "Formed elements", members: ["buffy", "rbcs"], tip: [90, 200], lab: [10, 200] } },
+  extraLabels: ["Serum"],
+};
+
+const BODY =
+  '<path d="M150,18 C164,18 172,30 172,42 C172,56 164,64 150,64 C136,64 128,56 128,42 C128,30 136,18 150,18 Z ' +
+  'M140,64 L160,64 L162,76 C186,78 202,84 206,96 L222,190 L208,194 L194,112 L192,206 L186,350 L162,350 L152,226 L148,226 L138,350 L114,350 ' +
+  'L108,206 L106,112 L92,194 L78,190 L94,96 C98,84 114,78 138,76 Z" class="base" style="fill:#262c55"/>';
+
+const lymphatic = {
+  title: "Lymphatic system",
+  ask: "Name the highlighted lymphatic structure.",
+  viewBox: "0 0 300 360",
+  crop: [70, 10, 160, 344],
+  base: BODY,
+  regions: {
+    vessels: {
+      label: "Lymph vessels", line: "M114,120 L100,186 M186,120 L200,186 M128,232 L124,340 M172,232 L176,340 M150,150 L132,224 M150,150 L168,224",
+      w: 1.6, c: "#59d98e", tip: [124, 300], lab: [10, 300],
+    },
+    duct: { label: "Thoracic duct", line: "M150,216 L148,150 L146,92 L140,84", w: 3, c: "#2fae6e", tip: [148, 170], lab: [290, 170] },
+    tonsils: { label: "Tonsils", d: `${circle(143, 54, 3)} ${circle(157, 54, 3)}`, c: "#f2a65a", tip: [157, 54], lab: [290, 40] },
+    cervical: { label: "Cervical lymph nodes", d: [[138, 70], [134, 76], [162, 70], [166, 76]].map(([x, y]) => circle(x, y, 3)).join(" "), c: "#7fd06f", tip: [134, 76], lab: [10, 70] },
+    thymus: { label: "Thymus", d: "M144,88 C140,98 142,108 150,110 C158,108 160,98 156,88 Z", c: "#f2c94c", tip: [150, 100], lab: [290, 96] },
+    axillary: { label: "Axillary lymph nodes", d: [[112, 106], [116, 112], [188, 106], [184, 112]].map(([x, y]) => circle(x, y, 3.2)).join(" "), c: "#7fd06f", tip: [112, 106], lab: [10, 110] },
+    spleen: { label: "Spleen", d: "M176,140 C186,136 194,146 190,160 C186,168 178,166 176,158 Z", c: "#a04a8a", tip: [186, 152], lab: [290, 140] },
+    intestinal: { label: "Lymph nodes of the intestines", d: [[140, 176], [152, 182], [162, 174], [146, 192]].map(([x, y]) => circle(x, y, 2.6)).join(" "), c: "#7fd06f", tip: [152, 182], lab: [290, 206] },
+    inguinal: { label: "Inguinal lymph nodes", d: [[128, 226], [134, 232], [172, 226], [166, 232]].map(([x, y]) => circle(x, y, 3.2)).join(" "), c: "#7fd06f", tip: [128, 226], lab: [10, 232] },
+    marrow: { label: "Red bone marrow", line: "M124,262 L122,300 M176,262 L178,300", w: 3, c: "#d84848", tip: [123, 280], lab: [10, 270] },
+  },
+  groups: {
+    nodes: { label: "Lymph nodes", members: ["cervical", "axillary", "inguinal", "intestinal"], tip: [116, 112], lab: [10, 150] },
+  },
+};
+
+/* =============================================================== RESPIRATORY */
+
+const respiratory = {
+  title: "Respiratory system (patient's right is on your left)",
+  ask: "Name the highlighted part of the respiratory system.",
+  viewBox: "0 0 320 320",
+  crop: [52, 8, 216, 304],
+  base: '<path d="M126,64 C120,40 130,12 160,12 C190,12 200,40 194,64" class="detail" style="stroke:#8f97c9;stroke-dasharray:3 3"/>',
+  regions: {
+    rul: { label: "Right upper lobe", c: "#f0a8b8", d: "M146,150 C116,130 76,144 66,190 L68,200 L146,206 Z", tip: [100, 170], lab: [10, 150] },
+    rml: { label: "Right middle lobe", c: "#e890a8", d: "M68,200 L146,206 L146,240 C120,236 92,240 72,250 C66,234 66,214 68,200 Z", tip: [96, 222], lab: [10, 214] },
+    rll: { label: "Right lower lobe", c: "#d87898", d: "M72,250 C92,240 120,236 146,240 L146,290 C128,294 100,296 76,300 C66,284 64,266 72,250 Z", tip: [100, 270], lab: [10, 266] },
+    lul: { label: "Left upper lobe", c: "#f0a8b8", d: "M174,150 C204,130 240,144 248,190 L250,212 C224,214 198,222 182,236 L174,232 Z", tip: [216, 180], lab: [310, 160] },
+    lll: { label: "Left lower lobe", c: "#d87898", d: "M250,212 C256,250 252,282 238,300 C216,296 196,294 180,290 L180,270 C192,262 194,246 182,236 C198,222 224,214 250,212 Z", tip: [222, 260], lab: [310, 262] },
+    nasal: { label: "Nasal cavity", c: "#8fe0e0", d: "M146,22 C154,18 168,20 172,30 L174,46 L148,50 C142,42 140,28 146,22 Z", tip: [160, 34], lab: [10, 30] },
+    pharynx: { label: "Pharynx (throat)", c: "#7fb8e0", d: "M156,48 L172,46 L172,96 L158,98 Z", tip: [166, 72], lab: [310, 70] },
+    larynx: { label: "Larynx (voice box)", c: "#9a8fd8", d: "M148,98 L172,98 L170,126 L150,126 Z", tip: [160, 112], lab: [10, 106] },
+    epiglottis: { label: "Epiglottis", line: "M150,96 L162,88", w: 3, c: "#f2c94c", tip: [156, 92], lab: [310, 94] },
+    trachea: { label: "Trachea (windpipe)", c: "#cfd5e8", d: "M152,126 L168,126 L168,190 L152,190 Z", tip: [160, 160], lab: [310, 126] },
+    bronchi: { label: "Bronchi", c: "#e9e2cf", d: "M152,186 L158,192 L132,226 L124,220 Z M162,192 L168,186 L204,210 L198,218 Z", tip: [140, 206], lab: [10, 190] },
+    bronchioles: {
+      label: "Bronchioles", line: "M128,222 l-18,14 M128,222 l-4,26 M110,236 l-14,4 M110,236 l-2,14 M200,214 l18,12 M200,214 l4,26 M218,226 l14,0 M218,226 l2,14",
+      w: 2, c: "#f4f1e8", tip: [218, 226], lab: [310, 214],
+    },
+    alveoli: { label: "Alveoli (air sacs)", d: [[94, 240], [99, 244], [94, 248], [106, 252], [110, 256], [105, 258]].map(([x, y]) => circle(x, y, 3)).join(" "), c: "#ffd0dc", tip: [100, 248], lab: [10, 240] },
+    pleura: { label: "Pleura", line: "M148,146 C114,124 70,140 60,190 C52,240 56,284 72,304 M172,146 C206,124 250,140 260,190 C268,240 264,284 248,304", w: 2, c: "#c7c9ff", tip: [60, 190], lab: [10, 180] },
+    diaphragm: { label: "Diaphragm", line: "M56,306 C100,286 130,298 160,302 C190,298 220,286 264,306", w: 4, c: "#c96b72", tip: [210, 292], lab: [310, 300] },
+  },
+  groups: {
+    rightLung: { label: "Right lung (3 lobes)", members: ["rul", "rml", "rll"], tip: [80, 230], lab: [10, 290] },
+    leftLung: { label: "Left lung (2 lobes)", members: ["lul", "lll"], tip: [240, 230], lab: [310, 240] },
+    upper: { label: "Upper respiratory tract", members: ["nasal", "pharynx", "larynx"], tip: [150, 60], lab: [10, 56] },
+    lower: { label: "Lower respiratory tract", members: ["trachea", "bronchi", "rul", "rml", "rll", "lul", "lll", "alveoli"], tip: [160, 176], lab: [310, 186] },
+  },
+  overlay: [134, 142, 150, 158, 166, 174, 182].map((y) => `<path d="M152,${y} h16" class="detail"/>`).join(""),
+};
+
+const alveolus = {
+  crop: [0, 22, 300, 182],
+  title: "Alveoli and gas exchange",
+  ask: "Name the highlighted structure.",
+  viewBox: "0 0 300 210",
+  regions: {
+    bronchiole: { label: "Terminal bronchiole", c: "#e9e2cf", d: "M10,98 L104,98 L104,118 L10,118 Z", tip: [50, 108], lab: [10, 150] },
+    duct: { label: "Alveolar duct", c: "#d8cfb4", d: "M104,102 L136,94 L142,124 L104,114 Z", tip: [122, 110], lab: [10, 186] },
+    alveoli: {
+      label: "Alveoli", c: "#ffd0dc",
+      d: [[168, 78], [204, 70], [234, 96], [228, 134], [196, 148], [164, 134], [196, 108]].map(([x, y]) => circle(x, y, 20)).join(" "),
+      tip: [204, 70], lab: [290, 40],
+    },
+    capillaries: {
+      label: "Pulmonary capillaries", line: "M150,50 C190,30 254,50 260,106 C266,160 214,176 166,166 M140,140 C150,170 210,184 248,160",
+      w: 3.5, c: "#c77dff", tip: [258, 120], lab: [290, 130],
+    },
+  },
+  overlay:
+    '<text x="152" y="112" class="lbl" style="font-size:11px">O₂ →</text><text x="214" y="114" class="lbl" style="font-size:11px">← CO₂</text>' +
+    '<text x="150" y="196" class="lbl">O₂ moves into the blood; CO₂ moves out to be exhaled</text>',
+};
+
+const airway = {
+  title: "Head and neck, side view (face to the left)",
+  ask: "Name the highlighted part of the airway.",
+  viewBox: "0 0 300 300",
+  crop: [50, 10, 200, 290],
+  base:
+    '<path d="M100,20 C80,30 74,60 76,76 L60,96 L76,104 L74,124 L84,132 L80,146 L90,170 L108,174 L110,292 L206,292 L204,200 C226,180 236,140 232,100 C228,40 190,18 150,16 C130,16 112,16 100,20 Z" class="base"/>',
+  regions: {
+    nasal: { label: "Nasal cavity", c: "#8fe0e0", d: "M86,70 L152,62 L156,98 L84,104 Z", tip: [118, 84], lab: [10, 70] },
+    hardPalate: { label: "Hard palate", c: "#e9e2cf", d: "M84,104 L140,100 L140,107 L86,110 Z", tip: [110, 106], lab: [10, 106] },
+    softPalate: { label: "Soft palate", c: "#f0a8b8", d: "M140,100 L158,104 L156,124 L148,118 L140,107 Z", tip: [150, 112], lab: [290, 112] },
+    tongue: { label: "Tongue", c: "#d87070", d: "M92,118 C110,110 140,112 148,124 C152,146 140,164 120,166 L100,160 C94,148 90,130 92,118 Z", tip: [118, 140], lab: [10, 140] },
+    nasopharynx: { label: "Nasopharynx", c: "#7fb8e0", d: "M156,62 L178,60 L178,104 L158,104 Z", tip: [168, 80], lab: [290, 70] },
+    oropharynx: { label: "Oropharynx", c: "#6aa0d8", d: "M158,104 L178,104 L178,150 L156,150 Z", tip: [168, 128], lab: [290, 136] },
+    laryngopharynx: { label: "Laryngopharynx", c: "#5a88c8", d: "M160,150 L178,150 L180,196 L164,196 Z", tip: [172, 176], lab: [290, 170] },
+    epiglottis: { label: "Epiglottis", c: "#f2c94c", d: "M148,150 L158,140 L161,146 L154,160 Z", tip: [155, 150], lab: [10, 168] },
+    larynx: { label: "Larynx (voice box)", c: "#9a8fd8", d: "M136,160 L158,160 L160,204 L138,204 Z", tip: [146, 186], lab: [10, 196] },
+    cords: { label: "Vocal cords", line: "M138,184 L158,184", w: 3, c: "#f4f1e8", tip: [154, 184], lab: [10, 226] },
+    trachea: { label: "Trachea", c: "#cfd5e8", d: "M138,204 L160,204 L160,290 L138,290 Z", tip: [148, 250], lab: [10, 262] },
+    esophagus: { label: "Esophagus", c: "#e8b090", d: "M164,200 L182,200 L182,290 L164,290 Z", tip: [174, 250], lab: [290, 250] },
+  },
+  groups: {
+    pharynx: { label: "Pharynx (throat)", members: ["nasopharynx", "oropharynx", "laryngopharynx"], tip: [178, 120], lab: [290, 100] },
+  },
+  overlay: [214, 226, 238, 250, 262, 274].map((y) => `<path d="M138,${y} h22" class="detail"/>`).join(""),
+};
+
 /* ================================================================== EXPORTS */
 
 export const DIAGRAMS = {
   skullLateral, skullAnterior, skullInferior, skeleton, spine: spine(), longBone: longBoneDiagram,
   fractures: fractures(), joint, skin, burns, lesions: lesions(), planes, quadrants, regions: nineRegions(),
   cavities, cell, heart, conduction, vessels,
+  bloodCells: bloodCells(), bloodTube, lymphatic, respiratory, alveolus, airway,
 };
 
 // Label of a region or group.

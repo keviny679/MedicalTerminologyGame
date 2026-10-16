@@ -14,7 +14,7 @@ Torii Path, Sakura Temple and Moonlit Wave.
 - **Hints** show an example word from Wikipedia when one is listed.
 - Keys: `1`–`4` answer · `H` hint · `Enter` continue.
 - **Essentials of Medical Language mode:** a calm study mode with the same battles but no random upgrades.
-  Pick a chapter (1–5 so far) or one of its sections. Questions mix terms, definitions, abbreviations,
+  Pick a chapter (1–7 so far) or one of its sections. Questions mix terms, definitions, abbreviations,
   word-part breakdowns and "name the highlighted structure" diagrams. Bigger chapters mean longer runs.
   Missed terms come back more often, and the game tracks how much of each chapter you've seen and mastered.
   The content lives in `data/eml/*.txt` (one line per term). It is original study notes arranged by the

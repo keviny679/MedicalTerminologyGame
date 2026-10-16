@@ -34,15 +34,13 @@ jobs:
           node --test tests/*.mjs
       - name: Fetch and parse Wikipedia term list
         run: python scripts/build_terms.py --list
-      - name: Week number for the music cache
-        id: week
-        run: echo "week=$(date +%G-%V)" >> "$GITHUB_OUTPUT"
       - name: Cache compressed music
         uses: actions/cache@v4
         with:
           path: ${{ runner.temp }}/music-cache
-          key: music-${{ steps.week.outputs.week }}-${{ hashFiles('scripts/fetch_music.py') }}
-          restore-keys: music-
+          # a fresh key each run so newly encoded songs are always saved; restore the latest
+          key: music-${{ hashFiles('scripts/fetch_music.py') }}-${{ github.run_id }}
+          restore-keys: music-${{ hashFiles('scripts/fetch_music.py') }}-
       - name: Fetch lo-fi music from Google Drive
         continue-on-error: true
         env:
