@@ -16,106 +16,108 @@ const BONE = "#e9e2cf", BONE2 = "#ddd3b8", BONE3 = "#cfc39f";
 /* ===================================================================== SKULL */
 
 const skullLateral = {
-  crop: [46, 18, 214, 210],
+  crop: [40, 12, 250, 232],
   title: "Skull, lateral view (face to the left)",
   ask: "Name the highlighted part of the skull.",
   viewBox: "0 0 330 250",
   base:
-    // orbit, nasal opening shadow, ear canal and teeth
-    '<ellipse cx="86" cy="124" rx="17" ry="15" class="hole"/>',
+    // eye socket (orbit) and the dark nasal opening behind the nasal bone
+    '<ellipse cx="94" cy="118" rx="21" ry="19" class="hole"/>' +
+    '<path d="M54,146 C60,150 64,160 60,172 L52,168 C50,160 50,152 54,146 Z" class="hole"/>',
   regions: {
     frontal: {
       label: "Frontal bone", c: "#f0a8c8",
-      d: "M66,114 C56,80 78,38 130,28 C126,55 116,85 112,108 L106,118 L100,121 C96,112 88,108 80,108 C74,108 70,111 68,114 Z",
-      tip: [92, 64], lab: [40, 52],
+      d: "M60,108 C52,72 80,28 140,22 C136,52 130,80 128,104 L118,108 C112,98 102,94 92,94 C78,94 68,100 62,108 Z",
+      tip: [96, 60], lab: [40, 52],
     },
     parietal: {
       label: "Parietal bone", c: "#8fe0e0",
-      d: "M130,28 C174,22 210,36 226,64 L236,108 C216,100 188,96 162,98 C148,99 136,101 126,104 L112,108 C116,85 126,55 130,28 Z",
-      tip: [184, 58], lab: [262, 30],
-    },
-    sphenoid: {
-      label: "Sphenoid bone", c: "#9a8fd8",
-      d: "M112,108 L126,104 C129,116 128,128 124,140 L108,142 C104,132 106,118 112,108 Z",
-      tip: [116, 124], lab: [40, 96],
-    },
-    temporal: {
-      label: "Temporal bone", c: "#f2c27a",
-      d: "M126,104 C136,101 148,99 162,98 C188,96 216,100 236,108 L228,140 C222,150 216,160 208,166 L198,166 C190,160 180,158 172,158 L152,156 L152,150 L124,148 L124,140 C128,128 129,116 126,104 Z",
-      tip: [200, 118], lab: [262, 150],
+      d: "M140,22 C192,16 232,30 246,58 L250,92 C248,104 246,112 242,122 C222,108 196,100 172,100 C156,100 142,102 132,106 L128,104 C130,80 136,52 140,22 Z",
+      tip: [192, 56], lab: [290, 30],
     },
     occipital: {
       label: "Occipital bone", c: "#8fd88f",
-      d: "M226,64 C246,80 254,110 246,138 C240,156 228,170 212,178 L204,178 L208,166 C216,160 222,150 228,140 L236,108 Z",
-      tip: [238, 110], lab: [262, 98],
+      d: "M246,58 C266,78 274,116 262,150 C254,170 240,184 224,192 L214,184 C224,172 236,160 240,148 L242,122 C246,112 248,104 250,92 Z",
+      tip: [258, 120], lab: [290, 104],
     },
-    mastoid: {
-      label: "Mastoid process", c: "#e8ad5e",
-      d: "M198,166 L208,166 L206,184 C204,190 198,190 196,184 Z",
-      tip: [202, 178], lab: [262, 196],
+    temporal: {
+      label: "Temporal bone", c: "#f2c27a",
+      d: "M132,106 C142,102 156,100 172,100 C196,100 222,108 242,122 L240,148 C236,160 226,170 214,180 L206,172 C200,166 194,164 186,164 L170,162 L168,152 L136,150 L134,140 C136,128 135,116 132,106 Z",
+      tip: [212, 126], lab: [290, 150],
     },
-    meatus: {
-      label: "External acoustic meatus", c: "#3a3322",
-      d: "M174,140 C174,132 186,132 186,140 C186,148 174,148 174,140 Z",
-      tip: [180, 140], lab: [262, 172],
+    sphenoid: {
+      label: "Sphenoid bone (greater wing)", c: "#9a8fd8",
+      d: "M118,108 L132,106 C135,116 136,128 134,140 L118,142 C114,132 114,118 118,108 Z",
+      tip: [125, 124], lab: [40, 92],
     },
     zygomatic: {
-      label: "Zygomatic bone", c: "#9fd8a8",
-      d: "M100,121 L106,118 L112,128 L124,140 L124,148 L152,150 L152,156 L122,154 L108,156 C100,162 90,162 82,156 L80,146 C92,146 100,138 102,128 Z",
-      tip: [100, 150], lab: [40, 196],
-    },
-    ethmoid: {
-      label: "Ethmoid bone", c: "#7fd0a0",
-      d: "M76,114 L84,112 L84,126 L76,128 Z",
-      tip: [80, 120], lab: [40, 118],
-    },
-    lacrimal: {
-      label: "Lacrimal bone", c: "#7fb8e0",
-      d: "M70,118 L76,116 L76,130 L71,132 Z",
-      tip: [73, 126], lab: [40, 140],
+      label: "Zygomatic bone (cheekbone)", c: "#9fd8a8",
+      d: "M112,104 L118,108 L118,142 L136,150 L168,152 L170,162 L134,160 L120,164 C110,172 96,172 86,166 L82,152 C96,152 108,144 110,130 Z",
+      tip: [104, 158], lab: [40, 186],
     },
     nasal: {
       label: "Nasal bone", c: "#ff7fa8",
-      d: "M62,116 L68,114 L68,138 L54,144 C56,134 59,124 62,116 Z",
-      tip: [62, 132], lab: [40, 162],
+      d: "M60,108 L69,110 L66,136 L52,144 C54,130 56,118 60,108 Z",
+      tip: [61, 124], lab: [40, 150],
+    },
+    lacrimal: {
+      label: "Lacrimal bone", c: "#7fb8e0",
+      d: "M70,108 L77,106 L78,124 L72,127 Z",
+      tip: [74, 116], lab: [40, 132],
+    },
+    ethmoid: {
+      label: "Ethmoid bone", c: "#7fd0a0",
+      d: "M77,104 L88,102 L88,121 L78,124 Z",
+      tip: [83, 112], lab: [40, 112],
     },
     maxilla: {
-      label: "Maxilla", c: "#c7b3e8",
-      d: "M54,144 L68,138 L71,132 L76,142 L82,156 C90,162 100,162 108,156 L122,154 L124,170 L122,186 L64,190 C58,178 52,164 54,144 Z",
-      tip: [94, 172], lab: [40, 218],
+      label: "Maxilla (upper jaw)", c: "#c7b3e8",
+      d: "M52,144 L66,136 L72,127 L78,124 L82,152 L86,166 C96,172 110,172 120,164 L134,160 L138,178 L134,190 L62,192 C56,178 50,162 52,144 Z",
+      tip: [100, 180], lab: [40, 206],
     },
     mandible: {
-      label: "Mandible", c: "#f5b39a",
-      d: "M62,198 L124,196 L136,176 L140,156 L148,170 L160,152 L170,150 L168,162 L162,196 C160,206 156,214 148,216 L104,220 C84,220 68,214 62,198 Z",
-      tip: [110, 208], lab: [88, 240],
+      label: "Mandible (lower jaw)", c: "#f5b39a",
+      d: "M60,202 L132,200 L144,184 L150,162 L158,178 L170,160 L180,158 L178,170 L170,206 C168,216 164,224 156,228 L110,234 C88,234 70,226 60,202 Z",
+      tip: [118, 222], lab: [40, 230],
+    },
+    mastoid: {
+      label: "Mastoid process", c: "#e8ad5e",
+      d: "M206,172 L214,180 L216,198 C214,206 206,206 204,198 Z",
+      tip: [210, 192], lab: [290, 196],
+    },
+    meatus: {
+      label: "External acoustic meatus (ear canal)", c: "#2a2418",
+      d: "M186,148 C186,140 198,140 198,148 C198,156 186,156 186,148 Z",
+      tip: [192, 148], lab: [290, 172],
     },
     coronal: {
-      label: "Coronal suture", line: "M130,28 C126,55 116,85 112,108", w: 3, c: "#5b4a3a",
-      tip: [124, 60], lab: [150, 14],
+      label: "Coronal suture", line: "M140,22 C136,52 130,80 128,104", w: 3, c: "#3a2a20",
+      tip: [134, 60], lab: [160, 6],
     },
     squamous: {
-      label: "Squamous suture", line: "M126,104 C136,101 148,99 162,98 C188,96 216,100 236,108", w: 3, c: "#5b4a3a",
-      tip: [170, 98], lab: [262, 128],
+      label: "Squamous suture", line: "M132,106 C142,102 156,100 172,100 C196,100 222,108 242,122", w: 3, c: "#3a2a20",
+      tip: [182, 100], lab: [290, 128],
     },
     lambdoid: {
-      label: "Lambdoid suture", line: "M226,64 L236,108 L228,140", w: 3, c: "#5b4a3a",
-      tip: [231, 84], lab: [262, 76],
+      label: "Lambdoid suture", line: "M246,58 L250,92 C248,104 246,112 242,122 L240,148", w: 3, c: "#3a2a20",
+      tip: [249, 80], lab: [290, 70],
     },
   },
   groups: {
     cranium: {
       label: "Cranium (cranial bones)", members: ["frontal", "parietal", "temporal", "occipital", "sphenoid", "ethmoid", "mastoid"],
-      tip: [160, 40], lab: [200, 14],
+      tip: [180, 40], lab: [290, 12],
     },
     facial: {
       label: "Facial bones", members: ["nasal", "lacrimal", "zygomatic", "maxilla", "mandible"],
-      tip: [96, 182], lab: [40, 240],
+      tip: [90, 196], lab: [40, 240],
     },
   },
   overlay:
-    '<path d="M68,188 h52 M68,194 h52" class="detail"/>' +
-    [70, 78, 86, 94, 102, 110, 118].map((x) => `<path d="M${x},186 v12" class="detail"/>`).join("") +
-    '<circle cx="82" cy="208" r="2" class="hole"/>',
+    // teeth, the TMJ notch and the mental foramen
+    [66, 74, 82, 90, 98, 106, 114, 122].map((x) => `<path d="M${x},190 h7 v9 h-7 Z" class="tooth"/>`).join("") +
+    [66, 74, 82, 90, 98, 106, 114, 122].map((x) => `<path d="M${x},201 h7 v8 h-7 Z" class="tooth"/>`).join("") +
+    '<circle cx="84" cy="216" r="2.2" class="hole"/>',
 };
 
 const skullAnterior = {
@@ -1051,6 +1053,31 @@ const esc = (s) => String(s).replace(/[&<>"]/g, (c) => ({ "&": "&amp;", "<": "&l
 
 // SVG for a diagram. highlight: a region or group id.
 // labels: "none" | "one" (only the highlighted part) | "all" (atlas style).
+// Where to point at a region or group: its tip, or the middle of its shape.
+export function targetPoint(name, id) {
+  const d = DIAGRAMS[name];
+  const item = d.regions[id] || d.groups?.[id];
+  if (item?.tip) return item.tip;
+  const ids = d.groups?.[id]?.members || [id];
+  let x0 = Infinity, y0 = Infinity, x1 = -Infinity, y1 = -Infinity;
+  for (const m of ids) {
+    const path = d.regions[m]?.d || d.regions[m]?.line || "";
+    // absolute coordinate pairs only (skip pairs that follow a lowercase, relative command)
+    for (const mm of path.matchAll(/([A-Za-z]?)\s*(-?\d+(?:\.\d+)?),(-?\d+(?:\.\d+)?)/g)) {
+      if (mm[1] && mm[1] === mm[1].toLowerCase()) continue;
+      const x = +mm[2], y = +mm[3];
+      x0 = Math.min(x0, x); x1 = Math.max(x1, x); y0 = Math.min(y0, y); y1 = Math.max(y1, y);
+    }
+  }
+  return Number.isFinite(x0) ? [(x0 + x1) / 2, (y0 + y1) / 2] : null;
+}
+
+let arrowSeq = 0;
+
+// SVG for a diagram. highlight: a region or group id.
+// labels: "none" | "one" (only the highlighted part) | "all" (atlas style).
+// A highlighted part pulses, everything else is dimmed during a question,
+// and an arrow plus a ring point at it so even tiny parts can't be missed.
 export function renderDiagram(name, highlight = null, { labels = "none" } = {}) {
   const d = DIAGRAMS[name];
   if (!d) return "";
@@ -1059,20 +1086,24 @@ export function renderDiagram(name, highlight = null, { labels = "none" } = {}) 
     lit.add(highlight);
     (d.groups?.[highlight]?.members || []).forEach((m) => lit.add(m));
   }
-  const fills = [], outlines = [], strokes = [];
+  const fills = [], outlines = [], strokes = [], glows = [];
   for (const [id, r] of Object.entries(d.regions)) {
-    const hl = lit.has(id) ? " hl" : "";
+    const on = lit.has(id);
+    const hl = on ? " hl" : "";
     const title = `<title>${esc(r.label)}</title>`;
     if (r.line) {
+      if (on) glows.push(`<path d="${r.line}" class="glow" style="stroke-width:${r.w + 9}"/>`);
       strokes.push(`<path d="${r.line}" class="rbo" style="stroke-width:${r.w + 2}"/>`);
-      strokes.push(`<path d="${r.line}" class="rb${hl}" style="stroke:${r.c};stroke-width:${r.w}">${title}</path>`);
+      strokes.push(`<path d="${r.line}" class="rb${hl}" style="${on ? "" : `stroke:${r.c};`}stroke-width:${on ? r.w + 1.5 : r.w}">${title}</path>`);
     } else if (d.solid) {
       outlines.push(`<path d="${r.d}" class="solid-o"/>`);
-      fills.push(`<path d="${r.d}" class="r solid${hl}" style="fill:${r.c}">${title}</path>`);
+      fills.push(`<path d="${r.d}" class="r solid${hl}"${on ? "" : ` style="fill:${r.c}"`}>${title}</path>`);
     } else {
-      fills.push(`<path d="${r.d}" class="r${hl}" style="fill:${r.c}">${title}</path>`);
+      fills.push(`<path d="${r.d}" class="r${hl}"${on ? "" : ` style="fill:${r.c}"`}>${title}</path>`);
     }
   }
+  // highlighted fills are drawn last so nothing covers them
+  fills.sort((a, b) => (a.includes(" hl") ? 1 : 0) - (b.includes(" hl") ? 1 : 0));
   const [, , VW, VH] = d.viewBox.split(" ").map(Number);
   const [cx0, cy0, W0, H0] = d.crop || [0, 0, VW, VH];
   const charW = 6; // generous so labels never touch the drawing, whichever font loads
@@ -1093,8 +1124,9 @@ export function renderDiagram(name, highlight = null, { labels = "none" } = {}) 
     else cols[w.item.lab[0] - cx0 < W0 / 2 ? "L" : "R"].push(w);
   }
   const width = (w) => w.item.label.length * charW * (w.on ? 1.2 : 1);
-  const padL = cols.L.length ? Math.max(...cols.L.map(width)) + 16 : 0;
-  const padR = cols.R.length ? Math.max(...cols.R.map(width)) + 16 : 0;
+  const margin = highlight ? 34 : 0; // room for the pointer arrow
+  const padL = Math.max(margin, cols.L.length ? Math.max(...cols.L.map(width)) + 16 : 0);
+  const padR = Math.max(margin, cols.R.length ? Math.max(...cols.R.map(width)) + 16 : 0);
   const totalW = padL + W0 + padR;
   for (const side of ["L", "R"]) {
     const list = cols[side].sort((a, b) => a.item.lab[1] - b.item.lab[1]);
@@ -1125,13 +1157,34 @@ export function renderDiagram(name, highlight = null, { labels = "none" } = {}) 
     const [lx, ly] = w.item.lab;
     items.push(`<text x="${lx - cx0 + padL}" y="${ly - cy0}" text-anchor="middle" class="tag${w.on ? " on" : ""}">${esc(w.item.short || w.item.label)}</text>`);
   }
+  // Pointer: a ring around the target and a bold arrow coming in from outside.
+  let pointer = "";
+  const target = highlight && targetPoint(name, highlight);
+  if (target) {
+    const px = target[0] - cx0 + padL, py = target[1] - cy0;
+    const fromLeft = target[0] - cx0 < W0 / 2;
+    const dx = fromLeft ? -1 : 1;
+    const dy = py > 44 ? -1 : 1;
+    const sx = px + dx * 34, sy = py + dy * 30;
+    const len = Math.hypot(px - sx, py - sy), ux = (px - sx) / len, uy = (py - sy) / len;
+    const ex = px - ux * 9, ey = py - uy * 9; // stop at the ring
+    const head = (k) => `${(ex - ux * 9 + -uy * k).toFixed(1)},${(ey - uy * 9 + ux * k).toFixed(1)}`;
+    const id = ++arrowSeq;
+    pointer =
+      `<g class="pointer" data-n="${id}">` +
+      `<circle cx="${px}" cy="${py}" r="7" class="ring"/>` +
+      `<path d="M${sx.toFixed(1)},${sy.toFixed(1)} L${ex.toFixed(1)},${ey.toFixed(1)}" class="arrow-o"/>` +
+      `<path d="M${sx.toFixed(1)},${sy.toFixed(1)} L${ex.toFixed(1)},${ey.toFixed(1)}" class="arrow"/>` +
+      `<path d="M${ex.toFixed(1)},${ey.toFixed(1)} L${head(6)} L${head(-6)} Z" class="arrowhead"/></g>`;
+  }
   let caption = "";
   if (labels !== "none" && highlight) {
     const lab = partLabel(name, highlight);
     const item = d.regions[highlight] || d.groups?.[highlight];
     if (!item?.lab) caption = `<figcaption>${esc(lab)}</figcaption>`;
   }
-  return `<figure class="dg"><svg viewBox="0 0 ${totalW.toFixed(0)} ${H0}" role="img" aria-label="${esc(d.title)}">` +
-    `<g transform="translate(${(padL - cx0).toFixed(1)},${-cy0})">${d.base || ""}${outlines.join("")}${fills.join("")}${d.overlay || ""}${strokes.join("")}</g>${items.join("")}</svg>` +
-    `<figcaption class="dg-title">${esc(d.title)}</figcaption>${caption}</figure>`;
+  const focus = highlight && labels !== "all" ? " focus" : highlight ? " revealed" : "";
+  return `<figure class="dg${focus}" data-diagram="${name}"><svg viewBox="0 0 ${totalW.toFixed(0)} ${H0}" role="img" aria-label="${esc(d.title)}">` +
+    `<g transform="translate(${(padL - cx0).toFixed(1)},${-cy0})">${d.base || ""}${outlines.join("")}${fills.join("")}${d.overlay || ""}${glows.join("")}${strokes.join("")}</g>${items.join("")}${pointer}</svg>` +
+    `<figcaption class="dg-title">${esc(d.title)} <span class="zoom-hint">· tap to enlarge</span></figcaption>${caption}</figure>`;
 }

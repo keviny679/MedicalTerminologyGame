@@ -1336,6 +1336,18 @@ for (const card of document.querySelectorAll(".hero-card")) {
 }
 $("studyBtn").onclick = () => { music.start(); S.nextMode = "study"; toSelect(); };
 $("hintBtn").onclick = useHint;
+// Tap any diagram to see it full screen; tap again (or Esc) to close.
+document.addEventListener("click", (e) => {
+  const zoom = $("zoom");
+  if (!zoom.hidden) { zoom.hidden = true; zoom.innerHTML = ""; return; }
+  const fig = e.target.closest?.(".panel .dg");
+  if (!fig) return;
+  zoom.innerHTML = fig.outerHTML;
+  zoom.hidden = false;
+});
+document.addEventListener("keydown", (e) => {
+  if (e.key === "Escape" && !$("zoom").hidden) { $("zoom").hidden = true; $("zoom").innerHTML = ""; }
+});
 $("typedForm").onsubmit = (e) => {
   e.preventDefault();
   const v = $("typedInput").value.trim();

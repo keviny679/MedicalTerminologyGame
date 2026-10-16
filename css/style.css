@@ -277,7 +277,7 @@ h2 { font-size: clamp(12px, 3vw, 20px); }
 .review b { color: var(--accent); font-weight: normal; }
 
 /* study-mode diagrams */
-.dg { margin: 8px auto 4px; max-width: 520px; text-align: center; }
+.dg { margin: 8px auto 4px; max-width: 560px; text-align: center; }
 .dg svg { width: 100%; height: auto; max-height: 380px; background: #0b0e24; border: 2px solid var(--panel-edge); }
 .dg .solid-o { fill: #1a1f40; stroke: #1a1f40; stroke-width: 3; stroke-linejoin: round; }
 .dg .r.solid { stroke: none; }
@@ -292,8 +292,34 @@ h2 { font-size: clamp(12px, 3vw, 20px); }
 .dg .r { stroke: #1a1f40; stroke-width: 1; }
 .dg .rbo { fill: none; stroke: #1a1f40; stroke-linecap: round; }
 .dg .rb { fill: none; stroke: #cfd5e8; stroke-linecap: round; }
-.dg .r.hl { fill: #ffd36b !important; fill-opacity: 1; stroke: #fff; stroke-width: 1.5; }
-.dg .rb.hl { stroke: #ffd36b; }
+.dg .r.hl { fill: #ff2e88; fill-opacity: 1; stroke: #fff; stroke-width: 2; animation: hl-fill 1.3s ease-in-out infinite; }
+.dg .r.solid.hl { stroke: none; }
+.dg.revealed, .choice-sub .dg { max-width: 100%; }
+.dg.revealed svg, .choice-sub .dg svg { max-height: 460px; }
+.dg .rb.hl { stroke: #ff2e88; animation: hl-stroke 1.3s ease-in-out infinite; }
+.dg .glow { fill: none; stroke: #ff2e88; stroke-opacity: 0.45; stroke-linecap: round; stroke-linejoin: round; }
+.dg.focus .r:not(.hl), .dg.focus .rb:not(.hl), .dg.focus .rbo, .dg.focus .base, .dg.focus .detail, .dg.focus .tooth, .dg.focus .solid-o { opacity: 0.32; filter: grayscale(0.7); }
+.dg .tooth { fill: #f4f1e8; stroke: #8a7f66; stroke-width: 0.6; }
+.dg .ring { fill: none; stroke: #ffffff; stroke-width: 2; transform-box: fill-box; transform-origin: center; animation: ring 1.3s ease-out infinite; }
+.dg .arrow-o { stroke: #0b0e24; stroke-width: 7; stroke-linecap: round; fill: none; }
+.dg .arrow { stroke: #ff2e88; stroke-width: 3.5; stroke-linecap: round; fill: none; }
+.dg .arrowhead { fill: #ff2e88; stroke: #0b0e24; stroke-width: 1.5; stroke-linejoin: round; }
+.dg svg { cursor: zoom-in; }
+.zoom-hint { opacity: 0.7; }
+@keyframes hl-fill { 0%, 100% { fill: #ff2e88; } 50% { fill: #ffe14d; } }
+@keyframes hl-stroke { 0%, 100% { stroke: #ff2e88; } 50% { stroke: #ffe14d; } }
+@keyframes ring { 0% { transform: scale(1); opacity: 1; } 100% { transform: scale(2.4); opacity: 0; } }
+@media (prefers-reduced-motion: reduce) {
+  .dg .r.hl, .dg .rb.hl, .dg .ring { animation: none; }
+}
+/* tap-to-zoom */
+.zoom {
+  position: fixed; inset: 0; z-index: 50; display: flex; align-items: center; justify-content: center;
+  padding: 12px; background: #05060ff2; cursor: zoom-out;
+}
+.zoom .dg { max-width: min(1100px, 100%); width: 100%; margin: 0; }
+.zoom .dg svg { max-height: 86vh; cursor: zoom-out; }
+
 .dg .base { fill: #262c55; stroke: #1a1f40; }
 .dg .hole { fill: #0b0e24; stroke: #1a1f40; }
 .dg .detail { fill: none; stroke: #1a1f40; stroke-width: 1; }
