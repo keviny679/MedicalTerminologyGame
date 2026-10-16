@@ -333,6 +333,8 @@ export class StudyDeck {
     this.style = style;
     this.recent = [];
     this._vocab = null;
+    this.asked = 0;
+    this.followUps = []; // { entry, at } -> ask again (typed) after a few questions
   }
 
   get vocab() {
@@ -362,19 +364,49 @@ export class StudyDeck {
     if (this.style === "typed") return true;
     if (this.style === "mc") return false;
     const p = this.progress[e.key];
-    return !!p && p.r >= 1 && this.rng() < 0.7;
+    return !!p && p.r >= 1 && this.rng() < 0.8;
+  }
+
+  // Seen it, now recall it: re-ask a term as a typed question a few
+  // questions later, after a recognition hit or after a miss.
+  queueFollowUp(entry, correct, typed) {
+    if (this.style === "mc" && correct) return;
+    if (correct && typed) return;
+    if (this.followUps.some((f) => f.entry === entry)) return;
+    const gap = correct ? 2 + Math.floor(this.rng() * 3) : 3 + Math.floor(this.rng() * 4);
+    this.followUps.push({ entry, at: this.asked + gap });
+  }
+
+  takeFollowUp() {
+    const i = this.followUps.findIndex((f) => f.at <= this.asked);
+    if (i < 0) return null;
+    const [f] = this.followUps.splice(i, 1);
+    if (this.style !== "mc") {
+      const q = makeRecallQuestion(f.entry, this.all, this.diagrams, this.rng);
+      if (q) return q;
+    }
+    return this.mcQuestion(f.entry);
+  }
+
+  mcQuestion(e) {
+    const sameSection = this.all.filter((x) => x.chapter === e.chapter && x.section === e.section);
+    const sameChapter = this.all.filter((x) => x.chapter === e.chapter);
+    return makeStudyQuestion(e, [sameSection, sameChapter, this.all], this.diagrams, this.rng);
   }
 
   next() {
+    this.asked += 1;
+    const follow = this.takeFollowUp();
+    if (follow) {
+      this.recent.push(follow.entry.key);
+      if (this.recent.length > Math.min(8, Math.floor(this.entries.length / 2))) this.recent.shift();
+      return follow;
+    }
     for (let tries = 0; tries < 30; tries++) {
       const e = this.pickEntry();
       let q = null;
       if (this.wantsTyped(e)) q = makeRecallQuestion(e, this.all, this.diagrams, this.rng);
-      if (!q) {
-        const sameSection = this.all.filter((x) => x.chapter === e.chapter && x.section === e.section);
-        const sameChapter = this.all.filter((x) => x.chapter === e.chapter);
-        q = makeStudyQuestion(e, [sameSection, sameChapter, this.all], this.diagrams, this.rng);
-      }
+      if (!q) q = this.mcQuestion(e);
       if (!q) continue;
       this.recent.push(e.key);
       if (this.recent.length > Math.min(8, Math.floor(this.entries.length / 2))) this.recent.shift();
@@ -391,5 +423,6 @@ export class StudyDeck {
     p.l = correct ? 1 : 0;
     schedule(p, correct, typed, now);
     this.progress[entry.key] = p;
+    this.queueFollowUp(entry, correct, typed);
   }
 }

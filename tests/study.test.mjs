@@ -169,3 +169,33 @@ test("decks in typed style ask typed questions when possible", () => {
   const mc = new StudyDeck(ch.entries, all, DG, {}, rng, "mc");
   for (let i = 0; i < 40; i++) assert.notEqual(mc.next().mode, "typed");
 });
+
+test("mixed style on a brand-new chapter asks plenty of typed recall", () => {
+  for (const [accuracy, minShare] of [[1, 0.35], [0.6, 0.35]]) {
+    const deck = new StudyDeck(chapters[2].entries, all, DG, {}, rng, "mixed");
+    let typed = 0;
+    const N = 60;
+    for (let i = 0; i < N; i++) {
+      const q = deck.next();
+      if (q.mode === "typed") typed++;
+      deck.record(q.entry, rng() < accuracy, q.mode === "typed");
+    }
+    assert.ok(typed / N >= minShare, `only ${typed}/${N} typed at accuracy ${accuracy}`);
+  }
+});
+
+test("a term answered by recognition is re-asked as typed a few questions later", () => {
+  const deck = new StudyDeck(chapters[4].entries, all, DG, {}, rng, "mixed");
+  const first = deck.next();
+  assert.notEqual(first.mode, "typed");
+  deck.record(first.entry, true, false);
+  const later = [];
+  for (let i = 0; i < 5; i++) {
+    const q = deck.next();
+    later.push(q);
+    deck.record(q.entry, true, q.mode === "typed");
+  }
+  const again = later.find((q) => q.entry === first.entry);
+  assert.ok(again, "term came back");
+  if (/ to /.test(first.entry.name) === false && first.entry.name.length <= 40) assert.equal(again.mode, "typed");
+});
