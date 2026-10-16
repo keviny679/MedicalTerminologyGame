@@ -1,0 +1,147 @@
+# 2 | The Body as a Whole
+
+## Levels of organization
+T cell = the smallest structural and functional unit of life
+T tissue = a group of similar cells working together to perform a function
+T organ = a structure made of two or more tissue types that performs a specific job
+T organ system = a group of organs that work together, such as the digestive system
+T organism = a complete living being made of interacting organ systems
+T homeostasis = the body's ability to keep a stable internal environment | home/o + -stasis
+T metabolism = all the chemical processes that build up and break down substances in the body
+T anabolism = the building of complex molecules from simpler ones
+T catabolism = the breakdown of complex molecules into simpler ones, releasing energy
+
+## Cells and genetics
+T cell membrane = the outer boundary of a cell that controls what enters and leaves
+T cytoplasm = the gel-like material inside a cell surrounding the nucleus | cyt/o + -plasm
+T nucleus = the control center of the cell that contains the DNA
+T mitochondria = organelles that produce energy (ATP) for the cell
+T ribosome = an organelle where proteins are made
+T chromosome = a structure in the nucleus made of DNA that carries genes; humans have 46
+T gene = a segment of DNA that carries the code for a specific trait or protein
+T DNA = the molecule that stores genetic information
+T genome = the complete set of genetic material in an organism
+T mitosis = cell division that produces two identical cells
+T meiosis = cell division that produces sex cells with half the chromosome number
+T mutation = a permanent change in the DNA sequence
+T congenital = present at birth
+T hereditary = passed from parents to children through genes
+T stem cell = an unspecialized cell that can develop into different cell types
+T karyotype = a picture of a person's chromosomes arranged in pairs | kary/o + -type
+P cyt/o = cell
+P kary/o, nucle/o = nucleus
+P gen/o = producing, origin, gene
+P hist/o = tissue
+
+## Tissues
+T epithelial tissue = tissue that covers body surfaces and lines cavities and organs | epi- + thel/i + -al
+T connective tissue = tissue that supports and binds other tissues, such as bone, blood and fat
+T muscle tissue = tissue that contracts to produce movement
+T nervous tissue = tissue that sends and receives electrical impulses
+T histology = the study of tissues | hist/o + -logy
+T hyperplasia = an increase in the number of cells in a tissue | hyper- + -plasia
+T hypertrophy = an increase in the size of cells or an organ | hyper- + -trophy
+T atrophy = wasting away or decrease in size of a tissue or organ | a- + -trophy
+T dysplasia = abnormal development or growth of cells | dys- + -plasia
+T neoplasm = a new, abnormal growth of tissue; a tumor | neo- + -plasm
+T benign = not cancerous and not spreading
+T malignant = cancerous, able to invade and spread
+P -plasia = formation, development
+P -plasm = formed substance
+
+## Anatomical position and directions
+T anatomical position = standing upright, facing forward, arms at the sides with palms forward
+T superior = above or toward the head
+T inferior = below or toward the feet
+T anterior = toward the front of the body
+T posterior = toward the back of the body
+T ventral = on the belly side; same as anterior in humans
+T dorsal = on the back side; same as posterior in humans
+T medial = toward the midline of the body
+T lateral = away from the midline, toward the side
+T proximal = closer to the point of attachment or the trunk
+T distal = farther from the point of attachment or the trunk
+T superficial = toward or at the body surface
+T deep = away from the body surface
+T cephalic = toward the head | cephal/o + -ic
+T caudal = toward the tail or lower body
+T supine = lying on the back, face up
+T prone = lying on the abdomen, face down
+T bilateral = on both sides | bi- + later/o + -al
+T unilateral = on one side only | uni- + later/o + -al
+P anter/o = front
+P poster/o = back, behind
+P medi/o = middle
+P later/o = side
+P proxim/o = near
+P dist/o = far, away from
+P cephal/o = head
+P ventr/o = belly side
+P dors/o = back
+
+## Planes and body cavities
+T sagittal plane = a vertical plane dividing the body into right and left parts | @planes.sagittal
+T midsagittal plane = the sagittal plane exactly at the midline, creating equal right and left halves
+T frontal plane = a vertical plane dividing the body into front and back parts; also called coronal | @planes.frontal
+T transverse plane = a horizontal plane dividing the body into upper and lower parts | @planes.transverse
+T cranial cavity = the space inside the skull that holds the brain
+T spinal cavity = the space inside the vertebral column that holds the spinal cord
+T thoracic cavity = the chest cavity, holding the heart and lungs
+T abdominal cavity = the cavity holding the stomach, intestines, liver and other digestive organs
+T pelvic cavity = the cavity holding the urinary bladder and reproductive organs
+T diaphragm = the dome-shaped muscle separating the thoracic and abdominal cavities
+T mediastinum = the central area of the chest between the lungs, holding the heart
+T peritoneum = the membrane that lines the abdominal cavity and covers its organs | periton/o + -eum
+T pleura = the membrane that surrounds the lungs and lines the chest cavity
+T viscera = the internal organs, especially those in the abdomen
+P thorac/o = chest
+P abdomin/o = abdomen
+P pelv/i = pelvis
+P viscer/o = internal organs
+
+## Abdominal quadrants and regions
+T right upper quadrant = the abdominal area holding most of the liver and the gallbladder | @quadrants.ruq
+T left upper quadrant = the abdominal area holding the stomach and spleen | @quadrants.luq
+T right lower quadrant = the abdominal area holding the appendix | @quadrants.rlq
+T left lower quadrant = the abdominal area holding the sigmoid colon | @quadrants.llq
+T epigastric region = the upper middle abdominal region, above the stomach | epi- + gastr/o + -ic | @regions.epigastric
+T umbilical region = the central abdominal region around the navel | @regions.umbilical
+T hypogastric region = the lower middle abdominal region below the navel; also called pubic | hypo- + gastr/o + -ic | @regions.hypogastric
+T right hypochondriac region = the upper right abdominal region, under the ribs | hypo- + chondr/o + -iac | @regions.rhypo
+T left hypochondriac region = the upper left abdominal region, under the ribs | @regions.lhypo
+T right lumbar region = the right side region of the abdomen at waist level | @regions.rlumbar
+T left lumbar region = the left side region of the abdomen at waist level | @regions.llumbar
+T right iliac region = the lower right abdominal region near the groin; also called inguinal | @regions.riliac
+T left iliac region = the lower left abdominal region near the groin; also called inguinal | @regions.liliac
+T umbilicus = the navel, where the umbilical cord was attached
+T inguinal = relating to the groin
+
+## Body systems and disease
+T integumentary system = the skin, hair, nails and skin glands; protects the body
+T musculoskeletal system = the bones, joints and muscles; supports and moves the body
+T cardiovascular system = the heart and blood vessels; moves blood through the body
+T respiratory system = the airways and lungs; exchanges oxygen and carbon dioxide
+T digestive system = the organs that break down food and absorb nutrients
+T urinary system = the kidneys, ureters, bladder and urethra; filters blood and removes wastes
+T nervous system = the brain, spinal cord and nerves; controls and coordinates the body
+T endocrine system = glands that release hormones into the blood
+T lymphatic system = vessels and organs that return fluid to the blood and help fight infection
+T inflammation = the body's protective response to injury or infection, with redness, heat, swelling and pain
+T infection = invasion of the body by disease-causing organisms
+T pathogen = a microorganism that causes disease | path/o + -gen
+T edema = swelling caused by excess fluid in the tissues
+T necrosis = death of cells or tissue | necr/o + -osis
+P path/o = disease
+P necr/o = death
+
+## Abbreviations
+A A&P = anatomy and physiology
+A RUQ = right upper quadrant
+A LUQ = left upper quadrant
+A RLQ = right lower quadrant
+A LLQ = left lower quadrant
+A DNA = deoxyribonucleic acid
+A ATP = adenosine triphosphate, the cell's energy molecule
+A LAT = lateral
+A AP = anteroposterior (front to back)
+A PA = posteroanterior (back to front)

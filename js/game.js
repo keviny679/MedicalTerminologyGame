@@ -6,12 +6,14 @@ import {
 import { Deck } from "./quiz.js";
 import { BOONS, ITEMS, KAMI, ELITES, META, RARITY, DOOR_INFO, metaCost } from "./content.js";
 import {
-  newRun, stats, enemiesForRoom, heroStrike, enemyStrike, endTurn, startRoom, killReward,
+  newRun, stats, enemiesForRoom, makeEnemy, heroStrike, enemyStrike, endTurn, startRoom, killReward,
   roomCleared, floorCleared, rollDoors, rollBoons, takeBoon, rollItem, takeItem, shopStock,
   tryRevive, heal, embersFor, ROOMS_PER_FLOOR, FLOOR_COUNT,
 } from "./run.js";
 import { FLOORS } from "./art.js";
 import { Music } from "./music.js";
+import { CHAPTER_FILES, parseChapter, StudyDeck, chapterMastery, roomsFor } from "./study.js";
+import { renderDiagram, DIAGRAMS } from "./diagrams.js";
 
 const HERO_X = 56;
 const MON_X = 178;
@@ -70,6 +72,7 @@ const music = new Music();
 /* ------------------------------------------------------------------ state */
 
 const META_KEY = "rb.meta";
+const EML_KEY = "rb.eml";
 const S = {
   terms: [],
   deck: null,
@@ -88,7 +91,12 @@ const S = {
   now: 0,
   q: null,
   pending: null, // resolver for the current question / continue / choice
+  nextMode: "run",
+  chapters: null, // study mode chapters, loaded on demand
+  progress: store.get(EML_KEY, {}),
+  studyDeck: null,
 };
+if (location.search.includes("debug")) window.__rb = S; // for automated play-tests
 
 /* ---------------------------------------------------------------- render */
 
@@ -283,9 +291,15 @@ function updateHud() {
     if (m.burn) bits.push(`burning ${m.burn}`);
     $("monInfo").innerHTML = esc(bits.join(" · ")) + (m.charging ? ' <span class="warn">⚠ WINDING UP</span>' : "");
   }
-  const roomLabel = R.room >= ROOMS_PER_FLOOR ? "BOSS" : `${Math.min(R.room + 1, ROOMS_PER_FLOOR)}/${ROOMS_PER_FLOOR}`;
-  $("floorTag").textContent = `F${Math.min(R.floor + 1, FLOOR_COUNT)} ${roomLabel}`;
+  if (R.study) {
+    const total = R.study.rooms;
+    $("floorTag").textContent = `Ch${R.study.chapter.num} ${R.room + 1 >= total ? "BOSS" : `${R.room + 1}/${total}`}`;
+  } else {
+    const roomLabel = R.room >= ROOMS_PER_FLOOR ? "BOSS" : `${Math.min(R.room + 1, ROOMS_PER_FLOOR)}/${ROOMS_PER_FLOOR}`;
+    $("floorTag").textContent = `F${Math.min(R.floor + 1, FLOOR_COUNT)} ${roomLabel}`;
+  }
   $("gold").textContent = R.gold;
+  $("goldStat").hidden = $("rerollStat").hidden = !!R.study;
   $("hintCount").textContent = R.hints;
   $("streak").textContent = R.streak;
   $("rerolls").textContent = R.rerolls;
@@ -494,8 +508,9 @@ function askQuestion(enemy) {
 
   show("choiceView", false);
   show("quizView");
-  $("prompt").innerHTML =
+  $("prompt").innerHTML = q.prompt ||
     `What does <span class="affix">${esc(q.affix)}</span> mean? <span class="kind">(${q.kind})</span>`;
+  $("quizImage").innerHTML = q.image ? renderDiagram(q.image.diagram, q.image.region, { caption: q.image.labelled }) : "";
   const box = $("choices");
   box.innerHTML = "";
   q.options.forEach((opt, i) => {
@@ -531,7 +546,10 @@ function refreshHintButton() {
   const answering = S.pending && S.pending.type === "answer";
   if (!q) return;
   if (q.hintUsed) { b.disabled = true; b.textContent = "Hint used"; }
-  else if (!q.examples.length && !stats(R).hintRemoves) {
+  else if (R.study) {
+    b.disabled = R.hints <= 0 || !answering;
+    b.textContent = R.hints > 0 ? `50/50 hint (${R.hints})` : "No hints left";
+  } else if (!q.examples.length && !stats(R).hintRemoves) {
     b.disabled = true;
     b.textContent = "No hint";
     if (!$("hintText").textContent) $("hintText").textContent = "Wikipedia lists no example word for this one.";
@@ -544,23 +562,25 @@ function refreshHintButton() {
 function useHint() {
   const q = S.q, R = S.run;
   if (!q || q.hintUsed || !S.pending || S.pending.type !== "answer" || R.hints <= 0) return;
-  const removes = stats(R).hintRemoves;
-  if (!q.examples.length && !removes) return;
+  const removes = R.study ? 2 : stats(R).hintRemoves;
+  if (!R.study && !q.examples.length && !removes) return;
   R.hints -= 1;
   q.hintUsed = true;
   const parts = [];
-  if (q.examples.length) parts.push(`Example word: ${q.examples[0]}`);
-  if (removes) {
+  if (q.examples?.length) parts.push(`Example word: ${q.examples[0]}`);
+  if (R.study && q.hint) parts.push(q.hint);
+  let crossed = 0;
+  for (let n = 0; n < removes; n++) {
     const wrong = q.options.map((_, i) => i).filter((i) => i !== q.answer && !q.removed.has(i));
-    if (wrong.length > 1) {
-      const i = wrong[Math.floor(rng() * wrong.length)];
-      q.removed.add(i);
-      const btn = $("choices").children[i];
-      btn.classList.add("struck");
-      btn.disabled = true;
-      parts.push("Inari crossed out a wrong answer.");
-    }
+    if (wrong.length <= 1) break;
+    const i = wrong[Math.floor(rng() * wrong.length)];
+    q.removed.add(i);
+    const btn = $("choices").children[i];
+    btn.classList.add("struck");
+    btn.disabled = true;
+    crossed++;
   }
+  if (crossed) parts.push(R.study ? `${crossed} wrong answers crossed out.` : "Inari crossed out a wrong answer.");
   $("hintText").textContent = parts.join(" · ");
   sfx.beep([880], 0.06, "triangle");
   refreshHintButton();
@@ -643,6 +663,11 @@ async function fight(enemy) {
     const fb = $("feedback");
     const notes = [];
 
+    if (R.study) {
+      S.studyDeck.record(q.entry, choice === q.answer);
+      store.set(EML_KEY, S.progress);
+      if (q.image) $("quizImage").innerHTML = renderDiagram(q.image.diagram, q.image.region, { caption: true });
+    }
     if (choice === q.answer) {
       sfx.right();
       const res = heroStrike(R, enemy, rng);
@@ -657,11 +682,17 @@ async function fight(enemy) {
     } else {
       sfx.wrong();
       buttons[choice].classList.add("wrong");
-      if (!R.missed.some((m) => m.affix === q.affix)) R.missed.push({ affix: q.affix, meaning: q.options[q.answer] });
+      const missedName = q.entry ? q.entry.name : q.affix;
+      if (!R.missed.some((m) => m.affix === missedName)) {
+        R.missed.push({ affix: missedName, meaning: q.entry ? q.entry.def : q.options[q.answer] });
+      }
       const res = enemyStrike(R, enemy, rng);
       fb.className = "feedback bad";
       let what = res.forgiven ? " Your charm shielded you." : res.dodged ? " You dodged!" : res.heavy ? " A crushing blow!" : "";
-      fb.innerHTML = `Not quite. <b>${esc(q.affix)}</b> means “${esc(q.options[q.answer])}”.${esc(what)}`;
+      const note = q.entry && `<b>${esc(q.entry.name)}</b>: ${esc(q.entry.def)}${q.entry.parts ? ` (${esc(q.entry.parts)})` : ""}.`;
+      fb.innerHTML = q.entry
+        ? (q.options[q.answer] === q.entry.def ? `Not quite. ${note}` : `Not quite. The answer is “${esc(q.options[q.answer])}”.<br>${note}`) + esc(what)
+        : `Not quite. <b>${esc(q.affix)}</b> means “${esc(q.options[q.answer])}”.${esc(what)}`;
       await animateEnemyHit(enemy, res);
     }
 
@@ -881,6 +912,144 @@ async function shrine() {
   }
 }
 
+/* ------------------------------------------------- study mode (EML book) */
+
+async function loadChapters() {
+  if (S.chapters) return S.chapters;
+  const texts = await Promise.all(CHAPTER_FILES.map(async (f) => {
+    const res = await fetch(`data/eml/${f}.txt`, { cache: "no-cache" });
+    if (!res.ok) throw new Error(`${f}: HTTP ${res.status}`);
+    return parseChapter(await res.text(), f);
+  }));
+  S.chapters = texts;
+  return texts;
+}
+
+const pctText = (x) => `${Math.round(x * 100)}%`;
+const seenShare = (entries) => entries.filter((e) => S.progress[e.key]).length / Math.max(1, entries.length);
+
+async function studyMenu(lookKey) {
+  S.look = HEROES[lookKey];
+  S.lookKey = lookKey;
+  S.mode = "title";
+  show("selectScreen", false);
+  show("titleScreen", false);
+  show("panel");
+  show("statsRow", false);
+  $("inventory").innerHTML = "";
+  $("invInfo").textContent = "";
+  let chapters;
+  try {
+    chapters = await loadChapters();
+  } catch (err) {
+    await choose({ title: "Couldn't load the chapters", sub: esc(err.message), buttons: [{ label: "Back", value: 1 }] });
+    return toTitle();
+  }
+  for (;;) {
+    const ch = await choose({
+      title: "Essentials of Medical Language",
+      sub: "Choose a chapter. Bigger chapters mean longer runs. Missed terms come back more often; a term counts as mastered after 2+ correct answers with the latest one right.",
+      cards: chapters.map((c) => ({
+        value: c,
+        color: chapterMastery(c, S.progress) >= 0.8 ? "#59d98e" : "#ffd36b",
+        html: cardHtml({
+          icon: String(c.num), name: c.title,
+          tag: `${c.entries.length} terms · ${c.sections.length} sections · ${roomsFor(c.entries.length)} rooms`,
+          body: `Seen ${pctText(seenShare(c.entries))} · mastered ${pctText(chapterMastery(c, S.progress))}`,
+        }),
+      })),
+      buttons: [{ label: "Back", value: "back", ghost: true }],
+    });
+    if (ch === "back") return toTitle();
+    const section = await choose({
+      title: `Chapter ${ch.num}: ${ch.title}`,
+      sub: "Study the whole chapter, or focus on one section.",
+      cards: [
+        { value: null, color: "#ffd36b", html: cardHtml({ icon: "★", name: "Whole chapter", tag: `${ch.entries.length} terms`, body: "Every section mixed together." }) },
+        ...ch.sections.map((sec, i) => {
+          const m = sec.entries.filter((e) => S.progress[e.key]?.r >= 2 && S.progress[e.key]?.l === 1).length / sec.entries.length;
+          return {
+            value: sec, color: m >= 0.8 ? "#59d98e" : "#5ab0ff",
+            html: cardHtml({ icon: `${ch.num}.${i + 1}`, name: sec.title, tag: `${sec.entries.length} terms`, body: `Seen ${pctText(seenShare(sec.entries))} · mastered ${pctText(m)}` }),
+          };
+        }),
+      ],
+      buttons: [{ label: "Back", value: "back", ghost: true }],
+    });
+    if (section === "back") continue;
+    return startStudy(ch, section);
+  }
+}
+
+async function startStudy(chapter, section) {
+  const entries = section ? section.entries : chapter.entries;
+  const all = S.chapters.flatMap((c) => c.entries);
+  S.studyDeck = new StudyDeck(entries, all, DIAGRAMS, S.progress);
+  S.deck = S.studyDeck;
+  const R = newRun({}, S.lookKey);
+  R.study = { chapter, section, rooms: roomsFor(entries.length) };
+  R.floor = (chapter.num - 1) % FLOOR_COUNT; // background and foes
+  R.hints = 3 + Math.floor(R.study.rooms / 3);
+  S.run = R;
+  S.enemy = null;
+  S.effects = [];
+  S.numbers = [];
+  S.mode = "battle";
+  S.hero.dead = false;
+  S.hero.anim = null;
+  show("hud");
+  show("panel");
+  show("statsRow");
+  $("inventory").innerHTML = "";
+  S.particles = [];
+  updateHud();
+  play(S.hero, "walkIn", 1400);
+  await banner(`Chapter ${chapter.num}`, section ? section.title : chapter.title);
+  const before = chapterMastery(chapter, S.progress);
+  for (let room = 0; room < R.study.rooms; room++) {
+    R.room = room;
+    const boss = room === R.study.rooms - 1;
+    const foe = makeEnemy(R, rng, { boss }); // calm mode: no elites or extra foes
+    R.depth += 1;
+    startRoom(R);
+    S.roomEnemies = 1;
+    S.roomIndex = 0;
+    if (!(await fight(foe))) return endStudy(false, before);
+    const healed = heal(R, 12);
+    if (healed) floatNum(`+${healed}`, HERO_X, GROUND - 46, "#59d98e");
+    R.stats.rooms += 1;
+    updateHud();
+    await sleep(500);
+  }
+  sfx.win();
+  await play(S.hero, "victory", 700);
+  return endStudy(true, before);
+}
+
+async function endStudy(won, before) {
+  const R = S.run;
+  const ch = R.study.chapter;
+  const after = chapterMastery(ch, S.progress);
+  store.set(EML_KEY, S.progress);
+  const acc = R.stats.correct + R.stats.wrong ? Math.round((R.stats.correct / (R.stats.correct + R.stats.wrong)) * 100) : 0;
+  const review = R.missed.slice(-20).map((m) => `<li><b>${esc(m.affix)}</b> ${esc(m.meaning)}</li>`).join("");
+  show("hud", false);
+  const pickd = await choose({
+    title: won ? `Chapter ${ch.num} complete!` : "You need a rest…",
+    sub:
+      `Accuracy ${acc}% · ${R.stats.correct} correct · seen ${pctText(seenShare(ch.entries))} of the chapter · mastered ${pctText(before)} → <b style="color:#59d98e">${pctText(after)}</b>` +
+      (review ? `<br><br>Review these:</p><ul class="review">${review}</ul><p>` : ""),
+    buttons: [
+      { label: "Study again", value: "again" },
+      { label: "Choose chapter", value: "chapters", ghost: true },
+      { label: "Title", value: "title", ghost: true },
+    ],
+  });
+  if (pickd === "again") return startStudy(ch, R.study.section);
+  if (pickd === "chapters") return studyMenu(S.lookKey);
+  return toTitle();
+}
+
 function toTitle() {
   S.mode = "title";
   S.run = null;
@@ -910,14 +1079,17 @@ function bestText() {
 
 /* ----------------------------------------------------------------- input */
 
-$("startBtn").onclick = () => { music.start(); toSelect(); };
+$("startBtn").onclick = () => { music.start(); S.nextMode = "run"; toSelect(); };
 $("shrineBtn").onclick = async () => {
   music.start();
   show("titleScreen", false);
   await shrine();
   toTitle();
 };
-for (const card of document.querySelectorAll(".hero-card")) card.onclick = () => startRun(card.dataset.hero);
+for (const card of document.querySelectorAll(".hero-card")) {
+  card.onclick = () => (S.nextMode === "study" ? studyMenu(card.dataset.hero) : startRun(card.dataset.hero));
+}
+$("studyBtn").onclick = () => { music.start(); S.nextMode = "study"; toSelect(); };
 $("hintBtn").onclick = useHint;
 $("continueBtn").onclick = () => resolvePending(null, "continue");
 
@@ -964,6 +1136,7 @@ document.addEventListener("keydown", (e) => {
 async function boot() {
   requestAnimationFrame(frame);
   $("bestText").textContent = bestText();
+  $("studyBtn").disabled = false; // study mode has its own data
   music.init();
   const status = $("loadStatus");
   try {

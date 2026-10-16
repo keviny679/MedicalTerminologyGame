@@ -1,0 +1,201 @@
+# 5 | The Cardiovascular System
+
+## Structure of the heart
+T heart = the hollow, muscular organ that pumps blood through the body
+T right atrium = the upper right chamber of the heart; receives oxygen-poor blood from the body | @heart.ra
+T right ventricle = the lower right chamber; pumps blood to the lungs | @heart.rv
+T left atrium = the upper left chamber; receives oxygen-rich blood from the lungs | @heart.la
+T left ventricle = the lower left chamber with the thickest wall; pumps blood to the whole body | @heart.lv
+T interventricular septum = the muscular wall dividing the right and left ventricles | inter- + ventricul/o + -ar | @heart.septum
+T pericardium = the double-layered sac that surrounds the heart | peri- + cardi/o + -um
+T epicardium = the outer layer of the heart wall | epi- + cardi/o + -um
+T myocardium = the thick middle muscle layer of the heart wall | my/o + cardi/o + -um
+T endocardium = the thin inner lining of the heart chambers and valves | endo- + cardi/o + -um
+T apex of the heart = the pointed lower tip of the heart, formed by the left ventricle
+T coronary arteries = the arteries that supply the heart muscle itself with blood
+P cardi/o = heart
+P atri/o = atrium
+P ventricul/o = ventricle
+P coron/o = crown; coronary arteries
+P pericardi/o = pericardium
+
+## Heart valves and blood flow
+T heart valve = a flap of tissue that keeps blood flowing in one direction through the heart
+T tricuspid valve = the valve between the right atrium and right ventricle | @heart.tricuspid
+T pulmonary valve = the valve between the right ventricle and the pulmonary trunk
+T mitral valve = the valve between the left atrium and left ventricle; also called bicuspid valve | @heart.mitral
+T aortic valve = the valve between the left ventricle and the aorta
+T superior vena cava = the large vein bringing blood from the upper body to the right atrium | @heart.svc
+T inferior vena cava = the large vein bringing blood from the lower body to the right atrium | @heart.ivc
+T aorta = the largest artery, carrying oxygen-rich blood from the left ventricle to the body | @heart.aorta
+T pulmonary trunk = the vessel carrying oxygen-poor blood from the right ventricle toward the lungs | @heart.pulmonary
+T pulmonary circulation = the flow of blood from the heart to the lungs and back
+T systemic circulation = the flow of blood from the heart to the body and back
+T chordae tendineae = string-like cords that hold the valve flaps to the ventricle walls
+P valv/o, valvul/o = valve
+P aort/o = aorta
+P pulmon/o = lung
+
+## Conduction system and heart rhythm
+T sinoatrial node = the heart's natural pacemaker in the right atrium that starts each heartbeat
+T atrioventricular node = the node that relays the electrical signal from the atria to the ventricles
+T bundle of His = the pathway that carries the signal from the AV node into the septum
+T Purkinje fibers = fibers that spread the signal through the ventricle walls so they contract
+T systole = the contraction phase of the heartbeat
+T diastole = the relaxation phase of the heartbeat, when the chambers fill
+T cardiac cycle = one complete heartbeat, from one contraction to the next
+T sinus rhythm = the normal heart rhythm started by the SA node
+T pulse = the throb of an artery felt with each heartbeat
+T cardiac output = the amount of blood the heart pumps per minute
+T bradycardia = an abnormally slow heart rate, under 60 beats per minute | brady- + cardi/o + -ia
+T tachycardia = an abnormally fast heart rate, over 100 beats per minute | tachy- + cardi/o + -ia
+T arrhythmia = any abnormal heart rhythm; also called dysrhythmia | a- + rhythm + -ia
+T atrial fibrillation = a fast, irregular, quivering rhythm of the atria that raises stroke risk
+T ventricular fibrillation = a life-threatening, chaotic quivering of the ventricles that stops pumping
+T heart block = a delay or blockage of the electrical signal through the AV node
+T palpitations = an awareness of a pounding, fluttering or racing heartbeat
+T cardiac arrest = sudden loss of heart function, breathing and consciousness
+
+## Blood vessels and blood pressure
+T artery = a vessel that carries blood away from the heart | arteri/o + -y
+T arteriole = a small branch of an artery | arteri/o + -ole
+T capillary = a tiny vessel where oxygen, nutrients and wastes are exchanged with tissues
+T venule = a small vein that collects blood from capillaries | ven/o + -ule
+T vein = a vessel that carries blood back toward the heart
+T lumen = the open space inside a blood vessel
+T vasoconstriction = narrowing of a blood vessel | vas/o + constriction
+T vasodilation = widening of a blood vessel | vas/o + dilation
+T blood pressure = the force of blood against artery walls
+T systolic pressure = the top number of blood pressure; pressure when the ventricles contract
+T diastolic pressure = the bottom number of blood pressure; pressure when the heart relaxes
+T sphygmomanometer = the instrument used to measure blood pressure | sphygm/o + man/o + -meter
+T stethoscope = an instrument used to listen to heart, lung and bowel sounds | steth/o + -scope
+T auscultation = listening to sounds within the body, usually with a stethoscope
+T hypertension = persistently high blood pressure | hyper- + tens/o + -ion
+T hypotension = abnormally low blood pressure | hypo- + tens/o + -ion
+T orthostatic hypotension = a drop in blood pressure when standing up, causing dizziness
+P angi/o, vas/o, vascul/o = vessel
+P arteri/o = artery
+P ven/o, phleb/o = vein
+P sphygm/o = pulse
+P steth/o = chest
+P -meter = instrument for measuring
+P thromb/o = clot
+P ather/o = fatty plaque
+P embol/o = plug
+
+## Heart disorders
+T coronary artery disease = narrowing of the coronary arteries by plaque, reducing blood flow to the heart
+T atherosclerosis = buildup of fatty plaque that hardens and narrows arteries | ather/o + -sclerosis
+T arteriosclerosis = hardening and thickening of artery walls | arteri/o + -sclerosis
+T angina pectoris = chest pain caused by too little blood flow to the heart muscle
+T myocardial infarction = a heart attack; death of heart muscle from blocked blood flow | my/o + cardi/o + -al
+T ischemia = reduced blood supply to a tissue | isch/o + -emia
+T infarct = an area of dead tissue caused by lack of blood supply
+T heart failure = the heart cannot pump enough blood to meet the body's needs
+T congestive heart failure = heart failure with fluid backing up into the lungs and body
+T cardiomyopathy = disease of the heart muscle | cardi/o + my/o + -pathy
+T cardiomegaly = enlargement of the heart | cardi/o + -megaly
+T endocarditis = inflammation of the inner lining of the heart, usually from infection | endo- + cardi/o + -itis
+T pericarditis = inflammation of the sac around the heart | pericardi/o + -itis
+T myocarditis = inflammation of the heart muscle | my/o + cardi/o + -itis
+T heart murmur = an abnormal heart sound, often from turbulent blood flow through a valve
+T mitral valve prolapse = a mitral valve that bulges back into the left atrium during contraction
+T valvular stenosis = narrowing of a heart valve that blocks blood flow
+T valvular regurgitation = backward leaking of blood through a valve that does not close well
+T congenital heart defect = a heart problem present at birth, such as a hole in the septum
+T rheumatic heart disease = heart valve damage caused by rheumatic fever after strep infection
+T cardiac tamponade = compression of the heart by fluid in the pericardial sac
+
+## Vascular disorders
+T aneurysm = a balloon-like bulge in the wall of an artery
+T thrombus = a blood clot that forms and stays in a vessel | thromb/o + -us
+T embolus = a clot or other mass that travels through the bloodstream | embol/o + -us
+T embolism = blockage of a vessel by an embolus | embol/o + -ism
+T deep vein thrombosis = a clot in a deep vein, usually in the leg | thromb/o + -osis
+T pulmonary embolism = a clot that travels to and blocks an artery in the lungs
+T thrombophlebitis = inflammation of a vein with a clot | thromb/o + phleb/o + -itis
+T phlebitis = inflammation of a vein | phleb/o + -itis
+T varicose veins = swollen, twisted veins, usually in the legs, from weak valves
+T peripheral artery disease = narrowing of arteries to the limbs, causing leg pain when walking
+T claudication = leg pain or cramping with walking from poor blood flow
+T Raynaud phenomenon = spasms of small arteries in the fingers and toes that turn them white or blue in the cold
+T hyperlipidemia = high levels of fats such as cholesterol in the blood | hyper- + lip/o + -emia
+T shock = a dangerous drop in blood flow to organs
+T hemorrhage = heavy bleeding | hem/o + -rrhage
+T stroke = brain damage from a blocked or burst blood vessel; also called cerebrovascular accident
+P lip/o = fat
+
+## Diagnostic tests
+T electrocardiogram = a recording of the heart's electrical activity | electr/o + cardi/o + -gram
+T Holter monitor = a portable ECG worn for 24 hours or more
+T echocardiogram = an ultrasound image of the heart | ech/o + cardi/o + -gram
+T stress test = an ECG done during exercise or medication to check the heart under strain
+T cardiac catheterization = threading a thin tube through a blood vessel into the heart to measure pressures and take images
+T angiography = x-ray imaging of blood vessels after injecting contrast dye | angi/o + -graphy
+T angiogram = the x-ray image of blood vessels made with contrast dye | angi/o + -gram
+T Doppler ultrasound = an ultrasound that measures blood flow through vessels
+T troponin = a heart muscle protein released into the blood when the heart is damaged
+T lipid panel = a blood test measuring cholesterol and triglycerides
+T LDL cholesterol = low-density lipoprotein; the bad cholesterol that builds plaque
+T HDL cholesterol = high-density lipoprotein; the good cholesterol that removes excess cholesterol
+T BNP test = a blood test that rises in heart failure
+P ech/o = sound
+
+## Procedures and treatments
+T angioplasty = opening a narrowed artery, often by inflating a small balloon | angi/o + -plasty
+T stent = a small mesh tube placed to hold an artery open
+T percutaneous coronary intervention = opening blocked coronary arteries through a catheter, with angioplasty and stents
+T coronary artery bypass graft = surgery using a vessel from elsewhere to route blood around a blocked coronary artery
+T endarterectomy = surgical removal of plaque from the inner lining of an artery | end/o + arteri/o + -ectomy
+T valve replacement = replacing a diseased heart valve with an artificial or tissue valve
+T pacemaker = a device that sends electrical pulses to keep the heart beating at a proper rate
+T implantable cardioverter-defibrillator = an implanted device that shocks the heart out of a dangerous rhythm
+T defibrillation = an electric shock that stops a chaotic rhythm so a normal one can return
+T cardioversion = using an electric shock or drugs to restore a normal heart rhythm
+T cardiopulmonary resuscitation = emergency chest compressions and rescue breaths to keep blood moving
+T automated external defibrillator = a portable device that checks the heart rhythm and delivers a shock if needed
+T anticoagulant = a drug that prevents clots from forming; a blood thinner | anti- + coagul/o + -ant
+T antiplatelet drug = a drug such as aspirin that keeps platelets from clumping
+T thrombolytic = a drug that dissolves blood clots | thromb/o + -lytic
+T beta blocker = a drug that slows the heart rate and lowers blood pressure
+T ACE inhibitor = a drug that relaxes blood vessels to lower blood pressure
+T calcium channel blocker = a drug that relaxes blood vessels and slows the heart
+T diuretic = a drug that increases urine output to reduce fluid and blood pressure
+T statin = a drug that lowers LDL cholesterol
+T nitroglycerin = a drug that widens blood vessels to relieve angina
+T antiarrhythmic = a drug that controls irregular heart rhythms
+P -lytic = destroying, dissolving
+P coagul/o = clotting
+
+## Abbreviations
+A BP = blood pressure
+A HR = heart rate
+A bpm = beats per minute
+A ECG, EKG = electrocardiogram
+A Echo = echocardiogram
+A MI = myocardial infarction
+A CAD = coronary artery disease
+A CHF = congestive heart failure
+A HF = heart failure
+A HTN = hypertension
+A AF, AFib = atrial fibrillation
+A VF, VFib = ventricular fibrillation
+A SA node = sinoatrial node
+A AV node = atrioventricular node
+A DVT = deep vein thrombosis
+A PE = pulmonary embolism
+A PAD = peripheral artery disease
+A CVA = cerebrovascular accident (stroke)
+A CABG = coronary artery bypass graft
+A PCI = percutaneous coronary intervention
+A ICD = implantable cardioverter-defibrillator
+A CPR = cardiopulmonary resuscitation
+A AED = automated external defibrillator
+A LDL = low-density lipoprotein
+A HDL = high-density lipoprotein
+A ACE = angiotensin-converting enzyme
+A MVP = mitral valve prolapse
+A BNP = B-type natriuretic peptide
+A IVC = inferior vena cava
+A SVC = superior vena cava

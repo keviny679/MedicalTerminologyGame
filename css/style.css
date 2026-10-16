@@ -276,6 +276,26 @@ h2 { font-size: clamp(12px, 3vw, 20px); }
 .review li { break-inside: avoid; margin-bottom: 2px; }
 .review b { color: var(--accent); font-weight: normal; }
 
+/* study-mode diagrams */
+.dg { margin: 8px auto 4px; max-width: 320px; text-align: center; }
+.dg svg { width: 100%; height: auto; max-height: 230px; background: #0b0e24; border: 2px solid var(--panel-edge); }
+.dg .r { stroke: #1a1f40; stroke-width: 1; }
+.dg .rbo { fill: none; stroke: #1a1f40; stroke-linecap: round; }
+.dg .rb { fill: none; stroke: #cfd5e8; stroke-linecap: round; }
+.dg .r.hl { fill: #ffd36b !important; stroke: #fff; stroke-width: 1.5; }
+.dg .rb.hl { stroke: #ffd36b; }
+.dg .base { fill: #262c55; stroke: #1a1f40; }
+.dg .hole { fill: #0b0e24; stroke: #1a1f40; }
+.dg .detail { fill: none; stroke: #1a1f40; stroke-width: 1; }
+.dg .figure { fill: none; stroke: #e9ecff; stroke-width: 2; }
+.dg .figure-line { fill: none; stroke: #e9ecff; stroke-width: 3; stroke-linecap: round; }
+.dg .lbl { fill: #e9ecff; font: 9px var(--read); }
+.dg figcaption { font-size: 15px; color: var(--muted); }
+.dg figcaption:not(.dg-title) { color: var(--accent); font-size: 18px; }
+.prompt i { color: var(--ink); }
+.prompt b { color: var(--accent); font-weight: normal; }
+.mode-pick { display: grid; gap: 10px; }
+
 footer { margin-top: 14px; font-size: 16px; color: var(--muted); text-align: center; }
 footer a { color: var(--ink); }
 

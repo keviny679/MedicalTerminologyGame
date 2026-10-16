@@ -44,7 +44,8 @@
         <p class="sub">A medical terminology roguelike</p>
         <p class="status" id="loadStatus">Loading term list…</p>
         <div class="row-btns">
-          <button class="btn" id="startBtn" type="button" disabled>Start run</button>
+          <button class="btn" id="startBtn" type="button" disabled>Roguelike run</button>
+          <button class="btn" id="studyBtn" type="button" disabled>Essentials of Medical Language</button>
           <button class="btn ghost" id="shrineBtn" type="button">Shrine</button>
         </div>
         <p class="best" id="bestText"></p>
@@ -72,15 +73,16 @@
 
     <section class="panel" id="panel" hidden>
       <div class="stats" id="statsRow">
-        <span>Mon <b id="gold">0</b></span>
+        <span id="goldStat">Mon <b id="gold">0</b></span>
         <span>Hints <b id="hintCount">3</b></span>
         <span>Streak <b id="streak">0</b></span>
-        <span>Rerolls <b id="rerolls">0</b></span>
+        <span id="rerollStat">Rerolls <b id="rerolls">0</b></span>
       </div>
       <div class="inventory" id="inventory"></div>
       <p class="inv-info" id="invInfo" aria-live="polite"></p>
 
       <div id="quizView" hidden>
+        <div id="quizImage"></div>
         <p class="prompt" id="prompt"></p>
         <div class="choices" id="choices"></div>
         <div class="hint-row">
@@ -100,9 +102,10 @@
     </section>
 
     <footer>
-      Terms from Wikipedia’s
+      Roguelike terms from Wikipedia’s
       <a href="https://en.wikipedia.org/wiki/List_of_medical_roots,_suffixes_and_prefixes" target="_blank" rel="noopener">List of medical roots, suffixes and prefixes</a>
       (<a href="https://creativecommons.org/licenses/by-sa/4.0/" target="_blank" rel="noopener">CC BY-SA 4.0</a>).
+      Essentials mode: original study notes arranged by the textbook’s chapters.
       Keys: 1–4 answer · H hint · Enter continue
     </footer>
   </main>
