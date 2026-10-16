@@ -59,8 +59,8 @@ test("deck favors missed entries and tracks mastery", () => {
   const deck = new StudyDeck(ch.entries, all, DG, progress, rng);
   for (let i = 0; i < 50; i++) {
     const q = deck.next();
-    deck.record(q.entry, true);
-    deck.record(q.entry, true);
+    deck.record(q.entry, true, true);
+    deck.record(q.entry, true, true);
   }
   assert.ok(chapterMastery(ch, progress) > 0);
   const target = ch.entries[5];
@@ -100,4 +100,72 @@ test("diagram paths contain no malformed numbers", () => {
       assert.ok(!/a[\d.]+,[\d.]+ 0 \d{2,}/.test(path), `${name}.${id} has a broken arc`);
     }
   }
+});
+
+import { vocabulary, acceptVariants, gradeTyped, makeRecallQuestion, schedule, dueEntries, isMastered, letterHint, INTERVALS } from "../js/study.js";
+
+test("typed answers accept every reasonable form", () => {
+  const v = acceptVariants("cardi/o, cordi-");
+  for (const ok of ["cardi/o", "cardio", "cardi", "cordi-", "cordi"]) assert.equal(gradeTyped(ok, v), "exact", ok);
+  assert.equal(gradeTyped("ECG", acceptVariants("ECG, EKG")), "exact");
+  assert.equal(gradeTyped("ekg", acceptVariants("ECG, EKG")), "exact");
+  const g = acceptVariants("Sweat (sudoriferous) gland");
+  for (const ok of ["sweat gland", "sudoriferous gland", "Sweat (sudoriferous) gland"]) assert.equal(gradeTyped(ok, g), "exact", ok);
+  assert.equal(gradeTyped("cranial bones", acceptVariants("Cranium (cranial bones)")), "exact");
+  assert.equal(gradeTyped("cranium", acceptVariants("Cranium (cranial bones)")), "exact");
+});
+
+test("small typos pass with a note, wrong words fail", () => {
+  const a = acceptVariants("gastrectomy");
+  assert.equal(gradeTyped("gastrectomey", a), "typo");
+  assert.equal(gradeTyped("gastrotomy", a), "wrong");
+  assert.equal(gradeTyped("hypotension", acceptVariants("hypertension")), "wrong");
+  const vocab = new Set(["ilium", "ileum"]);
+  assert.equal(gradeTyped("ilium", acceptVariants("ileum"), vocab), "wrong"); // a real, different word
+  assert.equal(gradeTyped("", a), "wrong");
+  assert.equal(gradeTyped("MO", acceptVariants("MI")), "wrong"); // short answers must be exact
+  assert.equal(gradeTyped("occipitl bone", acceptVariants("Occipital bone")), "typo");
+});
+
+test("recall questions accept synonyms with the same definition", () => {
+  const ch = chapters[2];
+  const e = ch.entries.find((x) => x.name === "derm/o, dermat/o");
+  const q = makeRecallQuestion(e, all, DG, () => 0.9);
+  assert.equal(q.mode, "typed");
+  assert.equal(gradeTyped("dermat/o", q.accept), "exact");
+  for (const x of all) {
+    const rq = makeRecallQuestion(x, all, DG, rng);
+    if (rq) assert.ok(rq.accept.length && rq.answerText, x.key);
+  }
+});
+
+test("spacing: typed recalls stretch the interval, misses reset it", () => {
+  const DAY = 86400000;
+  const p = { r: 0, w: 0, l: 0, t: 0 };
+  let now = 0;
+  for (let i = 0; i < 4; i++) {
+    schedule(p, true, true, now);
+    assert.equal(p.due - now, INTERVALS[i] * DAY);
+    now = p.due;
+  }
+  schedule(p, false, true, now);
+  assert.equal(p.box, 0);
+  assert.ok(p.due - now < DAY);
+  const e = { key: "x" };
+  assert.deepEqual(dueEntries([e], { x: p }, now + DAY), [e]);
+  assert.deepEqual(dueEntries([e], { x: p }, now), []);
+});
+
+test("mastery needs a typed recall, not just recognition", () => {
+  assert.ok(!isMastered({ r: 5, w: 0, l: 1, t: 0 }));
+  assert.ok(isMastered({ r: 2, w: 0, l: 1, t: 1 }));
+  assert.match(letterHint("gastrectomy"), /^g a _/);
+});
+
+test("decks in typed style ask typed questions when possible", () => {
+  const ch = chapters[4];
+  const deck = new StudyDeck(ch.entries, all, DG, {}, rng, "typed");
+  for (let i = 0; i < 40; i++) assert.equal(deck.next().mode, "typed");
+  const mc = new StudyDeck(ch.entries, all, DG, {}, rng, "mc");
+  for (let i = 0; i < 40; i++) assert.notEqual(mc.next().mode, "typed");
 });

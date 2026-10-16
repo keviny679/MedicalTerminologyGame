@@ -129,14 +129,14 @@ function critRoll(s, rng) {
 }
 
 // Player answered correctly: returns the hits to animate and mutates enemy/run.
-export function heroStrike(run, enemy, rng) {
+export function heroStrike(run, enemy, rng, mult = 1) {
   const s = stats(run);
   run.streak += 1;
   run.stats.correct += 1;
   const lvl = Math.min(run.streak - 1, 4);
   let dmg = BASE_DAMAGE + s.dmgFlat + lvl * s.streakFlat;
   dmg += lvl * 4 * (1 + s.streakMult);
-  dmg *= 1 + s.dmgPct;
+  dmg *= (1 + s.dmgPct) * mult;
   const interrupted = enemy.charging;
   if (interrupted) dmg *= 1.5;
   enemy.charging = false;

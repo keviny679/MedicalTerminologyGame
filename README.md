@@ -17,6 +17,12 @@ Torii Path, Sakura Temple and Moonlit Wave.
   Pick a chapter (1–7 so far) or one of its sections. Questions mix terms, definitions, abbreviations,
   word-part breakdowns and "name the highlighted structure" diagrams. Bigger chapters mean longer runs.
   Missed terms come back more often, and the game tracks how much of each chapter you've seen and mastered.
+- **Typed recall and spaced review:** in the default *Mixed* style, a term starts as multiple choice and
+  switches to typed recall once you know it. A correct typed answer is a "recall strike" for +50% damage.
+  Small typos in long words count, with a spelling note, but a different real term never does.
+  Each term is scheduled for review 1, 3, 7, 14, 30, 60 and 120 days later as you keep recalling it;
+  a miss brings it back the next day. The **Daily review** run (and the "due" count on the title screen)
+  pulls whatever is due from every chapter. A term only counts as *mastered* after a typed recall.
   The content lives in `data/eml/*.txt` (one line per term). It is original study notes arranged by the
   textbook's chapters, not text copied from the book.
 - **Music:** put lo-fi tracks in `audio/`. See [audio/README.md](audio/README.md).

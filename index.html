@@ -85,6 +85,12 @@
         <div id="quizImage"></div>
         <p class="prompt" id="prompt"></p>
         <div class="choices" id="choices"></div>
+        <form class="typed" id="typedForm" autocomplete="off" hidden>
+          <input id="typedInput" type="text" autocapitalize="off" autocorrect="off" spellcheck="false"
+            placeholder="Type your answer…" aria-label="Your answer">
+          <button class="btn small" type="submit">Strike ⏎</button>
+          <button class="btn small ghost" type="button" id="dontKnowBtn">I don't know</button>
+        </form>
         <div class="hint-row">
           <button class="btn small" id="hintBtn" type="button">Hint</button>
           <p class="hint" id="hintText" aria-live="polite"></p>

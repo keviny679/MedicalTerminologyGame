@@ -161,9 +161,126 @@ export function makeStudyQuestion(entry, pools, diagrams, rng = Math.random, typ
   };
 }
 
-/* ----------------------------------------------------------------- mastery */
+/* ------------------------------------------------------------ typed recall */
 
-export const isMastered = (p) => !!p && p.r >= 2 && p.l === 1;
+// Every acceptable typed form of an answer like "cardi/o, cordi-" or
+// "Sweat (sudoriferous) gland" or "ECG, EKG".
+export function acceptVariants(text) {
+  const out = new Set();
+  const add = (t) => {
+    const n = normAnswer(t);
+    if (n) out.add(n);
+  };
+  const noParen = text.replace(/\s*\([^)]*\)/g, "").trim();
+  const alts = [text, noParen];
+  // "Frontal (coronal) plane" -> "coronal plane"; "Sweat (sudoriferous) gland" -> "sudoriferous gland"
+  const m = text.match(/^(.*?)(\S+)\s*\(([^)]+)\)\s*(.*)$/);
+  if (m) alts.push(`${m[1]}${m[3]} ${m[4]}`);
+  const inner = text.match(/\(([^)]+)\)/);
+  if (inner) alts.push(inner[1]);
+  for (const a of alts) {
+    for (const piece of a.split(/,\s*|\s+or\s+|;\s*/)) {
+      add(piece);
+      // combining forms: "cardi/o" also accepts "cardio" and "cardi"
+      if (piece.includes("/")) {
+        add(piece.replace("/", ""));
+        add(piece.split("/")[0]);
+      }
+    }
+    add(a);
+  }
+  return [...out];
+}
+
+export function normAnswer(s) {
+  return s.toLowerCase().replace(/\([^)]*\)/g, " ").replace(/[^a-z0-9]+/g, "");
+}
+
+export function editDistance(a, b) {
+  const dp = Array.from({ length: a.length + 1 }, (_, i) => [i]);
+  for (let j = 1; j <= b.length; j++) dp[0][j] = j;
+  for (let i = 1; i <= a.length; i++) {
+    for (let j = 1; j <= b.length; j++) {
+      dp[i][j] = Math.min(dp[i - 1][j] + 1, dp[i][j - 1] + 1, dp[i - 1][j - 1] + (a[i - 1] === b[j - 1] ? 0 : 1));
+    }
+  }
+  return dp[a.length][b.length];
+}
+
+// "exact" | "typo" (counts as right, with a spelling note) | "wrong".
+// Medical words that differ by a letter or two often mean different things
+// (ileum/ilium, -otomy/-ectomy), so only a single slip in a longer word is
+// forgiven, and never when the input is itself another known term.
+export function gradeTyped(input, accept, vocab = null) {
+  const n = normAnswer(input);
+  if (!n) return "wrong";
+  if (accept.includes(n)) return "exact";
+  if (vocab && vocab.has(n)) return "wrong";
+  for (const a of accept) {
+    if (a.length >= 6 && editDistance(n, a) <= 1) return "typo";
+  }
+  return "wrong";
+}
+
+// Every typed form of every entry, to stop a real term passing as a typo.
+export function vocabulary(entries) {
+  const v = new Set();
+  for (const e of entries) acceptVariants(e.name).forEach((x) => v.add(x));
+  return v;
+}
+
+const TYPED_LABEL = { part: "word part", term: "term", abbr: "abbreviation" };
+
+// A fill-in question: the definition (or a highlighted picture) is shown, the
+// student types the term.
+// Some entries (plural rules like "-a to -ae") make poor fill-in answers.
+export const canRecall = (e) => !/ to /.test(e.name) && e.name.length <= 40;
+
+export function makeRecallQuestion(entry, allEntries, diagrams, rng = Math.random) {
+  if (!canRecall(entry)) return null;
+  const canImage = entry.img && diagrams.DIAGRAMS?.[entry.img.split(".")[0]];
+  if (canImage && rng() < 0.5) {
+    const [d, region] = entry.img.split(".");
+    const label = diagrams.partLabel(d, region);
+    return {
+      mode: "typed", type: "image-typed", entry,
+      prompt: `${diagrams.DIAGRAMS[d].ask} <span class="kind">(type the name)</span>`,
+      image: { diagram: d, region },
+      accept: [...new Set([...acceptVariants(label), ...acceptVariants(entry.name)])],
+      answerText: label,
+      explain: `${entry.name}: ${entry.def}`,
+      hint: entry.parts ? `Word parts: ${entry.parts}` : null,
+    };
+  }
+  // Accept any entry of the same kind whose definition says the same thing.
+  const twins = allEntries.filter((e) => e.kind === entry.kind && e.chapter === entry.chapter && tooSimilar(e.def, entry.def));
+  const accept = new Set(acceptVariants(entry.name));
+  for (const t of twins) acceptVariants(t.name).forEach((a) => accept.add(a));
+  return {
+    mode: "typed", type: "def>typed", entry,
+    prompt: `Type the ${TYPED_LABEL[entry.kind]} that means: <i>${esc(entry.def)}</i>`,
+    image: null,
+    accept: [...accept],
+    answerText: entry.name,
+    explain: `${entry.name}: ${entry.def}${entry.parts ? ` (${entry.parts})` : ""}`,
+    hint: entry.parts ? `Word parts: ${entry.parts}` : null,
+  };
+}
+
+// Letter hint for typed questions: "g _ _ _ _ _ _ _ _ _ y (11 letters)"
+export function letterHint(answer) {
+  const first = answer.split(/,\s*/)[0];
+  const letters = first.replace(/[^A-Za-z]/g, "");
+  if (letters.length <= 2) return `Starts with “${first[0]}”`;
+  const shown = first.split("").map((c, i) => (/[A-Za-z]/.test(c) && i > 1 && i < first.length - 1 ? "_" : c)).join(" ");
+  return `${shown}  (${letters.length} letters)`;
+}
+
+/* ---------------------------------------------------- mastery and spacing */
+
+// A term is mastered once it has been recalled by typing, answered right at
+// least twice in total, and was right the last time.
+export const isMastered = (p) => !!p && p.r >= 2 && p.l === 1 && (p.t || 0) >= 1;
 
 export function chapterMastery(chapter, progress) {
   if (!chapter.entries.length) return 0;
@@ -175,22 +292,59 @@ export function roomsFor(entryCount) {
   return Math.max(3, Math.min(12, Math.round(entryCount / 20)));
 }
 
+const DAY = 24 * 60 * 60 * 1000;
+// Review intervals in days for each successful recall in a row.
+export const INTERVALS = [1, 3, 7, 14, 30, 60, 120];
+
+// Update the spacing schedule after an answer. A typed recall moves a term up
+// the ladder; a multiple-choice hit only schedules a near review; a miss
+// sends it back to tomorrow.
+export function schedule(p, correct, typed, now = Date.now()) {
+  p.box ??= 0;
+  if (!correct) {
+    p.box = 0;
+    p.due = now + DAY * 0.5;
+  } else if (typed) {
+    p.due = now + DAY * INTERVALS[Math.min(p.box, INTERVALS.length - 1)];
+    p.box = Math.min(p.box + 1, INTERVALS.length - 1);
+  } else {
+    p.due = Math.min(p.due || Infinity, now + DAY);
+  }
+  return p;
+}
+
+export function dueEntries(entries, progress, now = Date.now()) {
+  return entries
+    .filter((e) => progress[e.key]?.due && progress[e.key].due <= now)
+    .sort((a, b) => progress[a.key].due - progress[b.key].due);
+}
+
+export const STYLES = ["mixed", "typed", "mc"];
+export const STYLE_LABEL = { mixed: "Mixed (recommended)", typed: "Typed recall only", mc: "Multiple choice only" };
+
 // Weighted deck: unseen and often-missed entries come up more; recent ones rest.
 export class StudyDeck {
-  constructor(entries, allEntries, diagrams, progress, rng = Math.random) {
+  constructor(entries, allEntries, diagrams, progress, rng = Math.random, style = "mixed") {
     this.entries = entries;
     this.all = allEntries;
     this.diagrams = diagrams;
     this.progress = progress;
     this.rng = rng;
+    this.style = style;
     this.recent = [];
+    this._vocab = null;
+  }
+
+  get vocab() {
+    return (this._vocab ||= vocabulary(this.all));
   }
 
   weight(e) {
     const p = this.progress[e.key];
     if (this.recent.includes(e.key)) return 0;
     if (!p) return 3;
-    return Math.max(0.3, Math.min(6, 1 + p.w * 2 - p.r * 0.5 + (p.l === 0 ? 2 : 0)));
+    const overdue = p.due && p.due <= Date.now() ? 3 : 0;
+    return Math.max(0.3, Math.min(8, 1 + p.w * 2 - p.r * 0.5 + (p.l === 0 ? 2 : 0) + overdue));
   }
 
   pickEntry() {
@@ -202,12 +356,25 @@ export class StudyDeck {
     return this.entries[this.entries.length - 1];
   }
 
+  // Recognition first, then recall: in mixed style a term switches to typed
+  // questions once it has been answered right at least once.
+  wantsTyped(e) {
+    if (this.style === "typed") return true;
+    if (this.style === "mc") return false;
+    const p = this.progress[e.key];
+    return !!p && p.r >= 1 && this.rng() < 0.7;
+  }
+
   next() {
     for (let tries = 0; tries < 30; tries++) {
       const e = this.pickEntry();
-      const sameSection = this.all.filter((x) => x.chapter === e.chapter && x.section === e.section);
-      const sameChapter = this.all.filter((x) => x.chapter === e.chapter);
-      const q = makeStudyQuestion(e, [sameSection, sameChapter, this.all], this.diagrams, this.rng);
+      let q = null;
+      if (this.wantsTyped(e)) q = makeRecallQuestion(e, this.all, this.diagrams, this.rng);
+      if (!q) {
+        const sameSection = this.all.filter((x) => x.chapter === e.chapter && x.section === e.section);
+        const sameChapter = this.all.filter((x) => x.chapter === e.chapter);
+        q = makeStudyQuestion(e, [sameSection, sameChapter, this.all], this.diagrams, this.rng);
+      }
       if (!q) continue;
       this.recent.push(e.key);
       if (this.recent.length > Math.min(8, Math.floor(this.entries.length / 2))) this.recent.shift();
@@ -216,11 +383,13 @@ export class StudyDeck {
     throw new Error("Couldn't build a question for this chapter.");
   }
 
-  record(entry, correct) {
-    const p = this.progress[entry.key] || { r: 0, w: 0, l: 0 };
+  record(entry, correct, typed = false, now = Date.now()) {
+    const p = this.progress[entry.key] || { r: 0, w: 0, l: 0, t: 0 };
     if (correct) p.r += 1;
     else p.w += 1;
+    if (correct && typed) p.t = (p.t || 0) + 1;
     p.l = correct ? 1 : 0;
+    schedule(p, correct, typed, now);
     this.progress[entry.key] = p;
   }
 }

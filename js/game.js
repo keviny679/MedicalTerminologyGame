@@ -12,7 +12,10 @@ import {
 } from "./run.js";
 import { FLOORS } from "./art.js";
 import { Music } from "./music.js";
-import { CHAPTER_FILES, parseChapter, StudyDeck, chapterMastery, roomsFor } from "./study.js";
+import {
+  CHAPTER_FILES, parseChapter, StudyDeck, chapterMastery, roomsFor, gradeTyped, letterHint, dueEntries,
+  STYLES, STYLE_LABEL, isMastered,
+} from "./study.js";
 import * as DG from "./diagrams.js";
 const { renderDiagram, DIAGRAMS } = DG;
 
@@ -294,7 +297,8 @@ function updateHud() {
   }
   if (R.study) {
     const total = R.study.rooms;
-    $("floorTag").textContent = `Ch${R.study.chapter.num} ${R.room + 1 >= total ? "BOSS" : `${R.room + 1}/${total}`}`;
+    const tag = R.study.chapter.num ? `Ch${R.study.chapter.num}` : "Review";
+    $("floorTag").textContent = `${tag} ${R.room + 1 >= total ? "BOSS" : `${R.room + 1}/${total}`}`;
   } else {
     const roomLabel = R.room >= ROOMS_PER_FLOOR ? "BOSS" : `${Math.min(R.room + 1, ROOMS_PER_FLOOR)}/${ROOMS_PER_FLOOR}`;
     $("floorTag").textContent = `F${Math.min(R.floor + 1, FLOOR_COUNT)} ${roomLabel}`;
@@ -504,8 +508,10 @@ function askQuestion(enemy) {
   S.q.hintUsed = false;
   const q = S.q;
   // Eye of Ryujin crosses out wrong answers up front.
-  const wrong = q.options.map((_, i) => i).filter((i) => i !== q.answer).sort(() => rng() - 0.5);
-  for (let i = 0; i < st.removeOptions; i++) q.removed.add(wrong[i]);
+  if (q.options) {
+    const wrong = q.options.map((_, i) => i).filter((i) => i !== q.answer).sort(() => rng() - 0.5);
+    for (let i = 0; i < st.removeOptions; i++) q.removed.add(wrong[i]);
+  }
 
   show("choiceView", false);
   show("quizView");
@@ -514,7 +520,18 @@ function askQuestion(enemy) {
   $("quizImage").innerHTML = q.image ? renderDiagram(q.image.diagram, q.image.region, { labels: q.image.labelled ? "one" : "none" }) : "";
   const box = $("choices");
   box.innerHTML = "";
-  q.options.forEach((opt, i) => {
+  const typed = q.mode === "typed";
+  show("choices", !typed);
+  show("typedForm", typed);
+  if (typed) {
+    const input = $("typedInput");
+    input.value = "";
+    input.disabled = false;
+    input.className = "";
+    $("typedForm").querySelectorAll("button").forEach((b) => (b.disabled = false));
+    setTimeout(() => input.focus(), 30);
+  }
+  (q.options || []).forEach((opt, i) => {
     const b = document.createElement("button");
     b.type = "button";
     b.className = "choice" + (q.removed.has(i) ? " struck" : "");
@@ -536,7 +553,7 @@ function askQuestion(enemy) {
 function resolvePending(value, type = "answer") {
   const p = S.pending;
   if (!p || p.type !== type) return;
-  if (type === "answer" && S.q && S.q.removed.has(value)) return;
+  if (type === "answer" && S.q && S.q.mode !== "typed" && S.q.removed.has(value)) return;
   S.pending = null;
   p.resolve(value);
 }
@@ -549,7 +566,8 @@ function refreshHintButton() {
   if (q.hintUsed) { b.disabled = true; b.textContent = "Hint used"; }
   else if (R.study) {
     b.disabled = R.hints <= 0 || !answering;
-    b.textContent = R.hints > 0 ? `50/50 hint (${R.hints})` : "No hints left";
+    const what = q.mode === "typed" ? "Letter hint" : "50/50 hint";
+    b.textContent = R.hints > 0 ? `${what} (${R.hints})` : "No hints left";
   } else if (!q.examples.length && !stats(R).hintRemoves) {
     b.disabled = true;
     b.textContent = "No hint";
@@ -563,6 +581,16 @@ function refreshHintButton() {
 function useHint() {
   const q = S.q, R = S.run;
   if (!q || q.hintUsed || !S.pending || S.pending.type !== "answer" || R.hints <= 0) return;
+  if (q.mode === "typed") {
+    R.hints -= 1;
+    q.hintUsed = true;
+    $("hintText").textContent = [letterHint(q.answerText), q.hint].filter(Boolean).join(" · ");
+    sfx.beep([880], 0.06, "triangle");
+    refreshHintButton();
+    updateHud();
+    $("typedInput").focus();
+    return;
+  }
   const removes = R.study ? 2 : stats(R).hintRemoves;
   if (!R.study && !q.examples.length && !removes) return;
   R.hints -= 1;
@@ -657,32 +685,45 @@ async function fight(enemy) {
   while (enemy.hp > 0) {
     const choice = await askQuestion(enemy);
     const q = S.q;
+    const typed = q.mode === "typed";
+    const grade = typed ? (choice === null ? "wrong" : gradeTyped(choice, q.accept, S.studyDeck.vocab)) : null;
+    const correct = typed ? grade !== "wrong" : choice === q.answer;
     const buttons = [...$("choices").children];
     buttons.forEach((b) => (b.disabled = true));
     $("hintBtn").disabled = true;
-    buttons[q.answer].classList.add("right");
+    if (typed) {
+      $("typedInput").disabled = true;
+      $("typedForm").querySelectorAll("button").forEach((b) => (b.disabled = true));
+      $("typedInput").classList.add(correct ? "right" : "wrong");
+    } else {
+      buttons[q.answer].classList.add("right");
+    }
     const fb = $("feedback");
     const notes = [];
 
     if (R.study) {
-      S.studyDeck.record(q.entry, choice === q.answer);
+      S.studyDeck.record(q.entry, correct, typed);
       store.set(EML_KEY, S.progress);
+      if (typed && correct) R.stats.recalled = (R.stats.recalled || 0) + 1;
       if (q.image) $("quizImage").innerHTML = renderDiagram(q.image.diagram, q.image.region, { labels: "all" });
     }
-    if (choice === q.answer) {
+    if (correct) {
       sfx.right();
-      const res = heroStrike(R, enemy, rng);
+      const res = heroStrike(R, enemy, rng, typed ? 1.5 : 1);
       fb.className = "feedback good";
       notes.push(R.streak > 1 ? `Correct! ${R.streak} in a row.` : "Correct!");
+      if (typed) notes.push("Recall strike: +50% damage!");
+      if (grade === "typo") notes.push(`(Check your spelling: “${q.answerText}”.)`);
       if (res.interrupted) notes.push("You staggered it!");
       if (res.hits.some((h) => h.crit)) notes.push("Critical!");
       if (res.hits.filter((h) => h.kind === "slash").length > 1) notes.push("Double strike!");
       if (res.hits.some((h) => h.blocked)) notes.push("Its ward absorbed the blow.");
       fb.textContent = notes.join(" ");
+      if (typed && q.entry) fb.innerHTML += `<br><span class="explain"><b>${esc(q.entry.name)}</b>: ${esc(q.entry.def)}</span>`;
       await animateHeroHits(enemy, res);
     } else {
       sfx.wrong();
-      buttons[choice].classList.add("wrong");
+      if (!typed) buttons[choice].classList.add("wrong");
       const missedName = q.entry ? q.entry.name : q.affix;
       if (!R.missed.some((m) => m.affix === missedName)) {
         R.missed.push({ affix: missedName, meaning: q.entry ? q.entry.def : q.options[q.answer] });
@@ -691,7 +732,10 @@ async function fight(enemy) {
       fb.className = "feedback bad";
       let what = res.forgiven ? " Your charm shielded you." : res.dodged ? " You dodged!" : res.heavy ? " A crushing blow!" : "";
       const note = q.entry && `<b>${esc(q.entry.name)}</b>: ${esc(q.entry.def)}${q.entry.parts ? ` (${esc(q.entry.parts)})` : ""}.`;
-      fb.innerHTML = q.entry
+      const def = `${esc(q.entry?.def || "")}${q.entry?.parts ? ` (${esc(q.entry.parts)})` : ""}`;
+      fb.innerHTML = typed
+        ? `${choice === null ? "Here it is:" : `Not quite (you typed “${esc(choice)}”).`} <b>${esc(q.answerText)}</b>: ${def}.${esc(what)}`
+        : q.entry
         ? (q.options[q.answer] === q.entry.def ? `Not quite. ${note}` : `Not quite. The answer is “${esc(q.options[q.answer])}”.<br>${note}`) + esc(what)
         : `Not quite. <b>${esc(q.affix)}</b> means “${esc(q.options[q.answer])}”.${esc(what)}`;
       await animateEnemyHit(enemy, res);
@@ -717,7 +761,7 @@ async function fight(enemy) {
       updateHud();
     }
 
-    if (choice !== q.answer && enemy.hp > 0) {
+    if (!correct && enemy.hp > 0) {
       show("continueBtn");
       $("continueBtn").focus();
       await new Promise((resolve) => { S.pending = { type: "continue", resolve }; });
@@ -927,6 +971,24 @@ async function loadChapters() {
 }
 
 const pctText = (x) => `${Math.round(x * 100)}%`;
+const STYLE_KEY = "rb.style";
+const studyStyle = () => (STYLES.includes(store.get(STYLE_KEY, "mixed")) ? store.get(STYLE_KEY, "mixed") : "mixed");
+
+function nextReviewText() {
+  const all = (S.chapters || []).flatMap((c) => c.entries);
+  const now = Date.now(), day = 86400000;
+  const today = all.filter((e) => S.progress[e.key]?.due <= now + day).length;
+  const week = all.filter((e) => S.progress[e.key]?.due <= now + 7 * day).length;
+  return `Coming back for review: ${today} within a day, ${week} within a week. Come back tomorrow to lock them in.`;
+}
+
+async function updateDueBadge() {
+  try {
+    const chapters = await loadChapters();
+    const due = dueEntries(chapters.flatMap((c) => c.entries), S.progress).length;
+    $("studyBtn").textContent = due ? `Essentials of Medical Language (${due} due)` : "Essentials of Medical Language";
+  } catch { /* badge is optional */ }
+}
 const seenShare = (entries) => entries.filter((e) => S.progress[e.key]).length / Math.max(1, entries.length);
 
 async function studyMenu(lookKey) {
@@ -947,21 +1009,44 @@ async function studyMenu(lookKey) {
     return toTitle();
   }
   for (;;) {
+    const allEntries = chapters.flatMap((c) => c.entries);
+    const due = dueEntries(allEntries, S.progress);
+    const reviewCard = due.length
+      ? [{
+          value: "review", color: "#59d98e",
+          html: cardHtml({ icon: "⟳", name: "Daily review", tag: `${due.length} term${due.length > 1 ? "s" : ""} due today`, body: "Typed recall of terms that are due, from every chapter. Do this first!" }),
+        }]
+      : [];
     const ch = await choose({
       title: "Essentials of Medical Language",
-      sub: "Choose a chapter. Bigger chapters mean longer runs. Missed terms come back more often; a term counts as mastered after 2+ correct answers with the latest one right.",
-      cards: chapters.map((c) => ({
+      sub: `Choose a chapter. Terms you get right come back for review after 1, 3, 7, 14 and 30 days; misses come back tomorrow. ` +
+        `A term counts as mastered once you've typed it correctly from memory. <br>Question style: <b>${STYLE_LABEL[studyStyle()]}</b>`,
+      cards: reviewCard.concat(chapters.map((c) => ({
         value: c,
         color: chapterMastery(c, S.progress) >= 0.8 ? "#59d98e" : "#ffd36b",
         html: cardHtml({
           icon: String(c.num), name: c.title,
           tag: `${c.entries.length} terms · ${c.sections.length} sections · ${roomsFor(c.entries.length)} rooms`,
-          body: `Seen ${pctText(seenShare(c.entries))} · mastered ${pctText(chapterMastery(c, S.progress))}`,
+          body: `Seen ${pctText(seenShare(c.entries))} · mastered ${pctText(chapterMastery(c, S.progress))}` +
+            (dueEntries(c.entries, S.progress).length ? ` · ${dueEntries(c.entries, S.progress).length} due` : ""),
         }),
-      })),
-      buttons: [{ label: "Diagram atlas", value: "atlas" }, { label: "Back", value: "back", ghost: true }],
+      }))),
+      buttons: [
+        { label: "Change question style", value: "style", ghost: true },
+        { label: "Diagram atlas", value: "atlas" },
+        { label: "Back", value: "back", ghost: true },
+      ],
     });
     if (ch === "back") return toTitle();
+    if (ch === "style") {
+      const i = STYLES.indexOf(studyStyle());
+      store.set(STYLE_KEY, STYLES[(i + 1) % STYLES.length]);
+      continue;
+    }
+    if (ch === "review") {
+      const list = dueEntries(allEntries, S.progress).slice(0, 60);
+      return startStudy({ num: 0, title: "Daily review", entries: list, sections: [] }, null);
+    }
     if (ch === "atlas") { await atlas(); continue; }
     const section = await choose({
       title: `Chapter ${ch.num}: ${ch.title}`,
@@ -1015,11 +1100,12 @@ async function atlas() {
 async function startStudy(chapter, section) {
   const entries = section ? section.entries : chapter.entries;
   const all = S.chapters.flatMap((c) => c.entries);
-  S.studyDeck = new StudyDeck(entries, all, DG, S.progress);
+  const style = chapter.num ? studyStyle() : studyStyle() === "mc" ? "mc" : "typed";
+  S.studyDeck = new StudyDeck(entries, all, DG, S.progress, Math.random, style);
   S.deck = S.studyDeck;
   const R = newRun({}, S.lookKey);
   R.study = { chapter, section, rooms: roomsFor(entries.length) };
-  R.floor = (chapter.num - 1) % FLOOR_COUNT; // background and foes
+  R.floor = chapter.num ? (chapter.num - 1) % FLOOR_COUNT : FLOOR_COUNT - 1; // background and foes
   R.hints = 3 + Math.floor(R.study.rooms / 3);
   S.run = R;
   S.enemy = null;
@@ -1035,7 +1121,7 @@ async function startStudy(chapter, section) {
   S.particles = [];
   updateHud();
   play(S.hero, "walkIn", 1400);
-  await banner(`Chapter ${chapter.num}`, section ? section.title : chapter.title);
+  await banner(chapter.num ? `Chapter ${chapter.num}` : "Daily review", section ? section.title : chapter.num ? chapter.title : `${entries.length} terms due`);
   const before = chapterMastery(chapter, S.progress);
   for (let room = 0; room < R.study.rooms; room++) {
     R.room = room;
@@ -1066,9 +1152,11 @@ async function endStudy(won, before) {
   const review = R.missed.slice(-20).map((m) => `<li><b>${esc(m.affix)}</b> ${esc(m.meaning)}</li>`).join("");
   show("hud", false);
   const pickd = await choose({
-    title: won ? `Chapter ${ch.num} complete!` : "You need a rest…",
+    title: won ? (ch.num ? `Chapter ${ch.num} complete!` : "Review complete!") : "You need a rest…",
     sub:
-      `Accuracy ${acc}% · ${R.stats.correct} correct · seen ${pctText(seenShare(ch.entries))} of the chapter · mastered ${pctText(before)} → <b style="color:#59d98e">${pctText(after)}</b>` +
+      `Accuracy ${acc}% · ${R.stats.correct} correct · <b>${R.stats.recalled || 0} recalled by typing</b> · ` +
+      `seen ${pctText(seenShare(ch.entries))} · mastered ${pctText(before)} → <b style="color:#59d98e">${pctText(after)}</b>` +
+      `<br>${nextReviewText()}` +
       (review ? `<br><br>Review these:</p><ul class="review">${review}</ul><p>` : ""),
     buttons: [
       { label: "Study again", value: "again" },
@@ -1076,12 +1164,16 @@ async function endStudy(won, before) {
       { label: "Title", value: "title", ghost: true },
     ],
   });
-  if (pickd === "again") return startStudy(ch, R.study.section);
+  if (pickd === "again") {
+    if (!ch.num) return studyMenu(S.lookKey);
+    return startStudy(ch, R.study.section);
+  }
   if (pickd === "chapters") return studyMenu(S.lookKey);
   return toTitle();
 }
 
 function toTitle() {
+  updateDueBadge();
   S.mode = "title";
   S.run = null;
   show("panel", false);
@@ -1122,6 +1214,12 @@ for (const card of document.querySelectorAll(".hero-card")) {
 }
 $("studyBtn").onclick = () => { music.start(); S.nextMode = "study"; toSelect(); };
 $("hintBtn").onclick = useHint;
+$("typedForm").onsubmit = (e) => {
+  e.preventDefault();
+  const v = $("typedInput").value.trim();
+  if (v) resolvePending(v);
+};
+$("dontKnowBtn").onclick = () => resolvePending(null);
 $("continueBtn").onclick = () => resolvePending(null, "continue");
 
 // sound menu
@@ -1168,6 +1266,7 @@ async function boot() {
   requestAnimationFrame(frame);
   $("bestText").textContent = bestText();
   $("studyBtn").disabled = false; // study mode has its own data
+  updateDueBadge();
   music.init();
   const status = $("loadStatus");
   try {
