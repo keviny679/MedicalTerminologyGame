@@ -22,7 +22,7 @@ class ParseTest(unittest.TestCase):
 
     def test_multiple_affixes_and_examples(self):
         t = self.by_affix["a-, an-"]
-        self.assertEqual(t["meaning"], "not, without")
+        self.assertEqual(t["meaning"], "not, without (alpha privative)")
         self.assertEqual(t["examples"], ["analgesic", "apathy"])
 
     def test_strips_citations(self):

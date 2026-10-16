@@ -26,7 +26,7 @@ API = (
 SOURCE_URL = "https://en.wikipedia.org/wiki/" + PAGE
 OUT = Path(__file__).resolve().parent.parent / "data" / "terms.json"
 
-CITATION = re.compile(r"\[(?:\d+|[a-z]|note \d+|citation needed)\]", re.I)
+CITATION = re.compile(r"\[\s*(?:\d+|[a-z]|note \d+|citation needed)\s*\]", re.I)
 SPACES = re.compile(r"\s+")
 
 
@@ -39,7 +39,9 @@ def fetch_html():
 
 
 def clean(text):
-    text = CITATION.sub("", text)
+    text = CITATION.sub("", SPACES.sub(" ", text))
+    text = re.sub(r"\s+([,.;:)\]])", r"\1", text)  # "genitals , x" -> "genitals, x"
+    text = re.sub(r"([(\[])\s+", r"\1", text)  # "( alpha" -> "(alpha"
     return SPACES.sub(" ", text).strip()
 
 
@@ -117,6 +119,8 @@ def split_examples(cell):
 
 def parse(html):
     soup = BeautifulSoup(html, "html.parser")
+    for junk in soup.select("sup.reference, .noprint, .mw-ref, style"):
+        junk.decompose()
     terms, seen = [], set()
 
     def add(affixes, meaning, examples):
