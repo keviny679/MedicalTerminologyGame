@@ -278,9 +278,17 @@ export function letterHint(answer) {
 
 /* ---------------------------------------------------- mastery and spacing */
 
-// A term is mastered once it has been recalled by typing, answered right at
-// least twice in total, and was right the last time.
-export const isMastered = (p) => !!p && p.r >= 2 && p.l === 1 && (p.t || 0) >= 1;
+// Successive relearning: a term is mastered once it has been typed correctly
+// from memory on at least 3 different days, and the latest answer was right.
+// (Recalling once in each of 3 sessions beats 3 times in one session by far.)
+export const MASTERY_DAYS = 3;
+export const isMastered = (p) => !!p && p.l === 1 && (p.days?.length || 0) >= MASTERY_DAYS;
+
+// Local calendar day, e.g. "2026-10-16".
+export function dayKey(now = Date.now()) {
+  const d = new Date(now);
+  return `${d.getFullYear()}-${String(d.getMonth() + 1).padStart(2, "0")}-${String(d.getDate()).padStart(2, "0")}`;
+}
 
 export function chapterMastery(chapter, progress) {
   if (!chapter.entries.length) return 0;
@@ -299,12 +307,12 @@ export const INTERVALS = [1, 3, 7, 14, 30, 60, 120];
 // Update the spacing schedule after an answer. A typed recall moves a term up
 // the ladder; a multiple-choice hit only schedules a near review; a miss
 // sends it back to tomorrow.
-export function schedule(p, correct, typed, now = Date.now()) {
+export function schedule(p, correct, typed, now = Date.now(), { guess = false } = {}) {
   p.box ??= 0;
   if (!correct) {
     p.box = 0;
     p.due = now + DAY * 0.5;
-  } else if (typed) {
+  } else if (typed && !guess) {
     p.due = now + DAY * INTERVALS[Math.min(p.box, INTERVALS.length - 1)];
     p.box = Math.min(p.box + 1, INTERVALS.length - 1);
   } else {
@@ -335,6 +343,7 @@ export class StudyDeck {
     this._vocab = null;
     this.asked = 0;
     this.followUps = []; // { entry, at } -> ask again (typed) after a few questions
+    this.missedNow = new Map(); // key -> entry, cleared once recalled again
   }
 
   get vocab() {
@@ -368,13 +377,24 @@ export class StudyDeck {
   }
 
   // Seen it, now recall it: re-ask a term as a typed question a few
-  // questions later, after a recognition hit or after a miss.
-  queueFollowUp(entry, correct, typed) {
-    if (this.style === "mc" && correct) return;
-    if (correct && typed) return;
+  // questions later, after a recognition hit, a guess or a miss.
+  // A confident miss comes back soonest (that surprise is when it sticks).
+  queueFollowUp(entry, correct, typed, { guess = false, confident = false } = {}) {
+    if (this.style === "mc" && correct && !guess) return;
+    if (correct && typed && !guess) return;
     if (this.followUps.some((f) => f.entry === entry)) return;
-    const gap = correct ? 2 + Math.floor(this.rng() * 3) : 3 + Math.floor(this.rng() * 4);
+    const gap = !correct && confident ? 2 + Math.floor(this.rng() * 2)
+      : correct ? 2 + Math.floor(this.rng() * 3) : 3 + Math.floor(this.rng() * 4);
     this.followUps.push({ entry, at: this.asked + gap });
+  }
+
+  // Terms missed this run that haven't been recalled correctly since.
+  get unresolved() {
+    return [...this.missedNow.values()];
+  }
+
+  recallFor(entry) {
+    return (this.style !== "mc" && makeRecallQuestion(entry, this.all, this.diagrams, this.rng)) || this.mcQuestion(entry);
   }
 
   takeFollowUp() {
@@ -415,14 +435,23 @@ export class StudyDeck {
     throw new Error("Couldn't build a question for this chapter.");
   }
 
-  record(entry, correct, typed = false, now = Date.now()) {
+  // opts.guess: the player marked the answer as a guess ("Unsure").
+  record(entry, correct, typed = false, now = Date.now(), { guess = false } = {}) {
     const p = this.progress[entry.key] || { r: 0, w: 0, l: 0, t: 0 };
+    const confident = !guess;
     if (correct) p.r += 1;
     else p.w += 1;
-    if (correct && typed) p.t = (p.t || 0) + 1;
-    p.l = correct ? 1 : 0;
-    schedule(p, correct, typed, now);
+    if (!correct && confident) p.cw = (p.cw || 0) + 1; // confident errors
+    if (correct && typed && !guess) {
+      p.t = (p.t || 0) + 1;
+      const today = dayKey(now);
+      p.days = [...new Set([...(p.days || []), today])].slice(-6);
+    }
+    p.l = correct && !guess ? 1 : 0;
+    schedule(p, correct, typed, now, { guess });
     this.progress[entry.key] = p;
-    this.queueFollowUp(entry, correct, typed);
+    if (!correct) this.missedNow.set(entry.key, entry);
+    else if (!guess) this.missedNow.delete(entry.key);
+    this.queueFollowUp(entry, correct, typed, { guess, confident });
   }
 }

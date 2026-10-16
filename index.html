@@ -93,6 +93,8 @@
         </form>
         <div class="hint-row">
           <button class="btn small" id="hintBtn" type="button">Hint</button>
+          <button class="btn small ghost unsure" id="unsureBtn" type="button" aria-pressed="false" hidden
+            title="Mark this answer as a guess (U)">Unsure?</button>
           <p class="hint" id="hintText" aria-live="polite"></p>
         </div>
         <div class="feedback" id="feedback" aria-live="polite"></div>
@@ -112,7 +114,7 @@
       <a href="https://en.wikipedia.org/wiki/List_of_medical_roots,_suffixes_and_prefixes" target="_blank" rel="noopener">List of medical roots, suffixes and prefixes</a>
       (<a href="https://creativecommons.org/licenses/by-sa/4.0/" target="_blank" rel="noopener">CC BY-SA 4.0</a>).
       Essentials mode: original study notes arranged by the textbook’s chapters.
-      Keys: 1–4 answer · H hint · Enter continue
+      Keys: 1–4 answer · H hint · U unsure · Enter continue
     </footer>
   </main>
   <script type="module" src="js/game.js"></script>

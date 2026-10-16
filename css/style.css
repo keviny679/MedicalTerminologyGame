@@ -321,6 +321,8 @@ h2 { font-size: clamp(12px, 3vw, 20px); }
 .typed input.right { border-color: var(--good); background: #14402b; }
 .typed input.wrong { border-color: var(--bad); background: #4a1621; }
 .explain { color: var(--ink); }
+.unsure.on { background: #c77dff; color: #12051f; box-shadow: inset -3px -3px 0 #7a3fb0, 0 0 0 3px #05060f; }
+.feedback.surprise { border-left: 4px solid var(--bad); padding-left: 8px; }
 
 footer { margin-top: 14px; font-size: 16px; color: var(--muted); text-align: center; }
 footer a { color: var(--ink); }

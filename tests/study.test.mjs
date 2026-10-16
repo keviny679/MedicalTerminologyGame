@@ -57,10 +57,12 @@ test("deck favors missed entries and tracks mastery", () => {
   const ch = chapters[0];
   const progress = {};
   const deck = new StudyDeck(ch.entries, all, DG, progress, rng);
-  for (let i = 0; i < 50; i++) {
-    const q = deck.next();
-    deck.record(q.entry, true, true);
-    deck.record(q.entry, true, true);
+  const DAY = 86400000;
+  for (let day = 0; day < 3; day++) {
+    for (let i = 0; i < 50; i++) {
+      const q = deck.next();
+      deck.record(q.entry, true, true, Date.UTC(2026, 9, 10) + day * DAY);
+    }
   }
   assert.ok(chapterMastery(ch, progress) > 0);
   const target = ch.entries[5];
@@ -102,7 +104,7 @@ test("diagram paths contain no malformed numbers", () => {
   }
 });
 
-import { vocabulary, acceptVariants, gradeTyped, makeRecallQuestion, schedule, dueEntries, isMastered, letterHint, INTERVALS } from "../js/study.js";
+import { dayKey, vocabulary, acceptVariants, gradeTyped, makeRecallQuestion, schedule, dueEntries, isMastered, letterHint, INTERVALS } from "../js/study.js";
 
 test("typed answers accept every reasonable form", () => {
   const v = acceptVariants("cardi/o, cordi-");
@@ -158,7 +160,9 @@ test("spacing: typed recalls stretch the interval, misses reset it", () => {
 
 test("mastery needs a typed recall, not just recognition", () => {
   assert.ok(!isMastered({ r: 5, w: 0, l: 1, t: 0 }));
-  assert.ok(isMastered({ r: 2, w: 0, l: 1, t: 1 }));
+  assert.ok(!isMastered({ r: 3, w: 0, l: 1, t: 3, days: ["2026-10-16"] })); // 3 times in one day is not enough
+  assert.ok(isMastered({ r: 3, w: 0, l: 1, t: 3, days: ["2026-10-14", "2026-10-15", "2026-10-16"] }));
+  assert.ok(!isMastered({ r: 4, w: 1, l: 0, t: 3, days: ["2026-10-14", "2026-10-15", "2026-10-16"] }));
   assert.match(letterHint("gastrectomy"), /^g a _/);
 });
 
@@ -198,4 +202,33 @@ test("a term answered by recognition is re-asked as typed a few questions later"
   const again = later.find((q) => q.entry === first.entry);
   assert.ok(again, "term came back");
   if (/ to /.test(first.entry.name) === false && first.entry.name.length <= 40) assert.equal(again.mode, "typed");
+});
+
+test("guesses don't count as knowing; confident misses come back soonest", () => {
+  const deck = new StudyDeck(chapters[1].entries, all, DG, {}, rng, "mixed");
+  const e = chapters[1].entries[3];
+  deck.record(e, true, true, Date.now(), { guess: true });
+  const p = deck.progress[e.key];
+  assert.equal(p.t, 0);
+  assert.equal(p.l, 0);
+  assert.ok(!p.days);
+  assert.ok(p.due - Date.now() <= 86400000 + 1000, "a lucky guess isn't pushed out");
+  assert.ok(deck.followUps.some((f) => f.entry === e), "a guessed term is re-asked");
+  const f = chapters[1].entries[5];
+  deck.record(f, false, true);
+  assert.equal(deck.progress[f.key].cw, 1);
+  const gap = deck.followUps.find((x) => x.entry === f).at - deck.asked;
+  assert.ok(gap <= 3, `confident miss re-asked within 3, got ${gap}`);
+});
+
+test("missed terms stay unresolved until recalled correctly", () => {
+  const deck = new StudyDeck(chapters[1].entries, all, DG, {}, rng, "mixed");
+  const e = chapters[1].entries[7];
+  deck.record(e, false, false);
+  assert.deepEqual(deck.unresolved, [e]);
+  deck.record(e, true, true, Date.now(), { guess: true });
+  assert.deepEqual(deck.unresolved, [e], "a guess does not resolve it");
+  deck.record(e, true, true);
+  assert.deepEqual(deck.unresolved, []);
+  assert.ok(deck.recallFor(e));
 });

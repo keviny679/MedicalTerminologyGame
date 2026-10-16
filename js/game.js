@@ -14,8 +14,9 @@ import { FLOORS } from "./art.js";
 import { Music } from "./music.js";
 import {
   CHAPTER_FILES, parseChapter, StudyDeck, chapterMastery, roomsFor, gradeTyped, letterHint, dueEntries,
-  STYLES, STYLE_LABEL, isMastered,
+  STYLES, STYLE_LABEL, isMastered, MASTERY_DAYS,
 } from "./study.js";
+import { countAnswer, goalMet, recordGoal, liveStreak, makeBackup, applyBackup, GOAL_MIN_ANSWERS } from "./progress.js";
 import * as DG from "./diagrams.js";
 const { renderDiagram, DIAGRAMS } = DG;
 
@@ -500,10 +501,15 @@ async function shopRoom() {
 
 /* ------------------------------------------------------------------ battle */
 
-function askQuestion(enemy) {
+function askQuestion(enemy, preset = null) {
   const R = S.run;
   const st = stats(R);
-  S.q = S.deck.next();
+  S.q = preset || S.deck.next();
+  S.unsure = false;
+  const ub = $("unsureBtn");
+  ub.hidden = !S.run?.study;
+  ub.classList.remove("on");
+  ub.setAttribute("aria-pressed", "false");
   S.q.removed = new Set();
   S.q.hintUsed = false;
   const q = S.q;
@@ -702,8 +708,9 @@ async function fight(enemy) {
     const notes = [];
 
     if (R.study) {
-      S.studyDeck.record(q.entry, correct, typed);
+      S.studyDeck.record(q.entry, correct, typed, Date.now(), { guess: S.unsure || choice === null });
       store.set(EML_KEY, S.progress);
+      store.set(TODAY_KEY, countAnswer(store.get(TODAY_KEY, null)));
       if (typed && correct) R.stats.recalled = (R.stats.recalled || 0) + 1;
       if (q.image) $("quizImage").innerHTML = renderDiagram(q.image.diagram, q.image.region, { labels: "all" });
     }
@@ -713,6 +720,7 @@ async function fight(enemy) {
       fb.className = "feedback good";
       notes.push(R.streak > 1 ? `Correct! ${R.streak} in a row.` : "Correct!");
       if (typed) notes.push("Recall strike: +50% damage!");
+      if (R.study && S.unsure) notes.push("Marked as a guess, so it'll come back soon.");
       if (grade === "typo") notes.push(`(Check your spelling: “${q.answerText}”.)`);
       if (res.interrupted) notes.push("You staggered it!");
       if (res.hits.some((h) => h.crit)) notes.push("Critical!");
@@ -729,10 +737,11 @@ async function fight(enemy) {
         R.missed.push({ affix: missedName, meaning: q.entry ? q.entry.def : q.options[q.answer] });
       }
       const res = enemyStrike(R, enemy, rng);
-      fb.className = "feedback bad";
+      fb.className = R.study && !S.unsure && choice !== null ? "feedback bad surprise" : "feedback bad";
       let what = res.forgiven ? " Your charm shielded you." : res.dodged ? " You dodged!" : res.heavy ? " A crushing blow!" : "";
       const note = q.entry && `<b>${esc(q.entry.name)}</b>: ${esc(q.entry.def)}${q.entry.parts ? ` (${esc(q.entry.parts)})` : ""}.`;
       const def = `${esc(q.entry?.def || "")}${q.entry?.parts ? ` (${esc(q.entry.parts)})` : ""}`;
+      if (R.study && !S.unsure && choice !== null) what += " You felt sure, so take a close look; it's coming back in a moment.";
       fb.innerHTML = typed
         ? `${choice === null ? "Here it is:" : `Not quite (you typed “${esc(choice)}”).`} <b>${esc(q.answerText)}</b>: ${def}.${esc(what)}`
         : q.entry
@@ -959,6 +968,38 @@ async function shrine() {
 
 /* ------------------------------------------------- study mode (EML book) */
 
+function exportProgress() {
+  const backup = makeBackup((k) => store.get(k, null));
+  const blob = new Blob([JSON.stringify(backup, null, 1)], { type: "application/json" });
+  const a = document.createElement("a");
+  a.href = URL.createObjectURL(blob);
+  a.download = `root-and-blade-progress-${dayKeyNow()}.json`;
+  document.body.appendChild(a);
+  a.click();
+  setTimeout(() => { URL.revokeObjectURL(a.href); a.remove(); }, 1000);
+}
+
+function importProgress() {
+  return new Promise((resolve) => {
+    const input = document.createElement("input");
+    input.type = "file";
+    input.accept = "application/json,.json";
+    input.onchange = async () => {
+      const file = input.files?.[0];
+      if (!file) return resolve(null);
+      try {
+        const out = applyBackup(JSON.parse(await file.text()), (k) => store.get(k, null));
+        for (const [k, v] of Object.entries(out)) store.set(k, v);
+        S.progress = store.get(EML_KEY, {});
+        resolve(`Progress imported: ${Object.keys(S.progress).length} terms tracked. Review dates and streak were merged with this device.`);
+      } catch (err) {
+        resolve(`Couldn't import: ${err.message}`);
+      }
+    };
+    input.click();
+  });
+}
+
 async function loadChapters() {
   if (S.chapters) return S.chapters;
   const texts = await Promise.all(CHAPTER_FILES.map(async (f) => {
@@ -972,6 +1013,13 @@ async function loadChapters() {
 
 const pctText = (x) => `${Math.round(x * 100)}%`;
 const STYLE_KEY = "rb.style";
+const TODAY_KEY = "rb.today";
+const STREAK_KEY = "rb.streak";
+const HAD_DUE_KEY = "rb.hadDue";
+const dayKeyNow = () => {
+  const d = new Date();
+  return `${d.getFullYear()}-${String(d.getMonth() + 1).padStart(2, "0")}-${String(d.getDate()).padStart(2, "0")}`;
+};
 const studyStyle = () => (STYLES.includes(store.get(STYLE_KEY, "mixed")) ? store.get(STYLE_KEY, "mixed") : "mixed");
 
 function nextReviewText() {
@@ -986,7 +1034,10 @@ async function updateDueBadge() {
   try {
     const chapters = await loadChapters();
     const due = dueEntries(chapters.flatMap((c) => c.entries), S.progress).length;
-    $("studyBtn").textContent = due ? `Essentials of Medical Language (${due} due)` : "Essentials of Medical Language";
+    if (due) store.set(HAD_DUE_KEY, dayKeyNow());
+    const streak = liveStreak(store.get(STREAK_KEY, null));
+    const bits = [due ? `${due} due` : "", streak ? `🔥${streak}` : ""].filter(Boolean).join(" · ");
+    $("studyBtn").textContent = bits ? `Essentials of Medical Language (${bits})` : "Essentials of Medical Language";
   } catch { /* badge is optional */ }
 }
 const seenShare = (entries) => entries.filter((e) => S.progress[e.key]).length / Math.max(1, entries.length);
@@ -1020,7 +1071,9 @@ async function studyMenu(lookKey) {
     const ch = await choose({
       title: "Essentials of Medical Language",
       sub: `Choose a chapter. Terms you get right come back for review after 1, 3, 7, 14 and 30 days; misses come back tomorrow. ` +
-        `A term counts as mastered once you've typed it correctly from memory. <br>Question style: <b>${STYLE_LABEL[studyStyle()]}</b>`,
+        `A term counts as mastered once you've typed it correctly from memory on ${MASTERY_DAYS} different days. ` +
+        `<br>Question style: <b>${STYLE_LABEL[studyStyle()]}</b> · 🔥 Streak: <b>${liveStreak(store.get(STREAK_KEY, null))}</b> day(s)` +
+        `<br><span class="kind">Tip: tap “Unsure” before answering when you're guessing, so a lucky guess isn't counted as known.</span>`,
       cards: reviewCard.concat(chapters.map((c) => ({
         value: c,
         color: chapterMastery(c, S.progress) >= 0.8 ? "#59d98e" : "#ffd36b",
@@ -1033,11 +1086,19 @@ async function studyMenu(lookKey) {
       }))),
       buttons: [
         { label: "Change question style", value: "style", ghost: true },
+        { label: "Export progress", value: "export", ghost: true },
+        { label: "Import progress", value: "import", ghost: true },
         { label: "Diagram atlas", value: "atlas" },
         { label: "Back", value: "back", ghost: true },
       ],
     });
     if (ch === "back") return toTitle();
+    if (ch === "export") { exportProgress(); continue; }
+    if (ch === "import") {
+      const msg = await importProgress();
+      if (msg) await choose({ title: "Import", sub: esc(msg), buttons: [{ label: "OK", value: 1 }] });
+      continue;
+    }
     if (ch === "style") {
       const i = STYLES.indexOf(studyStyle());
       store.set(STYLE_KEY, STYLES[(i + 1) % STYLES.length]);
@@ -1140,7 +1201,62 @@ async function startStudy(chapter, section) {
   }
   sfx.win();
   await play(S.hero, "victory", 700);
+  await relearnRound();
   return endStudy(true, before);
+}
+
+// Before leaving, every term missed this run must be recalled once more.
+async function relearnRound() {
+  const deck = S.studyDeck;
+  if (!deck.unresolved.length) return;
+  S.enemy = null;
+  updateHud();
+  await banner("Relearning", `Recall the ${deck.unresolved.length} term${deck.unresolved.length > 1 ? "s" : ""} you missed before you go`, 1500);
+  const tries = new Map();
+  while (deck.unresolved.length) {
+    const entry = deck.unresolved.find((e) => (tries.get(e.key) || 0) < 3);
+    if (!entry) break;
+    tries.set(entry.key, (tries.get(entry.key) || 0) + 1);
+    const choice = await askQuestion({ charging: false }, deck.recallFor(entry));
+    const q = S.q;
+    const typed = q.mode === "typed";
+    const correct = typed ? choice !== null && gradeTyped(choice, q.accept, deck.vocab) !== "wrong" : choice === q.answer;
+    deck.record(entry, correct, typed, Date.now(), { guess: S.unsure || choice === null });
+    store.set(EML_KEY, S.progress);
+    store.set(TODAY_KEY, countAnswer(store.get(TODAY_KEY, null)));
+    $("hintBtn").disabled = true;
+    if (typed) { $("typedInput").disabled = true; $("typedInput").classList.add(correct ? "right" : "wrong"); }
+    else { [...$("choices").children].forEach((b, i) => { b.disabled = true; if (i === q.answer) b.classList.add("right"); else if (i === choice) b.classList.add("wrong"); }); }
+    if (q.image) $("quizImage").innerHTML = renderDiagram(q.image.diagram, q.image.region, { labels: "all" });
+    const fb = $("feedback");
+    if (correct) {
+      sfx.right();
+      fb.className = "feedback good";
+      fb.textContent = `Got it! ${deck.unresolved.length ? `${deck.unresolved.length} left.` : "All relearned."}`;
+      await sleep(700);
+    } else {
+      sfx.wrong();
+      fb.className = "feedback bad";
+      fb.innerHTML = `The answer: <b>${esc(q.answerText || q.options[q.answer])}</b>. ${esc(entry.def)}. It'll come up again.`;
+      show("continueBtn");
+      $("continueBtn").focus();
+      await new Promise((resolve) => { S.pending = { type: "continue", resolve }; });
+      show("continueBtn", false);
+    }
+  }
+}
+
+// Daily goal and streak, checked at the end of each study run.
+function dailyStatus() {
+  const all = (S.chapters || []).flatMap((c) => c.entries);
+  const dueLeft = dueEntries(all, S.progress).length;
+  const today = store.get(TODAY_KEY, null);
+  const answeredToday = today?.day === dayKeyNow() ? today.answered : 0;
+  const hadDue = dueLeft > 0 || store.get(HAD_DUE_KEY, null) === dayKeyNow();
+  const met = goalMet({ dueLeft, answeredToday, hadDue });
+  let streak = store.get(STREAK_KEY, null);
+  if (met) { streak = recordGoal(streak); store.set(STREAK_KEY, streak); }
+  return { dueLeft, answeredToday, hadDue, met, streak: liveStreak(streak), best: streak?.best || 0 };
 }
 
 async function endStudy(won, before) {
@@ -1148,6 +1264,12 @@ async function endStudy(won, before) {
   const ch = R.study.chapter;
   const after = chapterMastery(ch, S.progress);
   store.set(EML_KEY, S.progress);
+  const day = dailyStatus();
+  const goalLine = day.met
+    ? `🔥 Daily goal done! Streak: <b>${day.streak} day${day.streak === 1 ? "" : "s"}</b> (best ${day.best}).`
+    : day.hadDue
+      ? `Daily goal: ${day.dueLeft} review${day.dueLeft === 1 ? "" : "s"} still due today. Clear them to keep your streak.`
+      : `Daily goal: ${day.answeredToday}/${GOAL_MIN_ANSWERS} answers today.`;
   const acc = R.stats.correct + R.stats.wrong ? Math.round((R.stats.correct / (R.stats.correct + R.stats.wrong)) * 100) : 0;
   const review = R.missed.slice(-20).map((m) => `<li><b>${esc(m.affix)}</b> ${esc(m.meaning)}</li>`).join("");
   show("hud", false);
@@ -1156,7 +1278,7 @@ async function endStudy(won, before) {
     sub:
       `Accuracy ${acc}% · ${R.stats.correct} correct · <b>${R.stats.recalled || 0} recalled by typing</b> · ` +
       `seen ${pctText(seenShare(ch.entries))} · mastered ${pctText(before)} → <b style="color:#59d98e">${pctText(after)}</b>` +
-      `<br>${nextReviewText()}` +
+      `<br>${nextReviewText()}<br>${goalLine}` +
       (review ? `<br><br>Review these:</p><ul class="review">${review}</ul><p>` : ""),
     buttons: [
       { label: "Study again", value: "again" },
@@ -1220,6 +1342,13 @@ $("typedForm").onsubmit = (e) => {
   if (v) resolvePending(v);
 };
 $("dontKnowBtn").onclick = () => resolvePending(null);
+$("unsureBtn").onclick = () => {
+  if (S.pending?.type !== "answer") return;
+  S.unsure = !S.unsure;
+  $("unsureBtn").classList.toggle("on", S.unsure);
+  $("unsureBtn").setAttribute("aria-pressed", String(S.unsure));
+  if (S.q?.mode === "typed") $("typedInput").focus();
+};
 $("continueBtn").onclick = () => resolvePending(null, "continue");
 
 // sound menu
@@ -1252,6 +1381,8 @@ document.addEventListener("keydown", (e) => {
   if (S.pending?.type === "answer" && /^[1-4]$/.test(e.key)) {
     e.preventDefault();
     resolvePending(Number(e.key) - 1);
+  } else if (S.pending?.type === "answer" && e.key.toLowerCase() === "u" && S.run?.study) {
+    $("unsureBtn").click();
   } else if (S.pending?.type === "answer" && e.key.toLowerCase() === "h") {
     useHint();
   } else if (S.pending?.type === "continue" && (e.key === "Enter" || e.key === " ")) {
