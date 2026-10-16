@@ -178,6 +178,7 @@ def main():
     ap = argparse.ArgumentParser()
     ap.add_argument("--html", help="parse this saved HTML file instead of fetching")
     ap.add_argument("--out", default=str(OUT))
+    ap.add_argument("--list", action="store_true", help="print every parsed term")
     args = ap.parse_args()
 
     html = Path(args.html).read_text(encoding="utf-8") if args.html else fetch_html()
@@ -194,8 +195,9 @@ def main():
     )
     with_ex = sum(1 for t in terms if t["examples"])
     print(f"Wrote {len(terms)} terms ({with_ex} with examples) to {out}")
-    for t in terms[:: max(1, len(terms) // 12)]:
-        print(f"  {t['affix']!r:28} {t['meaning'][:40]!r:44} {t['examples'][:2]}")
+    shown = terms if args.list else terms[:: max(1, len(terms) // 12)]
+    for t in shown:
+        print(f"  {t['affix']} | {t['meaning']} | {', '.join(t['examples'])}")
 
 
 if __name__ == "__main__":

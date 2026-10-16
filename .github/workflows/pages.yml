@@ -33,7 +33,7 @@ jobs:
           python -m unittest discover tests -v
           node --test tests/*.mjs
       - name: Fetch and parse Wikipedia term list
-        run: python scripts/build_terms.py
+        run: python scripts/build_terms.py --list
       - uses: actions/upload-pages-artifact@v3
         with:
           path: .
