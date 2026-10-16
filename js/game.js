@@ -13,7 +13,8 @@ import {
 import { FLOORS } from "./art.js";
 import { Music } from "./music.js";
 import { CHAPTER_FILES, parseChapter, StudyDeck, chapterMastery, roomsFor } from "./study.js";
-import { renderDiagram, DIAGRAMS } from "./diagrams.js";
+import * as DG from "./diagrams.js";
+const { renderDiagram, DIAGRAMS } = DG;
 
 const HERO_X = 56;
 const MON_X = 178;
@@ -510,7 +511,7 @@ function askQuestion(enemy) {
   show("quizView");
   $("prompt").innerHTML = q.prompt ||
     `What does <span class="affix">${esc(q.affix)}</span> mean? <span class="kind">(${q.kind})</span>`;
-  $("quizImage").innerHTML = q.image ? renderDiagram(q.image.diagram, q.image.region, { caption: q.image.labelled }) : "";
+  $("quizImage").innerHTML = q.image ? renderDiagram(q.image.diagram, q.image.region, { labels: q.image.labelled ? "one" : "none" }) : "";
   const box = $("choices");
   box.innerHTML = "";
   q.options.forEach((opt, i) => {
@@ -666,7 +667,7 @@ async function fight(enemy) {
     if (R.study) {
       S.studyDeck.record(q.entry, choice === q.answer);
       store.set(EML_KEY, S.progress);
-      if (q.image) $("quizImage").innerHTML = renderDiagram(q.image.diagram, q.image.region, { caption: true });
+      if (q.image) $("quizImage").innerHTML = renderDiagram(q.image.diagram, q.image.region, { labels: "all" });
     }
     if (choice === q.answer) {
       sfx.right();
@@ -958,9 +959,10 @@ async function studyMenu(lookKey) {
           body: `Seen ${pctText(seenShare(c.entries))} · mastered ${pctText(chapterMastery(c, S.progress))}`,
         }),
       })),
-      buttons: [{ label: "Back", value: "back", ghost: true }],
+      buttons: [{ label: "Diagram atlas", value: "atlas" }, { label: "Back", value: "back", ghost: true }],
     });
     if (ch === "back") return toTitle();
+    if (ch === "atlas") { await atlas(); continue; }
     const section = await choose({
       title: `Chapter ${ch.num}: ${ch.title}`,
       sub: "Study the whole chapter, or focus on one section.",
@@ -981,10 +983,39 @@ async function studyMenu(lookKey) {
   }
 }
 
+// Browse every diagram fully labelled.
+async function atlas() {
+  for (;;) {
+    const name = await choose({
+      title: "Diagram atlas",
+      sub: "Fully labelled diagrams for studying. In battles, a highlighted part is asked about without labels.",
+      cards: Object.entries(DIAGRAMS).map(([id, d]) => ({ value: id, color: "#5ab0ff", html: cardHtml({ icon: "◈", name: d.title }) })),
+      buttons: [{ label: "Back", value: "back", ghost: true }],
+    });
+    if (name === "back") return;
+    const d = DIAGRAMS[name];
+    const parts = [...Object.entries(d.regions), ...Object.entries(d.groups || {})].filter(([, r]) => r.label);
+    let current = null;
+    for (;;) {
+      const pick = await choose({
+        title: d.title,
+        sub: `${renderDiagram(name, current, { labels: "all" })}<p class="choice-sub">Tap a name to highlight it.</p>`,
+        cards: [],
+        buttons: [
+          ...parts.map(([id, r]) => ({ label: r.short || r.label, value: id, ghost: id !== current })),
+          { label: "All diagrams", value: "back" },
+        ],
+      });
+      if (pick === "back") break;
+      current = pick === current ? null : pick;
+    }
+  }
+}
+
 async function startStudy(chapter, section) {
   const entries = section ? section.entries : chapter.entries;
   const all = S.chapters.flatMap((c) => c.entries);
-  S.studyDeck = new StudyDeck(entries, all, DIAGRAMS, S.progress);
+  S.studyDeck = new StudyDeck(entries, all, DG, S.progress);
   S.deck = S.studyDeck;
   const R = newRun({}, S.lookKey);
   R.study = { chapter, section, rooms: roomsFor(entries.length) };

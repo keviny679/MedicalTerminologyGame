@@ -277,17 +277,27 @@ h2 { font-size: clamp(12px, 3vw, 20px); }
 .review b { color: var(--accent); font-weight: normal; }
 
 /* study-mode diagrams */
-.dg { margin: 8px auto 4px; max-width: 320px; text-align: center; }
-.dg svg { width: 100%; height: auto; max-height: 230px; background: #0b0e24; border: 2px solid var(--panel-edge); }
+.dg { margin: 8px auto 4px; max-width: 520px; text-align: center; }
+.dg svg { width: 100%; height: auto; max-height: 380px; background: #0b0e24; border: 2px solid var(--panel-edge); }
+.dg .solid-o { fill: #1a1f40; stroke: #1a1f40; stroke-width: 3; stroke-linejoin: round; }
+.dg .r.solid { stroke: none; }
+.dg .tag { fill: #c9cff0; font: 10px var(--read); paint-order: stroke; stroke: #0b0e24; stroke-width: 3px; }
+.dg .tag.on { fill: #ffd36b; font-size: 12px; }
+.dg .leader { stroke: #8f97c9; stroke-width: 0.8; fill: none; }
+.dg .leader.on { stroke: #ffd36b; stroke-width: 1.2; }
+.dg .dot { fill: #8f97c9; }
+.dg .dot.on { fill: #ffd36b; }
+.dg .crack { fill: none; stroke: #b02020; stroke-width: 2; stroke-linecap: round; }
+.dg .skinline { fill: none; stroke: #f6cfae; stroke-width: 3; }
 .dg .r { stroke: #1a1f40; stroke-width: 1; }
 .dg .rbo { fill: none; stroke: #1a1f40; stroke-linecap: round; }
 .dg .rb { fill: none; stroke: #cfd5e8; stroke-linecap: round; }
-.dg .r.hl { fill: #ffd36b !important; stroke: #fff; stroke-width: 1.5; }
+.dg .r.hl { fill: #ffd36b !important; fill-opacity: 1; stroke: #fff; stroke-width: 1.5; }
 .dg .rb.hl { stroke: #ffd36b; }
 .dg .base { fill: #262c55; stroke: #1a1f40; }
 .dg .hole { fill: #0b0e24; stroke: #1a1f40; }
 .dg .detail { fill: none; stroke: #1a1f40; stroke-width: 1; }
-.dg .figure { fill: none; stroke: #e9ecff; stroke-width: 2; }
+.dg .figure { fill: #e9ecff33; stroke: #e9ecff; stroke-width: 2; }
 .dg .figure-line { fill: none; stroke: #e9ecff; stroke-width: 3; stroke-linecap: round; }
 .dg .lbl { fill: #e9ecff; font: 9px var(--read); }
 .dg figcaption { font-size: 15px; color: var(--muted); }

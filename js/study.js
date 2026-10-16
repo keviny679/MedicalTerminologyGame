@@ -91,7 +91,7 @@ export function questionTypes(entry, diagrams = {}) {
   if (entry.kind === "abbr") return ["abbr>def", "def>abbr"];
   const t = ["term>def", "def>term"];
   if (entry.parts) t.push("parts");
-  if (entry.img && diagrams[entry.img.split(".")[0]]) t.push("image");
+  if (entry.img && diagrams.DIAGRAMS?.[entry.img.split(".")[0]]) t.push("image");
   return t;
 }
 
@@ -126,11 +126,9 @@ export function makeStudyQuestion(entry, pools, diagrams, rng = Math.random, typ
 
   if (type === "image") {
     const [d, region] = entry.img.split(".");
-    const diagram = diagrams[d];
-    const labels = Object.entries(diagram.regions).filter(([id]) => id !== region).map(([, r]) => r.label)
-      .concat(diagram.extraLabels || []);
-    answer = diagram.regions[region].label;
-    others = shuffle(labels.filter((l) => !tooSimilar(l, answer)), rng).slice(0, 3);
+    const diagram = diagrams.DIAGRAMS[d];
+    answer = diagrams.partLabel(d, region);
+    others = shuffle(diagrams.otherLabels(d, region).filter((l) => !tooSimilar(l, answer)), rng).slice(0, 3);
     if (others.length < 3) return makeStudyQuestion(entry, pools, diagrams, rng, "term>def");
     prompt = `${diagram.ask || "Name the highlighted structure."}`;
     image = { diagram: d, region };
