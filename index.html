@@ -1,0 +1,89 @@
+<!doctype html>
+<html lang="en">
+<head>
+  <meta charset="utf-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1">
+  <title>Root &amp; Blade</title>
+  <meta name="description" content="A pixel-art dungeon game for learning medical prefixes, suffixes and roots.">
+  <link rel="preconnect" href="https://fonts.googleapis.com">
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+  <link href="https://fonts.googleapis.com/css2?family=Press+Start+2P&family=VT323&display=swap" rel="stylesheet">
+  <link rel="stylesheet" href="css/style.css">
+</head>
+<body>
+  <main class="frame">
+    <div class="stage">
+      <canvas id="screen" width="240" height="135" aria-label="Battle scene"></canvas>
+
+      <div class="hud" id="hud" hidden>
+        <div class="bar-group">
+          <span class="who" id="heroName">Ren</span>
+          <div class="bar"><div class="fill hero" id="heroHp"></div></div>
+          <span class="nums" id="heroHpText">100/100</span>
+        </div>
+        <div class="floor-tag" id="floorTag">1-1</div>
+        <div class="bar-group right">
+          <span class="who" id="monName">?</span>
+          <div class="bar"><div class="fill mon" id="monHp"></div></div>
+          <span class="nums" id="monHpText"></span>
+        </div>
+      </div>
+      <button class="mute" id="muteBtn" type="button" aria-label="Toggle sound">♪</button>
+
+      <!-- overlays -->
+      <section class="overlay" id="titleScreen">
+        <h1>Root <span>&amp;</span> Blade</h1>
+        <p class="sub">A medical terminology dungeon</p>
+        <p class="status" id="loadStatus">Loading term list…</p>
+        <button class="btn" id="startBtn" type="button" disabled>Start</button>
+        <p class="best" id="bestText"></p>
+      </section>
+
+      <section class="overlay" id="selectScreen" hidden>
+        <h2>Choose your hero</h2>
+        <div class="heroes">
+          <button class="hero-card" type="button" data-hero="male">
+            <canvas width="48" height="40" data-preview="male"></canvas>
+            <strong>Ren</strong><small>Male</small>
+          </button>
+          <button class="hero-card" type="button" data-hero="female">
+            <canvas width="48" height="40" data-preview="female"></canvas>
+            <strong>Aiko</strong><small>Female</small>
+          </button>
+        </div>
+      </section>
+
+      <section class="overlay soft" id="bannerScreen" hidden>
+        <h2 id="bannerTitle"></h2>
+        <p class="sub" id="bannerSub"></p>
+        <button class="btn" id="bannerBtn" type="button" hidden>Continue</button>
+        <button class="btn ghost" id="bannerAlt" type="button" hidden>Change hero</button>
+      </section>
+    </div>
+
+    <section class="panel" id="panel" hidden>
+      <div class="stats">
+        <span>Hints <b id="hintCount">3</b></span>
+        <span>Streak <b id="streak">0</b></span>
+        <span>Score <b id="score">0</b></span>
+      </div>
+      <p class="prompt" id="prompt"></p>
+      <div class="choices" id="choices"></div>
+      <div class="hint-row">
+        <button class="btn small" id="hintBtn" type="button">Hint</button>
+        <p class="hint" id="hintText" aria-live="polite"></p>
+      </div>
+      <div class="feedback" id="feedback" aria-live="polite"></div>
+      <button class="btn small" id="continueBtn" type="button" hidden>Continue ⏎</button>
+    </section>
+
+    <footer>
+      Terms from Wikipedia’s
+      <a href="https://en.wikipedia.org/wiki/List_of_medical_roots,_suffixes_and_prefixes" target="_blank" rel="noopener">List of medical roots, suffixes and prefixes</a>
+      (<a href="https://creativecommons.org/licenses/by-sa/4.0/" target="_blank" rel="noopener">CC BY-SA 4.0</a>).
+      Keys: 1–4 answer · H hint · Enter continue
+    </footer>
+  </main>
+  <script type="module" src="js/game.js"></script>
+</body>
+</html>
