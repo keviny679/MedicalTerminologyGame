@@ -1,7 +1,7 @@
 // Run with: node --test tests/
 import test from "node:test";
 import assert from "node:assert/strict";
-import { affixBases, affixKind, conflicts, makeQuestion, Deck, CHOICES } from "../js/quiz.js";
+import { affixBases, affixKind, conflicts, meaningsOverlap, makeQuestion, Deck, CHOICES } from "../js/quiz.js";
 
 const T = (affix, meaning, examples = []) => ({ affix, meaning, examples });
 const terms = [
@@ -44,6 +44,27 @@ test("every question has 4 unique, non-conflicting options with one answer", () 
       if (i2 === q.answer) continue;
       assert.ok(!conflicts(right, T("zz-", opt)), `${opt} conflicts with ${right.meaning}`);
     }
+  }
+});
+
+test("synonyms and shared key words count as overlapping", () => {
+  assert.ok(meaningsOverlap("big", "large, long"));
+  assert.ok(meaningsOverlap("small", "tiny"));
+  assert.ok(meaningsOverlap("heart", "heart muscle"));
+  assert.ok(!meaningsOverlap("liver", "inflammation"));
+  assert.ok(!meaningsOverlap("pertaining to", "of or relating to"));
+});
+
+test("a distractor never matches another meaning of the same affix", () => {
+  const pool = [
+    T("magn(i)-", "huge"), T("magn(i)-", "great"), T("mega-", "great deal"),
+    T("-itis", "inflammation"), T("hepat-", "liver"), T("oste(o)-", "bone"),
+    T("dent(i)-", "tooth"), T("-logy", "study of"),
+  ];
+  for (let i = 0; i < 100; i++) {
+    const q = makeQuestion(pool[0], pool);
+    assert.ok(!q.options.includes("great deal"), q.options.join(" / "));
+    assert.ok(!q.options.includes("great"));
   }
 });
 

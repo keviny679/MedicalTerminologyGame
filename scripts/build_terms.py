@@ -93,6 +93,23 @@ def find_columns(header):
     return idx("affix"), idx("meaning"), idx("example")
 
 
+LEAD_IN = re.compile(
+    r"^(?:(?:of or )?(?:pertaining|relating) to|denot(?:ing|es)(?: something)?(?: as)?) (?:the |a |an )?", re.I
+)
+SEE_PAREN = re.compile(r"\s*\([^()]*\bsee\b[^()]*\)", re.I)
+SEE_ALSO = re.compile(r"[;,]?\s*\bsee(?: also)? [^;]*", re.I)
+BRACKET_NOTE = re.compile(r"\s*\[[^\]]*\]")
+
+
+def simplify_meaning(text):
+    """Make meanings read alike so the wording of one option can't give it away."""
+    text = BRACKET_NOTE.sub("", text)
+    text = SEE_ALSO.sub("", SEE_PAREN.sub("", text)).strip(" ;,")
+    text = re.sub(r"[\"“”]", "", text)
+    short = LEAD_IN.sub("", text).strip()
+    return short if short else text
+
+
 def split_affixes(text):
     parts = [p.strip(" ,;") for p in re.split(r",|;|\s/\s|\bor\b", text)]
     return [p for p in parts if p]
@@ -144,7 +161,7 @@ def parse(html):
             if row[a_col].name == "th" and row[m_col].name == "th":
                 continue  # repeated header row
             affixes = [a for a in split_affixes(clean(row[a_col].get_text(" "))) if is_word_part(a)]
-            meaning = clean(row[m_col].get_text(" "))
+            meaning = simplify_meaning(clean(row[m_col].get_text(" ")))
             if not affixes or not meaning or len(meaning) > 120:
                 continue
             examples = split_examples(row[e_col]) if e_col is not None and e_col < len(row) else []
