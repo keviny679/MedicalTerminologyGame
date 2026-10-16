@@ -1,13 +1,19 @@
 # Root & Blade
 
-A pixel-art dungeon game for learning medical **prefixes, suffixes and roots**.
-Pick a hero (Ren or Aiko), then fight yokai across four floors: Lantern Alley,
-Torii Path, Sakura Temple and Moonlit Wave. Each floor has three monsters and a boss.
+A pixel-art roguelike for learning medical **prefixes, suffixes and roots**.
+Pick a hero (Ren or Aiko) and fight yokai across four floors: Lantern Alley,
+Torii Path, Sakura Temple and Moonlit Wave.
 
-- Every attack is a multiple-choice question: what does this word part mean? There are 4 choices.
-- A right answer hits the monster. A wrong one lets it hit you, and the correct meaning is shown.
-- You get **3 hints per floor**. A hint shows an example word from Wikipedia, when one is listed.
+- **Combat:** every attack is a 4-choice question about what a word part means. A right answer hits the foe. A wrong one lets it hit you and shows the right meaning.
+- **Doors (Hades-style):** after each room, pick a door by its reward: a kami blessing, a relic chest, mon, an elite fight, a merchant, or a hot spring. Four rooms, then the floor's boss.
+- **Boons:** five kami (Amaterasu, Susanoo, Tsukuyomi, Inari, Raijin) each offer three upgrades in Common, Rare or Epic. Taking one you already have levels it up.
+- **Relics (Risk of Rain-style):** stacking items in Common, Uncommon, Legendary and Cursed. Cursed relics are powerful but have a drawback.
+- **Scaling:** foes get tougher every room. Elites (Armored, Vampiric, Furious, Warded) appear more often as you go. Bosses wind up a heavy attack every few turns: answer right to stagger them.
+- **Shrine of Memory:** every run earns Spirit Embers, even a lost one. Spend them on permanent upgrades.
+- **Review:** the end-of-run screen lists the word parts you missed.
+- **Hints** show an example word from Wikipedia when one is listed.
 - Keys: `1`–`4` answer · `H` hint · `Enter` continue.
+- **Music:** put lo-fi tracks in `audio/`. See [audio/README.md](audio/README.md).
 
 ## Data
 

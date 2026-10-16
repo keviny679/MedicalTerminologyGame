@@ -1,3 +1,4 @@
 __pycache__/
 data/terms.json
 node_modules/
+.music-cache/
