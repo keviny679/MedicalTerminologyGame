@@ -1459,9 +1459,29 @@ music.onchange = () => {
 };
 
 document.addEventListener("keydown", (e) => {
+  const answering = S.pending?.type === "answer";
+  const typedQ = answering && S.q?.mode === "typed";
+  // Shortcuts that work while typing an answer: Esc = I don't know,
+  // Alt+H = hint, Alt+U = unsure (e.code, since Option+letter types a symbol on a Mac).
+  if (answering && e.altKey && !e.ctrlKey && !e.metaKey && (e.code === "KeyH" || e.code === "KeyU")) {
+    e.preventDefault();
+    if (e.code === "KeyH") useHint();
+    else if (S.run?.study) $("unsureBtn").click();
+    return;
+  }
+  if (typedQ && e.key === "Escape" && $("zoom").hidden) {
+    e.preventDefault();
+    resolvePending(null);
+    return;
+  }
   if (e.altKey || e.ctrlKey || e.metaKey) return;
   const tag = document.activeElement?.tagName;
-  if (tag === "INPUT") return;
+  if (tag === "INPUT" || tag === "TEXTAREA") return;
+  // Typing anywhere during a typed question goes into the answer box.
+  if (typedQ && !$("typedInput").disabled && (e.key.length === 1 || e.key === "Backspace")) {
+    $("typedInput").focus();
+    return;
+  }
   if (S.pending?.type === "answer" && /^[1-4]$/.test(e.key)) {
     e.preventDefault();
     resolvePending(Number(e.key) - 1);

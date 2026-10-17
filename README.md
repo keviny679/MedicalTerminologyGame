@@ -12,7 +12,8 @@ Torii Path, Sakura Temple and Moonlit Wave.
 - **Shrine of Memory:** every run earns Spirit Embers, even a lost one. Spend them on permanent upgrades.
 - **Review:** the end-of-run screen lists the word parts you missed.
 - **Hints** show an example word from Wikipedia when one is listed.
-- Keys: `1`–`4` answer · `H` hint · `Enter` continue.
+- Keys: `1`–`4` answer · `H` hint · `U` unsure · `Enter` continue. While typing an answer: `Esc` = I don't know,
+  `Alt+H` hint, `Alt+U` unsure. Typing anywhere on the page goes into the answer box.
 - **Essentials of Medical Language mode:** a calm study mode with the same battles but no random upgrades.
   Pick a chapter (1–7 so far) or one of its sections. Questions mix terms, definitions, abbreviations,
   word-part breakdowns and "name the highlighted structure" diagrams. Bigger chapters mean longer runs.
