@@ -645,23 +645,90 @@ function lesions() {
 
 /* ============================================================ BODY AS WHOLE */
 
-const FIGURE_FRONT =
-  '<circle cx="160" cy="34" r="16" class="figure"/>' +
-  '<path d="M160,50 L160,58 M136,62 C150,56 170,56 184,62 L188,128 L176,130 L172,92 L170,150 L176,236 L164,236 L160,160 L156,236 L144,236 L150,150 L148,92 L144,130 L132,128 Z" class="figure"/>';
-
-const planes = {
-  crop: [84, 8, 172, 242],
-  title: "Planes of the body",
-  ask: "Name the highlighted plane.",
-  viewBox: "0 0 320 250",
-  overlay: FIGURE_FRONT,
-  regions: {
-    frontal: { label: "Frontal (coronal) plane", c: "#5ab0ff88", d: "M96,70 L224,50 L224,214 L96,234 Z" },
-    sagittal: { label: "Sagittal plane", c: "#59d98e88", d: "M150,14 L182,36 L182,246 L150,224 Z" },
-    transverse: { label: "Transverse (horizontal) plane", c: "#f2c94c88", d: "M90,132 L210,112 L250,140 L130,160 Z" },
-  },
-  extraLabels: ["Oblique plane"],
+// Smooth closed outline through points (Catmull-Rom as cubic curves).
+function smooth(pts) {
+  const f = (n) => n.toFixed(1), n = pts.length;
+  let d = `M${f(pts[0][0])},${f(pts[0][1])}`;
+  for (let i = 0; i < n; i++) {
+    const [p0, p1, p2, p3] = [pts[(i - 1 + n) % n], pts[i], pts[(i + 1) % n], pts[(i + 2) % n]];
+    d += ` C${f(p1[0] + (p2[0] - p0[0]) / 6)},${f(p1[1] + (p2[1] - p0[1]) / 6)} ` +
+      `${f(p2[0] - (p3[0] - p1[0]) / 6)},${f(p2[1] - (p3[1] - p1[1]) / 6)} ${f(p2[0])},${f(p2[1])}`;
+  }
+  return `${d} Z`;
+}
+// Scale points drawn around (0,0) and move them to (cx, top).
+const place = (pts, cx, top, s = 1) => pts.map(([x, y]) => [cx + x * s, top + y * s]);
+const ellipse = (cx, cy, rx, ry) => {
+  const kx = 0.5523 * rx, ky = 0.5523 * ry, f = (n) => n.toFixed(1);
+  return `M${f(cx - rx)},${f(cy)} C${f(cx - rx)},${f(cy - ky)} ${f(cx - kx)},${f(cy - ry)} ${f(cx)},${f(cy - ry)} ` +
+    `C${f(cx + kx)},${f(cy - ry)} ${f(cx + rx)},${f(cy - ky)} ${f(cx + rx)},${f(cy)} ` +
+    `C${f(cx + rx)},${f(cy + ky)} ${f(cx + kx)},${f(cy + ry)} ${f(cx)},${f(cy + ry)} ` +
+    `C${f(cx - kx)},${f(cy + ry)} ${f(cx - rx)},${f(cy + ky)} ${f(cx - rx)},${f(cy)} Z`;
 };
+
+// Human figure, front view: the viewer's right half, mirrored for the left.
+const FRONT_HALF = [
+  [5, 26], [7, 34], [18, 37], [28, 41], [33, 51], [35, 72], [37, 95], [39, 117], [40, 129], [37, 138], [32, 136],
+  [31, 125], [30, 104], [28, 84], [26, 68], [25, 84], [24, 101], [26, 118], [27, 133], [24, 150], [22, 175],
+  [20, 199], [19, 211], [25, 218], [8, 219], [7, 209], [7, 189], [6, 166], [4, 149], [0, 146],
+];
+const FRONT_BODY = [...FRONT_HALF, ...FRONT_HALF.slice(0, -1).reverse().map(([x, y]) => [-x, y])];
+const frontFigure = (cx, top, s = 1) =>
+  ({ body: smooth(place(FRONT_BODY, cx, top, s)), head: ellipse(cx, top + 13 * s, 11 * s, 13.5 * s) });
+
+// Human figure, side view facing left (front = left, back = right).
+const SIDE_BODY = [
+  [5, 25], [10, 34], [13, 46], [12, 62], [9, 80], [10, 96], [14, 110], [15, 124], [12, 138], [9, 152], [8, 172],
+  [10, 190], [7, 207], [8, 218], [-15, 219], [-16, 214], [-6, 210], [-5, 194], [-4, 172], [-6, 150], [-8, 132],
+  [-10, 117], [-12, 101], [-11, 85], [-14, 66], [-12, 50], [-6, 40], [-4, 30], [-4, 25],
+];
+const SIDE_ARM = [[-3, 40], [6, 41], [7, 70], [6, 96], [5, 117], [1, 127], [-3, 119], [-3, 96], [-2, 70]];
+// depth > 1 makes the body thicker front to back (the head keeps its size).
+const sideFigure = (cx, top, s = 1, depth = 1) => {
+  const deep = (pts) => pts.map(([x, y]) => [x * depth, y]);
+  return {
+    body: smooth(place(deep(SIDE_BODY), cx, top, s)),
+    head: smooth(place([[-1, 0], [8, 3], [12, 13], [9, 24], [3, 27], [-5, 26], [-9, 21], [-12, 17], [-10, 14], [-12, 10], [-9, 3]], cx, top, s)),
+    arm: smooth(place(deep(SIDE_ARM), cx, top, s)),
+  };
+};
+
+// Three panels, each cutting a body with one plane; the two halves it makes are tinted.
+function planes() {
+  const TOP = 30;
+  const A = frontFigure(80, TOP), B = sideFigure(240, TOP, 1, 1.5), C = frontFigure(400, TOP);
+  const outline = (f) => `<path d="${f.body}" class="figure" style="fill:none"/><path d="${f.head}" class="figure" style="fill:none"/>` +
+    (f.arm ? `<path d="${f.arm}" class="figure" style="fill:none;stroke-width:1.2"/>` : "");
+  const clip = (id, f) => `<clipPath id="${id}"><path d="${f.body}"/><path d="${f.head}"/></clipPath>`;
+  const tint = (id, x, y, w, h, c) => `<rect x="${x}" y="${y}" width="${w}" height="${h}" clip-path="url(#${id})" style="fill:${c};fill-opacity:0.42"/>`;
+  const caption = (x, t) => `<text x="${x}" y="11" text-anchor="middle" class="lbl" style="fill:#8f97c9">${t}</text>`;
+  const base =
+    `<defs>${clip("pl-a", A)}${clip("pl-b", B)}${clip("pl-c", C)}</defs>` +
+    tint("pl-a", 0, 0, 80, 260, "#5ab0ff") + tint("pl-a", 80, 0, 80, 260, "#59d98e") +
+    tint("pl-b", 160, 0, 80, 260, "#f2a65a") + tint("pl-b", 240, 0, 80, 260, "#c77dff") +
+    tint("pl-c", 320, 0, 160, 146, "#f2c94c") + tint("pl-c", 320, 146, 160, 130, "#5ab0ff") +
+    outline(A) + outline(B) + outline(C) +
+    caption(80, "front view") + caption(240, "side view (facing left)") + caption(400, "front view");
+  const halves = (x, y, t, anchor = "middle") => `<text x="${x}" y="${y}" text-anchor="${anchor}" class="lbl">${t}</text>`;
+  return {
+    crop: [0, 0, 500, 272],
+    title: "Planes of the body",
+    ask: "Name the highlighted plane.",
+    viewBox: "0 0 500 272",
+    base,
+    regions: {
+      sagittal: { label: "Sagittal plane", c: "#e9ecff88", d: "M73,18 L87,28 L87,258 L73,248 Z", tip: [80, 74], lab: [80, 268], center: true },
+      frontal: { label: "Frontal (coronal) plane", c: "#e9ecff88", d: "M233,18 L247,28 L247,258 L233,248 Z", tip: [240, 74], lab: [240, 268], center: true, short: "Frontal (coronal)" },
+      transverse: { label: "Transverse (horizontal) plane", c: "#e9ecff88", d: "M340,140 L444,140 L462,152 L358,152 Z", tip: [452, 146], lab: [400, 268], center: true, short: "Transverse" },
+    },
+    // shown only when labels are on, so they never give away a question
+    labelled:
+      halves(22, 120, "Right", "middle") + halves(130, 120, "Left", "middle") +
+      halves(205, 120, "Anterior", "end") + halves(275, 120, "Posterior", "start") +
+      halves(496, 110, "Superior", "end") + halves(496, 196, "Inferior", "end"),
+    extraLabels: ["Oblique plane"],
+  };
+}
 
 const quadrants = {
   crop: [78, 8, 164, 232],
@@ -712,26 +779,60 @@ function nineRegions() {
   };
 }
 
-const cavities = {
-  crop: [92, 6, 120, 290],
-  title: "Body cavities (side view, front to the left)",
-  ask: "Name the highlighted body cavity or structure.",
-  viewBox: "0 0 320 300",
-  base:
-    '<path d="M150,10 C186,10 196,44 188,70 L196,80 C206,92 204,120 206,150 C208,190 204,230 196,262 L180,292 L120,292 L110,262 C100,230 96,190 98,150 C100,110 104,90 116,80 L122,70 C110,44 120,10 150,10 Z" class="base"/>',
-  regions: {
-    cranial: { label: "Cranial cavity", c: "#c7b3e8", d: "M150,18 C176,18 184,40 178,60 L130,60 C122,40 128,18 150,18 Z", tip: [156, 40], lab: [20, 30] },
-    spinal: { label: "Spinal (vertebral) cavity", c: "#9a8fd8", d: "M176,62 L184,62 L190,240 L182,240 Z", tip: [186, 150], lab: [300, 150] },
-    thoracic: { label: "Thoracic cavity", c: "#8fe0e0", d: "M118,92 C130,84 166,84 174,92 L176,150 L114,150 Z", tip: [140, 120], lab: [20, 110] },
-    diaphragm: { label: "Diaphragm", line: "M112,154 C130,140 160,140 178,154", w: 4, c: "#c96b72", tip: [146, 146], lab: [300, 120] },
-    abdominal: { label: "Abdominal cavity", c: "#f2c27a", d: "M112,160 L178,160 L178,214 L110,214 Z", tip: [140, 186], lab: [20, 186] },
-    pelvic: { label: "Pelvic cavity", c: "#8fd88f", d: "M110,218 L178,218 L172,256 C160,268 130,268 118,256 Z", tip: [144, 240], lab: [20, 250] },
-  },
-  groups: {
-    dorsal: { label: "Dorsal (posterior) cavity", members: ["cranial", "spinal"], tip: [178, 70], lab: [300, 40] },
-    ventral: { label: "Ventral (anterior) cavity", members: ["thoracic", "abdominal", "pelvic"], tip: [116, 200], lab: [300, 280] },
-  },
-};
+// Side view with a real outline: cavities sit where they are in the body.
+function cavities() {
+  const S = 1.2, CX = 160, TOP = 8;
+  const P = (pts) => place(pts, CX, TOP, S);
+  const path = (pts, close = true) => `M${P(pts).map(([x, y]) => `${x.toFixed(1)},${y.toFixed(1)}`).join(" L")}${close ? " Z" : ""}`;
+  const fig = sideFigure(CX, TOP, S);
+  // spinal canal runs just inside the back, from the skull to the sacrum
+  const canal = [[4, 26], [7, 40], [8, 56], [6, 74], [5, 92], [7, 106], [9, 118], [9, 128]];
+  const canalPath = smooth(P([...canal.map(([x, y]) => [x, y]), ...canal.slice().reverse().map(([x, y]) => [x + 3, y])]));
+  const vertebrae = canal.slice(1, -1).flatMap(([x, y], i, a) => {
+    const next = a[i + 1] || [x, y + 14];
+    return [0, 0.5].map((t) => {
+      const vx = x + (next[0] - x) * t, vy = y + (next[1] - y) * t;
+      return path([[vx - 5.5, vy - 2.6], [vx - 0.8, vy - 2.6], [vx - 0.8, vy + 2.6], [vx - 5.5, vy + 2.6]]);
+    });
+  }).join(" ");
+  const at = (x, y) => P([[x, y]])[0];
+  return {
+    crop: [96, 2, 128, 282],
+    title: "Body cavities (side view, front to the left)",
+    ask: "Name the highlighted body cavity or structure.",
+    viewBox: "0 0 320 285",
+    base:
+      `<path d="${fig.body}" class="base" style="stroke:#8f97c9;stroke-width:1.5"/>` +
+      `<path d="${fig.head}" class="base" style="stroke:#8f97c9;stroke-width:1.5"/>` +
+      `<path d="${vertebrae}" class="detail" style="fill:#4a5288;stroke:#1a1f40"/>`,
+    regions: {
+      cranial: { label: "Cranial cavity", c: "#c7b3e8", d: ellipse(...at(1.5, 12.5), 8.5 * S, 9.5 * S), tip: at(1, 12), lab: [300, 20] },
+      spinal: { label: "Spinal (vertebral) cavity", c: "#9a8fd8", d: canalPath, tip: at(7, 80), lab: [300, 110] },
+      thoracic: {
+        label: "Thoracic cavity", c: "#8fe0e0",
+        d: smooth(P([[-6, 41], [-10, 50], [-11.5, 66], [-10, 82], [-5, 75], [0, 74], [1, 78], [1, 60], [1, 46]])),
+        tip: at(-5, 58), lab: [20, 70],
+      },
+      diaphragm: { label: "Diaphragm", line: path([[-10.5, 84], [-6, 77.5], [-2, 76], [1.5, 80], [2.5, 84]], false), w: 3, c: "#c96b72", tip: at(-4, 77), lab: [20, 110] },
+      abdominal: {
+        label: "Abdominal cavity", c: "#f2c27a",
+        d: smooth(P([[-10, 87], [-5, 80], [0, 79], [2.5, 86], [4, 102], [4, 116], [-4, 117], [-10.5, 116], [-11.5, 101]])),
+        tip: at(-4, 100), lab: [20, 140],
+      },
+      pelvic: {
+        label: "Pelvic cavity", c: "#8fd88f",
+        d: smooth(P([[-8.5, 120], [-3, 120], [5, 120], [6, 130], [2, 139], [-4, 141], [-7.5, 134]])),
+        tip: at(-2, 130), lab: [20, 170],
+      },
+    },
+    groups: {
+      dorsal: { label: "Dorsal (posterior) cavity", members: ["cranial", "spinal"], tip: at(7, 45), lab: [300, 60] },
+      ventral: { label: "Ventral (anterior) cavity", members: ["thoracic", "abdominal", "pelvic"], tip: at(-5, 98), lab: [20, 200] },
+    },
+    labelled: `<text x="${at(-14, 200)[0]}" y="${at(0, 236)[1]}" text-anchor="middle" class="lbl">◀ front</text>` +
+      `<text x="${at(12, 200)[0]}" y="${at(0, 236)[1]}" text-anchor="middle" class="lbl">back ▶</text>`,
+  };
+}
 
 const cell = {
   crop: [26, 14, 262, 212],
@@ -1014,8 +1115,8 @@ const airway = {
 
 export const DIAGRAMS = {
   skullLateral, skullAnterior, skullInferior, skeleton, spine: spine(), longBone: longBoneDiagram,
-  fractures: fractures(), joint, skin, burns, lesions: lesions(), planes, quadrants, regions: nineRegions(),
-  cavities, cell, heart, conduction, vessels,
+  fractures: fractures(), joint, skin, burns, lesions: lesions(), planes: planes(), quadrants, regions: nineRegions(),
+  cavities: cavities(), cell, heart, conduction, vessels,
   bloodCells: bloodCells(), bloodTube, lymphatic, respiratory, alveolus, airway,
 };
 
@@ -1185,6 +1286,6 @@ export function renderDiagram(name, highlight = null, { labels = "none" } = {}) 
   }
   const focus = highlight && labels !== "all" ? " focus" : highlight ? " revealed" : "";
   return `<figure class="dg${focus}" data-diagram="${name}"><svg viewBox="0 0 ${totalW.toFixed(0)} ${H0}" role="img" aria-label="${esc(d.title)}">` +
-    `<g transform="translate(${(padL - cx0).toFixed(1)},${-cy0})">${d.base || ""}${outlines.join("")}${fills.join("")}${d.overlay || ""}${glows.join("")}${strokes.join("")}</g>${items.join("")}${pointer}</svg>` +
+    `<g transform="translate(${(padL - cx0).toFixed(1)},${-cy0})">${d.base || ""}${outlines.join("")}${fills.join("")}${d.overlay || ""}${labels !== "none" ? d.labelled || "" : ""}${glows.join("")}${strokes.join("")}</g>${items.join("")}${pointer}</svg>` +
     `<figcaption class="dg-title">${esc(d.title)} <span class="zoom-hint">· tap to enlarge</span></figcaption>${caption}</figure>`;
 }
