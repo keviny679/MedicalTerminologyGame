@@ -1,6 +1,13 @@
 # 2 | The Body as a Whole
 
 ## Levels of organization
+> The body is organized in levels, from small to large. The [[cell]] is the smallest living unit. Similar cells
+> working together form a [[tissue]], two or more tissues form an [[organ]], and organs that cooperate form an
+> [[organ system]], such as the digestive system. All the systems together make up the whole [[organism]]. To
+> survive, the body must keep its internal conditions stable, such as temperature and blood sugar; this balance
+> is called [[homeostasis]]. All of the chemical reactions in the body are its [[metabolism]]. Metabolism has
+> two halves: [[anabolism]] builds complex molecules from simple ones, and [[catabolism]] breaks complex
+> molecules down and releases energy.
 T cell = the smallest structural and functional unit of life
 T tissue = a group of similar cells working together to perform a function
 T organ = a structure made of two or more tissue types that performs a specific job
@@ -12,6 +19,15 @@ T anabolism = the building of complex molecules from simpler ones
 T catabolism = the breakdown of complex molecules into simpler ones, releasing energy
 
 ## Cells and genetics
+> Every cell is wrapped in a [[cell membrane]] that controls what goes in and out. Inside is the gel-like
+> [[cytoplasm]], which holds the organelles. The [[nucleus]] is the control center and contains the DNA.
+> [[mitochondria]] make the cell's energy, and each [[ribosome]] builds proteins. DNA is packed into structures
+> called chromosomes, and a [[gene]] is a segment of DNA that codes for a trait or protein. Each human body cell
+> has 46 of them, arranged as 23 pairs, and each [[chromosome]] carries many genes. When a body cell divides to
+> make two identical cells, the process is [[mitosis]]; when sex cells are made with half the chromosomes, it is
+> [[meiosis]]. A permanent change in DNA is a [[mutation]]. A condition present at birth is [[congenital]],
+> while one passed down through genes is [[hereditary]]. A [[stem cell]] is unspecialized and can become many
+> cell types.
 T cell membrane = the outer boundary of a cell that controls what enters and leaves | @cell.membrane
 T cytoplasm = the gel-like material inside a cell surrounding the nucleus | cyt/o + -plasm | @cell.cytoplasm
 T nucleus = the control center of the cell that contains the DNA | @cell.nucleus
@@ -37,6 +53,14 @@ P gen/o = producing, origin, gene
 P hist/o = tissue
 
 ## Tissues
+> There are four basic tissue types. [[epithelial tissue]] covers surfaces and lines organs and cavities, like
+> the skin's outer layer. [[connective tissue]] supports and binds other tissues; bone, fat, cartilage and even
+> blood are connective tissues. [[muscle tissue]] contracts to create movement, and [[nervous tissue]] sends
+> electrical signals. The study of tissues is [[histology]]. Tissues can change. An increase in the number of
+> cells is [[hyperplasia]], an increase in cell or organ size is [[hypertrophy]], and wasting away is
+> [[atrophy]]. Abnormal development of cells is [[dysplasia]], which can be an early warning sign. A new
+> abnormal growth is a [[neoplasm]], or tumor. A [[benign]] tumor stays put and is not cancer, while a
+> [[malignant]] tumor invades nearby tissue and can spread.
 T epithelial tissue = tissue that covers body surfaces and lines cavities and organs | epi- + thel/i + -al
 T connective tissue = tissue that supports and binds other tissues, such as bone, blood and fat
 T muscle tissue = tissue that contracts to produce movement
@@ -53,6 +77,14 @@ P -plasia = formation, development
 P -plasm = formed substance
 
 ## Anatomical position and directions
+> All directional terms assume [[anatomical position]]: standing upright, facing forward, arms at the sides with
+> palms forward. From there, [[superior]] means toward the head and [[inferior]] means toward the feet.
+> [[anterior]] means toward the front and [[posterior]] means toward the back; in humans these match [[ventral]]
+> and [[dorsal]]. [[medial]] means toward the midline of the body and [[lateral]] means toward the side, so the
+> thumb is lateral to the little finger. On the limbs, [[proximal]] means closer to the trunk and [[distal]]
+> means farther away, so the elbow is proximal to the wrist. [[superficial]] means near the surface and [[deep]]
+> means farther inside. A patient lying face up is [[supine]], and face down is [[prone]]. Something on both
+> sides is [[bilateral]], and on one side only is [[unilateral]].
 T anatomical position = standing upright, facing forward, arms at the sides with palms forward
 T superior = above or toward the head
 T inferior = below or toward the feet
@@ -83,6 +115,15 @@ P ventr/o = belly side
 P dors/o = back
 
 ## Planes and body cavities
+> Imaging and anatomy often slice the body along planes. The [[sagittal plane]] is vertical and divides the body
+> into right and left parts; when it runs exactly down the middle it is the midsagittal plane. The [[frontal
+> plane]], also called the coronal plane, divides the body into front and back. The [[transverse plane]] is
+> horizontal and divides the body into upper and lower parts. The body also has cavities that hold organs. The
+> [[dorsal cavity]] at the back contains the [[cranial cavity]], which holds the brain, and the [[spinal
+> cavity]], which holds the spinal cord. The [[ventral cavity]] at the front contains the [[thoracic cavity]],
+> holding the heart and lungs, the [[abdominal cavity]], holding the digestive organs, and the [[pelvic
+> cavity]], holding the bladder and reproductive organs. The dome-shaped [[diaphragm]] separates the chest from
+> the abdomen. The [[peritoneum]] lines the abdominal cavity.
 T sagittal plane = a vertical plane dividing the body into right and left parts | @planes.sagittal
 T midsagittal plane = the sagittal plane exactly at the midline, creating equal right and left halves
 T frontal plane = a vertical plane dividing the body into front and back parts; also called coronal | @planes.frontal
@@ -105,6 +146,14 @@ P pelv/i = pelvis
 P viscer/o = internal organs
 
 ## Abdominal quadrants and regions
+> To describe where pain or a finding is, the abdomen is divided into quadrants by two lines that cross at the
+> navel, or [[umbilicus]]. Remember that right and left are the patient's sides. The [[right upper quadrant]]
+> holds most of the liver and the gallbladder, and the [[left upper quadrant]] holds the stomach and spleen. The
+> [[right lower quadrant]] holds the appendix, which is why appendicitis pain settles there, and the [[left
+> lower quadrant]] holds the sigmoid colon. A more detailed system divides the abdomen into nine regions. Down
+> the middle are the [[epigastric region]] at the top, the [[umbilical region]] in the center and the
+> [[hypogastric region]] at the bottom. Under the ribs on each side are the hypochondriac regions, at the waist
+> are the lumbar regions, and near the groin are the iliac, or [[inguinal]], regions.
 T right upper quadrant = the abdominal area holding most of the liver and the gallbladder | @quadrants.ruq
 T left upper quadrant = the abdominal area holding the stomach and spleen | @quadrants.luq
 T right lower quadrant = the abdominal area holding the appendix | @quadrants.rlq
@@ -122,6 +171,14 @@ T umbilicus = the navel, where the umbilical cord was attached
 T inguinal = relating to the groin
 
 ## Body systems and disease
+> The body's organ systems each have a main job. The [[integumentary system]] of skin, hair and nails protects
+> the body. The [[musculoskeletal system]] supports and moves it. The [[cardiovascular system]] pumps blood, the
+> [[respiratory system]] exchanges oxygen and carbon dioxide, and the [[digestive system]] breaks down food. The
+> [[urinary system]] filters the blood, the [[nervous system]] controls and coordinates, and the [[endocrine
+> system]] releases hormones. When disease strikes, a germ that causes disease is a [[pathogen]], and its
+> invasion of the body is an [[infection]]. The body responds with [[inflammation]]: redness, heat, swelling and
+> pain. Swelling from excess fluid in tissues is called [[edema]], and the death of cells or tissue is
+> [[necrosis]].
 T integumentary system = the skin, hair, nails and skin glands; protects the body
 T musculoskeletal system = the bones, joints and muscles; supports and moves the body
 T cardiovascular system = the heart and blood vessels; moves blood through the body

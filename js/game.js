@@ -14,7 +14,7 @@ import { FLOORS } from "./art.js";
 import { Music } from "./music.js";
 import {
   CHAPTER_FILES, parseChapter, StudyDeck, chapterMastery, roomsFor, gradeTyped, letterHint, dueEntries,
-  STYLES, STYLE_LABEL, isMastered, MASTERY_DAYS,
+  STYLES, STYLE_LABEL, isMastered, MASTERY_DAYS, gradeBrainDump,
 } from "./study.js";
 import { countAnswer, goalMet, recordGoal, liveStreak, makeBackup, applyBackup, GOAL_MIN_ANSWERS } from "./progress.js";
 import * as DG from "./diagrams.js";
@@ -1111,14 +1111,14 @@ async function studyMenu(lookKey) {
     if (ch === "atlas") { await atlas(); continue; }
     const section = await choose({
       title: `Chapter ${ch.num}: ${ch.title}`,
-      sub: "Study the whole chapter, or focus on one section.",
+      sub: "Study the whole chapter, or pick a section to read its lesson, recall it, then battle.",
       cards: [
         { value: null, color: "#ffd36b", html: cardHtml({ icon: "★", name: "Whole chapter", tag: `${ch.entries.length} terms`, body: "Every section mixed together." }) },
         ...ch.sections.map((sec, i) => {
           const m = sec.entries.filter((e) => S.progress[e.key]?.r >= 2 && S.progress[e.key]?.l === 1).length / sec.entries.length;
           return {
             value: sec, color: m >= 0.8 ? "#59d98e" : "#5ab0ff",
-            html: cardHtml({ icon: `${ch.num}.${i + 1}`, name: sec.title, tag: `${sec.entries.length} terms`, body: `Seen ${pctText(seenShare(sec.entries))} · mastered ${pctText(m)}` }),
+            html: cardHtml({ icon: `${ch.num}.${i + 1}`, name: sec.title, tag: `${sec.entries.length} terms${sec.lesson ? " · 📖 lesson" : ""}`, body: `Seen ${pctText(seenShare(sec.entries))} · mastered ${pctText(m)}` }),
           };
         }),
       ],
@@ -1164,6 +1164,7 @@ async function startStudy(chapter, section) {
   const style = chapter.num ? studyStyle() : studyStyle() === "mc" ? "mc" : "typed";
   S.studyDeck = new StudyDeck(entries, all, DG, S.progress, Math.random, style);
   S.deck = S.studyDeck;
+  if (section?.lesson) await lessonPhase(section, S.studyDeck);
   const R = newRun({}, S.lookKey);
   R.study = { chapter, section, rooms: roomsFor(entries.length) };
   R.floor = chapter.num ? (chapter.num - 1) % FLOOR_COUNT : FLOOR_COUNT - 1; // background and foes
@@ -1203,6 +1204,62 @@ async function startStudy(chapter, section) {
   await play(S.hero, "victory", 700);
   await relearnRound();
   return endStudy(true, before);
+}
+
+// The diagram most of a section's entries point to, if any.
+function lessonDiagram(section) {
+  const count = new Map();
+  for (const e of section.entries) {
+    const d = e.img?.split(".")[0];
+    if (d && DIAGRAMS[d]) count.set(d, (count.get(d) || 0) + 1);
+  }
+  const best = [...count.entries()].sort((a, b) => b[1] - a[1])[0];
+  return best && best[1] >= 2 ? best[0] : null;
+}
+
+// Read a short lesson, write down every key term remembered (free recall),
+// see what was missed, then battle with fill-in-the-blanks from the lesson.
+async function lessonPhase(section, deck) {
+  const { lesson } = section;
+  const dg = lessonDiagram(section);
+  const read = await choose({
+    title: `Lesson: ${section.title}`,
+    sub: `<span class="kind">Read carefully. Afterwards you'll write down every key term you can remember.</span>` +
+      `<span class="lesson">${lesson.html}</span>` +
+      (dg ? renderDiagram(dg, null, { labels: "all" }) : ""),
+    buttons: [
+      { label: "I've read it — test me", value: "dump" },
+      { label: "Skip to battle", value: "skip", ghost: true },
+    ],
+  });
+  if (read === "skip") return;
+  const n = lesson.terms.length;
+  const asked = choose({
+    title: "Brain dump",
+    sub: `Without looking back, write every <b>key term</b> from the lesson you can remember ` +
+      `(${n} were in bold). One per line or separated by commas. Spelling counts, but small typos are forgiven.` +
+      `<textarea id="dumpBox" class="dump" rows="7" autocapitalize="off" spellcheck="false" ` +
+      `aria-label="Terms you remember" placeholder="epidermis&#10;keratin&#10;…"></textarea>`,
+    buttons: [
+      { label: "Check my list", value: "check" },
+      { label: "I can't remember any", value: "none", ghost: true },
+    ],
+  });
+  $("dumpBox")?.focus();
+  const go = await asked;
+  const text = go === "check" ? $("dumpBox")?.value || "" : "";
+  const res = gradeBrainDump(text, lesson, deck.vocab);
+  deck.primeFromBrainDump(res);
+  store.set(EML_KEY, S.progress);
+  const row = (t) => `<li><b>${esc(t.shown)}</b> ${esc(t.entry.def)}</li>`;
+  await choose({
+    title: `You recalled ${res.recalled.length} of ${n}`,
+    sub: (res.recalled.length ? `Recalled: ${res.recalled.map((t) => `<b>${esc(t.shown)}</b>`).join(", ")}<br>` : "") +
+      (res.missed.length
+        ? `Missed — read these again; they'll come up first in battle:</p><ul class="review">${res.missed.map(row).join("")}</ul><p>`
+        : "Every term recalled!"),
+    buttons: [{ label: "To battle ⚔", value: 1 }],
+  });
 }
 
 // Before leaving, every term missed this run must be recalled once more.

@@ -1,6 +1,16 @@
 # 3 | The Integumentary System
 
 ## Structure and functions of the skin
+> The skin, or [[integument]], is the body's largest organ, and it has three layers. The outer [[epidermis]] has
+> no blood vessels. Its deepest layer, the [[stratum basale]], constantly makes new cells, which move upward and
+> fill with the tough protein [[keratin]]. By the time they reach the surface they are dead, flat cells forming
+> the [[stratum corneum]], a waterproof shield. Scattered in the basal layer, each [[melanocyte]] makes the
+> pigment [[melanin]], which colors the skin and absorbs ultraviolet light. Beneath lies the [[dermis]], the
+> living layer with blood vessels, nerves, glands and hair follicles. Its strength comes from [[collagen]]
+> fibers, and its stretch comes from [[elastin]]. The deepest layer is the [[subcutaneous layer]], made mostly
+> of [[adipose tissue]], or fat, which cushions and insulates. The skin protects against germs, helps with
+> [[thermoregulation]] by sweating and adjusting blood flow, and begins [[vitamin D synthesis]] in sunlight.
+> Combining forms for skin include [[dermat/o|derm/o, dermat/o]] and [[cutane/o]].
 T integument = the skin and its accessory structures
 T epidermis = the thin outermost layer of the skin, with no blood vessels | epi- + derm/o + -is | @skin.epidermis
 T dermis = the thick layer under the epidermis containing blood vessels, nerves, glands and hair follicles | @skin.dermis
@@ -32,6 +42,16 @@ P cyan/o = blue
 P xanth/o = yellow
 
 ## Accessory structures: hair, nails and glands
+> Hair, nails and glands are called accessory structures of the skin. Each hair grows from a [[hair follicle]]
+> deep in the dermis, and the visible part above the skin is the [[hair shaft]]. A tiny muscle, the [[arrector
+> pili]], pulls the hair upright when you are cold or frightened, creating goosebumps. Beside each follicle is a
+> [[sebaceous gland]], which releases oily [[sebum]] to keep hair and skin soft. A [[sweat gland]] releases
+> sweat through a [[sweat pore]]. The [[eccrine gland]] type is found all over the body and cools you, while the
+> [[apocrine gland]] type is found in the armpits and groin and becomes active at puberty. Nails grow over the
+> [[nail bed]]; the pale half-moon at the base is the [[lunula]], and the fold of skin over the base is the
+> [[cuticle]]. Hair loss is [[alopecia]], and excess hair in a male pattern on a woman is [[hirsutism]].
+> Infection around the nail is [[paronychia]], and fungal infection of the nail is [[onychomycosis]]. Profuse
+> sweating is [[diaphoresis]].
 T hair follicle = the tube-shaped pocket in the dermis from which a hair grows | @skin.follicle
 T hair shaft = the visible part of a hair above the skin surface | @skin.hair
 T arrector pili = the tiny muscle that pulls a hair upright, causing goose bumps | @skin.arrector
@@ -54,6 +74,15 @@ T anhidrosis = absence or deficiency of sweating | an- + hidr/o + -osis
 P myc/o = fungus
 
 ## Skin lesions and signs
+> A [[lesion]] is any area of abnormal skin, and lesions are described by size and whether they are flat, raised
+> or fluid filled. A [[macule]] is a flat, discolored spot smaller than 1 cm, like a freckle; a larger flat spot
+> is a [[patch]]. A [[papule]] is a small, solid, raised bump, and a larger, deeper solid lump is a [[nodule]].
+> A [[vesicle]] is a small blister filled with clear fluid, and a large blister is a [[bulla]]. A [[pustule]] is
+> a blister filled with pus. A [[wheal]] is a smooth, itchy, temporary swelling, as in hives. Some lesions go
+> below the surface: an [[ulcer]] is an open sore extending into the dermis, and a [[fissure]] is a linear
+> crack. Skin color gives signs of illness too. [[erythema]] is redness, [[jaundice]] is yellowing from
+> bilirubin, [[cyanosis]] is bluish color from low oxygen, and [[pallor]] is paleness. Bleeding into the skin
+> produces pinpoint [[petechiae]] or a larger bruise called an [[ecchymosis]]. Itching is [[pruritus]].
 T lesion = any area of abnormal tissue on the skin or in the body
 T macule = a flat, discolored spot smaller than 1 cm, such as a freckle | @lesions.macule
 T patch = a flat, discolored area larger than 1 cm
@@ -83,6 +112,16 @@ T rash = a temporary eruption on the skin
 T xeroderma = abnormally dry skin | xer/o + derm/o + -a
 
 ## Infections and inflammatory skin disorders
+> [[dermatitis]] means inflammation of the skin. [[contact dermatitis]] is caused by touching an irritant or
+> allergen, like poison ivy, and [[atopic dermatitis]], or eczema, is a chronic itchy rash often linked to
+> allergies. [[psoriasis]] causes thick red plaques with silvery scales because skin cells grow too fast.
+> [[urticaria]], or hives, causes itchy wheals. [[acne vulgaris]] involves clogged follicles and inflamed
+> sebaceous glands. Bacteria cause several infections: [[impetigo]] is a contagious crusting infection common in
+> children, and [[cellulitis]] is a spreading infection of the deeper skin. An [[abscess]] is a pocket of pus; a
+> boil from an infected follicle is a [[furuncle]], and a cluster of boils is a [[carbuncle]]. Fungal infections
+> are called [[tinea]], such as [[tinea pedis]], athlete's foot. Viruses cause [[herpes simplex]] cold sores,
+> [[herpes zoster]] or shingles, and [[verruca]], the common wart. Parasites cause [[scabies]] from mites and
+> [[pediculosis]] from lice. Loss of pigment in patches is [[vitiligo]].
 T dermatitis = inflammation of the skin | dermat/o + -itis
 T contact dermatitis = skin inflammation from touching an irritant or allergen
 T atopic dermatitis = a chronic, itchy inflammatory skin condition often linked to allergies; also called eczema
@@ -113,6 +152,16 @@ T lupus = an autoimmune disease that may cause a butterfly rash on the face
 P scler/o = hard
 
 ## Skin cancers and growths
+> Skin cancers are named for the cells they come from. [[basal cell carcinoma]] is the most common and arises in
+> the basal layer; it grows slowly and rarely spreads. [[squamous cell carcinoma]] arises in the flattened cells
+> of the epidermis and can spread if untreated. [[melanoma]] arises from melanocytes and is the most dangerous
+> because it spreads early. The [[ABCDE rule]] helps spot it: asymmetry, irregular borders, uneven color, a
+> diameter larger than a pencil eraser, and evolving changes. A rough, scaly patch caused by sun damage is an
+> [[actinic keratosis]], which can become squamous cell carcinoma. Not all growths are cancer. A mole is a
+> [[nevus]]; a waxy, stuck-on brown growth common with age is a [[seborrheic keratosis]]; a soft fatty lump is a
+> [[lipoma]]; an overgrown raised scar is a [[keloid]]; and a benign tumor of blood vessels, such as a
+> strawberry mark, is a [[hemangioma]]. [[Kaposi sarcoma]] causes purple lesions and is linked to weakened
+> immunity.
 T basal cell carcinoma = the most common skin cancer; grows slowly from the basal layer and rarely spreads
 T squamous cell carcinoma = a skin cancer of the flat surface cells of the epidermis that can spread
 T melanoma = the most dangerous skin cancer, arising from melanocytes | melan/o + -oma
@@ -128,6 +177,16 @@ P carcin/o = cancer
 P sarc/o = flesh, connective tissue
 
 ## Burns and wounds
+> Burns are classified by depth. A [[superficial burn]], or first-degree burn, affects only the epidermis and
+> causes redness and pain, like a sunburn. A [[partial-thickness burn]], or second-degree burn, reaches into the
+> dermis and forms blisters. A [[full-thickness burn]], or third-degree burn, destroys the epidermis and dermis;
+> the area may look white or charred and feel numb because nerves are destroyed. A [[fourth-degree burn]]
+> extends into muscle or bone. To estimate the size of a burn, the [[rule of nines]] assigns about 9 percent of
+> the [[total body surface area]] to each arm and to the head, and 18 percent to each leg, the front of the
+> trunk and the back. Dead, hard tissue over a deep burn is [[eschar]], and removing it is [[debridement]]. A
+> [[skin graft]] may follow: an [[autograft]] uses the patient's own skin, an [[allograft]] uses donor skin, and
+> a [[xenograft]] uses animal skin. Wounds include a [[laceration]] or cut, an [[abrasion]] or scrape, and a
+> [[contusion]] or bruise. Prolonged pressure causes a [[pressure injury]].
 T burn = injury to tissue caused by heat, chemicals, electricity or radiation
 T superficial burn = a first-degree burn involving only the epidermis; red and painful | @burns.first
 T partial-thickness burn = a second-degree burn reaching into the dermis, with blisters | @burns.second
@@ -156,6 +215,16 @@ P all/o = other
 P xen/o = foreign
 
 ## Diagnosis, procedures and treatment
+> To diagnose skin lesions, doctors often take a [[biopsy]], removing tissue to examine under a microscope. A
+> [[punch biopsy]] removes a small cylinder of skin, a [[shave biopsy]] slices off a raised lesion, and an
+> [[excisional biopsy]] removes the entire lesion. For infections, a [[culture and sensitivity]] test grows the
+> germ and shows which drugs will kill it, and a [[Wood lamp]] uses ultraviolet light to make some fungal
+> infections glow. Treatments include [[cryosurgery]], which freezes tissue with liquid nitrogen,
+> [[electrocautery]], which burns tissue with electric current, and [[curettage]], which scrapes it away. [[Mohs
+> surgery]] removes skin cancer one thin layer at a time, checking each under the microscope to spare healthy
+> skin. Cosmetic procedures include [[blepharoplasty]], repair of the eyelids, and [[rhytidectomy]], a facelift.
+> Many drugs are [[topical]], applied to the skin. A [[corticosteroid]] reduces inflammation, an [[antifungal]]
+> treats fungi, and an [[antihistamine]] relieves itching.
 T biopsy = removal of a small piece of tissue for examination | bi/o + -opsy
 T punch biopsy = removal of a small cylinder of skin with a round cutting tool
 T shave biopsy = removal of a raised lesion by slicing it off at the skin surface

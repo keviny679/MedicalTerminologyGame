@@ -25,8 +25,13 @@ export function parseChapter(text, file = "") {
     const line = raw.trim();
     if (!line || line.startsWith("//")) return;
     const where = `${file}:${i + 1}`;
+    if (line.startsWith("> ")) {
+      if (!section) throw new Error(`Lesson text before any section at ${where}`);
+      section.passage = `${section.passage || ""} ${line.slice(2).trim()}`.trim();
+      return;
+    }
     if (line.startsWith("## ")) {
-      section = { title: line.slice(3).trim(), entries: [] };
+      section = { title: line.slice(3).trim(), entries: [], passage: "" };
       ch.sections.push(section);
       return;
     }
@@ -53,7 +58,79 @@ export function parseChapter(text, file = "") {
     section.entries.push(entry);
     ch.entries.push(entry);
   });
+  for (const sec of ch.sections) if (sec.passage) sec.lesson = buildLesson(sec.passage, ch.entries, file, sec.title);
   return ch;
+}
+
+/* ------------------------------------------------------------------ lessons */
+
+// Lesson text marks key terms as [[term]] or [[shown text|entry name]].
+const MARK = /\[\[([^\]|]+)(?:\|([^\]]+))?\]\]/g;
+
+// Links each marked term to its entry and turns every sentence that contains a
+// term into fill-in-the-blank (cloze) material for that entry.
+export function buildLesson(passage, entries, file = "", title = "") {
+  const byName = new Map(entries.map((e) => [e.name.toLowerCase(), e]));
+  const terms = [];
+  const resolve = (shown, target) => {
+    const e = byName.get((target || shown).trim().toLowerCase());
+    if (!e) throw new Error(`Lesson "${title}" in ${file}: no entry named "${(target || shown).trim()}"`);
+    return e;
+  };
+  for (const m of passage.matchAll(MARK)) {
+    const entry = resolve(m[1], m[2]);
+    if (!terms.some((t) => t.entry === entry)) terms.push({ shown: m[1].trim(), entry });
+  }
+  const sentences = passage.match(/[^.!?]+[.!?]+/g) || [passage];
+  for (const raw of sentences) {
+    const marks = [...raw.matchAll(MARK)];
+    marks.forEach((m) => {
+      const entry = resolve(m[1], m[2]);
+      // blank out this term; show any other marked terms as plain text
+      let text = "";
+      let last = 0;
+      for (const o of marks) {
+        text += raw.slice(last, o.index);
+        text += o === m ? "\u0000" : o[1];
+        last = o.index + o[0].length;
+      }
+      text += raw.slice(last);
+      const [before, after] = text.trim().split("\u0000");
+      const shown = m[1].trim();
+      // skip a sentence that would give the answer away elsewhere in it
+      if (`${before} ${after}`.toLowerCase().includes(shown.toLowerCase())) return;
+      (entry.clozes ||= []).push({ before, after, shown });
+    });
+  }
+  return { terms, html: passage.replace(MARK, (_, shown) => `<b>${esc(shown)}</b>`) };
+}
+
+// Fill-in-the-blank from the lesson the student just read.
+export function makeClozeQuestion(entry, rng = Math.random) {
+  if (!entry.clozes?.length) return null;
+  const c = entry.clozes[Math.floor(rng() * entry.clozes.length)];
+  const accept = [...new Set([...acceptVariants(c.shown), ...acceptVariants(entry.name)])];
+  return {
+    mode: "typed", type: "cloze", entry,
+    prompt: `Fill in the blank: <i>${esc(c.before.trimEnd())} <span class="blank">______</span>${/^[.,;:!?)]/.test(c.after) ? "" : " "}${esc(c.after.trimStart())}</i>`,
+    image: null,
+    accept,
+    answerText: c.shown,
+    explain: `${entry.name}: ${entry.def}`,
+    hint: entry.parts ? `Word parts: ${entry.parts}` : null,
+  };
+}
+
+// Free recall ("brain dump") after reading: which lesson terms did they write?
+export function gradeBrainDump(text, lesson, vocab = null) {
+  const pieces = text.split(/[\n,;]+/).map((p) => p.trim()).filter(Boolean);
+  const recalled = [], missed = [];
+  for (const t of lesson.terms) {
+    const accept = [...new Set([...acceptVariants(t.shown), ...acceptVariants(t.entry.name)])];
+    const hit = pieces.some((p) => gradeTyped(p, accept, vocab) !== "wrong");
+    (hit ? recalled : missed).push(t);
+  }
+  return { recalled, missed };
 }
 
 /* --------------------------------------------------------------- questions */
@@ -238,6 +315,10 @@ export const canRecall = (e) => !/ to /.test(e.name) && e.name.length <= 40;
 
 export function makeRecallQuestion(entry, allEntries, diagrams, rng = Math.random) {
   if (!canRecall(entry)) return null;
+  if (entry.clozes?.length && rng() < 0.5) {
+    const cloze = makeClozeQuestion(entry, rng);
+    if (cloze) return cloze;
+  }
   const canImage = entry.img && diagrams.DIAGRAMS?.[entry.img.split(".")[0]];
   if (canImage && rng() < 0.5) {
     const [d, region] = entry.img.split(".");
@@ -386,6 +467,19 @@ export class StudyDeck {
     const gap = !correct && confident ? 2 + Math.floor(this.rng() * 2)
       : correct ? 2 + Math.floor(this.rng() * 3) : 3 + Math.floor(this.rng() * 4);
     this.followUps.push({ entry, at: this.asked + gap });
+  }
+
+  // After a brain dump: what they recalled counts as seen and correct (but not
+  // toward mastery: it was only just read); what they missed is queued to come
+  // back early in the battle.
+  primeFromBrainDump({ recalled, missed }, now = Date.now()) {
+    for (const t of recalled) this.record(t.entry, true, false, now);
+    const got = new Set(recalled.map((t) => t.entry));
+    this.followUps = this.followUps.filter((f) => !got.has(f.entry)); // missed terms go first
+    missed.forEach((t, i) => {
+      this.missedNow.set(t.entry.key, t.entry);
+      if (!this.followUps.some((f) => f.entry === t.entry)) this.followUps.push({ entry: t.entry, at: this.asked + 1 + i * 2 });
+    });
   }
 
   // Terms missed this run that haven't been recalled correctly since.

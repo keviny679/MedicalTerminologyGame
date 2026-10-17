@@ -2,6 +2,17 @@
 // P = word part, T = term, A = abbreviation. Definitions are original study notes.
 
 ## Building medical words
+> Most medical terms are built from a small set of parts, so learning the parts lets you decode thousands of
+> words. The [[root]] carries the core meaning, such as cardi meaning heart. A [[combining vowel]], usually o,
+> links a root to another part, and a root plus its vowel is written as a [[combining form]], like cardi/o. A
+> [[prefix]] sits at the front of a word and changes its meaning, while a [[suffix]] completes the word at the
+> end. Breaking a term into these pieces is called [[word analysis]], and the usual way to define a term is to
+> start with the suffix, then the prefix, then the root. Clinical words describe disease too. A [[sign]] is
+> something objective you can observe or measure, like a fever, while a [[symptom]] is something the patient
+> feels and reports, like pain. Identifying the disease is the [[diagnosis]], and predicting its course is the
+> [[prognosis]]. An [[acute]] illness starts suddenly and is short, while a [[chronic]] one lasts a long time.
+> The cause of a disease is its [[etiology]]; a disease with no known cause is [[idiopathic]], and a problem
+> caused by treatment is [[iatrogenic]].
 T root = the core part of a medical word that carries its main meaning
 T combining vowel = a vowel (usually o) added after a root to link it to another word part
 T combining form = a root plus its combining vowel, written with a slash, such as cardi/o
@@ -29,6 +40,15 @@ T physiology = the study of how the body and its parts function | physi/o + -log
 T anatomy = the study of the structure of the body
 
 ## Common prefixes
+> Prefixes tell you about number, position, time, speed or amount. Position prefixes are everywhere:
+> [[endo-|endo-]] means within, [[epi-]] means upon, [[sub-|sub-, infra-]] means below, [[inter-]] means
+> between, [[intra-]] means within, and [[peri-]] means around. For amount, [[hyper-]] means above normal and
+> [[hypo-]] means below normal, so hypertension and hypotension are opposites. Speed prefixes appear in heart
+> and breathing words: [[brady-]] means slow and [[tachy-]] means fast. [[dys-]] means bad, painful or
+> difficult, while [[eu-]] means good or normal. Many prefixes deal with number: [[mono-|mono-, uni-]] is one,
+> [[bi-|bi-, di-]] is two, [[tri-]] is three and [[poly-|poly-, multi-]] is many. Others deal with time:
+> [[pre-|ante-, pre-, pro-]] means before and [[post-]] means after. Finally, [[a-|a-, an-]] means without, as
+> in apnea, and [[anti-|anti-, contra-]] means against, as in antibiotic.
 P a-, an- = not, without
 P ab- = away from
 P ad- = toward
@@ -76,6 +96,16 @@ P para- = beside, abnormal
 P meta- = change, beyond
 
 ## Common suffixes
+> Suffixes usually tell you what kind of word you are looking at. Diagnostic suffixes describe a condition:
+> [[-itis]] means inflammation, [[-osis]] means an abnormal condition, [[-algia|-algia, -dynia]] means pain,
+> [[-megaly]] means enlargement, [[-oma]] means tumor and [[-pathy]] means disease. Blood conditions end in
+> [[-emia]]. Procedural suffixes describe what is done: [[-ectomy]] is surgical removal, [[-otomy]] is cutting
+> into, and [[-ostomy]] is creating an opening. Repair is [[-plasty]], and stitching is [[-rrhaphy]]. Looking
+> inside with an instrument is [[-scopy]], done with a [[-scope]]. A record or picture is a [[-gram]], and the
+> process of recording it is [[-graphy]]. Puncturing to remove fluid is [[-centesis]]. Watch the look-alikes:
+> [[-rrhage|-rrhage, -rrhagia]] is bursting forth of blood, [[-rrhea]] is a flow or discharge, and [[-rrhexis]]
+> is a rupture. A deficiency is [[-penia]], paralysis is [[-plegia]], hardening is [[-sclerosis]] and narrowing
+> is [[-stenosis]].
 P -algia, -dynia = pain
 P -itis = inflammation
 P -osis = abnormal condition
@@ -116,6 +146,13 @@ P -ist = specialist
 P -ole, -ule = small one
 
 ## Plurals and pronunciation
+> Medical plurals follow Greek and Latin rules rather than simply adding s. A word ending in -a becomes -ae, so
+> one vertebra becomes two vertebrae. A word ending in -is changes to -es, so diagnosis becomes diagnoses. A
+> word ending in -um changes to -a, as in bacterium and bacteria, and -us changes to -i, as in bronchus and
+> bronchi. Words ending in -ix or -ex change to -ices, so appendix becomes appendices. Pronunciation matters
+> because some terms sound almost identical. The [[ilium]] is the large wing of the hip bone, while the
+> [[ileum]] is the last part of the small intestine. Mixing them up in a chart would point to a completely
+> different part of the body, so always check the spelling.
 P -a to -ae = singular ending that becomes -ae in the plural, as vertebra to vertebrae
 P -is to -es = singular ending that becomes -es in the plural, as diagnosis to diagnoses
 P -um to -a = singular ending that becomes -a in the plural, as bacterium to bacteria
@@ -128,6 +165,14 @@ T ilium = the large upper wing-shaped bone of the pelvis; sounds like ileum
 T ileum = the last section of the small intestine; sounds like ilium
 
 ## The health care team
+> Patients are cared for by a team. A [[physician]] holds an MD or DO degree and diagnoses and treats disease. A
+> [[physician assistant]] practices medicine as part of a physician-led team, and a [[nurse practitioner]] is an
+> advanced practice nurse who can also diagnose and prescribe. A [[registered nurse]] plans and delivers bedside
+> care, and a [[medical assistant]] handles both clinical and office tasks. The [[pharmacist]] prepares and
+> dispenses medicines. Specialists are named with -logist, -ist or -ician: a [[pediatrician]] treats children, a
+> [[geriatrician]] treats older adults, a [[dermatologist]] treats skin, a [[cardiologist]] treats the heart and
+> an [[orthopedist]] treats bones and joints. The whole team shares information through the [[electronic health
+> record]], and [[HIPAA]] is the law that protects the privacy of that information.
 T physician = a licensed medical doctor (MD or DO) who diagnoses and treats disease
 T physician assistant = a licensed clinician who practices medicine as part of a physician-led team
 T nurse practitioner = an advanced practice registered nurse who can diagnose, treat and prescribe

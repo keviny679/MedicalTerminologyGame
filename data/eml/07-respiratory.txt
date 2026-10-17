@@ -1,6 +1,16 @@
 # 7 | The Respiratory System
 
 ## Upper respiratory tract
+> The [[respiratory system]] brings in oxygen and removes carbon dioxide. The [[upper respiratory tract]]
+> includes the nose, sinuses, pharynx and larynx. Air enters the [[nose]] and passes into the [[nasal cavity]],
+> which is divided in two by the [[nasal septum]]. The nasal cavity warms and moistens the air, sticky [[mucus]]
+> traps dust and germs, and tiny hair-like [[cilia]] sweep the mucus toward the throat. Air-filled spaces in the
+> skull bones around the nose are the [[paranasal sinuses]]. The throat, or [[pharynx]], has three parts: the
+> [[nasopharynx]] behind the nose, the [[oropharynx]] behind the mouth, and the [[laryngopharynx]] just above
+> the larynx. The [[larynx]], or voice box, contains the [[vocal cords]], which vibrate to make sound. Over the
+> larynx is a leaf-shaped flap, the [[epiglottis]], which closes during swallowing so food goes down the
+> esophagus instead of the airway. The roof of the mouth is the bony [[hard palate]] in front and the [[soft
+> palate]] in back. Combining forms for nose are [[rhin/o|nas/o, rhin/o]] and nas/o.
 T respiratory system = the organs that bring air into the body and exchange oxygen and carbon dioxide
 T upper respiratory tract = the nose, nasal cavity, sinuses, pharynx and larynx | @respiratory.upper
 T nose = the external organ of smell and the main entrance for air
@@ -27,6 +37,16 @@ P or/o = mouth
 P -phonia = voice, sound
 
 ## Lower respiratory tract
+> Below the larynx, the [[lower respiratory tract]] begins with the [[trachea]], or windpipe, a tube held open
+> by C-shaped rings of cartilage. It splits into the right and left [[bronchi]], which enter the lungs and
+> branch again and again into smaller tubes called [[bronchioles]]. The smallest branches end in tiny air sacs,
+> the [[alveoli]], where gas exchange happens. Each alveolus is wrapped in [[pulmonary capillaries]], and the
+> alveoli are coated with [[surfactant]], a substance that keeps them from collapsing. The two [[lungs]] are
+> divided into lobes. The [[right lung]] has three lobes, upper, middle and lower, while the [[left lung]] has
+> only two, leaving room for the heart. Each lung is covered by a double membrane, the [[pleura]], with a thin
+> fluid-filled [[pleural cavity]] between the layers that lets the lungs glide as they move. The space between
+> the lungs, holding the heart, trachea and esophagus, is the [[mediastinum]]. The dome-shaped [[diaphragm]]
+> below the lungs is the main muscle of breathing.
 T lower respiratory tract = the trachea, bronchi, bronchioles, lungs and alveoli | @respiratory.lower
 T trachea = the windpipe; a tube held open by C-shaped cartilage rings | @respiratory.trachea
 T bronchi = the two main airways branching from the trachea into the lungs | @respiratory.bronchi
@@ -60,6 +80,17 @@ P phren/o = diaphragm
 P thorac/o = chest
 
 ## Breathing and gas exchange
+> [[ventilation]] is the movement of air in and out of the lungs. Breathing in is [[inspiration]]: the diaphragm
+> contracts and flattens, the chest expands, and air rushes in. Breathing out is [[expiration]]: the diaphragm
+> relaxes and air flows out. [[respiration]] is the exchange of gases. [[external respiration]] happens in the
+> lungs, where [[oxygen]] moves from the alveoli into the blood and [[carbon dioxide]] moves out. [[internal
+> respiration]] happens in the tissues, where the blood delivers oxygen to cells and picks up carbon dioxide.
+> Many breathing words use the suffix [[-pnea]], meaning breathing. Normal, easy breathing is [[eupnea]].
+> Absence of breathing is [[apnea]], difficult breathing is [[dyspnea]], fast breathing is [[tachypnea]], and
+> slow breathing is [[bradypnea]]. Difficulty breathing unless sitting upright is [[orthopnea]], a sign of heart
+> failure. Low oxygen in the tissues is [[hypoxia]], low oxygen in the blood is [[hypoxemia]], and too much
+> carbon dioxide in the blood is [[hypercapnia]]. The amount of air in one normal breath is the [[tidal
+> volume]].
 T ventilation = moving air in and out of the lungs
 T respiration = the exchange of oxygen and carbon dioxide
 T external respiration = gas exchange between the alveoli and the blood
@@ -91,6 +122,17 @@ P -capnia = carbon dioxide
 P spir/o = breathe, breathing
 
 ## Signs and lung sounds
+> A [[cough]] clears the airways. A [[productive cough]] brings up [[sputum]], mucus from the lungs, and
+> coughing it out is [[expectoration]]. Coughing up blood is [[hemoptysis]], a warning sign of conditions like
+> tuberculosis or lung cancer. A nosebleed is [[epistaxis]], and a runny nose is [[rhinorrhea]]. Hoarseness or
+> difficulty speaking is [[dysphonia]], and complete loss of voice is [[aphonia]]. Listening to the lungs with a
+> stethoscope reveals abnormal sounds. [[wheezes]] are high-pitched whistling sounds from narrowed airways,
+> typical of asthma. [[crackles]] are fine bubbling or popping sounds, like hair rubbed between fingers, made
+> when fluid-filled alveoli pop open, as in pneumonia or heart failure. [[rhonchi]] are low, snoring sounds from
+> mucus in the larger airways that may clear with coughing. [[stridor]] is a harsh, high-pitched sound on
+> breathing in, caused by a blocked upper airway, and it is an emergency. A [[pleural friction rub]] is a
+> grating sound when inflamed pleura rub together. [[clubbing]] is rounding and widening of the fingertips from
+> long-term low oxygen.
 T cough = a sudden, forceful burst of air to clear the airways
 T productive cough = a cough that brings up mucus or sputum
 T sputum = mucus coughed up from the lower airways
@@ -109,6 +151,16 @@ T clubbing = rounded, enlarged fingertips from long-term low oxygen
 P -ptysis = spitting
 
 ## Upper respiratory disorders
+> An [[upper respiratory infection]], such as the common cold, affects the nose and throat. Inflammation of the
+> nose lining is [[rhinitis]]; when it is caused by pollen or dust it is [[allergic rhinitis]], or hay fever.
+> Inflammation of the sinuses is [[sinusitis]]. A sore throat is [[pharyngitis]], and when it is caused by
+> streptococcus bacteria it is [[strep throat]], which needs antibiotics. Inflammation of the voice box is
+> [[laryngitis]], which causes hoarseness. [[epiglottitis]] is a dangerous swelling of the epiglottis that can
+> block the airway. [[croup]] is a viral infection in young children that causes a barking cough and stridor.
+> [[influenza]], or the flu, is a viral infection with fever, body aches and cough. [[pertussis]], or whooping
+> cough, causes violent coughing fits followed by a whooping gasp and is prevented by vaccination. A [[deviated
+> septum]] is a nasal septum shifted to one side, which can block airflow. In [[obstructive sleep apnea]], the
+> throat collapses during sleep, causing repeated pauses in breathing and loud snoring.
 T upper respiratory infection = an infection of the nose, sinuses or throat, such as the common cold
 T rhinitis = inflammation of the nasal lining | rhin/o + -itis
 T allergic rhinitis = hay fever; nasal inflammation caused by allergens
@@ -125,6 +177,17 @@ T nasal polyps = soft, painless growths on the lining of the nose or sinuses
 T obstructive sleep apnea = repeated pauses in breathing during sleep from a collapsing airway
 
 ## Lower respiratory and lung disorders
+> [[asthma]] is chronic inflammation of the airways that causes episodes of narrowing, wheezing and shortness of
+> breath. Inflammation of the bronchi is [[bronchitis]]. [[chronic obstructive pulmonary disease]] is long-term
+> airflow blockage, usually from smoking, and includes chronic bronchitis and [[emphysema]], in which the
+> alveolar walls are destroyed and air gets trapped. [[pneumonia]] is infection of the lungs that fills the
+> alveoli with fluid; inhaling food or vomit causes [[aspiration pneumonia]]. [[tuberculosis]] is a contagious
+> bacterial lung infection. [[atelectasis]] is collapse of part of a lung. Air in the pleural cavity is a
+> [[pneumothorax]], blood there is a [[hemothorax]], and excess fluid is a [[pleural effusion]]. Inflammation of
+> the pleura is [[pleurisy]], causing sharp pain with breathing, and pus in the pleural cavity is [[empyema]].
+> Fluid in the lungs from heart failure is [[pulmonary edema]]. A clot in a lung artery is a [[pulmonary
+> embolism]]. [[cystic fibrosis]] is an inherited disease that makes thick mucus clog the lungs. [[lung cancer]]
+> is the leading cause of cancer death.
 T asthma = chronic inflammation and narrowing of the airways causing wheezing and shortness of breath
 T bronchitis = inflammation of the bronchi | bronch/o + -itis
 T chronic obstructive pulmonary disease = a long-term lung disease that blocks airflow, mainly emphysema and chronic bronchitis
@@ -155,6 +218,16 @@ P -thorax = chest, pleural cavity
 P coni/o = dust
 
 ## Diagnostic tests
+> A [[chest x-ray]] shows the lungs, heart and diaphragm and reveals pneumonia, fluid or a collapsed lung.
+> [[pulse oximetry]] uses a clip on the finger to measure how saturated the blood is with oxygen. [[arterial
+> blood gases]] are measured from a sample of arterial blood and show oxygen, carbon dioxide and acid levels
+> precisely. [[pulmonary function tests]] measure how well the lungs move air. The most common is
+> [[spirometry]], in which the patient breathes into a [[spirometer]] to measure how much air they can exhale
+> and how fast. A [[peak flow meter]] is a simple handheld device that people with asthma use at home. In
+> [[bronchoscopy]], a flexible scope is passed into the airways to look inside or take a biopsy. A [[sputum
+> culture]] grows germs from coughed-up mucus to identify an infection. The [[tuberculin skin test]] checks for
+> exposure to tuberculosis. [[thoracentesis]] uses a needle through the chest wall to drain fluid from the
+> pleural cavity. [[polysomnography]] is an overnight sleep study used to diagnose sleep apnea.
 T chest x-ray = an image of the lungs, heart and chest bones
 T pulse oximetry = a clip-on sensor that measures the oxygen saturation of the blood | ox/i + -metry
 T arterial blood gases = a test of oxygen, carbon dioxide and pH in arterial blood
@@ -172,6 +245,17 @@ P -metry = process of measuring
 P somn/o = sleep
 
 ## Procedures and treatment
+> [[oxygen therapy]] delivers extra oxygen, often through a [[nasal cannula]], small prongs in the nose. When a
+> patient cannot protect their own airway, [[endotracheal intubation]] places a tube through the mouth into the
+> trachea, usually connected to [[mechanical ventilation]], a machine that breathes for the patient. For long-
+> term airway support, a [[tracheostomy]] creates a permanent opening in the neck into the trachea; a
+> [[tracheotomy]] is the incision itself. [[continuous positive airway pressure]] uses a mask to keep the airway
+> open during sleep in sleep apnea. Inhaled medicines are given by a [[nebulizer]], which turns liquid into
+> mist, or a [[metered-dose inhaler]]. A [[bronchodilator]] opens narrowed airways quickly, while an [[inhaled
+> corticosteroid]] reduces airway inflammation over time. An [[expectorant]] loosens mucus, an [[antitussive]]
+> suppresses cough, and a [[decongestant]] shrinks swollen nasal tissue. A [[chest tube]] drains air or fluid
+> from the pleural cavity. Removing one lobe of a lung is a [[lobectomy]], and removing a whole lung is a
+> [[pneumonectomy]]. The [[Heimlich maneuver]] uses abdominal thrusts to dislodge a choking object.
 T oxygen therapy = giving extra oxygen through a nasal cannula or mask
 T nasal cannula = thin tubing with two prongs that delivers oxygen into the nose
 T endotracheal intubation = placing a tube through the mouth into the trachea to keep the airway open | endo- + trache/o + -al

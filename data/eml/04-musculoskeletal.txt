@@ -1,6 +1,15 @@
 # 4 | The Musculoskeletal System
 
 ## Bone structure and function
+> Bones support the body, protect organs, store minerals and make blood cells. Three types of cells keep bone
+> alive: an [[osteoblast]] builds new bone, an [[osteoclast]] breaks bone down, and an [[osteocyte]] is a mature
+> bone cell that maintains it. Remodeling is a balance between building and breaking. A [[long bone]] like the
+> femur has a shaft called the [[diaphysis]] and two ends called the [[epiphyses|epiphysis]]. In children, the
+> [[epiphyseal plate]], or growth plate, lets the bone lengthen. The shaft is made of dense [[compact bone]],
+> while the ends hold lightweight [[spongy bone]]. The hollow center is the [[medullary cavity]], which holds
+> [[yellow bone marrow]], mostly fat. [[red bone marrow]], found in spongy bone, carries out [[hematopoiesis]],
+> the making of blood cells. A tough membrane, the [[periosteum]], covers the outside of bone. The ends of bones
+> at joints are capped with smooth [[cartilage]]. The formation of bone from cartilage is [[ossification]].
 T skeletal system = the bones and joints that support the body, protect organs, store minerals and make blood cells
 T osteocyte = a mature bone cell | oste/o + -cyte
 T osteoblast = a bone cell that builds new bone | oste/o + -blast
@@ -30,6 +39,17 @@ P -clast = to break
 P -poiesis = formation
 
 ## Bones of the skull and axial skeleton
+> The [[axial skeleton]] forms the center of the body: the skull, spine, ribs and sternum. The [[cranium]]
+> protects the brain. The [[frontal bone]] forms the forehead, two [[parietal bones|parietal bone]] form the top
+> and sides, the [[temporal bones|temporal bone]] lie above the ears, and the [[occipital bone]] forms the back
+> and base of the skull. The large opening in the occipital bone where the spinal cord passes is the [[foramen
+> magnum]]. The [[sphenoid bone]] is shaped like a bat and spans the skull floor, and the [[ethmoid bone]] lies
+> between the eyes. These bones are joined by immovable joints: the [[coronal suture]] runs across the top, the
+> [[sagittal suture]] runs down the middle, and the [[lambdoid suture]] runs across the back. In infants, soft
+> spots called each [[fontanelle]] let the skull grow. Facial bones include the [[maxilla]], the upper jaw, the
+> [[mandible]], the lower jaw and only movable skull bone, and the [[zygomatic bone]], the cheekbone. The
+> [[vertebral column]] has 7 [[cervical vertebrae]], 12 [[thoracic vertebrae]] and 5 [[lumbar vertebrae]], then
+> the [[sacrum]] and [[coccyx]], with an [[intervertebral disk]] cushioning each pair.
 T axial skeleton = the skull, vertebral column, ribs and sternum | @skeleton.axial
 T appendicular skeleton = the bones of the limbs plus the shoulder and pelvic girdles | @skeleton.appendicular
 T cranium = the part of the skull that encloses the brain | crani/o + -um | @skullLateral.cranium
@@ -81,6 +101,16 @@ P stern/o = sternum
 P cost/o = rib
 
 ## Bones of the limbs and girdles
+> The [[appendicular skeleton]] includes the limbs and the girdles that attach them. The shoulder girdle is made
+> of the [[clavicle]], or collarbone, and the [[scapula]], or shoulder blade. The upper arm bone is the
+> [[humerus]]. The forearm has two bones: the [[radius]] on the thumb side and the [[ulna]] on the little finger
+> side. The point of the elbow is the [[olecranon]], part of the ulna. The wrist is made of eight [[carpals]],
+> the palm of five [[metacarpals]], and the fingers of [[phalanges]]. The hip girdle, or [[pelvis]], is formed
+> by the ilium, the [[ischium]], which you sit on, and the [[pubis]] in front. The hip socket is the
+> [[acetabulum]]. The thigh bone, the [[femur]], is the longest bone in the body. The kneecap is the
+> [[patella]]. The lower leg has the large [[tibia]], or shin bone, and the thin [[fibula]] on the outside. The
+> bumps on each side of the ankle are each a [[malleolus]]. The ankle has seven [[tarsals]], including the heel
+> bone, the [[calcaneus]], and the foot has five [[metatarsals]].
 T clavicle = the collarbone | @skeleton.clavicle
 T scapula = the shoulder blade | @skeleton.scapula
 T humerus = the bone of the upper arm | @skeleton.humerus
@@ -110,6 +140,16 @@ P patell/o = kneecap
 P pelv/i = pelvis, hip bone
 
 ## Joints and connective structures
+> A [[joint]] is where two bones meet. The most movable type is the [[synovial joint]], such as the knee or
+> shoulder. It is surrounded by a fibrous [[joint capsule]], lined by a [[synovial membrane]] that secretes
+> slippery [[synovial fluid]] to reduce friction. The bone ends are covered with smooth [[articular cartilage]].
+> Bones are connected to other bones by each [[ligament]], while muscles are connected to bones by each
+> [[tendon]]. A [[bursa]] is a small fluid-filled sac that cushions areas where tendons rub over bone. The knee
+> has a C-shaped cartilage cushion called the [[meniscus]], and inside it the [[anterior cruciate ligament]]
+> stops the shin from sliding forward; it is commonly torn in sports. The shoulder is a [[ball-and-socket
+> joint]] that moves in all directions, stabilized by the [[rotator cuff]] muscles and tendons. The elbow is a
+> [[hinge joint]] that bends in one direction only. Combining forms include [[arthr/o|arthr/o, articul/o]] for
+> joint and [[tendin/o|ten/o, tend/o, tendin/o]] for tendon.
 T joint = a place where two or more bones meet; also called an articulation
 T synovial joint = a freely movable joint with a fluid-filled cavity, such as the knee
 T joint capsule = the fibrous sac that surrounds and encloses a synovial joint | @joint.capsule
@@ -132,6 +172,16 @@ P synov/o = synovial membrane, synovial fluid
 P menisc/o = meniscus
 
 ## Muscles and body movements
+> There are three types of muscle. [[skeletal muscle]] is voluntary and moves the bones. [[smooth muscle]] is
+> involuntary and lines organs like the stomach and blood vessels. [[cardiac muscle]] is found only in the
+> heart. Muscles are wrapped in [[fascia]]. A muscle's [[origin]] is its attachment to the bone that stays
+> still, and its [[insertion]] is its attachment to the bone that moves. Movements come in opposite pairs.
+> [[flexion]] decreases the angle of a joint, like bending the elbow, and [[extension]] increases it.
+> [[abduction]] moves a limb away from the midline, and [[adduction]] moves it toward the midline. [[rotation]]
+> turns a bone around its own axis, and [[circumduction]] moves a limb in a circle. Turning the palm down is
+> [[pronation]], and turning it up is [[supination]]. At the ankle, pulling the toes up is [[dorsiflexion]], and
+> pointing them down is [[plantar flexion]]. Familiar muscles include the [[deltoid]] of the shoulder, the
+> [[biceps]] and [[triceps]] of the arm, and the [[quadriceps]] and [[hamstrings]] of the thigh.
 T skeletal muscle = voluntary striated muscle attached to bones that moves the body | @joint.muscle
 T smooth muscle = involuntary muscle in the walls of organs and blood vessels
 T cardiac muscle = involuntary striated muscle found only in the heart
@@ -160,6 +210,17 @@ P -asthenia = weakness
 P kinesi/o = movement
 
 ## Fractures and bone disorders
+> A [[fracture]] is a broken bone. In a [[closed fracture]] the skin stays intact, while in an [[open fracture]]
+> the bone breaks through the skin, raising the risk of infection. A [[comminuted fracture]] shatters into
+> several pieces. A [[greenstick fracture]] is an incomplete break on one side, common in children's flexible
+> bones. A [[compression fracture]] crushes a vertebra, often from osteoporosis. A [[spiral fracture]] twists
+> around the bone, and a [[stress fracture]] is a tiny crack from repeated strain. A [[pathologic fracture]]
+> happens in bone already weakened by disease. A [[Colles fracture]] is a break of the radius at the wrist from
+> falling on an outstretched hand. Putting the pieces back in line is [[reduction]], and the new bone that forms
+> during healing is a [[callus]]. Among bone disorders, [[osteoporosis]] means thin, porous bones that break
+> easily, and milder thinning is [[osteopenia]]. Infection of bone is [[osteomyelitis]]. Softening of bone from
+> lack of vitamin D is [[osteomalacia]], called [[rickets]] in children. A malignant bone tumor is an
+> [[osteosarcoma]].
 T fracture = a break in a bone
 T closed fracture = a broken bone that does not break through the skin; also called simple fracture | @fractures.closed
 T open fracture = a broken bone that breaks through the skin; also called compound fracture | @fractures.open
@@ -184,6 +245,16 @@ T Paget disease = a disorder of disorganized bone remodeling causing enlarged, w
 P por/o = pore, small opening
 
 ## Joint and spine disorders
+> [[arthritis]] means joint inflammation. [[osteoarthritis]] is wear-and-tear breakdown of cartilage, common
+> with age. [[rheumatoid arthritis]] is an autoimmune disease where the immune system attacks the synovial
+> membrane, often in small joints on both sides of the body. [[gout]] is caused by uric acid crystals,
+> classically in the big toe. Injuries include a [[sprain]], a stretched or torn ligament, and a [[strain]], a
+> stretched or torn muscle or tendon. A [[dislocation]] is when a bone is pushed completely out of its joint,
+> and a partial dislocation is a [[subluxation]]. Overuse can cause [[tendinitis]] or [[bursitis]]. [[carpal
+> tunnel syndrome]] is compression of the median nerve at the wrist, causing numbness in the fingers. The spine
+> can curve abnormally: [[kyphosis]] is an exaggerated hunchback curve of the upper back, [[lordosis]] is an
+> exaggerated swayback curve of the lower back, and [[scoliosis]] is a sideways curve. A [[herniated disk]]
+> bulges and can press on a nerve, causing [[sciatica]], pain down the leg. Muscle pain is [[myalgia]].
 T arthritis = inflammation of a joint | arthr/o + -itis
 T osteoarthritis = degenerative joint disease with wearing away of cartilage | oste/o + arthr/o + -itis
 T rheumatoid arthritis = a chronic autoimmune disease that inflames the synovial lining of many joints
@@ -216,6 +287,17 @@ P scoli/o = crooked, curved
 P fibr/o = fiber
 
 ## Diagnosis and treatment
+> To look inside a joint, surgeons perform [[arthroscopy]] through small incisions. Removing fluid from a joint
+> with a needle is [[arthrocentesis]]. Replacing or repairing a joint is [[arthroplasty]], such as a [[total
+> knee arthroplasty]] or [[total hip arthroplasty]], while surgically fusing a joint so it cannot move is
+> [[arthrodesis]]. A [[bone density scan]] measures bone strength to diagnose osteoporosis, and
+> [[electromyography]] records the electrical activity of muscles. For the spine, a [[laminectomy]] removes part
+> of a vertebra to relieve pressure on nerves, and [[spinal fusion]] joins vertebrae together. Fractures are
+> treated by [[closed reduction]], realigning the bone without surgery, or by [[open reduction internal
+> fixation]], where the surgeon opens the area and holds the bone with plates and screws. A [[cast]] keeps the
+> bone still while it heals, and [[traction]] uses pulling force to align it. A [[prosthesis]] is an artificial
+> body part, while an [[orthosis]] is a brace. [[physical therapy]] restores strength and movement. Common
+> medicines are [[NSAIDs]] for pain and inflammation and [[bisphosphonates|bisphosphonate]] to strengthen bone.
 T arthroscopy = looking inside a joint with a small camera | arthr/o + -scopy
 T arthrocentesis = puncturing a joint to remove fluid | arthr/o + -centesis
 T arthroplasty = surgical repair or replacement of a joint | arthr/o + -plasty

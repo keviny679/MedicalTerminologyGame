@@ -1,6 +1,16 @@
 # 5 | The Cardiovascular System
 
 ## Structure of the heart
+> The [[heart]] is a muscular pump about the size of a fist, sitting in the chest between the lungs with its
+> pointed [[apex|apex of the heart]] aimed down and to the left. It has four chambers. The two upper chambers
+> receive blood: the [[right atrium]] and [[left atrium]]. The two lower chambers pump blood out: the [[right
+> ventricle]] and [[left ventricle]]. The left ventricle has the thickest wall because it pumps blood to the
+> whole body. A wall called the [[interventricular septum]] separates the two ventricles. The heart wall has
+> three layers. The inner lining is the [[endocardium]], the thick muscle layer is the [[myocardium]], and the
+> outer layer is the [[epicardium]]. Around the heart is a protective sac, the [[pericardium]]. The heart muscle
+> gets its own blood supply from the [[coronary arteries]], which branch off the aorta and wrap around the heart
+> like a crown. Combining forms include [[cardi/o]] for heart, [[atri/o]] for atrium and [[ventricul/o]] for
+> ventricle.
 T heart = the hollow, muscular organ that pumps blood through the body
 T right atrium = the upper right chamber of the heart; receives oxygen-poor blood from the body | @heart.ra
 T right ventricle = the lower right chamber; pumps blood to the lungs | @heart.rv
@@ -20,6 +30,16 @@ P coron/o = crown; coronary arteries
 P pericardi/o = pericardium
 
 ## Heart valves and blood flow
+> Blood flows through the heart in one direction, kept on track by four valves. Oxygen-poor blood returns from
+> the body through the [[superior vena cava]] and [[inferior vena cava]] into the right atrium. It passes
+> through the [[tricuspid valve]] into the right ventricle, then through the [[pulmonary valve]] into the
+> [[pulmonary trunk]], which splits into the [[pulmonary arteries]] going to the lungs. These are the only
+> arteries that carry oxygen-poor blood. In the lungs, blood picks up oxygen and returns through the [[pulmonary
+> veins]] to the left atrium. This loop between heart and lungs is the [[pulmonary circulation]]. Blood then
+> passes through the [[mitral valve]] into the left ventricle, then through the [[aortic valve]] into the
+> [[aorta]], the body's largest artery, which sends it everywhere else; this loop is the [[systemic
+> circulation]]. The valve flaps between atria and ventricles are anchored by cord-like [[chordae tendineae]],
+> which stop them from flipping backward. Closing valves make the lub-dub sounds of the heartbeat.
 T heart valve = a flap of tissue that keeps blood flowing in one direction through the heart
 T tricuspid valve = the valve between the right atrium and right ventricle | @heart.tricuspid
 T pulmonary valve = the valve between the right ventricle and the pulmonary trunk | @heart.pulmValve
@@ -39,6 +59,16 @@ P aort/o = aorta
 P pulmon/o = lung
 
 ## Conduction system and heart rhythm
+> The heart has its own electrical system. Each beat starts in the [[sinoatrial node]], the natural pacemaker in
+> the wall of the right atrium. The signal spreads across both atria, making them contract, and reaches the
+> [[atrioventricular node]], which pauses it briefly so the ventricles can fill. The signal then travels down
+> the [[bundle of His]], splits into the right and left [[bundle branches]], and spreads through the [[Purkinje
+> fibers]] in the ventricle walls, making the ventricles contract. One full heartbeat is a [[cardiac cycle]]:
+> the contraction phase is [[systole]], and the relaxation and filling phase is [[diastole]]. A normal rhythm
+> started by the SA node is [[sinus rhythm]]. A heart rate below 60 beats per minute is [[bradycardia]], and
+> above 100 is [[tachycardia]]. Any irregular rhythm is an [[arrhythmia]]. In [[atrial fibrillation]] the atria
+> quiver chaotically, raising the risk of clots. [[ventricular fibrillation]] is a deadly quivering of the
+> ventricles that causes [[cardiac arrest]] unless the heart is shocked.
 T sinoatrial node = the heart's natural pacemaker in the right atrium that starts each heartbeat | @conduction.sa
 T atrioventricular node = the node that relays the electrical signal from the atria to the ventricles | @conduction.av
 T bundle of His = the pathway that carries the signal from the AV node into the septum | @conduction.his
@@ -60,6 +90,17 @@ T palpitations = an awareness of a pounding, fluttering or racing heartbeat
 T cardiac arrest = sudden loss of heart function, breathing and consciousness
 
 ## Blood vessels and blood pressure
+> Blood travels away from the heart in each [[artery]], which branches into smaller vessels, each an
+> [[arteriole]]. The arterioles feed the [[capillary]] networks, tiny thin-walled vessels where oxygen and
+> nutrients pass into the tissues. Blood then drains into each [[venule]], which joins larger veins returning
+> blood to the heart. A [[vein]] has thinner walls than an artery and contains valves to keep blood moving
+> toward the heart. The open space inside a vessel is the [[lumen]]. Narrowing of vessels is
+> [[vasoconstriction]], and widening is [[vasodilation]]. [[blood pressure]] is the force of blood against
+> artery walls, written as two numbers. The top number, the [[systolic pressure]], is measured as the heart
+> contracts; the bottom number, the [[diastolic pressure]], is measured as it relaxes. It is measured with a
+> [[sphygmomanometer]] and a [[stethoscope]]; listening with a stethoscope is [[auscultation]]. Persistently
+> high blood pressure is [[hypertension]], and low is [[hypotension]]. A drop in pressure on standing up,
+> causing dizziness, is [[orthostatic hypotension]].
 T artery = a vessel that carries blood away from the heart | arteri/o + -y | @vessels.artery
 T arteriole = a small branch of an artery | arteri/o + -ole
 T capillary = a tiny vessel where oxygen, nutrients and wastes are exchanged with tissues | @vessels.capillary
@@ -88,6 +129,17 @@ P ather/o = fatty plaque
 P embol/o = plug
 
 ## Heart disorders
+> The most common heart disease is [[coronary artery disease]]. It is usually caused by [[atherosclerosis]], the
+> buildup of fatty plaque inside the arteries; hardening of the arteries in general is [[arteriosclerosis]].
+> When narrowed arteries cannot deliver enough blood, the tissue suffers [[ischemia]], and the patient may feel
+> chest pain called [[angina pectoris]]. If an artery is completely blocked, heart muscle dies; this is a
+> [[myocardial infarction]], or heart attack, and the area of dead tissue is an [[infarct]]. When the heart
+> cannot pump enough blood to meet the body's needs, the patient has [[heart failure]]; when fluid backs up into
+> the lungs and legs it is called [[congestive heart failure]]. Disease of the heart muscle itself is
+> [[cardiomyopathy]], and an enlarged heart is [[cardiomegaly]]. Inflammation is named by layer:
+> [[endocarditis]], [[myocarditis]] and [[pericarditis]]. An abnormal heart sound from turbulent blood flow is a
+> [[heart murmur]]. A valve that is too narrow has [[valvular stenosis]], while a leaky valve has [[valvular
+> regurgitation]]. Fluid squeezing the heart inside the pericardium is [[cardiac tamponade]].
 T coronary artery disease = narrowing of the coronary arteries by plaque, reducing blood flow to the heart
 T atherosclerosis = buildup of fatty plaque that hardens and narrows arteries | ather/o + -sclerosis
 T arteriosclerosis = hardening and thickening of artery walls | arteri/o + -sclerosis
@@ -111,6 +163,17 @@ T rheumatic heart disease = heart valve damage caused by rheumatic fever after s
 T cardiac tamponade = compression of the heart by fluid in the pericardial sac
 
 ## Vascular disorders
+> An [[aneurysm]] is a bulging, weakened spot in an artery wall that can burst. A [[thrombus]] is a blood clot
+> that forms in a vessel and stays there, while an [[embolus]] is a clot or other mass that breaks loose and
+> travels; when it blocks a vessel, the blockage is an [[embolism]]. A clot in a deep leg vein is [[deep vein
+> thrombosis]], which causes swelling and pain. If part of it breaks off and lodges in the lungs, it becomes a
+> [[pulmonary embolism]], a medical emergency. Inflammation of a vein is [[phlebitis]], and with a clot it is
+> [[thrombophlebitis]]. Twisted, swollen veins in the legs with weak valves are [[varicose veins]]. Narrowed
+> arteries in the legs cause [[peripheral artery disease]], which produces [[claudication]], cramping leg pain
+> when walking that eases with rest. In [[Raynaud phenomenon]], fingers turn white and blue in the cold as small
+> arteries spasm. High fat levels in the blood are [[hyperlipidemia]]. Severe bleeding is a [[hemorrhage]], and
+> failure of circulation to deliver enough blood to organs is [[shock]]. A [[stroke]] occurs when blood flow to
+> the brain is cut off.
 T aneurysm = a balloon-like bulge in the wall of an artery
 T thrombus = a blood clot that forms and stays in a vessel | thromb/o + -us
 T embolus = a clot or other mass that travels through the bloodstream | embol/o + -us
@@ -130,6 +193,16 @@ T stroke = brain damage from a blocked or burst blood vessel; also called cerebr
 P lip/o = fat
 
 ## Diagnostic tests
+> The [[electrocardiogram]] records the heart's electrical activity using electrodes on the skin and shows
+> rhythm problems and heart attacks. A [[Holter monitor]] is a portable ECG worn for a day or more to catch
+> irregular beats that come and go. An [[echocardiogram]] uses ultrasound to make moving images of the heart's
+> chambers and valves. A [[stress test]] records the heart during exercise to reveal problems that only appear
+> under strain. In [[cardiac catheterization]], a thin tube is threaded through a blood vessel into the heart.
+> Injecting dye and taking x-rays of vessels is [[angiography]], and the resulting picture is an [[angiogram]].
+> A [[Doppler ultrasound]] measures blood flow through vessels. Blood tests help too. [[troponin]] is a protein
+> released when heart muscle is damaged, so it rises after a heart attack. A [[lipid panel]] measures
+> cholesterol: [[LDL cholesterol]] is the bad kind that builds plaque, and [[HDL cholesterol]] is the good kind
+> that removes it. A [[BNP test]] measures a hormone that rises in heart failure.
 T electrocardiogram = a recording of the heart's electrical activity | electr/o + cardi/o + -gram
 T Holter monitor = a portable ECG worn for 24 hours or more
 T echocardiogram = an ultrasound image of the heart | ech/o + cardi/o + -gram
@@ -146,6 +219,17 @@ T BNP test = a blood test that rises in heart failure
 P ech/o = sound
 
 ## Procedures and treatments
+> To open a narrowed coronary artery, doctors perform [[angioplasty]], inflating a balloon inside the vessel,
+> and usually leave a [[stent]], a small mesh tube that holds the artery open. Done through a catheter, this is
+> called [[percutaneous coronary intervention]]. When blockages are severe, a [[coronary artery bypass graft]]
+> uses a vessel from elsewhere in the body to route blood around the blockage. Removing plaque from inside an
+> artery, such as the carotid, is [[endarterectomy]]. For rhythm problems, a [[pacemaker]] sends electrical
+> pulses to keep the heart beating at a normal rate, and an [[implantable cardioverter-defibrillator]] shocks
+> the heart if a deadly rhythm occurs. In an emergency, [[cardiopulmonary resuscitation]] combines chest
+> compressions and breathing, and an [[automated external defibrillator]] delivers a shock. Medicines include an
+> [[anticoagulant]] to prevent clots, a [[thrombolytic]] to dissolve clots, a [[statin]] to lower cholesterol, a
+> [[diuretic]] to remove excess fluid, a [[beta blocker]] to slow the heart, and [[nitroglycerin]] to relieve
+> angina by widening vessels.
 T angioplasty = opening a narrowed artery, often by inflating a small balloon | angi/o + -plasty
 T stent = a small mesh tube placed to hold an artery open
 T percutaneous coronary intervention = opening blocked coronary arteries through a catheter, with angioplasty and stents

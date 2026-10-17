@@ -17,6 +17,11 @@ Torii Path, Sakura Temple and Moonlit Wave.
   Pick a chapter (1–7 so far) or one of its sections. Questions mix terms, definitions, abbreviations,
   word-part breakdowns and "name the highlighted structure" diagrams. Bigger chapters mean longer runs.
   Missed terms come back more often, and the game tracks how much of each chapter you've seen and mastered.
+- **Read → recall → battle lessons:** picking a section opens a short lesson (original text, with the
+  most relevant diagram). Then you write down every key term you remember (a "brain dump"), see what you
+  missed, and the battle starts with those terms first, including fill-in-the-blank sentences from the
+  lesson. Lessons live in the chapter files as `> ` lines, with key terms marked `[[term]]` or
+  `[[shown text|entry name]]`.
 - **Typed recall and spaced review:** in the default *Mixed* style, a term starts as multiple choice and
   switches to typed recall once you know it. A correct typed answer is a "recall strike" for +50% damage.
   Small typos in long words count, with a spelling note, but a different real term never does.
