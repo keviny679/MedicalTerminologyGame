@@ -456,6 +456,13 @@ export class StudyDeck {
     this.asked = 0;
     this.followUps = []; // { entry, at } -> ask again (typed) after a few questions
     this.missedNow = new Map(); // key -> entry, cleared once recalled again
+    this.once = false; // review: ask each term once, then stop (misses go to relearning)
+    this.used = new Set();
+  }
+
+  // In "once" mode, true when every term has been asked.
+  get finished() {
+    return this.once && this.used.size >= this.entries.length;
   }
 
   get vocab() {
@@ -541,6 +548,15 @@ export class StudyDeck {
 
   next() {
     this.asked += 1;
+    if (this.once) {
+      const left = this.entries.filter((e) => !this.used.has(e.key));
+      for (const e of shuffle(left, this.rng)) {
+        const q = (this.wantsTyped(e) && makeRecallQuestion(e, this.all, this.diagrams, this.rng)) || this.mcQuestion(e);
+        this.used.add(e.key);
+        if (q) return q;
+      }
+      this.once = false; // nothing left to ask: fall back to normal practice
+    }
     const follow = this.takeFollowUp();
     if (follow) {
       this.recent.push(follow.entry.key);

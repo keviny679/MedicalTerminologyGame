@@ -90,3 +90,19 @@ test("hints quote the lesson with the term hidden; feedback quotes it in full", 
   assert.ok(n > 600);
   assert.equal(lessonNotes({ name: "x" }), null);
 });
+
+test("review mode asks each due term exactly once, then finishes", () => {
+  const due = chapters[1].entries.slice(0, 4);
+  const deck = new StudyDeck(due, all, DG, {}, Math.random, "typed");
+  deck.once = true;
+  const seen = [];
+  for (let i = 0; i < 4; i++) {
+    assert.ok(!deck.finished);
+    const q = deck.next();
+    deck.record(q.entry, i !== 0, true); // one miss
+    seen.push(q.entry.key);
+  }
+  assert.equal(new Set(seen).size, 4, "no repeats");
+  assert.ok(deck.finished);
+  assert.equal(deck.unresolved.length, 1, "the miss goes to relearning");
+});

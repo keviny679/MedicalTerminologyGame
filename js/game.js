@@ -298,8 +298,10 @@ function updateHud() {
   }
   if (R.study) {
     const total = R.study.rooms;
-    const tag = R.study.chapter.num ? `Ch${R.study.chapter.num}` : "Review";
-    $("floorTag").textContent = `${tag} ${R.room + 1 >= total ? "BOSS" : `${R.room + 1}/${total}`}`;
+    const d = S.studyDeck;
+    $("floorTag").textContent = R.study.chapter.num
+      ? `Ch${R.study.chapter.num} ${R.room + 1 >= total ? "BOSS" : `${R.room + 1}/${total}`}`
+      : `Review ${Math.min(d.used.size, d.entries.length)}/${d.entries.length}`;
   } else {
     const roomLabel = R.room >= ROOMS_PER_FLOOR ? "BOSS" : `${Math.min(R.room + 1, ROOMS_PER_FLOOR)}/${ROOMS_PER_FLOOR}`;
     $("floorTag").textContent = `F${Math.min(R.floor + 1, FLOOR_COUNT)} ${roomLabel}`;
@@ -793,6 +795,11 @@ async function fight(enemy) {
     } else {
       await sleep(350);
     }
+    // review: once every due term has been asked, the fight is over
+    if (R.study && S.studyDeck.finished && enemy.hp > 0) {
+      enemy.hp = 0;
+      updateHud();
+    }
   }
   // enemy defeated
   sparks(MON_X, GROUND - 20, ["#ffffff", "#ffd36b", "#a970ff", "#7fd9ff"], 24);
@@ -1180,6 +1187,8 @@ async function startStudy(chapter, section) {
   S.studyDeck = new StudyDeck(entries, all, DG, S.progress, Math.random, style);
   S.deck = S.studyDeck;
   if (section?.lesson) await lessonPhase(section, S.studyDeck);
+  const review = !chapter.num; // each due term once, then relearn the misses
+  S.studyDeck.once = review;
   const R = newRun({}, S.lookKey);
   R.study = { chapter, section, rooms: roomsFor(entries.length) };
   R.floor = chapter.num ? (chapter.num - 1) % FLOOR_COUNT : FLOOR_COUNT - 1; // background and foes
@@ -1200,9 +1209,9 @@ async function startStudy(chapter, section) {
   play(S.hero, "walkIn", 1400);
   await banner(chapter.num ? `Chapter ${chapter.num}` : "Daily review", section ? section.title : chapter.num ? chapter.title : `${entries.length} terms due`);
   const before = chapterMastery(chapter, S.progress);
-  for (let room = 0; room < R.study.rooms; room++) {
+  for (let room = 0; review ? !S.studyDeck.finished : room < R.study.rooms; room++) {
     R.room = room;
-    const boss = room === R.study.rooms - 1;
+    const boss = !review && room === R.study.rooms - 1;
     const foe = makeEnemy(R, rng, { boss }); // calm mode: no elites or extra foes
     R.depth += 1;
     startRoom(R);
