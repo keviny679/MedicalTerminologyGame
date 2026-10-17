@@ -14,7 +14,7 @@ import { FLOORS } from "./art.js";
 import { Music } from "./music.js";
 import {
   CHAPTER_FILES, parseChapter, StudyDeck, chapterMastery, roomsFor, gradeTyped, letterHint, dueEntries,
-  STYLES, STYLE_LABEL, isMastered, MASTERY_DAYS, gradeBrainDump,
+  STYLES, STYLE_LABEL, isMastered, MASTERY_DAYS, gradeBrainDump, lessonNotes, lessonClue,
 } from "./study.js";
 import { countAnswer, goalMet, recordGoal, liveStreak, makeBackup, applyBackup, GOAL_MIN_ANSWERS } from "./progress.js";
 import * as DG from "./diagrams.js";
@@ -590,7 +590,7 @@ function useHint() {
   if (q.mode === "typed") {
     R.hints -= 1;
     q.hintUsed = true;
-    $("hintText").textContent = [letterHint(q.answerText), q.hint].filter(Boolean).join(" · ");
+    $("hintText").innerHTML = [esc(letterHint(q.answerText)), q.hint && esc(q.hint), clueHtml(q)].filter(Boolean).join(" · ");
     sfx.beep([880], 0.06, "triangle");
     refreshHintButton();
     updateHud();
@@ -616,10 +616,22 @@ function useHint() {
     crossed++;
   }
   if (crossed) parts.push(R.study ? `${crossed} wrong answers crossed out.` : "Inari crossed out a wrong answer.");
-  $("hintText").textContent = parts.join(" · ");
+  $("hintText").innerHTML = [...parts.map(esc), R.study && clueHtml(q)].filter(Boolean).join(" · ");
   sfx.beep([880], 0.06, "triangle");
   refreshHintButton();
   updateHud();
+}
+
+// Study hint: a sentence from the lesson about this term, with the term blanked.
+function clueHtml(q) {
+  const clue = q.entry && lessonClue(q.entry, q, rng);
+  return clue ? `<span class="clue">📖 From the lesson: “${esc(clue)}”</span>` : "";
+}
+
+// After a miss, a guess or a hint: what the lesson says about the term.
+function notesHtml(entry) {
+  const n = lessonNotes(entry);
+  return n ? `<span class="lesson-note"><span class="kind">📖 From the lesson “${esc(n.title)}”:</span> ${n.html}</span>` : "";
 }
 
 async function animateHeroHits(enemy, res) {
@@ -707,8 +719,9 @@ async function fight(enemy) {
     const fb = $("feedback");
     const notes = [];
 
+    const guess = S.unsure || q.hintUsed || choice === null; // not answered from memory alone
     if (R.study) {
-      S.studyDeck.record(q.entry, correct, typed, Date.now(), { guess: S.unsure || choice === null });
+      S.studyDeck.record(q.entry, correct, typed, Date.now(), { guess });
       store.set(EML_KEY, S.progress);
       store.set(TODAY_KEY, countAnswer(store.get(TODAY_KEY, null)));
       if (typed && correct) R.stats.recalled = (R.stats.recalled || 0) + 1;
@@ -720,7 +733,7 @@ async function fight(enemy) {
       fb.className = "feedback good";
       notes.push(R.streak > 1 ? `Correct! ${R.streak} in a row.` : "Correct!");
       if (typed) notes.push("Recall strike: +50% damage!");
-      if (R.study && S.unsure) notes.push("Marked as a guess, so it'll come back soon.");
+      if (R.study && guess) notes.push(S.unsure ? "Marked as a guess, so it'll come back soon." : "You used a hint, so it'll come back soon.");
       if (grade === "typo") notes.push(`(Check your spelling: “${q.answerText}”.)`);
       if (res.interrupted) notes.push("You staggered it!");
       if (res.hits.some((h) => h.crit)) notes.push("Critical!");
@@ -728,6 +741,7 @@ async function fight(enemy) {
       if (res.hits.some((h) => h.blocked)) notes.push("Its ward absorbed the blow.");
       fb.textContent = notes.join(" ");
       if (typed && q.entry) fb.innerHTML += `<br><span class="explain"><b>${esc(q.entry.name)}</b>: ${esc(q.entry.def)}</span>`;
+      if (R.study && guess) fb.innerHTML += notesHtml(q.entry);
       await animateHeroHits(enemy, res);
     } else {
       sfx.wrong();
@@ -737,16 +751,17 @@ async function fight(enemy) {
         R.missed.push({ affix: missedName, meaning: q.entry ? q.entry.def : q.options[q.answer] });
       }
       const res = enemyStrike(R, enemy, rng);
-      fb.className = R.study && !S.unsure && choice !== null ? "feedback bad surprise" : "feedback bad";
+      fb.className = R.study && !guess ? "feedback bad surprise" : "feedback bad";
       let what = res.forgiven ? " Your charm shielded you." : res.dodged ? " You dodged!" : res.heavy ? " A crushing blow!" : "";
       const note = q.entry && `<b>${esc(q.entry.name)}</b>: ${esc(q.entry.def)}${q.entry.parts ? ` (${esc(q.entry.parts)})` : ""}.`;
       const def = `${esc(q.entry?.def || "")}${q.entry?.parts ? ` (${esc(q.entry.parts)})` : ""}`;
-      if (R.study && !S.unsure && choice !== null) what += " You felt sure, so take a close look; it's coming back in a moment.";
+      if (R.study && !guess) what += " You felt sure, so take a close look; it's coming back in a moment.";
       fb.innerHTML = typed
         ? `${choice === null ? "Here it is:" : `Not quite (you typed “${esc(choice)}”).`} <b>${esc(q.answerText)}</b>: ${def}.${esc(what)}`
         : q.entry
         ? (q.options[q.answer] === q.entry.def ? `Not quite. ${note}` : `Not quite. The answer is “${esc(q.options[q.answer])}”.<br>${note}`) + esc(what)
         : `Not quite. <b>${esc(q.affix)}</b> means “${esc(q.options[q.answer])}”.${esc(what)}`;
+      if (R.study) fb.innerHTML += notesHtml(q.entry);
       await animateEnemyHit(enemy, res);
     }
 
@@ -1294,7 +1309,7 @@ async function relearnRound() {
     } else {
       sfx.wrong();
       fb.className = "feedback bad";
-      fb.innerHTML = `The answer: <b>${esc(q.answerText || q.options[q.answer])}</b>. ${esc(entry.def)}. It'll come up again.`;
+      fb.innerHTML = `The answer: <b>${esc(q.answerText || q.options[q.answer])}</b>. ${esc(entry.def)}. It'll come up again.${notesHtml(entry)}`;
       show("continueBtn");
       $("continueBtn").focus();
       await new Promise((resolve) => { S.pending = { type: "continue", resolve }; });

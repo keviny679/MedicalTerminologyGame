@@ -82,10 +82,14 @@ export function buildLesson(passage, entries, file = "", title = "") {
     if (!terms.some((t) => t.entry === entry)) terms.push({ shown: m[1].trim(), entry });
   }
   const sentences = passage.match(/[^.!?]+[.!?]+/g) || [passage];
-  for (const raw of sentences) {
+  const lesson = { title, terms, sentences: [] };
+  sentences.forEach((raw, si) => {
     const marks = [...raw.matchAll(MARK)];
+    lesson.sentences.push(raw.trim().replace(MARK, (_, shown) => `<b>${esc(shown)}</b>`));
     marks.forEach((m) => {
       const entry = resolve(m[1], m[2]);
+      entry.notes ||= [];
+      if (!entry.notes.some((n) => n.lesson === lesson && n.i === si)) entry.notes.push({ lesson, i: si });
       // blank out this term; show any other marked terms as plain text
       let text = "";
       let last = 0;
@@ -101,8 +105,35 @@ export function buildLesson(passage, entries, file = "", title = "") {
       if (`${before} ${after}`.toLowerCase().includes(shown.toLowerCase())) return;
       (entry.clozes ||= []).push({ before, after, shown });
     });
+  });
+  lesson.html = passage.replace(MARK, (_, shown) => `<b>${esc(shown)}</b>`);
+  return lesson;
+}
+
+// What the lessons say about a term: the sentences that mention it, each with
+// the sentence after it for context (at most three sentences). HTML.
+export function lessonNotes(entry) {
+  if (!entry?.notes?.length) return null;
+  const out = [];
+  for (const { lesson, i } of entry.notes.slice(0, 2)) {
+    for (const j of [i, i + 1]) {
+      const s = lesson.sentences[j];
+      if (s && !out.some((o) => o.s === s) && out.length < 3) out.push({ s, title: lesson.title });
+    }
   }
-  return { terms, html: passage.replace(MARK, (_, shown) => `<b>${esc(shown)}</b>`) };
+  return { title: out[0].title, html: out.map((o) => o.s).join(" ") };
+}
+
+// A hint that teaches: a lesson sentence about the term with the term blanked
+// out. Avoids the sentence a fill-in-the-blank question is already showing.
+export function lessonClue(entry, q = null, rng = Math.random) {
+  const shownNow = q?.type === "cloze" ? q.prompt : "";
+  const same = (c) => shownNow.includes(esc(c.before.trimEnd())) && shownNow.includes(esc(c.after.trimStart()));
+  const options = (entry?.clozes || []).filter((c) => !shownNow || !same(c));
+  if (!options.length) return null;
+  const c = options[Math.floor(rng() * options.length)];
+  const glue = /^[.,;:!?)]/.test(c.after) ? "" : " ";
+  return `${c.before.trimEnd()} ______${glue}${c.after.trimStart()}`;
 }
 
 // Fill-in-the-blank from the lesson the student just read.

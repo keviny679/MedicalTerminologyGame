@@ -302,6 +302,16 @@ h2 { font-size: clamp(12px, 3vw, 20px); }
 }
 .dump:focus { outline: none; border-color: var(--accent); }
 .blank { color: var(--accent); font-style: normal; letter-spacing: 1px; }
+.clue { color: var(--ink); }
+.lesson-note {
+  display: block;
+  margin-top: 8px;
+  padding: 6px 10px;
+  color: var(--ink);
+  background: #141a3e;
+  border-left: 4px solid var(--accent);
+}
+.lesson-note b { color: var(--accent); font-weight: normal; }
 
 /* study-mode diagrams */
 .dg { margin: 8px auto 4px; max-width: 560px; text-align: center; }

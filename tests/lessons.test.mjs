@@ -1,7 +1,7 @@
 import test from "node:test";
 import assert from "node:assert/strict";
 import { readFileSync } from "node:fs";
-import { CHAPTER_FILES, parseChapter, buildLesson, makeClozeQuestion, gradeBrainDump, gradeTyped, StudyDeck, vocabulary } from "../js/study.js";
+import { CHAPTER_FILES, parseChapter, buildLesson, makeClozeQuestion, lessonNotes, lessonClue, gradeBrainDump, gradeTyped, StudyDeck, vocabulary } from "../js/study.js";
 import * as DG from "../js/diagrams.js";
 
 const chapters = CHAPTER_FILES.map((f) => parseChapter(readFileSync(new URL(`../data/eml/${f}.txt`, import.meta.url), "utf8"), f));
@@ -66,4 +66,27 @@ test("priming from a brain dump queues missed terms early without granting maste
   const firstFew = [deck.next(), deck.next(), deck.next()];
   assert.ok(res.missed.some((t) => t.entry === firstFew[0].entry), "a missed term comes up first");
   assert.ok(!firstFew.some((q) => res.recalled.some((t) => t.entry === q.entry)), "just-recalled terms wait");
+});
+
+test("hints quote the lesson with the term hidden; feedback quotes it in full", () => {
+  const keratin = chapters[2].entries.find((e) => e.name === "keratin");
+  const notes = lessonNotes(keratin);
+  assert.equal(notes.title, "Structure and functions of the skin");
+  assert.match(notes.html, /<b>keratin<\/b>/);
+  assert.ok(notes.html.split(/[.!?](\s|$)/).filter((x) => x && x.trim()).length <= 3 * 2);
+  let n = 0;
+  for (const e of all) {
+    if (!e.clozes) continue;
+    const clue = lessonClue(e, null, () => 0);
+    assert.ok(clue.includes("______"));
+    assert.ok(!clue.toLowerCase().includes(e.clozes[0].shown.toLowerCase()), `clue for ${e.name} gives it away`);
+    // during a fill-in-the-blank, the hint must be a different sentence (or none)
+    const q = makeClozeQuestion(e, () => 0);
+    const other = lessonClue(e, q, () => 0);
+    if (other) assert.ok(!q.prompt.includes(other.split("______")[0].trim() || "\u0000") || e.clozes.length > 1);
+    if (e.clozes.length === 1) assert.equal(other, null);
+    n++;
+  }
+  assert.ok(n > 600);
+  assert.equal(lessonNotes({ name: "x" }), null);
 });

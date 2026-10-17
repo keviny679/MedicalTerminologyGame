@@ -20,7 +20,8 @@ Torii Path, Sakura Temple and Moonlit Wave.
 - **Read → recall → battle lessons:** picking a section opens a short lesson (original text, with the
   most relevant diagram). Then you write down every key term you remember (a "brain dump"), see what you
   missed, and the battle starts with those terms first, including fill-in-the-blank sentences from the
-  lesson. Lessons live in the chapter files as `> ` lines, with key terms marked `[[term]]` or
+  lesson. Hints quote the lesson with the term blanked out, and after a miss, a guess or a hint the
+  feedback shows what the lesson says about the term. Lessons live in the chapter files as `> ` lines, with key terms marked `[[term]]` or
   `[[shown text|entry name]]`.
 - **Typed recall and spaced review:** in the default *Mixed* style, a term starts as multiple choice and
   switches to typed recall once you know it. A correct typed answer is a "recall strike" for +50% damage.
