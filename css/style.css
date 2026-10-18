@@ -85,6 +85,7 @@ canvas {
 
 .mute {
   position: absolute;
+  z-index: 4; /* above the title and banner overlays */
   right: 8px;
   bottom: 8px;
   width: 30px;
@@ -370,6 +371,21 @@ h2 { font-size: clamp(12px, 3vw, 20px); }
 .mode-pick { display: grid; gap: 10px; }
 
 .typed { display: flex; flex-wrap: wrap; gap: 8px; align-items: center; }
+.typed-btns { display: flex; gap: 8px; }
+.mute.fs { right: 44px; }
+
+/* fullscreen, or the compact layout used where the browser has no fullscreen (iPhone) */
+.full .frame { max-width: none; min-height: 100dvh; padding: env(safe-area-inset-top) 8px env(safe-area-inset-bottom); box-sizing: border-box; }
+.full footer { display: none; }
+.full #screen { max-height: 38dvh; object-fit: contain; }
+.full .stage { width: 100%; max-width: calc(38dvh * 16 / 9 + 6px); margin: 0 auto; box-sizing: border-box; }
+@media (min-aspect-ratio: 1/1) {
+  .full .frame { display: grid; grid-template-columns: minmax(0, 1.1fr) minmax(0, 1fr); gap: 10px; align-items: start; }
+  .full #screen { max-height: 92dvh; }
+  .full .stage { max-width: none; position: sticky; top: 4px; }
+  .full .panel { max-height: calc(100dvh - 8px); overflow-y: auto; margin-top: 0; font-size: 18px; }
+  .full .prompt { font-size: 20px; margin-top: 4px; }
+}
 .typed input {
   flex: 1 1 220px;
   min-width: 0;
@@ -392,6 +408,10 @@ footer a { color: var(--ink); }
 
 @media (max-width: 520px) {
   body { font-size: 20px; }
+  .typed input { flex-basis: 100%; font-size: 20px; }
+  .typed-btns { flex: 1 1 100%; }
+  .typed-btns .btn { flex: 1; padding-block: 12px; }
+  .hint-row .btn { padding-block: 10px; }
   .choices { grid-template-columns: 1fr; }
   .hero-card canvas { width: 96px; height: 80px; }
   .heroes { gap: 10px; }

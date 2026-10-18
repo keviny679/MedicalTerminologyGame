@@ -1432,8 +1432,49 @@ document.addEventListener("keydown", (e) => {
 $("typedForm").onsubmit = (e) => {
   e.preventDefault();
   const v = $("typedInput").value.trim();
-  if (v) resolvePending(v);
+  if (/^(\?+|idk|i don'?t know|dunno|pass)$/i.test(v)) resolvePending(null); // typed "I don't know"
+  else if (v) resolvePending(v);
 };
+// Phones: keep the question and answer box above the on-screen keyboard.
+$("typedInput").addEventListener("focus", () => {
+  if (!matchMedia("(pointer: coarse)").matches) return;
+  setTimeout(() => $("prompt").scrollIntoView({ block: "start", behavior: "smooth" }), 300);
+});
+
+// Fullscreen: the real thing where the browser allows it, otherwise (iPhone) a
+// compact layout that drops the footer and fits the game to the screen.
+const fullApi = document.fullscreenEnabled || document.webkitFullscreenEnabled;
+const isFull = () => !!(document.fullscreenElement || document.webkitFullscreenElement) || document.body.classList.contains("compact");
+function syncFull() {
+  const on = isFull();
+  document.body.classList.toggle("full", on);
+  $("fullBtn").textContent = on ? "✕" : "⛶";
+  $("fullBtn").setAttribute("aria-label", on ? "Exit fullscreen" : "Fullscreen");
+}
+$("fullBtn").onclick = async () => {
+  const el = document.documentElement;
+  try {
+    if (document.fullscreenElement || document.webkitFullscreenElement) {
+      await (document.exitFullscreen || document.webkitExitFullscreen).call(document);
+    } else if (document.body.classList.contains("compact")) {
+      document.body.classList.remove("compact");
+    } else if (fullApi) {
+      await (el.requestFullscreen || el.webkitRequestFullscreen).call(el, { navigationUI: "hide" });
+    } else {
+      document.body.classList.add("compact");
+    }
+  } catch {
+    document.body.classList.toggle("compact");
+  }
+  syncFull();
+};
+document.addEventListener("fullscreenchange", syncFull);
+document.addEventListener("webkitfullscreenchange", syncFull);
+// launched from the home screen: already full screen
+if (matchMedia("(display-mode: fullscreen), (display-mode: standalone)").matches || navigator.standalone) {
+  document.body.classList.add("full");
+  $("fullBtn").hidden = true;
+}
 $("dontKnowBtn").onclick = () => resolvePending(null);
 $("unsureBtn").onclick = () => {
   if (S.pending?.type !== "answer") return;

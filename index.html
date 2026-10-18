@@ -2,12 +2,20 @@
 <html lang="en">
 <head>
   <meta charset="utf-8">
-  <meta name="viewport" content="width=device-width, initial-scale=1">
+  <meta name="viewport" content="width=device-width, initial-scale=1, viewport-fit=cover">
   <title>Root &amp; Blade</title>
   <meta name="description" content="A pixel-art roguelike for learning medical prefixes, suffixes and roots.">
   <link rel="preconnect" href="https://fonts.googleapis.com">
   <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
   <link href="https://fonts.googleapis.com/css2?family=Press+Start+2P&family=VT323&display=swap" rel="stylesheet">
+  <meta name="theme-color" content="#07091a">
+  <meta name="mobile-web-app-capable" content="yes">
+  <meta name="apple-mobile-web-app-capable" content="yes">
+  <meta name="apple-mobile-web-app-status-bar-style" content="black-translucent">
+  <meta name="apple-mobile-web-app-title" content="Root &amp; Blade">
+  <link rel="manifest" href="manifest.webmanifest">
+  <link rel="icon" href="icon-192.png">
+  <link rel="apple-touch-icon" href="icon-192.png">
   <link rel="stylesheet" href="css/style.css">
 </head>
 <body>
@@ -29,6 +37,7 @@
         </div>
       </div>
 
+      <button class="mute fs" id="fullBtn" type="button" aria-label="Fullscreen" title="Fullscreen">⛶</button>
       <button class="mute" id="soundBtn" type="button" aria-label="Sound and music" aria-expanded="false">♪</button>
       <div class="sound-menu" id="soundMenu" hidden>
         <p class="now" id="nowPlaying">No music yet</p>
@@ -87,9 +96,11 @@
         <div class="choices" id="choices"></div>
         <form class="typed" id="typedForm" autocomplete="off" hidden>
           <input id="typedInput" type="text" autocapitalize="off" autocorrect="off" spellcheck="false"
-            placeholder="Type your answer… (Esc = I don't know)" aria-label="Your answer">
-          <button class="btn small" type="submit">Strike ⏎</button>
-          <button class="btn small ghost" type="button" id="dontKnowBtn" title="Esc">I don't know (Esc)</button>
+            placeholder="Your answer (? = I don't know)" enterkeyhint="go" aria-label="Your answer">
+          <span class="typed-btns">
+            <button class="btn small" type="submit">Strike ⏎</button>
+            <button class="btn small ghost" type="button" id="dontKnowBtn" title="Esc, or type ? and press Enter">I don't know</button>
+          </span>
         </form>
         <div class="hint-row">
           <button class="btn small" id="hintBtn" type="button" title="H, or Alt+H while typing">Hint</button>
@@ -114,7 +125,7 @@
       <a href="https://en.wikipedia.org/wiki/List_of_medical_roots,_suffixes_and_prefixes" target="_blank" rel="noopener">List of medical roots, suffixes and prefixes</a>
       (<a href="https://creativecommons.org/licenses/by-sa/4.0/" target="_blank" rel="noopener">CC BY-SA 4.0</a>).
       Essentials mode: original study notes arranged by the textbook’s chapters.
-      Keys: 1–4 answer · H hint · U unsure · Enter continue · while typing: Esc I don't know, Alt+H hint, Alt+U unsure
+      Keys: 1–4 answer · H hint · U unsure · Enter continue · while typing: Esc or “?” I don't know, Alt+H hint, Alt+U unsure
     </footer>
   </main>
   <div class="zoom" id="zoom" hidden></div>
