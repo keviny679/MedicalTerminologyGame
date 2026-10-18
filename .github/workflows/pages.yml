@@ -53,6 +53,13 @@ jobs:
       - name: List music tracks in audio/
         run: |
           python scripts/build_music.py
+      - name: Version stamp files so phones load the new version right away
+        run: |
+          v="${GITHUB_SHA::8}"
+          sed -i -E "s#(href=\"css/style\.css)\"#\1?v=$v\"#; s#(src=\"js/game\.js)\"#\1?v=$v\"#" index.html
+          sed -i -E "s#(from \"\./[a-z]+\.js)\"#\1?v=$v\"#g" js/*.js
+          grep -o 'game\.js?v=[0-9a-f]*' index.html
+          ! grep -nE 'from "\./[a-z]+\.js"' js/*.js
       - uses: actions/upload-pages-artifact@v3
         with:
           path: .
