@@ -57,3 +57,25 @@ test("backups round-trip and merge without losing practice", () => {
   assert.throws(() => applyBackup({ hello: 1 }, read));
   assert.deepEqual(mergeProgress({}, { z: { r: 1, w: 0 } }), { z: { r: 1, w: 0 } });
 });
+
+test("progress from before the chapter split moves to the new chapters", async () => {
+  const { readFileSync } = await import("node:fs");
+  const { CHAPTER_FILES, parseChapter } = await import("../js/study.js");
+  const { migrateProgress } = await import("../js/progress.js");
+  const chapters = CHAPTER_FILES.map((f) => parseChapter(readFileSync(new URL(`../data/eml/${f}.txt`, import.meta.url), "utf8"), f));
+  const keys = new Set(chapters.flatMap((c) => c.entries.map((e) => e.key)));
+  const old = {
+    "4|term|femur": { r: 3, w: 0 },          // stays in skeletal
+    "4|term|tendon": { r: 2, w: 1 },         // moved to muscles and tendons
+    "4|term|biceps": { r: 1, w: 0 },         // renamed
+    "5|term|aorta": { r: 4, w: 0 },          // heart: 5 -> 6
+    "6|term|plasma": { r: 1, w: 0 },         // blood: 6 -> 7
+    "7|term|trachea": { r: 1, w: 0 },        // lungs: 7 -> 8
+    "2|term|cell": { r: 5, w: 0 },           // unchanged
+  };
+  const out = migrateProgress(old, chapters);
+  assert.deepEqual(Object.keys(out).sort(), [
+    "2|term|cell", "4|term|femur", "5|term|biceps brachii", "5|term|tendon", "6|term|aorta", "7|term|plasma", "8|term|trachea",
+  ]);
+  for (const k of Object.keys(out)) assert.ok(keys.has(k), `${k} is a real entry`);
+});

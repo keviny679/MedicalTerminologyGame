@@ -1,4 +1,4 @@
-# 4 | The Musculoskeletal System
+# 4 | The Skeletal System
 
 ## Bone structure and function
 > Bones support the body, protect organs, store minerals and make blood cells. Three types of cells keep bone
@@ -11,6 +11,8 @@
 > the making of blood cells. A tough membrane, the [[periosteum]], covers the outside of bone. The ends of bones
 > at joints are capped with smooth [[cartilage]]. The formation of bone from cartilage is [[ossification]].
 T skeletal system = the bones and joints that support the body, protect organs, store minerals and make blood cells
+T orthopedics = the medical specialty that treats bones, joints and ligaments | orth/o + ped/o + -ics
+T orthopedist = a physician who specializes in the skeletal system; also called an orthopedic surgeon
 T osteocyte = a mature bone cell | oste/o + -cyte
 T osteoblast = a bone cell that builds new bone | oste/o + -blast
 T osteoclast = a bone cell that breaks down and reabsorbs bone | oste/o + -clast
@@ -139,17 +141,18 @@ P femor/o = femur
 P patell/o = kneecap
 P pelv/i = pelvis, hip bone
 
-## Joints and connective structures
-> A [[joint]] is where two bones meet. The most movable type is the [[synovial joint]], such as the knee or
-> shoulder. It is surrounded by a fibrous [[joint capsule]], lined by a [[synovial membrane]] that secretes
-> slippery [[synovial fluid]] to reduce friction. The bone ends are covered with smooth [[articular cartilage]].
-> Bones are connected to other bones by each [[ligament]], while muscles are connected to bones by each
-> [[tendon]]. A [[bursa]] is a small fluid-filled sac that cushions areas where tendons rub over bone. The knee
-> has a C-shaped cartilage cushion called the [[meniscus]], and inside it the [[anterior cruciate ligament]]
-> stops the shin from sliding forward; it is commonly torn in sports. The shoulder is a [[ball-and-socket
-> joint]] that moves in all directions, stabilized by the [[rotator cuff]] muscles and tendons. The elbow is a
-> [[hinge joint]] that bends in one direction only. Combining forms include [[arthr/o|arthr/o, articul/o]] for
-> joint and [[tendin/o|ten/o, tend/o, tendin/o]] for tendon.
+## Joints and ligaments
+> A [[joint]] is where two or more bones meet. Joints are grouped by how much they move. A [[fibrous joint]],
+> such as a skull suture, does not move at all. A [[cartilaginous joint]] moves slightly; the [[pubic
+> symphysis]] at the front of the pelvis is an example. The most movable type is the [[synovial joint]], such as
+> the knee or shoulder. It is surrounded by a fibrous [[joint capsule]], lined by a [[synovial membrane]] that
+> secretes slippery [[synovial fluid]], and the bone ends are covered with smooth [[articular cartilage]]. Bones
+> are held to other bones by each [[ligament]]. A [[bursa]] is a small fluid-filled sac that cushions areas
+> where tissues rub over bone. The knee has a C-shaped cartilage cushion called the [[meniscus]], the [[anterior
+> cruciate ligament]] inside it stops the shin from sliding forward, and the [[medial collateral ligament]] on
+> its inner side resists sideways force. Synovial joints come in shapes: the shoulder and hip are each a
+> [[ball-and-socket joint]], the elbow is a [[hinge joint]], and the joint between the first two neck vertebrae
+> is a [[pivot joint]] that lets the head turn.
 T joint = a place where two or more bones meet; also called an articulation
 T synovial joint = a freely movable joint with a fluid-filled cavity, such as the knee
 T joint capsule = the fibrous sac that surrounds and encloses a synovial joint | @joint.capsule
@@ -157,57 +160,21 @@ T synovial membrane = the lining of a joint capsule that produces synovial fluid
 T synovial fluid = the slippery fluid that lubricates a joint | @joint.cavity
 T articular cartilage = the smooth cartilage that covers bone ends inside a joint | @joint.cartilage
 T ligament = a tough band of fibrous tissue that connects bone to bone | @joint.ligament
-T tendon = a tough cord of fibrous tissue that connects muscle to bone | @joint.tendon
 T bursa = a small fluid-filled sac that reduces friction near a joint | @joint.bursa
 T meniscus = a crescent-shaped pad of cartilage in the knee | @joint.meniscus
 T anterior cruciate ligament = a key ligament inside the knee that keeps the tibia from sliding forward | @joint.acl
-T rotator cuff = the group of four muscles and their tendons that stabilize the shoulder
+T fibrous joint = an immovable joint joined by fibrous tissue, such as a skull suture
+T cartilaginous joint = a slightly movable joint joined by cartilage, such as between vertebrae or at the pubic symphysis
+T pubic symphysis = the cartilage joint where the two pubic bones meet at the front of the pelvis
 T ball-and-socket joint = a joint allowing movement in many directions, such as the hip and shoulder
 T hinge joint = a joint that moves in one plane like a door, such as the elbow and knee
+T pivot joint = a joint that allows rotation, such as between the first two neck vertebrae
+T medial collateral ligament = the ligament on the inner side of the knee that resists sideways force
 P arthr/o, articul/o = joint
 P ligament/o = ligament
-P ten/o, tend/o, tendin/o = tendon
 P burs/o = bursa
 P synov/o = synovial membrane, synovial fluid
 P menisc/o = meniscus
-
-## Muscles and body movements
-> There are three types of muscle. [[skeletal muscle]] is voluntary and moves the bones. [[smooth muscle]] is
-> involuntary and lines organs like the stomach and blood vessels. [[cardiac muscle]] is found only in the
-> heart. Muscles are wrapped in [[fascia]]. A muscle's [[origin]] is its attachment to the bone that stays
-> still, and its [[insertion]] is its attachment to the bone that moves. Movements come in opposite pairs.
-> [[flexion]] decreases the angle of a joint, like bending the elbow, and [[extension]] increases it.
-> [[abduction]] moves a limb away from the midline, and [[adduction]] moves it toward the midline. [[rotation]]
-> turns a bone around its own axis, and [[circumduction]] moves a limb in a circle. Turning the palm down is
-> [[pronation]], and turning it up is [[supination]]. At the ankle, pulling the toes up is [[dorsiflexion]], and
-> pointing them down is [[plantar flexion]]. Familiar muscles include the [[deltoid]] of the shoulder, the
-> [[biceps]] and [[triceps]] of the arm, and the [[quadriceps]] and [[hamstrings]] of the thigh.
-T skeletal muscle = voluntary striated muscle attached to bones that moves the body | @joint.muscle
-T smooth muscle = involuntary muscle in the walls of organs and blood vessels
-T cardiac muscle = involuntary striated muscle found only in the heart
-T fascia = a sheet of fibrous tissue that surrounds and separates muscles
-T origin = the attachment of a muscle to the bone that stays still
-T insertion = the attachment of a muscle to the bone that moves
-T flexion = bending a joint to decrease the angle between bones
-T extension = straightening a joint to increase the angle between bones
-T abduction = moving a limb away from the midline of the body | ab- + duct/o + -ion
-T adduction = moving a limb toward the midline of the body | ad- + duct/o + -ion
-T rotation = turning a bone around its own axis
-T circumduction = moving a limb in a circle
-T pronation = turning the palm downward or backward
-T supination = turning the palm upward or forward
-T dorsiflexion = bending the foot upward toward the shin | dors/o + flexion
-T plantar flexion = pointing the foot downward
-T range of motion = how far a joint can move in each direction
-T deltoid = the triangular muscle covering the shoulder, a common injection site
-T quadriceps = the group of four muscles on the front of the thigh that extend the knee
-T hamstrings = the muscles at the back of the thigh that bend the knee
-T biceps = the muscle on the front of the upper arm that bends the elbow
-T triceps = the muscle on the back of the upper arm that straightens the elbow
-P my/o, muscul/o = muscle
-P fasci/o = fascia
-P -asthenia = weakness
-P kinesi/o = movement
 
 ## Fractures and bone disorders
 > A [[fracture]] is a broken bone. In a [[closed fracture]] the skin stays intact, while in an [[open fracture]]
@@ -246,15 +213,15 @@ P por/o = pore, small opening
 
 ## Joint and spine disorders
 > [[arthritis]] means joint inflammation. [[osteoarthritis]] is wear-and-tear breakdown of cartilage, common
-> with age. [[rheumatoid arthritis]] is an autoimmune disease where the immune system attacks the synovial
+> with age. [[rheumatoid arthritis]] is an autoimmune disease in which the immune system attacks the synovial
 > membrane, often in small joints on both sides of the body. [[gout]] is caused by uric acid crystals,
-> classically in the big toe. Injuries include a [[sprain]], a stretched or torn ligament, and a [[strain]], a
-> stretched or torn muscle or tendon. A [[dislocation]] is when a bone is pushed completely out of its joint,
-> and a partial dislocation is a [[subluxation]]. Overuse can cause [[tendinitis]] or [[bursitis]]. [[carpal
-> tunnel syndrome]] is compression of the median nerve at the wrist, causing numbness in the fingers. The spine
-> can curve abnormally: [[kyphosis]] is an exaggerated hunchback curve of the upper back, [[lordosis]] is an
-> exaggerated swayback curve of the lower back, and [[scoliosis]] is a sideways curve. A [[herniated disk]]
-> bulges and can press on a nerve, causing [[sciatica]], pain down the leg. Muscle pain is [[myalgia]].
+> classically in the big toe. [[ankylosing spondylitis]] inflames the spine until vertebrae fuse and stiffen.
+> Joint pain is [[arthralgia]], and inflammation of a bursa is [[bursitis]]. A [[sprain]] is a stretched or torn
+> ligament. A [[dislocation]] is when a bone is pushed completely out of its joint, and a partial dislocation is
+> a [[subluxation]]. The spine can curve abnormally: [[kyphosis]] is an exaggerated hunchback curve of the upper
+> back, [[lordosis]] is an exaggerated swayback curve of the lower back, and [[scoliosis]] is a sideways curve.
+> A [[herniated disk]] bulges and can press on a nerve, causing [[sciatica]], pain down the back of the leg.
+> Narrowing of the spinal canal is [[spinal stenosis]].
 T arthritis = inflammation of a joint | arthr/o + -itis
 T osteoarthritis = degenerative joint disease with wearing away of cartilage | oste/o + arthr/o + -itis
 T rheumatoid arthritis = a chronic autoimmune disease that inflames the synovial lining of many joints
@@ -263,41 +230,31 @@ T ankylosing spondylitis = inflammation of the spine leading to fused, stiff ver
 T arthralgia = joint pain | arthr/o + -algia
 T bursitis = inflammation of a bursa | burs/o + -itis
 T sprain = a stretched or torn ligament
-T strain = a stretched or torn muscle or tendon
 T dislocation = displacement of a bone out of its joint
 T subluxation = a partial dislocation of a joint
-T tendinitis = inflammation of a tendon | tendin/o + -itis
-T carpal tunnel syndrome = numbness and pain in the hand from pressure on the median nerve at the wrist
 T kyphosis = an exaggerated outward curve of the upper back; hunchback
 T lordosis = an exaggerated inward curve of the lower back; swayback
 T scoliosis = an abnormal sideways curve of the spine
 T herniated disk = a disk whose soft center pushes through its outer ring and may press on a nerve
 T spinal stenosis = narrowing of the spinal canal that can press on nerves
 T sciatica = pain along the sciatic nerve down the back of the leg
-T myalgia = muscle pain | my/o + -algia
-T fibromyalgia = a chronic condition of widespread muscle pain, tenderness and fatigue | fibr/o + my/o + -algia
-T muscular dystrophy = an inherited group of diseases causing progressive muscle weakness | dys- + -trophy
-T myasthenia gravis = an autoimmune disease causing muscle weakness and fatigue | my/o + -asthenia
-T rhabdomyolysis = breakdown of skeletal muscle that releases harmful proteins into the blood | rhabd/o + my/o + -lysis
-T atrophy of muscle = wasting away of muscle from disuse or disease
 P rheumat/o = watery flow; joints
 P kyph/o = humpback
 P lord/o = swayback, curve
 P scoli/o = crooked, curved
-P fibr/o = fiber
 
 ## Diagnosis and treatment
-> To look inside a joint, surgeons perform [[arthroscopy]] through small incisions. Removing fluid from a joint
-> with a needle is [[arthrocentesis]]. Replacing or repairing a joint is [[arthroplasty]], such as a [[total
-> knee arthroplasty]] or [[total hip arthroplasty]], while surgically fusing a joint so it cannot move is
-> [[arthrodesis]]. A [[bone density scan]] measures bone strength to diagnose osteoporosis, and
-> [[electromyography]] records the electrical activity of muscles. For the spine, a [[laminectomy]] removes part
-> of a vertebra to relieve pressure on nerves, and [[spinal fusion]] joins vertebrae together. Fractures are
-> treated by [[closed reduction]], realigning the bone without surgery, or by [[open reduction internal
-> fixation]], where the surgeon opens the area and holds the bone with plates and screws. A [[cast]] keeps the
-> bone still while it heals, and [[traction]] uses pulling force to align it. A [[prosthesis]] is an artificial
-> body part, while an [[orthosis]] is a brace. [[physical therapy]] restores strength and movement. Common
-> medicines are [[NSAIDs]] for pain and inflammation and [[bisphosphonates|bisphosphonate]] to strengthen bone.
+> Bones and joints are treated by [[orthopedics]]. To look inside a joint, surgeons perform [[arthroscopy]]
+> through small incisions. Removing fluid from a joint with a needle is [[arthrocentesis]]. Replacing or
+> repairing a joint is [[arthroplasty]], such as a [[total knee arthroplasty]] or [[total hip arthroplasty]],
+> while surgically fusing a joint so it cannot move is [[arthrodesis]]. A [[bone density scan]] measures bone
+> strength to diagnose osteoporosis. For the spine, a [[laminectomy]] removes part of a vertebra to relieve
+> pressure on nerves, and [[spinal fusion]] joins vertebrae together. Fractures are treated by [[closed
+> reduction]], realigning the bone without surgery, or by [[open reduction internal fixation]], where the
+> surgeon opens the area and holds the bone with plates and screws. A [[cast]] keeps the bone still while it
+> heals, and [[traction]] uses a pulling force to align it. A [[prosthesis]] is an artificial body part, while
+> an [[orthosis]] is a brace. Surgical removal of a limb is [[amputation]]. Common medicines are [[NSAIDs]] for
+> pain and inflammation and [[bisphosphonates|bisphosphonate]] to strengthen bone.
 T arthroscopy = looking inside a joint with a small camera | arthr/o + -scopy
 T arthrocentesis = puncturing a joint to remove fluid | arthr/o + -centesis
 T arthroplasty = surgical repair or replacement of a joint | arthr/o + -plasty
@@ -305,7 +262,6 @@ T arthrodesis = surgical fusion of a joint | arthr/o + -desis
 T total knee arthroplasty = replacement of the knee joint with an artificial joint
 T total hip arthroplasty = replacement of the hip joint with an artificial joint
 T bone density scan = a low-dose x-ray test that measures bone strength to detect osteoporosis
-T electromyography = recording the electrical activity of muscles | electr/o + my/o + -graphy
 T laminectomy = removal of part of a vertebra (the lamina) to relieve pressure on nerves | lamin/o + -ectomy
 T spinal fusion = joining two or more vertebrae so they heal into one solid bone
 T open reduction internal fixation = surgery that realigns a broken bone and holds it with plates, screws or rods
@@ -315,29 +271,24 @@ T cast = a rigid wrap that holds a broken bone still while it heals
 T orthosis = a brace or splint that supports a body part | orth/o + -osis
 T prosthesis = an artificial body part, such as a leg or joint
 T amputation = surgical removal of a limb or part of a limb
-T physical therapy = treatment using exercise and movement to restore function
 T NSAIDs = drugs such as ibuprofen that reduce pain and inflammation
-T muscle relaxant = a drug that relieves muscle spasms
 T bisphosphonate = a drug that slows bone loss, used for osteoporosis
 P -desis = binding, fusion
 P lamin/o = lamina (part of a vertebra)
 P orth/o = straight
-P electr/o = electricity
 
 ## Abbreviations
 A Fx = fracture
+A ortho = orthopedics
 A ORIF = open reduction internal fixation
-A ROM = range of motion
 A OA = osteoarthritis
 A RA = rheumatoid arthritis
 A ACL = anterior cruciate ligament
-A CTS = carpal tunnel syndrome
+A MCL = medial collateral ligament
 A DXA = dual-energy x-ray absorptiometry (bone density scan)
-A EMG = electromyography
 A TKA = total knee arthroplasty
 A THA = total hip arthroplasty
 A NSAID = nonsteroidal anti-inflammatory drug
-A PT = physical therapy
 A C1–C7 = cervical vertebrae
 A T1–T12 = thoracic vertebrae
 A L1–L5 = lumbar vertebrae

@@ -16,7 +16,7 @@ import {
   CHAPTER_FILES, parseChapter, StudyDeck, chapterMastery, roomsFor, gradeTyped, letterHint, dueEntries,
   STYLES, STYLE_LABEL, isMastered, MASTERY_DAYS, gradeBrainDump, lessonNotes, lessonClue,
 } from "./study.js";
-import { countAnswer, goalMet, recordGoal, liveStreak, makeBackup, applyBackup, GOAL_MIN_ANSWERS } from "./progress.js";
+import { countAnswer, goalMet, recordGoal, liveStreak, makeBackup, applyBackup, GOAL_MIN_ANSWERS, migrateProgress, PROGRESS_VERSION } from "./progress.js";
 import * as DG from "./diagrams.js";
 const { renderDiagram, DIAGRAMS } = DG;
 
@@ -1012,7 +1012,13 @@ function importProgress() {
       const file = input.files?.[0];
       if (!file) return resolve(null);
       try {
-        const out = applyBackup(JSON.parse(await file.text()), (k) => store.get(k, null));
+        const backup = JSON.parse(await file.text());
+        // a backup from before the chapter split: move its terms to the new chapters first
+        if (backup?.data?.["rb.eml"] && (backup.data["rb.emlv"] || 1) < PROGRESS_VERSION) {
+          backup.data["rb.eml"] = migrateProgress(backup.data["rb.eml"], await loadChapters());
+          backup.data["rb.emlv"] = PROGRESS_VERSION;
+        }
+        const out = applyBackup(backup, (k) => store.get(k, null));
         for (const [k, v] of Object.entries(out)) store.set(k, v);
         S.progress = store.get(EML_KEY, {});
         resolve(`Progress imported: ${Object.keys(S.progress).length} terms tracked. Review dates and streak were merged with this device.`);
@@ -1032,6 +1038,11 @@ async function loadChapters() {
     return parseChapter(await res.text(), f);
   }));
   S.chapters = texts;
+  if ((store.get("rb.emlv", 1) || 1) < PROGRESS_VERSION) {
+    S.progress = migrateProgress(S.progress, texts);
+    store.set(EML_KEY, S.progress);
+    store.set("rb.emlv", PROGRESS_VERSION);
+  }
   return texts;
 }
 

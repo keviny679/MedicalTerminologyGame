@@ -38,7 +38,7 @@ export function liveStreak(streak, now = Date.now()) {
 
 /* ------------------------------------------------------------------ backup */
 
-export const BACKUP_KEYS = ["rb.eml", "rb.streak", "rb.today", "rb.style", "rb.meta", "rb.best"];
+export const BACKUP_KEYS = ["rb.eml", "rb.emlv", "rb.streak", "rb.today", "rb.style", "rb.meta", "rb.best"];
 
 export function makeBackup(read, now = new Date()) {
   const data = {};
@@ -80,5 +80,32 @@ export function applyBackup(backup, read) {
     out["rb.meta"] = { embers: Math.max(ma?.embers || 0, mb.embers || 0), levels };
   }
   for (const k of ["rb.style", "rb.best", "rb.today"]) if (d[k] !== undefined && read(k) == null) out[k] = d[k];
+  return out;
+}
+
+/* --------------------------------------------------------------- migration */
+
+// Version 2 split chapter 4 (musculoskeletal) into 4 (skeletal) and 5 (muscles
+// and tendons) and moved chapters 5-7 to 6-8. Progress keys are
+// "chapter|kind|name", so move each old key to wherever that term now lives.
+export const PROGRESS_VERSION = 2;
+export function migrateProgress(progress, chapters) {
+  const where = new Map(); // "kind|name" -> new chapter numbers
+  for (const ch of chapters) for (const e of ch.entries) {
+    const k = e.key.slice(e.key.indexOf("|") + 1);
+    (where.get(k) || where.set(k, []).get(k)).push(ch.num);
+  }
+  const RENAMED = { "term|biceps": "term|biceps brachii", "term|triceps": "term|triceps brachii" };
+  const out = {};
+  for (const [key, p] of Object.entries(progress || {})) {
+    const i = key.indexOf("|");
+    const num = +key.slice(0, i);
+    const rest = (num === 4 && RENAMED[key.slice(i + 1)]) || key.slice(i + 1);
+    const nums = where.get(rest) || [];
+    let to = num >= 5 ? num + 1 : num;
+    if (num === 4) to = nums.includes(4) ? 4 : nums.includes(5) ? 5 : 4;
+    const nk = `${to}|${rest}`;
+    if (!out[nk] || ((p.r || 0) + (p.w || 0)) > ((out[nk].r || 0) + (out[nk].w || 0))) out[nk] = p;
+  }
   return out;
 }

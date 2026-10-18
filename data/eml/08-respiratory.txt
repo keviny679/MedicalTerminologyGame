@@ -1,4 +1,4 @@
-# 7 | The Respiratory System
+# 8 | The Respiratory System
 
 ## Upper respiratory tract
 > The [[respiratory system]] brings in oxygen and removes carbon dioxide. The [[upper respiratory tract]]
@@ -247,8 +247,8 @@ P somn/o = sleep
 ## Procedures and treatment
 > [[oxygen therapy]] delivers extra oxygen, often through a [[nasal cannula]], small prongs in the nose. When a
 > patient cannot protect their own airway, [[endotracheal intubation]] places a tube through the mouth into the
-> trachea, usually connected to [[mechanical ventilation]], a machine that breathes for the patient. For long-
-> term airway support, a [[tracheostomy]] creates a permanent opening in the neck into the trachea; a
+> trachea, usually connected to [[mechanical ventilation]], a machine that breathes for the patient. For
+> long-term airway support, a [[tracheostomy]] creates a permanent opening in the neck into the trachea; a
 > [[tracheotomy]] is the incision itself. [[continuous positive airway pressure]] uses a mask to keep the airway
 > open during sleep in sleep apnea. Inhaled medicines are given by a [[nebulizer]], which turns liquid into
 > mist, or a [[metered-dose inhaler]]. A [[bronchodilator]] opens narrowed airways quickly, while an [[inhaled

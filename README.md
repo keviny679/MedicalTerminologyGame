@@ -18,7 +18,7 @@ Torii Path, Sakura Temple and Moonlit Wave.
   fullscreen; on iPhone, where browsers can't, it switches to a compact full-screen layout instead.
   For true fullscreen on iPhone, use Share → Add to Home Screen and open it from there.
 - **Essentials of Medical Language mode:** a calm study mode with the same battles but no random upgrades.
-  Pick a chapter (1–7 so far) or one of its sections. Questions mix terms, definitions, abbreviations,
+  Pick a chapter (1–8 so far, in the order of the 2024 release: word parts, body as a whole, skin, skeletal, muscles and tendons, cardiovascular, blood/lymph/immune, respiratory) or one of its sections. Questions mix terms, definitions, abbreviations,
   word-part breakdowns and "name the highlighted structure" diagrams. Bigger chapters mean longer runs.
   Missed terms come back more often, and the game tracks how much of each chapter you've seen and mastered.
 - **Read → recall → battle lessons:** picking a section opens a short lesson (original text, with the

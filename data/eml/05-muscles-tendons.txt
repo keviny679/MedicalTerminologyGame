@@ -1,0 +1,181 @@
+# 5 | Muscles and Tendons
+
+## Muscle types and structure
+> The [[muscular system]] moves the body, holds posture and makes heat. There are three kinds of muscle.
+> [[skeletal muscle]] attaches to bones and is a [[voluntary muscle]], under your control. [[smooth muscle]]
+> lines organs and blood vessels and is an [[involuntary muscle]]. [[cardiac muscle]] is found only in the heart
+> and is also involuntary. Skeletal and cardiac muscle are both [[striated muscle]], striped under a microscope.
+> Each long muscle cell is a [[muscle fiber]], and muscles are wrapped and separated by sheets of [[fascia]]. A
+> muscle pulls on bone through a [[tendon]]; a broad, flat tendon is an [[aponeurosis]]. A muscle's [[origin]]
+> is where it attaches to the bone that stays still, and its [[insertion]] is where it attaches to the bone that
+> moves. Movement comes from [[contraction]], and even at rest a muscle keeps a little tension called [[muscle
+> tone]].
+T muscular system = the muscles of the body, which produce movement, maintain posture and generate heat
+T skeletal muscle = voluntary striated muscle attached to bones that moves the body | @joint.muscle
+T smooth muscle = involuntary muscle in the walls of organs and blood vessels
+T cardiac muscle = involuntary striated muscle found only in the heart
+T striated muscle = muscle that looks striped under a microscope; skeletal and cardiac muscle
+T voluntary muscle = muscle under conscious control, such as skeletal muscle
+T involuntary muscle = muscle that works without conscious control, such as smooth and cardiac muscle
+T muscle fiber = a single long muscle cell
+T fascia = a sheet of fibrous tissue that surrounds and separates muscles | fasci/o + -a
+T tendon = a tough cord of fibrous tissue that connects muscle to bone | @joint.tendon
+T aponeurosis = a flat, sheet-like tendon that attaches a muscle over a wide area
+T origin = the attachment of a muscle to the bone that stays still
+T insertion = the attachment of a muscle to the bone that moves
+T muscle tone = the slight, constant tension of a resting muscle
+T contraction = shortening of a muscle to produce movement
+P my/o, muscul/o = muscle
+P fasci/o = fascia
+P rhabd/o = rod-shaped, striated
+P leiomy/o = smooth muscle
+P -trophy = development, nourishment
+
+## Body movements
+> Joint movements come in opposite pairs. [[flexion]] bends a joint and decreases its angle, as when you bend
+> the elbow, while [[extension]] straightens it; pushing past straight is [[hyperextension]]. [[abduction]]
+> moves a limb away from the midline of the body, and [[adduction]] moves it back toward the midline.
+> [[rotation]] turns a bone around its own axis, and [[circumduction]] swings a limb in a circle. Turning the
+> palm down is [[pronation]], and turning it up is [[supination]]. At the ankle, pulling the toes up is
+> [[dorsiflexion]] and pointing them down is [[plantar flexion]], while turning the sole inward is [[inversion]]
+> and outward is [[eversion]]. How far a joint can move is its [[range of motion]]. Muscles work in teams: the
+> [[agonist]] produces a movement while its [[antagonist]] relaxes; for bending the elbow, the biceps is the
+> agonist and the triceps is the antagonist.
+T flexion = bending a joint to decrease the angle between bones
+T extension = straightening a joint to increase the angle between bones
+T hyperextension = extending a joint beyond its normal straight position | hyper- + extension
+T abduction = moving a limb away from the midline of the body | ab- + duct/o + -ion
+T adduction = moving a limb toward the midline of the body | ad- + duct/o + -ion
+T rotation = turning a bone around its own axis
+T circumduction = moving a limb in a circle | circum- + duct/o + -ion
+T pronation = turning the palm downward or backward
+T supination = turning the palm upward or forward
+T dorsiflexion = bending the foot upward toward the shin | dors/o + flexion
+T plantar flexion = pointing the foot downward
+T inversion = turning the sole of the foot inward
+T eversion = turning the sole of the foot outward
+T range of motion = how far a joint can move in each direction
+T agonist = the main muscle that produces a movement; also called the prime mover
+T antagonist = the muscle that opposes a movement and relaxes while the agonist contracts
+P duct/o = to lead
+P kinesi/o = movement
+P -kinesia = movement
+P circum- = around
+
+## Major skeletal muscles
+> Many muscles are named for their shape, location or action. The [[deltoid]] is the triangle-shaped muscle
+> capping the shoulder and a common injection site. On the upper arm, the [[biceps brachii]] bends the elbow and
+> the [[triceps brachii]] straightens it. The [[pectoralis major]] covers the chest, the [[trapezius]] spans the
+> upper back and neck, and the [[latissimus dorsi]] is the broad muscle of the middle back. In the neck, the
+> [[sternocleidomastoid]] runs from behind the ear to the sternum and clavicle and turns the head. The [[rectus
+> abdominis]] runs vertically down the abdomen, with the [[external oblique]] on the sides. The [[gluteus
+> maximus]] is the large buttock muscle. On the thigh, the [[quadriceps]] in front straighten the knee and the
+> [[hamstrings]] behind bend it, and the [[gastrocnemius]] is the calf muscle. The [[rotator cuff]] holds the
+> shoulder joint stable, and the [[diaphragm]] is the main muscle of breathing.
+T deltoid = the triangular muscle covering the shoulder, a common injection site
+T biceps brachii = the muscle on the front of the upper arm that bends the elbow
+T triceps brachii = the muscle on the back of the upper arm that straightens the elbow
+T pectoralis major = the large fan-shaped chest muscle that moves the arm across the body
+T trapezius = the large diamond-shaped muscle of the upper back and neck that moves the shoulder blade
+T latissimus dorsi = the broad muscle of the middle and lower back that pulls the arm down and back
+T sternocleidomastoid = the neck muscle running from behind the ear to the sternum and clavicle that turns the head
+T rectus abdominis = the vertical abdominal muscle that bends the trunk forward
+T external oblique = the outer side muscle of the abdomen that twists and bends the trunk
+T gluteus maximus = the large buttock muscle that extends the hip
+T quadriceps = the group of four muscles on the front of the thigh that extend the knee
+T hamstrings = the three muscles at the back of the thigh that bend the knee
+T gastrocnemius = the calf muscle that points the foot downward
+T rotator cuff = the four muscles and their tendons that hold the shoulder joint stable
+T diaphragm = the dome-shaped muscle under the lungs that is the main muscle of breathing
+
+## Tendons and their injuries
+> The largest tendon in the body is the [[Achilles tendon]], which joins the calf muscles to the heel bone. A
+> [[strain]] is a stretched or torn muscle or tendon, while a complete tear is a [[tendon rupture]]. Overuse
+> causes [[tendinitis]], inflammation of a tendon, or [[tenosynovitis]] when the sheath around the tendon is
+> inflamed too. A [[rotator cuff tear]] causes shoulder pain and weakness when lifting the arm. [[lateral
+> epicondylitis]], or tennis elbow, is painful inflammation of the tendons on the outer elbow. [[plantar
+> fasciitis]] inflames the thick band of fascia on the sole and causes heel pain, worst with the first steps in
+> the morning. In [[carpal tunnel syndrome]], swollen tendons in the wrist squeeze the median nerve, causing
+> numbness in the fingers. A [[ganglion cyst]] is a fluid-filled lump on a tendon sheath, often on the wrist,
+> and [[shin splints]] are pain along the shinbone from overworked muscles and tendons.
+T Achilles tendon = the tendon joining the calf muscles to the heel bone
+T strain = a stretched or torn muscle or tendon
+T tendinitis = inflammation of a tendon | tendin/o + -itis
+T tenosynovitis = inflammation of a tendon and the sheath around it | ten/o + synov/o + -itis
+T tendon rupture = a complete tear of a tendon
+T rotator cuff tear = a tear in one or more rotator cuff tendons, causing shoulder pain and weakness
+T lateral epicondylitis = painful inflammation of the tendons on the outer elbow; tennis elbow | epi- + condyl/o + -itis
+T plantar fasciitis = inflammation of the thick band of fascia on the sole of the foot, causing heel pain | fasci/o + -itis
+T carpal tunnel syndrome = numbness and pain in the hand from pressure on the median nerve at the wrist
+T ganglion cyst = a fluid-filled lump that forms on a tendon sheath or joint, often on the wrist
+T shin splints = pain along the shinbone from overworked muscles and tendons
+P ten/o, tend/o, tendin/o = tendon
+P condyl/o = knuckle, rounded end of a bone
+
+## Muscle disorders
+> Muscle pain is [[myalgia]], and any disease of muscle is a [[myopathy]]. Inflammation of muscle is
+> [[myositis]]; when it is autoimmune and affects many muscles it is [[polymyositis]]. [[fibromyalgia]] is a
+> chronic condition of widespread muscle pain and tenderness with fatigue. [[muscular dystrophy]] is a group of
+> inherited diseases in which muscle steadily weakens and wastes away. [[myasthenia gravis]] is an autoimmune
+> disease that blocks nerve signals to muscle, causing weakness that worsens with use. [[rhabdomyolysis]] is a
+> rapid breakdown of skeletal muscle that releases proteins that can damage the kidneys. Muscle wasting from
+> disuse is [[atrophy of muscle]], muscle growth from exercise is [[hypertrophy of muscle]], and the loss of
+> muscle with aging is [[sarcopenia]]. A [[spasm]] is a sudden involuntary contraction, and a painful sustained
+> one is a [[cramp]]. Permanent shortening that limits movement is a [[contracture]], and dangerous pressure
+> inside a closed group of muscles is [[compartment syndrome]].
+T myalgia = muscle pain | my/o + -algia
+T myopathy = any disease of muscle | my/o + -pathy
+T myositis = inflammation of muscle | my/o + -itis
+T polymyositis = an autoimmune inflammation of many muscles causing weakness | poly- + my/o + -itis
+T fibromyalgia = a chronic condition of widespread muscle pain, tenderness and fatigue | fibr/o + my/o + -algia
+T muscular dystrophy = an inherited group of diseases causing progressive muscle weakness and wasting | dys- + -trophy
+T myasthenia gravis = an autoimmune disease causing muscle weakness and fatigue | my/o + -asthenia
+T rhabdomyolysis = breakdown of skeletal muscle that releases harmful proteins into the blood | rhabd/o + my/o + -lysis
+T atrophy of muscle = wasting away of muscle from disuse or disease | a- + -trophy
+T hypertrophy of muscle = enlargement of muscle from exercise or extra work | hyper- + -trophy
+T sarcopenia = loss of muscle mass and strength with aging | sarc/o + -penia
+T spasm = a sudden involuntary contraction of a muscle
+T cramp = a painful, sustained muscle spasm
+T contracture = permanent shortening of a muscle or tendon that limits joint movement
+T compartment syndrome = dangerous pressure buildup inside a closed group of muscles that cuts off blood flow
+T leiomyoma = a benign tumor of smooth muscle | leiomy/o + -oma
+T rhabdomyosarcoma = a malignant tumor of skeletal muscle | rhabd/o + my/o + sarc/o + -oma
+P fibr/o = fiber
+P -asthenia = weakness
+P sarc/o = flesh, connective tissue
+
+## Diagnosis and treatment
+> Muscle problems are tested with [[electromyography]], which records the electrical activity of muscles, and a
+> [[muscle biopsy]], which removes a small piece for examination. A blood test for [[creatine kinase]] shows
+> muscle damage, since this enzyme leaks out of injured muscle. The specialty of [[physical medicine and
+> rehabilitation]] restores function after injury or illness, and its doctor is a [[physiatrist]]. [[physical
+> therapy]] rebuilds strength and movement with exercise, while [[occupational therapy]] helps people relearn
+> the skills of daily life and work. A [[muscle relaxant]] relieves spasms. Surgery uses the word parts you
+> know: [[tenorrhaphy]] sutures a torn tendon, [[tenotomy]] cuts a tendon, [[myorrhaphy]] sutures a muscle, and
+> [[fasciotomy]] cuts fascia to relieve the pressure of compartment syndrome.
+T electromyography = recording the electrical activity of muscles | electr/o + my/o + -graphy
+T muscle biopsy = removal of a small piece of muscle for examination
+T creatine kinase = an enzyme released into the blood when muscle is damaged
+T physical medicine and rehabilitation = the specialty that restores function after injury or illness
+T physiatrist = a physician who specializes in physical medicine and rehabilitation | physi/o + iatr/o + -ist
+T physical therapy = treatment using exercise and movement to restore strength and function
+T occupational therapy = treatment that helps people regain the skills for daily activities and work
+T muscle relaxant = a drug that relieves muscle spasms
+T tenorrhaphy = surgical suturing of a tendon | ten/o + -rrhaphy
+T tenotomy = surgical cutting of a tendon | ten/o + -otomy
+T fasciotomy = surgical cutting of fascia to relieve pressure | fasci/o + -otomy
+T myorrhaphy = surgical suturing of a muscle | my/o + -rrhaphy
+P electr/o = electricity
+P physi/o = nature, physical function
+
+## Abbreviations
+A ROM = range of motion
+A EMG = electromyography
+A CK = creatine kinase
+A CTS = carpal tunnel syndrome
+A PT = physical therapy
+A OT = occupational therapy
+A PM&R = physical medicine and rehabilitation
+A RICE = rest, ice, compression, elevation
+A MG = myasthenia gravis
+A DMD = Duchenne muscular dystrophy

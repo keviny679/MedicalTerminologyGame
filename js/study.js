@@ -2,8 +2,8 @@
 // Pure logic (no DOM) so it can be unit-tested with Node.
 
 export const CHAPTER_FILES = [
-  "01-word-anatomy", "02-body-as-a-whole", "03-integumentary", "04-musculoskeletal",
-  "05-cardiovascular", "06-blood-lymph-immune", "07-respiratory",
+  "01-word-anatomy", "02-body-as-a-whole", "03-integumentary", "04-skeletal", "05-muscles-tendons",
+  "06-cardiovascular", "07-blood-lymph-immune", "08-respiratory",
 ];
 
 const KIND = { P: "part", T: "term", A: "abbr" };

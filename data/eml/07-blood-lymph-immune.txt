@@ -1,4 +1,4 @@
-# 6 | Blood, Lymphatic and Immune Systems
+# 7 | Blood, Lymphatic and Immune Systems
 
 ## Composition and formation of blood
 > [[blood]] is a connective tissue made of a liquid part and cells. The liquid part, [[plasma]], is mostly water
@@ -34,8 +34,8 @@ P -crit = to separate
 P plasm/o = plasma, formed substance
 
 ## Red blood cells and anemia
-> Each [[erythrocyte]], or red blood cell, is a disk with no nucleus, packed with [[hemoglobin]], the iron-
-> containing protein that carries oxygen. A young red cell newly released from the marrow is a [[reticulocyte]].
+> Each [[erythrocyte]], or red blood cell, is a disk with no nucleus, packed with [[hemoglobin]], the
+> iron-containing protein that carries oxygen. A young red cell newly released from the marrow is a [[reticulocyte]].
 > Red cells live about 120 days; when they break down, hemoglobin becomes [[bilirubin]], which the liver clears.
 > Too much bilirubin causes [[jaundice]]. A shortage of red cells or hemoglobin is [[anemia]], which causes
 > fatigue and pallor. The most common type is [[iron-deficiency anemia]]. [[pernicious anemia]] results from
