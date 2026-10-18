@@ -531,6 +531,7 @@ function askQuestion(enemy, preset = null) {
   const typed = q.mode === "typed";
   show("choices", !typed);
   show("typedForm", typed);
+  show("mcIdkBtn", !typed && !!R.study);
   if (typed) {
     const input = $("typedInput");
     input.value = "";
@@ -711,6 +712,7 @@ async function fight(enemy) {
     const buttons = [...$("choices").children];
     buttons.forEach((b) => (b.disabled = true));
     $("hintBtn").disabled = true;
+    show("mcIdkBtn", false);
     if (typed) {
       $("typedInput").disabled = true;
       $("typedForm").querySelectorAll("button").forEach((b) => (b.disabled = true));
@@ -747,7 +749,7 @@ async function fight(enemy) {
       await animateHeroHits(enemy, res);
     } else {
       sfx.wrong();
-      if (!typed) buttons[choice].classList.add("wrong");
+      if (!typed && choice !== null) buttons[choice].classList.add("wrong");
       const missedName = q.entry ? q.entry.name : q.affix;
       if (!R.missed.some((m) => m.affix === missedName)) {
         R.missed.push({ affix: missedName, meaning: q.entry ? q.entry.def : q.options[q.answer] });
@@ -761,7 +763,7 @@ async function fight(enemy) {
       fb.innerHTML = typed
         ? `${choice === null ? "Here it is:" : `Not quite (you typed “${esc(choice)}”).`} <b>${esc(q.answerText)}</b>: ${def}.${esc(what)}`
         : q.entry
-        ? (q.options[q.answer] === q.entry.def ? `Not quite. ${note}` : `Not quite. The answer is “${esc(q.options[q.answer])}”.<br>${note}`) + esc(what)
+        ? (q.options[q.answer] === q.entry.def ? `${choice === null ? "Here it is:" : "Not quite."} ${note}` : `${choice === null ? "Here it is:" : "Not quite."} The answer is “${esc(q.options[q.answer])}”.<br>${note}`) + esc(what)
         : `Not quite. <b>${esc(q.affix)}</b> means “${esc(q.options[q.answer])}”.${esc(what)}`;
       if (R.study) fb.innerHTML += notesHtml(q.entry);
       await animateEnemyHit(enemy, res);
@@ -1306,6 +1308,7 @@ async function relearnRound() {
     store.set(EML_KEY, S.progress);
     store.set(TODAY_KEY, countAnswer(store.get(TODAY_KEY, null)));
     $("hintBtn").disabled = true;
+    show("mcIdkBtn", false);
     if (typed) { $("typedInput").disabled = true; $("typedInput").classList.add(correct ? "right" : "wrong"); }
     else { [...$("choices").children].forEach((b, i) => { b.disabled = true; if (i === q.answer) b.classList.add("right"); else if (i === choice) b.classList.add("wrong"); }); }
     if (q.image) $("quizImage").innerHTML = renderDiagram(q.image.diagram, q.image.region, { labels: "all" });
@@ -1476,6 +1479,7 @@ if (matchMedia("(display-mode: fullscreen), (display-mode: standalone)").matches
   $("fullBtn").hidden = true;
 }
 $("dontKnowBtn").onclick = () => resolvePending(null);
+$("mcIdkBtn").onclick = () => resolvePending(null);
 $("unsureBtn").onclick = () => {
   if (S.pending?.type !== "answer") return;
   S.unsure = !S.unsure;
@@ -1535,6 +1539,9 @@ document.addEventListener("keydown", (e) => {
   if (S.pending?.type === "answer" && /^[1-4]$/.test(e.key)) {
     e.preventDefault();
     resolvePending(Number(e.key) - 1);
+  } else if (S.pending?.type === "answer" && S.run?.study && (e.key === "0" || e.key === "?")) {
+    e.preventDefault();
+    resolvePending(null);
   } else if (S.pending?.type === "answer" && e.key.toLowerCase() === "u" && S.run?.study) {
     $("unsureBtn").click();
   } else if (S.pending?.type === "answer" && e.key.toLowerCase() === "h") {

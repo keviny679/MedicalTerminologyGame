@@ -409,6 +409,7 @@ footer a { color: var(--ink); }
 @media (max-width: 520px) {
   body { font-size: 20px; }
   .typed input { flex-basis: 100%; font-size: 20px; }
+  #quizImage .dg svg { max-height: 40vh; }
   .typed-btns { flex: 1 1 100%; }
   .typed-btns .btn { flex: 1; padding-block: 12px; }
   .hint-row .btn { padding-block: 10px; }
