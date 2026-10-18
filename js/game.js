@@ -1448,9 +1448,26 @@ $("typedInput").addEventListener("focus", () => {
 // compact layout that drops the footer and fits the game to the screen.
 const fullApi = document.fullscreenEnabled || document.webkitFullscreenEnabled;
 const isFull = () => !!(document.fullscreenElement || document.webkitFullscreenElement) || document.body.classList.contains("compact");
+// Size the game and the UI to the screen: side by side when wide, stacked when tall.
+function fitFull() {
+  const b = document.body;
+  if (!b.classList.contains("full")) return;
+  const w = innerWidth, h = innerHeight;
+  const wide = w > h * 1.9; // phones on their side: game and questions side by side
+  b.classList.toggle("wide", wide);
+  const stageW = wide ? Math.min(w * 0.58, (h - 12) * 16 / 9) : Math.min(w - 12, h * (w > h ? 0.5 : 0.48) * 16 / 9);
+  // scale the questions up, but keep them inside the space left under the game
+  const ui = wide ? Math.min(1.6, Math.max(1, Math.min((w - stageW) / 380, h / 380)))
+    : Math.min(2, Math.max(1, Math.min(stageW / 720, (h - stageW * 9 / 16 - 16) / 380)));
+  b.style.setProperty("--stageW", `${Math.round(stageW)}px`);
+  b.style.setProperty("--uiZoom", ui.toFixed(2));
+  b.style.setProperty("--hudZoom", Math.min(2.2, Math.max(1, stageW / 720)).toFixed(2));
+}
+addEventListener("resize", fitFull);
 function syncFull() {
   const on = isFull();
   document.body.classList.toggle("full", on);
+  fitFull();
   $("fullBtn").textContent = on ? "✕" : "⛶";
   $("fullBtn").setAttribute("aria-label", on ? "Exit fullscreen" : "Fullscreen");
 }
@@ -1477,6 +1494,7 @@ document.addEventListener("webkitfullscreenchange", syncFull);
 if (matchMedia("(display-mode: fullscreen), (display-mode: standalone)").matches || navigator.standalone) {
   document.body.classList.add("full");
   $("fullBtn").hidden = true;
+  fitFull();
 }
 $("dontKnowBtn").onclick = () => resolvePending(null);
 $("mcIdkBtn").onclick = () => resolvePending(null);

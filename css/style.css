@@ -374,18 +374,20 @@ h2 { font-size: clamp(12px, 3vw, 20px); }
 .typed-btns { display: flex; gap: 8px; }
 .mute.fs { right: 44px; }
 
-/* fullscreen, or the compact layout used where the browser has no fullscreen (iPhone) */
-.full .frame { max-width: none; min-height: 100dvh; padding: env(safe-area-inset-top) 8px env(safe-area-inset-bottom); box-sizing: border-box; }
+/* fullscreen, or the compact layout used where the browser has no fullscreen (iPhone).
+   game.js sets --stageW, --uiZoom and --hudZoom to fit the screen. */
+.full .frame { max-width: none; min-height: 100dvh; padding: env(safe-area-inset-top) 6px env(safe-area-inset-bottom); box-sizing: border-box; }
 .full footer { display: none; }
-.full #screen { max-height: 38dvh; object-fit: contain; }
-.full .stage { width: 100%; max-width: calc(38dvh * 16 / 9 + 6px); margin: 0 auto; box-sizing: border-box; }
-@media (min-aspect-ratio: 1/1) {
-  .full .frame { display: grid; grid-template-columns: minmax(0, 1.1fr) minmax(0, 1fr); gap: 10px; align-items: start; }
-  .full #screen { max-height: 92dvh; }
-  .full .stage { max-width: none; position: sticky; top: 4px; }
-  .full .panel { max-height: calc(100dvh - 8px); overflow-y: auto; margin-top: 0; font-size: 18px; }
-  .full .prompt { font-size: 20px; margin-top: 4px; }
-}
+.full .stage { width: var(--stageW, 100%); max-width: 100%; margin: 4px auto 0; box-sizing: border-box; }
+.full .hud, .full .mute { zoom: var(--hudZoom, 1); }
+.full .panel { zoom: var(--uiZoom, 1); }
+.full #quizImage .dg svg { max-height: calc(30dvh / var(--uiZoom, 1)); }
+.full.wide #quizImage .dg svg { max-height: calc(45dvh / var(--uiZoom, 1)); }
+.full:not(.wide) .panel { width: calc(var(--stageW) / var(--uiZoom, 1)); max-width: none; margin-left: auto; margin-right: auto; box-sizing: border-box; }
+.full.wide .frame { display: grid; grid-template-columns: var(--stageW) minmax(0, 1fr); gap: 8px; align-items: start; }
+.full.wide .stage { margin: 4px 0 0; position: sticky; top: 4px; }
+.full.wide .panel { margin-top: 4px; max-height: calc((100dvh - 10px) / var(--uiZoom, 1)); overflow-y: auto; }
+
 .typed input {
   flex: 1 1 220px;
   min-width: 0;
