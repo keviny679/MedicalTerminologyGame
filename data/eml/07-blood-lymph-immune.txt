@@ -1,6 +1,8 @@
-# 7 | Blood, Lymphatic and Immune Systems
+# 7 | The Blood, Lymphatic, and Immune Systems: The Essentials of the Languages of Hematology and Immunology
+// Aligned to Essentials of Medical Language (2024), supplied educational PDF.
 
-## Composition and formation of blood
+## Components and Functions of Blood
+@source 145-151 | Textbook section 7.1, pp. 145-151
 > [[blood]] is a connective tissue made of a liquid part and cells. The liquid part, [[plasma]], is mostly water
 > and makes up about 55 percent of blood. It carries proteins such as [[albumin]], which holds water in the
 > vessels, [[globulins]], which include antibodies, and [[fibrinogen]], which is needed for clotting. When blood
@@ -33,7 +35,6 @@ P -poiesis = formation, production
 P -crit = to separate
 P plasm/o = plasma, formed substance
 
-## Red blood cells and anemia
 > Each [[erythrocyte]], or red blood cell, is a disk with no nucleus, packed with [[hemoglobin]], the
 > iron-containing protein that carries oxygen. A young red cell newly released from the marrow is a [[reticulocyte]].
 > Red cells live about 120 days; when they break down, hemoglobin becomes [[bilirubin]], which the liver clears.
@@ -64,7 +65,6 @@ P sider/o = iron
 P -lysis = breakdown, destruction
 P -hemia = blood condition
 
-## White blood cells
 > Each [[leukocyte]], or white blood cell, defends the body against infection. Some contain visible granules and
 > are called a [[granulocyte]]. The most common is the [[neutrophil]], the first responder to bacterial
 > infection. The [[eosinophil]] fights parasites and increases in allergies. The [[basophil]] releases histamine
@@ -101,7 +101,6 @@ P -phil, -philia = attraction to
 P phag/o = to eat, swallow
 P -phage = one that eats
 
-## Platelets and clotting
 > A [[platelet]], also called a [[thrombocyte]], is a small cell fragment that helps stop bleeding. Stopping
 > bleeding is [[hemostasis]], and it happens in steps. First, the injured vessel constricts. Then platelets
 > stick to the injury and to each other, forming a plug. Finally, [[coagulation]] occurs: a chain of [[clotting
@@ -132,32 +131,9 @@ T international normalized ratio = a standardized version of the prothrombin tim
 P coagul/o = clotting
 P -stasis = stopping, controlling
 
-## Blood groups and transfusion
-> A person's [[blood type]] depends on markers on the surface of their red cells. Each marker is an [[antigen]],
-> and the immune system makes an [[antibody]] against any antigen it does not have. Type A blood has A antigens,
-> type B has B, type AB has both, and type O has neither. The [[Rh factor]] is another antigen: people who have
-> it are Rh positive, and those who lack it are Rh negative. Because [[type O negative]] blood has no A, B or Rh
-> antigens, it is the universal donor. Because [[type AB positive]] blood has no antibodies against them, it is
-> the universal recipient. Before a [[transfusion]], a [[crossmatch]] mixes donor and recipient blood to check
-> compatibility. A mismatched transfusion causes a dangerous [[transfusion reaction]] in which red cells are
-> destroyed. Donating your own blood ahead of surgery is an [[autologous transfusion]]. When an Rh negative
-> mother carries an Rh positive baby, her antibodies can attack the baby's red cells, causing [[hemolytic
-> disease of the newborn]]. Separating and removing plasma from blood is [[plasmapheresis]].
-T blood type = the classification of blood by antigens on the red cells (A, B, AB or O)
-T antigen = a substance that causes the immune system to make antibodies
-T antibody = a protein made by B cells that binds a specific antigen; also called immunoglobulin
-T type O negative = the universal donor blood type for red cells
-T type AB positive = the universal recipient blood type
-T Rh factor = an antigen on red cells; people who have it are Rh positive
-T hemolytic disease of the newborn = destruction of a baby's red cells by the Rh-negative mother's antibodies
-T transfusion = giving blood or blood products through a vein
-T crossmatch = a test mixing donor and recipient blood to check they are compatible
-T autologous transfusion = receiving your own blood that was collected earlier
-T transfusion reaction = a harmful immune reaction to incompatible donated blood
-T plasmapheresis = removing blood, separating out the plasma, and returning the cells | plasm/o + -apheresis
-T hemorrhage = loss of a large amount of blood
 
-## The lymphatic system
+## Lymphatic System
+@source 152-159 | Textbook section 7.2, pp. 152-159
 > The lymphatic system returns extra fluid from tissues to the blood and helps fight infection. Fluid that leaks
 > out of capillaries is collected as [[lymph]], which flows through [[lymph vessels]]. Along the way it is
 > filtered by each [[lymph node]], a small bean-shaped organ packed with white cells. Nodes cluster in the neck
@@ -199,7 +175,36 @@ P thym/o = thymus
 P tonsill/o = tonsil
 P aden/o = gland
 
-## The immune system and its disorders
+
+## Disorders of Blood and Blood Components
+@source 160-166 | Textbook section 7.3, pp. 160-166
+> A person's [[blood type]] depends on markers on the surface of their red cells. Each marker is an [[antigen]],
+> and the immune system makes an [[antibody]] against any antigen it does not have. Type A blood has A antigens,
+> type B has B, type AB has both, and type O has neither. The [[Rh factor]] is another antigen: people who have
+> it are Rh positive, and those who lack it are Rh negative. Because [[type O negative]] blood has no A, B or Rh
+> antigens, it is the universal donor. Because [[type AB positive]] blood has no antibodies against them, it is
+> the universal recipient. Before a [[transfusion]], a [[crossmatch]] mixes donor and recipient blood to check
+> compatibility. A mismatched transfusion causes a dangerous [[transfusion reaction]] in which red cells are
+> destroyed. Donating your own blood ahead of surgery is an [[autologous transfusion]]. When an Rh negative
+> mother carries an Rh positive baby, her antibodies can attack the baby's red cells, causing [[hemolytic
+> disease of the newborn]]. Separating and removing plasma from blood is [[plasmapheresis]].
+T blood type = the classification of blood by antigens on the red cells (A, B, AB or O)
+T antigen = a substance that causes the immune system to make antibodies
+T antibody = a protein made by B cells that binds a specific antigen; also called immunoglobulin
+T type O negative = the universal donor blood type for red cells
+T type AB positive = the universal recipient blood type
+T Rh factor = an antigen on red cells; people who have it are Rh positive
+T hemolytic disease of the newborn = destruction of a baby's red cells by the Rh-negative mother's antibodies
+T transfusion = giving blood or blood products through a vein
+T crossmatch = a test mixing donor and recipient blood to check they are compatible
+T autologous transfusion = receiving your own blood that was collected earlier
+T transfusion reaction = a harmful immune reaction to incompatible donated blood
+T plasmapheresis = removing blood, separating out the plasma, and returning the cells | plasm/o + -apheresis
+T hemorrhage = loss of a large amount of blood
+
+
+## Disorders of the Lymphatic and Immune Systems
+@source 167-173 | Textbook section 7.4, pp. 167-173
 > [[immunity]] is the body's ability to resist disease. [[innate immunity]] is the inborn first line of defense,
 > such as skin, inflammation and phagocytes, and it responds the same way to every invader. [[adaptive
 > immunity]] learns to recognize specific germs and remembers them. A [[B cell]] makes antibodies. A [[helper T
@@ -240,7 +245,9 @@ T immunologist = a specialist in the immune system | immun/o + -logist
 P immun/o = immune, protection
 P tox/o = poison
 
-## Tests and treatments
+
+## Diagnostic and Therapeutic Procedures and Pharmacology for the Blood, Lymphatic, and Immune Systems
+@source 174-182 | Textbook section 7.5, pp. 174-182
 > The most common blood test is the [[complete blood count]], which counts red cells, white cells and platelets
 > and measures hemoglobin and hematocrit. The [[erythrocyte sedimentation rate]] measures how fast red cells
 > settle in a tube; a fast rate signals inflammation. A [[blood smear]] spreads a drop of blood on a slide to
@@ -267,7 +274,6 @@ T immunosuppressant = a drug that weakens the immune response, used after transp
 T epinephrine auto-injector = a pen that injects epinephrine to treat anaphylaxis
 T antihistamine = a drug that blocks histamine to relieve allergy symptoms
 
-## Abbreviations
 A RBC = red blood cell
 A WBC = white blood cell
 A Hb, Hgb = hemoglobin

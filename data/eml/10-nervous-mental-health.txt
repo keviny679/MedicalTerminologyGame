@@ -1,0 +1,70 @@
+# 10 | The Nervous System and Mental Health: The Essentials of the Languages of Neurology and Psychiatry
+
+## Structure and Function of the Nervous System
+@source 249-252 | Textbook section 10.1, pp. 249-252
+> The [[central nervous system]] is the brain and spinal cord; the [[peripheral nervous system]] includes nerves outside it. [[afferent nerve]] fibers carry sensory information toward the CNS, while [[efferent nerve]] fibers carry motor commands away. The [[autonomic nervous system]] controls involuntary functions.
+T central nervous system = brain and spinal cord
+T peripheral nervous system = all neurons and nerves outside the central nervous system
+T afferent nerve = sensory nerve carrying messages toward the brain and spinal cord
+T efferent nerve = motor nerve carrying messages away from the brain and spinal cord
+T autonomic nervous system = visceral motor division controlling glands, cardiac muscle, and smooth muscle
+A CNS = central nervous system
+A PNS = peripheral nervous system
+A ANS = autonomic nervous system
+
+## The Brain and Cranial Nerves
+@source 253-257 | Textbook section 10.2, pp. 253-257
+> The [[cerebrum]] supports conscious thought and voluntary activity. The [[cerebellum]] coordinates movement and balance, and the [[brainstem]] connects the brain with the spinal cord. Twelve pairs of [[cranial nerves]] arise from the brain.
+T cerebrum = largest brain region responsible for conscious thought, sensation, and voluntary movement
+T cerebellum = brain region that coordinates movement, posture, and balance
+T brainstem = region connecting the cerebrum and cerebellum with the spinal cord
+T cranial nerves = twelve pairs of nerves originating from the brain
+T meninges = protective membranes covering the brain and spinal cord
+
+## Disorders of the Brain, Cranial Nerves, and Meninges
+@source 258-266 | Textbook section 10.3, pp. 258-266
+> A [[cerebrovascular accident]] interrupts blood flow to brain tissue. [[meningitis]] inflames the meninges, [[encephalitis]] inflames the brain, and [[epilepsy]] is a disorder of recurring seizures.
+T cerebrovascular accident = brain injury caused by interrupted blood flow or bleeding; stroke
+T meningitis = inflammation of the meninges | mening/o + -itis
+T encephalitis = inflammation of the brain | encephal/o + -itis
+T epilepsy = neurologic disorder characterized by recurrent unprovoked seizures
+T aphasia = impaired ability to use or understand language
+A CVA = cerebrovascular accident
+
+## Disorders of the Spinal Cord and Peripheral Nerves
+@source 267-273 | Textbook section 10.4, pp. 267-273
+> [[paraplegia]] paralyzes the lower body, whereas [[quadriplegia]] affects all four limbs. [[neuropathy]] is disease of nerves, and [[neuralgia]] is pain along a nerve.
+T paraplegia = paralysis of both legs and the lower body
+T quadriplegia = paralysis of all four limbs and the trunk
+T neuropathy = disease or dysfunction of one or more nerves | neur/o + -pathy
+T neuralgia = pain along the course of a nerve | neur/o + -algia
+T radiculopathy = disease of a spinal nerve root
+
+## Diagnostic and Therapeutic Procedures and Pharmacology of the Nervous System
+@source 274-280 | Textbook section 10.5, pp. 274-280
+> An [[electroencephalogram]] records brain electrical activity. A [[lumbar puncture]] obtains cerebrospinal fluid, and [[computed tomography]] or [[magnetic resonance imaging]] creates images used to evaluate nervous-system structures.
+T electroencephalogram = record of electrical activity of the brain
+T lumbar puncture = needle puncture of the lumbar subarachnoid space to obtain cerebrospinal fluid
+T computed tomography = cross-sectional imaging produced using x-rays and computer processing
+T magnetic resonance imaging = imaging using magnetic fields and radio waves
+A EEG = electroencephalogram
+A CT = computed tomography
+A MRI = magnetic resonance imaging
+
+## Mental Health
+@source 281-286 | Textbook section 10.6, pp. 281-286
+> [[anxiety disorder]] involves excessive fear or worry. [[major depressive disorder]] causes persistent depressed mood or loss of interest. [[bipolar disorder]] features episodes of depression and mania, and [[schizophrenia]] affects thought, perception, and behavior.
+T anxiety disorder = mental health disorder characterized by excessive fear, anxiety, or worry
+T major depressive disorder = persistent depressed mood or loss of interest that impairs functioning
+T bipolar disorder = disorder with episodes of depression and mania or hypomania
+T schizophrenia = disorder affecting thought, perception, emotion, and behavior
+T psychotherapy = treatment of mental or emotional disorders through therapeutic communication
+
+## Diagnostic and Therapeutic Procedures and Pharmacology for Mental Health Disorders
+@source 287-291 | Textbook section 10.7, pp. 287-291
+> A [[psychiatric evaluation]] assesses mental status and symptoms. [[cognitive behavioral therapy]] changes harmful patterns of thought and behavior. [[antidepressant]] and [[antipsychotic]] medicines treat specific symptom groups.
+T psychiatric evaluation = assessment of a person's mental status, symptoms, and functioning
+T cognitive behavioral therapy = psychotherapy focused on changing unhelpful thought and behavior patterns
+T antidepressant = medication used to treat depressive disorders
+T antipsychotic = medication used to treat psychosis
+A CBT = cognitive behavioral therapy

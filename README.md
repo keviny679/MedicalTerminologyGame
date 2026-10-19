@@ -18,7 +18,7 @@ Torii Path, Sakura Temple and Moonlit Wave.
   fullscreen; on iPhone, where browsers can't, it switches to a compact full-screen layout instead.
   For true fullscreen on iPhone, use Share → Add to Home Screen and open it from there.
 - **Essentials of Medical Language mode:** a calm study mode with the same battles but no random upgrades.
-  Pick a chapter (1–8 so far, in the order of the 2024 release: word parts, body as a whole, skin, skeletal, muscles and tendons, cardiovascular, blood/lymph/immune, respiratory) or one of its sections. Questions mix terms, definitions, abbreviations,
+  Pick any chapter (1–13, matching the supplied 2024 educational textbook) or one of its numbered sections. Questions mix terms, definitions, abbreviations,
   word-part breakdowns and "name the highlighted structure" diagrams. Bigger chapters mean longer runs.
   Missed terms come back more often, and the game tracks how much of each chapter you've seen and mastered.
 - **Read → recall → battle lessons:** picking a section opens a short lesson (original text, with the
@@ -33,8 +33,8 @@ Torii Path, Sakura Temple and Moonlit Wave.
   Each term is scheduled for review 1, 3, 7, 14, 30, 60 and 120 days later as you keep recalling it;
   a miss brings it back the next day. The **Daily review** run (and the "due" count on the title screen)
   pulls whatever is due from every chapter. A term only counts as *mastered* after a typed recall.
-  The content lives in `data/eml/*.txt` (one line per term). It is original study notes arranged by the
-  textbook's chapters, not text copied from the book.
+  The content lives in `data/eml/*.txt` (one line per term). Chapter and section titles and the visible page
+  references match the supplied textbook; lesson prose is adapted into concise study notes.
 - **Music:** put lo-fi tracks in `audio/`. See [audio/README.md](audio/README.md).
 
 ## Data

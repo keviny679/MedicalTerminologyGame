@@ -1,0 +1,34 @@
+# 12 | The Endocrine System: The Essentials of the Language of Endocrinology
+
+## Endocrine System, Hypothalamus, and Pituitary and Pineal Glands
+@source 332-339 | Textbook section 12.1, pp. 332-339
+> An [[endocrine gland]] releases a [[hormone]] into the bloodstream. The [[hypothalamus]] links nervous and endocrine control, the [[pituitary gland]] regulates many endocrine organs, and the [[pineal gland]] secretes melatonin.
+T endocrine gland = ductless gland that secretes hormones into the bloodstream
+T hormone = chemical messenger carried in blood to a target tissue
+T hypothalamus = brain region linking the nervous and endocrine systems and regulating pituitary secretion
+T pituitary gland = endocrine gland that secretes hormones controlling growth and other glands
+T pineal gland = endocrine gland that secretes melatonin and helps regulate sleep-wake cycles
+T thyroid gland = neck gland producing hormones that regulate metabolism
+T adrenal gland = gland above a kidney that secretes corticosteroids and catecholamines
+
+## Disorders of the Endocrine System
+@source 340-348 | Textbook section 12.2, pp. 340-348
+> [[diabetes mellitus]] results from deficient insulin action. [[hyperthyroidism]] is excessive thyroid activity, whereas [[hypothyroidism]] is deficient thyroid activity. [[Cushing syndrome]] reflects prolonged excess cortisol, and [[Addison disease]] reflects adrenal-cortex insufficiency.
+T diabetes mellitus = metabolic disorder marked by hyperglycemia caused by deficient insulin secretion or action
+T hyperthyroidism = excessive production of thyroid hormones
+T hypothyroidism = deficient production of thyroid hormones
+T Cushing syndrome = disorder caused by prolonged exposure to excessive cortisol
+T Addison disease = chronic insufficiency of the adrenal cortex
+T goiter = enlargement of the thyroid gland
+
+## Diagnostic and Therapeutic Procedures and Pharmacology for Disorders of the Endocrine System
+@source 349-358 | Textbook section 12.3, pp. 349-358
+> A [[fasting blood glucose]] test and [[hemoglobin A1c]] evaluate glucose regulation. A [[thyroid function test]] measures thyroid-related hormones. [[insulin]] lowers blood glucose, and [[hormone replacement therapy]] replaces deficient hormones.
+T fasting blood glucose = blood glucose measurement after a period without caloric intake
+T hemoglobin A1c = measure reflecting average blood glucose over approximately two to three months
+T thyroid function test = laboratory assessment of thyroid hormones and thyroid-stimulating hormone
+T insulin = pancreatic hormone that lowers blood glucose by promoting cellular uptake and storage
+T hormone replacement therapy = administration of a hormone to replace deficient production
+A FBG = fasting blood glucose
+A HRT = hormone replacement therapy
+

@@ -1,7 +1,8 @@
-# 1 | The Anatomy of Medical Terms
-// P = word part, T = term, A = abbreviation. Definitions are original study notes.
+# 1 | The Anatomy of Medical Terms: The Essential Elements of the Language of Medicine
+// Aligned to Essentials of Medical Language (2024), supplied educational PDF.
 
-## Building medical words
+## The Construction of Medical Words
+@source 2-8 | Textbook section 1.1, pp. 2-8
 > Most medical terms are built from a small set of parts, so learning the parts lets you decode thousands of
 > words. The [[root]] carries the core meaning, such as cardi meaning heart. A [[combining vowel]], usually o,
 > links a root to another part, and a root plus its vowel is written as a [[combining form]], like cardi/o. A
@@ -39,7 +40,6 @@ T pathology = the study of disease | path/o + -logy
 T physiology = the study of how the body and its parts function | physi/o + -logy
 T anatomy = the study of the structure of the body
 
-## Common prefixes
 > Prefixes tell you about number, position, time, speed or amount. Position prefixes are everywhere:
 > [[endo-|endo-]] means within, [[epi-]] means upon, [[sub-|sub-, infra-]] means below, [[inter-]] means
 > between, [[intra-]] means within, and [[peri-]] means around. For amount, [[hyper-]] means above normal and
@@ -95,7 +95,6 @@ P in-, im- = not, or in, into
 P para- = beside, abnormal
 P meta- = change, beyond
 
-## Common suffixes
 > Suffixes usually tell you what kind of word you are looking at. Diagnostic suffixes describe a condition:
 > [[-itis]] means inflammation, [[-osis]] means an abnormal condition, [[-algia|-algia, -dynia]] means pain,
 > [[-megaly]] means enlargement, [[-oma]] means tumor and [[-pathy]] means disease. Blood conditions end in
@@ -145,7 +144,9 @@ P -ia, -ism, -y = condition, process
 P -ist = specialist
 P -ole, -ule = small one
 
-## Plurals and pronunciation
+
+## Word Deconstruction, Plurals, Pronunciation, and Precision
+@source 9-14 | Textbook section 1.2, pp. 9-14
 > Medical plurals follow Greek and Latin rules rather than simply adding s. A word ending in -a becomes -ae, so
 > one vertebra becomes two vertebrae. A word ending in -is changes to -es, so diagnosis becomes diagnoses. A
 > word ending in -um changes to -a, as in bacterium and bacteria, and -us changes to -i, as in bronchus and
@@ -164,7 +165,6 @@ P -nx to -nges = singular ending that becomes -nges in the plural, as phalanx to
 T ilium = the large upper wing-shaped bone of the pelvis; sounds like ileum
 T ileum = the last section of the small intestine; sounds like ilium
 
-## The health care team
 > Patients are cared for by a team. A [[physician]] holds an MD or DO degree and diagnoses and treats disease. A
 > [[physician assistant]] practices medicine as part of a physician-led team, and a [[nurse practitioner]] is an
 > advanced practice nurse who can also diagnose and prescribe. A [[registered nurse]] plans and delivers bedside
@@ -187,7 +187,6 @@ T orthopedist = a specialist in disorders of bones, joints and muscles | orth/o 
 T electronic health record = a digital record of a patient's health information shared by providers
 T HIPAA = the US law that protects the privacy and security of patient health information
 
-## Abbreviations in the medical record
 A MD = Doctor of Medicine
 A DO = Doctor of Osteopathic Medicine
 A RN = registered nurse

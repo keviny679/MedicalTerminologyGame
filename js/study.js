@@ -3,7 +3,8 @@
 
 export const CHAPTER_FILES = [
   "01-word-anatomy", "02-body-as-a-whole", "03-integumentary", "04-skeletal", "05-muscles-tendons",
-  "06-cardiovascular", "07-blood-lymph-immune", "08-respiratory",
+  "06-cardiovascular", "07-blood-lymph-immune", "08-respiratory", "09-digestive",
+  "10-nervous-mental-health", "11-eye-ear", "12-endocrine", "13-urinary",
 ];
 
 const KIND = { P: "part", T: "term", A: "abbr" };
@@ -28,6 +29,17 @@ export function parseChapter(text, file = "") {
     if (line.startsWith("> ")) {
       if (!section) throw new Error(`Lesson text before any section at ${where}`);
       section.passage = `${section.passage || ""} ${line.slice(2).trim()}`.trim();
+      return;
+    }
+    if (line.startsWith("@source ")) {
+      if (!section) throw new Error(`Source reference before any section at ${where}`);
+      const m = line.match(/^@source\s+(\d+)(?:-(\d+))?(?:\s+\|\s+(.+))?$/);
+      if (!m) throw new Error(`Can't parse source reference at ${where}: ${line}`);
+      section.source = {
+        start: Number(m[1]),
+        end: Number(m[2] || m[1]),
+        label: (m[3] || `Textbook pp. ${m[1]}${m[2] ? `-${m[2]}` : ""}`).trim(),
+      };
       return;
     }
     if (line.startsWith("## ")) {

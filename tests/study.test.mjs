@@ -11,12 +11,16 @@ let seed = 11;
 const rng = () => ((seed = (seed * 16807) % 2147483647) / 2147483647);
 
 test("every chapter parses with sections and enough entries", () => {
+  const expectedSections = [2, 5, 4, 4, 5, 4, 5, 5, 6, 7, 6, 3, 3];
   chapters.forEach((c, i) => {
     assert.equal(c.num, i + 1, c.file);
     assert.ok(c.title, c.file);
-    assert.ok(c.sections.length >= 4, `${c.file} sections`);
-    assert.ok(c.entries.length >= 60, `${c.file} has ${c.entries.length}`);
-    for (const s of c.sections) assert.ok(s.entries.length > 0, `${c.file} empty section ${s.title}`);
+    assert.equal(c.sections.length, expectedSections[i], `${c.file} textbook section count`);
+    assert.ok(c.entries.length >= 20, `${c.file} has ${c.entries.length}`);
+    for (const s of c.sections) {
+      assert.ok(s.entries.length > 0, `${c.file} empty section ${s.title}`);
+      assert.ok(s.source?.start && s.source?.end, `${c.file} missing source for ${s.title}`);
+    }
   });
 });
 

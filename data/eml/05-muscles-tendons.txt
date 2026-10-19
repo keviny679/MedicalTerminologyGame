@@ -1,6 +1,8 @@
-# 5 | Muscles and Tendons
+# 5 | Muscles and Tendons: The Essentials of the Languages of Orthopedics and Rehabilitation
+// Aligned to Essentials of Medical Language (2024), supplied educational PDF.
 
-## Muscle types and structure
+## Muscles and Tendons
+@source 97-99 | Textbook section 5.1, pp. 97-99
 > The [[muscular system]] moves the body, holds posture and makes heat. There are three kinds of muscle.
 > [[skeletal muscle]] attaches to bones and is a [[voluntary muscle]], under your control. [[smooth muscle]]
 > lines organs and blood vessels and is an [[involuntary muscle]]. [[cardiac muscle]] is found only in the heart
@@ -31,7 +33,6 @@ P rhabd/o = rod-shaped, striated
 P leiomy/o = smooth muscle
 P -trophy = development, nourishment
 
-## Body movements
 > Joint movements come in opposite pairs. [[flexion]] bends a joint and decreases its angle, as when you bend
 > the elbow, while [[extension]] straightens it; pushing past straight is [[hyperextension]]. [[abduction]]
 > moves a limb away from the midline of the body, and [[adduction]] moves it back toward the midline.
@@ -62,7 +63,9 @@ P kinesi/o = movement
 P -kinesia = movement
 P circum- = around
 
-## Major skeletal muscles
+
+## Muscles and Tendons of the Upper and Lower Extremities
+@source 100-103 | Textbook section 5.2, pp. 100-103
 > Many muscles are named for their shape, location or action. The [[deltoid]] is the triangle-shaped muscle
 > capping the shoulder and a common injection site. On the upper arm, the [[biceps brachii]] bends the elbow and
 > the [[triceps brachii]] straightens it. The [[pectoralis major]] covers the chest, the [[trapezius]] spans the
@@ -88,7 +91,9 @@ T gastrocnemius = the calf muscle that points the foot downward
 T rotator cuff = the four muscles and their tendons that hold the shoulder joint stable
 T diaphragm = the dome-shaped muscle under the lungs that is the main muscle of breathing
 
-## Tendons and their injuries
+
+## Disorders and Injuries of Muscles and Tendons
+@source 104-106 | Textbook section 5.3, pp. 104-106
 > The largest tendon in the body is the [[Achilles tendon]], which joins the calf muscles to the heel bone. A
 > [[strain]] is a stretched or torn muscle or tendon, while a complete tear is a [[tendon rupture]]. Overuse
 > causes [[tendinitis]], inflammation of a tendon, or [[tenosynovitis]] when the sheath around the tendon is
@@ -112,7 +117,6 @@ T shin splints = pain along the shinbone from overworked muscles and tendons
 P ten/o, tend/o, tendin/o = tendon
 P condyl/o = knuckle, rounded end of a bone
 
-## Muscle disorders
 > Muscle pain is [[myalgia]], and any disease of muscle is a [[myopathy]]. Inflammation of muscle is
 > [[myositis]]; when it is autoimmune and affects many muscles it is [[polymyositis]]. [[fibromyalgia]] is a
 > chronic condition of widespread muscle pain and tenderness with fatigue. [[muscular dystrophy]] is a group of
@@ -144,7 +148,18 @@ P fibr/o = fiber
 P -asthenia = weakness
 P sarc/o = flesh, connective tissue
 
-## Diagnosis and treatment
+
+## Physical Medicine and Rehabilitation (PM&R)
+@source 107-109 | Textbook section 5.4, pp. 107-109
+> [[physical medicine and rehabilitation]] restores function and quality of life after illness or injury. A [[physiatrist]] directs rehabilitation care, [[physical therapy]] improves movement, and [[occupational therapy]] builds skills needed for daily activities. A [[prosthesis]] replaces a missing body part.
+T physical medicine and rehabilitation = specialty focused on restoring function and quality of life after illness or injury
+T physiatrist = physician specializing in physical medicine and rehabilitation
+T physical therapy = treatment using exercise and physical methods to restore movement and function
+T occupational therapy = treatment that develops or restores skills for daily living and work
+T prosthesis = artificial replacement for a missing body part
+
+## Procedures and Pharmacology
+@source 110-114 | Textbook section 5.5, pp. 110-114
 > Muscle problems are tested with [[electromyography]], which records the electrical activity of muscles, and a
 > [[muscle biopsy]], which removes a small piece for examination. A blood test for [[creatine kinase]] shows
 > muscle damage, since this enzyme leaks out of injured muscle. The specialty of [[physical medicine and
@@ -156,10 +171,6 @@ P sarc/o = flesh, connective tissue
 T electromyography = recording the electrical activity of muscles | electr/o + my/o + -graphy
 T muscle biopsy = removal of a small piece of muscle for examination
 T creatine kinase = an enzyme released into the blood when muscle is damaged
-T physical medicine and rehabilitation = the specialty that restores function after injury or illness
-T physiatrist = a physician who specializes in physical medicine and rehabilitation | physi/o + iatr/o + -ist
-T physical therapy = treatment using exercise and movement to restore strength and function
-T occupational therapy = treatment that helps people regain the skills for daily activities and work
 T muscle relaxant = a drug that relieves muscle spasms
 T tenorrhaphy = surgical suturing of a tendon | ten/o + -rrhaphy
 T tenotomy = surgical cutting of a tendon | ten/o + -otomy
@@ -168,7 +179,6 @@ T myorrhaphy = surgical suturing of a muscle | my/o + -rrhaphy
 P electr/o = electricity
 P physi/o = nature, physical function
 
-## Abbreviations
 A ROM = range of motion
 A EMG = electromyography
 A CK = creatine kinase

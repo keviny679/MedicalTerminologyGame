@@ -1,6 +1,52 @@
-# 8 | The Respiratory System
+# 8 | The Respiratory System: The Essentials of the Language of Pulmonology
+// Aligned to Essentials of Medical Language (2024), supplied educational PDF.
 
-## Upper respiratory tract
+## Introduction to the Respiratory System
+@source 184-186 | Textbook section 8.1, pp. 184-186
+> [[ventilation]] is the movement of air in and out of the lungs. Breathing in is [[inspiration]]: the diaphragm
+> contracts and flattens, the chest expands, and air rushes in. Breathing out is [[expiration]]: the diaphragm
+> relaxes and air flows out. [[respiration]] is the exchange of gases. [[external respiration]] happens in the
+> lungs, where [[oxygen]] moves from the alveoli into the blood and [[carbon dioxide]] moves out. [[internal
+> respiration]] happens in the tissues, where the blood delivers oxygen to cells and picks up carbon dioxide.
+> Many breathing words use the suffix [[-pnea]], meaning breathing. Normal, easy breathing is [[eupnea]].
+> Absence of breathing is [[apnea]], difficult breathing is [[dyspnea]], fast breathing is [[tachypnea]], and
+> slow breathing is [[bradypnea]]. Difficulty breathing unless sitting upright is [[orthopnea]], a sign of heart
+> failure. Low oxygen in the tissues is [[hypoxia]], low oxygen in the blood is [[hypoxemia]], and too much
+> carbon dioxide in the blood is [[hypercapnia]]. The amount of air in one normal breath is the [[tidal
+> volume]].
+T ventilation = moving air in and out of the lungs
+T respiration = the exchange of oxygen and carbon dioxide
+T external respiration = gas exchange between the alveoli and the blood
+T internal respiration = gas exchange between the blood and the body's cells
+T inspiration = breathing in; also called inhalation
+T expiration = breathing out; also called exhalation
+T oxygen = the gas the body needs, taken in by the lungs
+T carbon dioxide = the waste gas carried to the lungs and breathed out
+T eupnea = normal, easy breathing | eu- + -pnea
+T apnea = temporary absence of breathing | a- + -pnea
+T dyspnea = difficult or labored breathing; shortness of breath | dys- + -pnea
+T tachypnea = abnormally rapid breathing | tachy- + -pnea
+T bradypnea = abnormally slow breathing | brady- + -pnea
+T hyperpnea = abnormally deep breathing | hyper- + -pnea
+T orthopnea = difficulty breathing when lying flat, relieved by sitting up | orth/o + -pnea
+T hyperventilation = breathing faster and deeper than needed, blowing off too much carbon dioxide
+T hypoventilation = breathing too slowly or shallowly to remove carbon dioxide
+T hypoxia = too little oxygen reaching the tissues | hyp/o + ox/o + -ia
+T hypoxemia = too little oxygen in the blood | hyp/o + ox/o + -emia
+T hypercapnia = too much carbon dioxide in the blood | hyper- + -capnia
+T anoxia = a total lack of oxygen | an- + ox/o + -ia
+T asphyxia = suffocation; lack of oxygen and buildup of carbon dioxide from blocked breathing
+T Cheyne-Stokes respiration = cycles of deep, then shallow breathing followed by pauses
+T tidal volume = the amount of air moved in one normal breath
+T vital capacity = the most air a person can breathe out after the deepest breath in
+P -pnea = breathing
+P ox/o, ox/i = oxygen
+P -capnia = carbon dioxide
+P spir/o = breathe, breathing
+
+
+## Upper Respiratory Tract
+@source 187-189 | Textbook section 8.2, pp. 187-189
 > The [[respiratory system]] brings in oxygen and removes carbon dioxide. The [[upper respiratory tract]]
 > includes the nose, sinuses, pharynx and larynx. Air enters the [[nose]] and passes into the [[nasal cavity]],
 > which is divided in two by the [[nasal septum]]. The nasal cavity warms and moistens the air, sticky [[mucus]]
@@ -36,7 +82,9 @@ P glott/o = glottis, opening of the larynx
 P or/o = mouth
 P -phonia = voice, sound
 
-## Lower respiratory tract
+
+## Lower Respiratory Tract
+@source 190-193 | Textbook section 8.3, pp. 190-193
 > Below the larynx, the [[lower respiratory tract]] begins with the [[trachea]], or windpipe, a tube held open
 > by C-shaped rings of cartilage. It splits into the right and left [[bronchi]], which enter the lungs and
 > branch again and again into smaller tubes called [[bronchioles]]. The smallest branches end in tiny air sacs,
@@ -79,49 +127,6 @@ P lob/o = lobe
 P phren/o = diaphragm
 P thorac/o = chest
 
-## Breathing and gas exchange
-> [[ventilation]] is the movement of air in and out of the lungs. Breathing in is [[inspiration]]: the diaphragm
-> contracts and flattens, the chest expands, and air rushes in. Breathing out is [[expiration]]: the diaphragm
-> relaxes and air flows out. [[respiration]] is the exchange of gases. [[external respiration]] happens in the
-> lungs, where [[oxygen]] moves from the alveoli into the blood and [[carbon dioxide]] moves out. [[internal
-> respiration]] happens in the tissues, where the blood delivers oxygen to cells and picks up carbon dioxide.
-> Many breathing words use the suffix [[-pnea]], meaning breathing. Normal, easy breathing is [[eupnea]].
-> Absence of breathing is [[apnea]], difficult breathing is [[dyspnea]], fast breathing is [[tachypnea]], and
-> slow breathing is [[bradypnea]]. Difficulty breathing unless sitting upright is [[orthopnea]], a sign of heart
-> failure. Low oxygen in the tissues is [[hypoxia]], low oxygen in the blood is [[hypoxemia]], and too much
-> carbon dioxide in the blood is [[hypercapnia]]. The amount of air in one normal breath is the [[tidal
-> volume]].
-T ventilation = moving air in and out of the lungs
-T respiration = the exchange of oxygen and carbon dioxide
-T external respiration = gas exchange between the alveoli and the blood
-T internal respiration = gas exchange between the blood and the body's cells
-T inspiration = breathing in; also called inhalation
-T expiration = breathing out; also called exhalation
-T oxygen = the gas the body needs, taken in by the lungs
-T carbon dioxide = the waste gas carried to the lungs and breathed out
-T eupnea = normal, easy breathing | eu- + -pnea
-T apnea = temporary absence of breathing | a- + -pnea
-T dyspnea = difficult or labored breathing; shortness of breath | dys- + -pnea
-T tachypnea = abnormally rapid breathing | tachy- + -pnea
-T bradypnea = abnormally slow breathing | brady- + -pnea
-T hyperpnea = abnormally deep breathing | hyper- + -pnea
-T orthopnea = difficulty breathing when lying flat, relieved by sitting up | orth/o + -pnea
-T hyperventilation = breathing faster and deeper than needed, blowing off too much carbon dioxide
-T hypoventilation = breathing too slowly or shallowly to remove carbon dioxide
-T hypoxia = too little oxygen reaching the tissues | hyp/o + ox/o + -ia
-T hypoxemia = too little oxygen in the blood | hyp/o + ox/o + -emia
-T hypercapnia = too much carbon dioxide in the blood | hyper- + -capnia
-T anoxia = a total lack of oxygen | an- + ox/o + -ia
-T asphyxia = suffocation; lack of oxygen and buildup of carbon dioxide from blocked breathing
-T Cheyne-Stokes respiration = cycles of deep, then shallow breathing followed by pauses
-T tidal volume = the amount of air moved in one normal breath
-T vital capacity = the most air a person can breathe out after the deepest breath in
-P -pnea = breathing
-P ox/o, ox/i = oxygen
-P -capnia = carbon dioxide
-P spir/o = breathe, breathing
-
-## Signs and lung sounds
 > A [[cough]] clears the airways. A [[productive cough]] brings up [[sputum]], mucus from the lungs, and
 > coughing it out is [[expectoration]]. Coughing up blood is [[hemoptysis]], a warning sign of conditions like
 > tuberculosis or lung cancer. A nosebleed is [[epistaxis]], and a runny nose is [[rhinorrhea]]. Hoarseness or
@@ -150,7 +155,9 @@ T pleural friction rub = a grating sound when inflamed pleural layers rub togeth
 T clubbing = rounded, enlarged fingertips from long-term low oxygen
 P -ptysis = spitting
 
-## Upper respiratory disorders
+
+## Disorders of the Respiratory System
+@source 194-201 | Textbook section 8.4, pp. 194-201
 > An [[upper respiratory infection]], such as the common cold, affects the nose and throat. Inflammation of the
 > nose lining is [[rhinitis]]; when it is caused by pollen or dust it is [[allergic rhinitis]], or hay fever.
 > Inflammation of the sinuses is [[sinusitis]]. A sore throat is [[pharyngitis]], and when it is caused by
@@ -176,7 +183,6 @@ T deviated septum = a nasal septum that is off-center, which can block airflow
 T nasal polyps = soft, painless growths on the lining of the nose or sinuses
 T obstructive sleep apnea = repeated pauses in breathing during sleep from a collapsing airway
 
-## Lower respiratory and lung disorders
 > [[asthma]] is chronic inflammation of the airways that causes episodes of narrowing, wheezing and shortness of
 > breath. Inflammation of the bronchi is [[bronchitis]]. [[chronic obstructive pulmonary disease]] is long-term
 > airflow blockage, usually from smoking, and includes chronic bronchitis and [[emphysema]], in which the
@@ -217,7 +223,9 @@ P atel/o = incomplete
 P -thorax = chest, pleural cavity
 P coni/o = dust
 
-## Diagnostic tests
+
+## Diagnostic and Therapeutic Procedures and Pharmacology
+@source 202-208 | Textbook section 8.5, pp. 202-208
 > A [[chest x-ray]] shows the lungs, heart and diaphragm and reveals pneumonia, fluid or a collapsed lung.
 > [[pulse oximetry]] uses a clip on the finger to measure how saturated the blood is with oxygen. [[arterial
 > blood gases]] are measured from a sample of arterial blood and show oxygen, carbon dioxide and acid levels
@@ -244,7 +252,6 @@ T polysomnography = an overnight sleep study | poly- + somn/o + -graphy
 P -metry = process of measuring
 P somn/o = sleep
 
-## Procedures and treatment
 > [[oxygen therapy]] delivers extra oxygen, often through a [[nasal cannula]], small prongs in the nose. When a
 > patient cannot protect their own airway, [[endotracheal intubation]] places a tube through the mouth into the
 > trachea, usually connected to [[mechanical ventilation]], a machine that breathes for the patient. For
@@ -278,7 +285,6 @@ T Heimlich maneuver = abdominal thrusts used to clear a choking person's airway
 T tonsillectomy = removal of the tonsils, sometimes for repeated throat infections
 P tuss/i = cough
 
-## Abbreviations
 A URI = upper respiratory infection
 A LRI = lower respiratory infection
 A COPD = chronic obstructive pulmonary disease

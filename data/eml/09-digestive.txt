@@ -1,0 +1,68 @@
+# 9 | The Digestive System: The Essentials of the Language of Gastroenterology
+// Source-faithful study outline aligned to the supplied textbook.
+
+## The Digestive System
+@source 210-212 | Textbook section 9.1, pp. 210-212
+> The [[alimentary canal]] carries food from mouth to anus. [[ingestion]] takes food in, [[deglutition]] swallows it, [[peristalsis]] propels it, and [[digestion]] breaks it down so [[absorption]] can move nutrients into blood or lymph. [[defecation]] eliminates indigestible residue.
+T alimentary canal = digestive tract extending from the mouth to the anus
+T ingestion = selective intake of food into the mouth
+T deglutition = swallowing a bolus from the mouth into the esophagus
+T peristalsis = waves of contraction and relaxation that move material through the digestive tract
+T digestion = mechanical and chemical breakdown of food into absorbable forms
+T absorption = movement of digested nutrients into blood or lymph
+T defecation = elimination of indigestible material as feces
+
+## Mouth, Pharynx, and Esophagus
+@source 213-216 | Textbook section 9.2, pp. 213-216
+> [[mastication]] begins mechanical digestion in the [[oral cavity]]. The [[palate]] forms the roof of the mouth, the [[uvula]] helps close the nasopharynx during swallowing, and [[saliva]] begins chemical digestion. The [[pharynx]] directs the bolus toward the [[esophagus]].
+T mastication = chewing that mechanically breaks food into smaller particles
+T oral cavity = the mouth; the first site of mechanical and chemical digestion
+T palate = roof of the mouth, with hard anterior and soft posterior portions
+T uvula = projection of the soft palate that helps close the nasopharynx during swallowing
+T saliva = secretion that lubricates food and begins chemical digestion
+T pharynx = throat passage shared by the digestive and respiratory systems
+T esophagus = muscular tube that carries food from the pharynx to the stomach
+
+## Digestion—Stomach, Small Intestine, and Large Intestine
+@source 217-222 | Textbook section 9.3, pp. 217-222
+> The [[stomach]] mixes food into [[chyme]]. Most digestion and absorption occur in the [[small intestine]], whose parts are the [[duodenum]], [[jejunum]], and [[ileum]]. The [[large intestine]] absorbs water and forms feces, which pass through the [[rectum]].
+T stomach = muscular sac that mixes food with gastric secretions
+T chyme = semifluid mixture of partially digested food and gastric juice
+T small intestine = digestive tract segment where most digestion and nutrient absorption occur
+T duodenum = first section of the small intestine
+T jejunum = middle section of the small intestine
+T ileum = third and final section of the small intestine
+T large intestine = bowel segment that absorbs water and forms feces
+T rectum = terminal storage portion of the large intestine before the anus
+
+## Digestion—Liver, Gallbladder, and Pancreas
+@source 223-225 | Textbook section 9.4, pp. 223-225
+> The [[liver]] produces [[bile]], the [[gallbladder]] stores and concentrates it, and the [[pancreas]] supplies digestive enzymes and bicarbonate to the duodenum. Bile helps [[emulsification]] of fats before absorption.
+T liver = large accessory organ that produces bile and performs metabolic functions
+T bile = liver secretion that aids digestion and absorption of fats
+T gallbladder = sac that stores and concentrates bile
+T pancreas = gland that supplies digestive enzymes and bicarbonate to the small intestine
+T emulsification = breaking large fat globules into small droplets to aid digestion
+
+## Disorders of the Digestive System
+@source 226-238 | Textbook section 9.5, pp. 226-238
+> [[gastroesophageal reflux disease]] is chronic backward flow into the esophagus. A [[peptic ulcer]] is an erosion in the stomach or duodenal lining. [[hepatitis]] inflames the liver, [[cholelithiasis]] means gallstones, and [[cirrhosis]] is chronic scarring of the liver.
+T gastroesophageal reflux disease = chronic reflux of stomach contents into the esophagus
+T peptic ulcer = erosion in the lining of the stomach or duodenum
+T hepatitis = inflammation of the liver | hepat/o + -itis
+T cholelithiasis = condition of stones in the gallbladder or bile ducts | chol/e + lith/o + -iasis
+T cirrhosis = chronic liver disease with fibrosis and loss of normal function
+T appendicitis = inflammation of the appendix | appendic/o + -itis
+T diverticulitis = inflammation of one or more diverticula in the colon
+
+## Diagnostic and Therapeutic Procedures and Pharmacology of the Digestive System
+@source 239-247 | Textbook section 9.6, pp. 239-247
+> [[endoscopy]] visually examines the digestive tract. [[colonoscopy]] examines the colon, while [[biopsy]] removes tissue for microscopic study. An [[antacid]] neutralizes gastric acid, and an [[antiemetic]] prevents or relieves nausea and vomiting.
+T endoscopy = visual examination within a body cavity using an endoscope
+T colonoscopy = endoscopic examination of the colon
+T biopsy = removal of tissue for microscopic examination
+T antacid = drug that neutralizes stomach acid
+T antiemetic = drug that prevents or relieves nausea and vomiting
+A GERD = gastroesophageal reflux disease
+A GI = gastrointestinal
+

@@ -1,6 +1,8 @@
-# 4 | The Skeletal System
+# 4 | The Skeletal System: The Essentials of the Language of Orthopedics
+// Aligned to Essentials of Medical Language (2024), supplied educational PDF.
 
-## Bone structure and function
+## Bones of the Skeletal System
+@source 64-67 | Textbook section 4.1, pp. 64-67
 > Bones support the body, protect organs, store minerals and make blood cells. Three types of cells keep bone
 > alive: an [[osteoblast]] builds new bone, an [[osteoclast]] breaks bone down, and an [[osteocyte]] is a mature
 > bone cell that maintains it. Remodeling is a balance between building and breaking. A [[long bone]] like the
@@ -40,7 +42,9 @@ P -blast = immature cell, germ cell
 P -clast = to break
 P -poiesis = formation
 
-## Bones of the skull and axial skeleton
+
+## Axial and Appendicular Skeleton
+@source 68-78 | Textbook section 4.2, pp. 68-78
 > The [[axial skeleton]] forms the center of the body: the skull, spine, ribs and sternum. The [[cranium]]
 > protects the brain. The [[frontal bone]] forms the forehead, two [[parietal bones|parietal bone]] form the top
 > and sides, the [[temporal bones|temporal bone]] lie above the ears, and the [[occipital bone]] forms the back
@@ -102,7 +106,6 @@ P lumb/o = lower back
 P stern/o = sternum
 P cost/o = rib
 
-## Bones of the limbs and girdles
 > The [[appendicular skeleton]] includes the limbs and the girdles that attach them. The shoulder girdle is made
 > of the [[clavicle]], or collarbone, and the [[scapula]], or shoulder blade. The upper arm bone is the
 > [[humerus]]. The forearm has two bones: the [[radius]] on the thumb side and the [[ulna]] on the little finger
@@ -141,7 +144,9 @@ P femor/o = femur
 P patell/o = kneecap
 P pelv/i = pelvis, hip bone
 
-## Joints and ligaments
+
+## Disorders and Injuries of the Skeleton System
+@source 79-86 | Textbook section 4.3, pp. 79-86
 > A [[joint]] is where two or more bones meet. Joints are grouped by how much they move. A [[fibrous joint]],
 > such as a skull suture, does not move at all. A [[cartilaginous joint]] moves slightly; the [[pubic
 > symphysis]] at the front of the pelvis is an example. The most movable type is the [[synovial joint]], such as
@@ -176,7 +181,6 @@ P burs/o = bursa
 P synov/o = synovial membrane, synovial fluid
 P menisc/o = meniscus
 
-## Fractures and bone disorders
 > A [[fracture]] is a broken bone. In a [[closed fracture]] the skin stays intact, while in an [[open fracture]]
 > the bone breaks through the skin, raising the risk of infection. A [[comminuted fracture]] shatters into
 > several pieces. A [[greenstick fracture]] is an incomplete break on one side, common in children's flexible
@@ -211,7 +215,6 @@ T osteogenesis imperfecta = an inherited disorder causing brittle bones that bre
 T Paget disease = a disorder of disorganized bone remodeling causing enlarged, weak bones
 P por/o = pore, small opening
 
-## Joint and spine disorders
 > [[arthritis]] means joint inflammation. [[osteoarthritis]] is wear-and-tear breakdown of cartilage, common
 > with age. [[rheumatoid arthritis]] is an autoimmune disease in which the immune system attacks the synovial
 > membrane, often in small joints on both sides of the body. [[gout]] is caused by uric acid crystals,
@@ -243,7 +246,9 @@ P kyph/o = humpback
 P lord/o = swayback, curve
 P scoli/o = crooked, curved
 
-## Diagnosis and treatment
+
+## Diagnostic and Therapeutic Procedures and Pharmacology for Bone Disorders
+@source 87-95 | Textbook section 4.4, pp. 87-95
 > Bones and joints are treated by [[orthopedics]]. To look inside a joint, surgeons perform [[arthroscopy]]
 > through small incisions. Removing fluid from a joint with a needle is [[arthrocentesis]]. Replacing or
 > repairing a joint is [[arthroplasty]], such as a [[total knee arthroplasty]] or [[total hip arthroplasty]],
@@ -277,7 +282,6 @@ P -desis = binding, fusion
 P lamin/o = lamina (part of a vertebra)
 P orth/o = straight
 
-## Abbreviations
 A Fx = fracture
 A ortho = orthopedics
 A ORIF = open reduction internal fixation

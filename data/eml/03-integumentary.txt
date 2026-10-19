@@ -1,6 +1,8 @@
-# 3 | The Integumentary System
+# 3 | The Integumentary System: The Essentials of the Language of Dermatology
+// Aligned to Essentials of Medical Language (2024), supplied educational PDF.
 
-## Structure and functions of the skin
+## Functions and Structure of the Skin
+@source 35-40 | Textbook section 3.1, pp. 35-40
 > The skin, or [[integument]], is the body's largest organ, and it has three layers. The outer [[epidermis]] has
 > no blood vessels. Its deepest layer, the [[stratum basale]], constantly makes new cells, which move upward and
 > fill with the tough protein [[keratin]]. By the time they reach the surface they are dead, flat cells forming
@@ -41,7 +43,6 @@ P leuk/o = white
 P cyan/o = blue
 P xanth/o = yellow
 
-## Accessory structures: hair, nails and glands
 > Hair, nails and glands are called accessory structures of the skin. Each hair grows from a [[hair follicle]]
 > deep in the dermis, and the visible part above the skin is the [[hair shaft]]. A tiny muscle, the [[arrector
 > pili]], pulls the hair upright when you are cold or frightened, creating goosebumps. Beside each follicle is a
@@ -73,7 +74,9 @@ T hyperhidrosis = excessive sweating | hyper- + hidr/o + -osis
 T anhidrosis = absence or deficiency of sweating | an- + hidr/o + -osis
 P myc/o = fungus
 
-## Skin lesions and signs
+
+## Disorders of the Skin and Accessory Organs
+@source 41-51 | Textbook section 3.2, pp. 41-51
 > A [[lesion]] is any area of abnormal skin, and lesions are described by size and whether they are flat, raised
 > or fluid filled. A [[macule]] is a flat, discolored spot smaller than 1 cm, like a freckle; a larger flat spot
 > is a [[patch]]. A [[papule]] is a small, solid, raised bump, and a larger, deeper solid lump is a [[nodule]].
@@ -111,7 +114,6 @@ T purpura = purple patches on the skin caused by bleeding underneath
 T rash = a temporary eruption on the skin
 T xeroderma = abnormally dry skin | xer/o + derm/o + -a
 
-## Infections and inflammatory skin disorders
 > [[dermatitis]] means inflammation of the skin. [[contact dermatitis]] is caused by touching an irritant or
 > allergen, like poison ivy, and [[atopic dermatitis]], or eczema, is a chronic itchy rash often linked to
 > allergies. [[psoriasis]] causes thick red plaques with silvery scales because skin cells grow too fast.
@@ -151,7 +153,6 @@ T scleroderma = a chronic disease causing hardening and thickening of the skin |
 T lupus = an autoimmune disease that may cause a butterfly rash on the face
 P scler/o = hard
 
-## Skin cancers and growths
 > Skin cancers are named for the cells they come from. [[basal cell carcinoma]] is the most common and arises in
 > the basal layer; it grows slowly and rarely spreads. [[squamous cell carcinoma]] arises in the flattened cells
 > of the epidermis and can spread if untreated. [[melanoma]] arises from melanocytes and is the most dangerous
@@ -176,45 +177,9 @@ T Kaposi sarcoma = a cancer of blood vessel tissue causing purple skin lesions, 
 P carcin/o = cancer
 P sarc/o = flesh, connective tissue
 
-## Burns and wounds
-> Burns are classified by depth. A [[superficial burn]], or first-degree burn, affects only the epidermis and
-> causes redness and pain, like a sunburn. A [[partial-thickness burn]], or second-degree burn, reaches into the
-> dermis and forms blisters. A [[full-thickness burn]], or third-degree burn, destroys the epidermis and dermis;
-> the area may look white or charred and feel numb because nerves are destroyed. A [[fourth-degree burn]]
-> extends into muscle or bone. To estimate the size of a burn, the [[rule of nines]] assigns about 9 percent of
-> the [[total body surface area]] to each arm and to the head, and 18 percent to each leg, the front of the
-> trunk and the back. Dead, hard tissue over a deep burn is [[eschar]], and removing it is [[debridement]]. A
-> [[skin graft]] may follow: an [[autograft]] uses the patient's own skin, an [[allograft]] uses donor skin, and
-> a [[xenograft]] uses animal skin. Wounds include a [[laceration]] or cut, an [[abrasion]] or scrape, and a
-> [[contusion]] or bruise. Prolonged pressure causes a [[pressure injury]].
-T burn = injury to tissue caused by heat, chemicals, electricity or radiation
-T superficial burn = a first-degree burn involving only the epidermis; red and painful | @burns.first
-T partial-thickness burn = a second-degree burn reaching into the dermis, with blisters | @burns.second
-T full-thickness burn = a third-degree burn destroying the epidermis and dermis; may be painless | @burns.third
-T fourth-degree burn = a burn extending into muscle, tendon or bone | @burns.fourth
-T rule of nines = a method that divides the body into 9% sections to estimate burn size
-T total body surface area = the percent of skin affected, used to judge burn severity
-T eschar = the thick, dead, leathery tissue over a deep burn
-T debridement = removal of dead or damaged tissue from a wound or burn
-T skin graft = moving healthy skin to cover a wound or burn
-T autograft = a graft taken from the patient's own body | auto- + graft
-T allograft = a graft taken from another person | all/o + graft
-T xenograft = a graft taken from another species, such as pig skin | xen/o + graft
-T laceration = a torn or jagged wound
-T abrasion = a scrape that removes the top layer of skin
-T contusion = a bruise caused by a blow, without breaking the skin
-T puncture wound = a deep, narrow wound made by a sharp, pointed object
-T pressure injury = damage to skin and tissue from prolonged pressure; also called pressure ulcer or bedsore
-T decubitus ulcer = a pressure sore from lying in one position too long
-T frostbite = injury to skin and tissue from freezing
-T gangrene = death of tissue due to loss of blood supply, sometimes with infection
-T cicatrix = a scar
-T granulation tissue = new tissue with tiny blood vessels that forms as a wound heals
-T suture = to close a wound with stitches, or the stitch itself
-P all/o = other
-P xen/o = foreign
 
-## Diagnosis, procedures and treatment
+## Diagnostic and Therapeutic Procedures and Pharmacology for Disorders
+@source 52-55 | Textbook section 3.3, pp. 52-55
 > To diagnose skin lesions, doctors often take a [[biopsy]], removing tissue to examine under a microscope. A
 > [[punch biopsy]] removes a small cylinder of skin, a [[shave biopsy]] slices off a raised lesion, and an
 > [[excisional biopsy]] removes the entire lesion. For infections, a [[culture and sensitivity]] test grows the
@@ -254,7 +219,6 @@ P blephar/o = eyelid
 P rhytid/o = wrinkle
 P bi/o = life
 
-## Abbreviations
 A BCC = basal cell carcinoma
 A SCC = squamous cell carcinoma
 A TBSA = total body surface area
@@ -266,3 +230,42 @@ A MRSA = methicillin-resistant Staphylococcus aureus
 A Bx = biopsy
 A derm = dermatology
 A SubQ = subcutaneous
+
+## Burns and Injuries to the Skin
+@source 56-62 | Textbook section 3.4, pp. 56-62
+> Burns are classified by depth. A [[superficial burn]], or first-degree burn, affects only the epidermis and
+> causes redness and pain, like a sunburn. A [[partial-thickness burn]], or second-degree burn, reaches into the
+> dermis and forms blisters. A [[full-thickness burn]], or third-degree burn, destroys the epidermis and dermis;
+> the area may look white or charred and feel numb because nerves are destroyed. A [[fourth-degree burn]]
+> extends into muscle or bone. To estimate the size of a burn, the [[rule of nines]] assigns about 9 percent of
+> the [[total body surface area]] to each arm and to the head, and 18 percent to each leg, the front of the
+> trunk and the back. Dead, hard tissue over a deep burn is [[eschar]], and removing it is [[debridement]]. A
+> [[skin graft]] may follow: an [[autograft]] uses the patient's own skin, an [[allograft]] uses donor skin, and
+> a [[xenograft]] uses animal skin. Wounds include a [[laceration]] or cut, an [[abrasion]] or scrape, and a
+> [[contusion]] or bruise. Prolonged pressure causes a [[pressure injury]].
+T burn = injury to tissue caused by heat, chemicals, electricity or radiation
+T superficial burn = a first-degree burn involving only the epidermis; red and painful | @burns.first
+T partial-thickness burn = a second-degree burn reaching into the dermis, with blisters | @burns.second
+T full-thickness burn = a third-degree burn destroying the epidermis and dermis; may be painless | @burns.third
+T fourth-degree burn = a burn extending into muscle, tendon or bone | @burns.fourth
+T rule of nines = a method that divides the body into 9% sections to estimate burn size
+T total body surface area = the percent of skin affected, used to judge burn severity
+T eschar = the thick, dead, leathery tissue over a deep burn
+T debridement = removal of dead or damaged tissue from a wound or burn
+T skin graft = moving healthy skin to cover a wound or burn
+T autograft = a graft taken from the patient's own body | auto- + graft
+T allograft = a graft taken from another person | all/o + graft
+T xenograft = a graft taken from another species, such as pig skin | xen/o + graft
+T laceration = a torn or jagged wound
+T abrasion = a scrape that removes the top layer of skin
+T contusion = a bruise caused by a blow, without breaking the skin
+T puncture wound = a deep, narrow wound made by a sharp, pointed object
+T pressure injury = damage to skin and tissue from prolonged pressure; also called pressure ulcer or bedsore
+T decubitus ulcer = a pressure sore from lying in one position too long
+T frostbite = injury to skin and tissue from freezing
+T gangrene = death of tissue due to loss of blood supply, sometimes with infection
+T cicatrix = a scar
+T granulation tissue = new tissue with tiny blood vessels that forms as a wound heals
+T suture = to close a wound with stitches, or the stitch itself
+P all/o = other
+P xen/o = foreign

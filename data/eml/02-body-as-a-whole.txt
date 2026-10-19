@@ -1,6 +1,8 @@
-# 2 | The Body as a Whole
+# 2 | The Body as a Whole, Cells, and Genes: The Essentials of the Languages of Anatomy and Genetics
+// Aligned to Essentials of Medical Language (2024), supplied educational PDF.
 
-## Levels of organization
+## Composition of Body and Cells
+@source 16-19 | Textbook section 2.1, pp. 16-19
 > The body is organized in levels, from small to large. The [[cell]] is the smallest living unit. Similar cells
 > working together form a [[tissue]], two or more tissues form an [[organ]], and organs that cooperate form an
 > [[organ system]], such as the digestive system. All the systems together make up the whole [[organism]]. To
@@ -18,7 +20,9 @@ T metabolism = all the chemical processes that build up and break down substance
 T anabolism = the building of complex molecules from simpler ones
 T catabolism = the breakdown of complex molecules into simpler ones, releasing energy
 
-## Cells and genetics
+
+## Genes and Genetics
+@source 20-21 | Textbook section 2.2, pp. 20-21
 > Every cell is wrapped in a [[cell membrane]] that controls what goes in and out. Inside is the gel-like
 > [[cytoplasm]], which holds the organelles. The [[nucleus]] is the control center and contains the DNA.
 > [[mitochondria]] make the cell's energy, and each [[ribosome]] builds proteins. DNA is packed into structures
@@ -52,7 +56,17 @@ P kary/o, nucle/o = nucleus
 P gen/o = producing, origin, gene
 P hist/o = tissue
 
-## Tissues
+
+## Genetic Medicine
+@source 22-23 | Textbook section 2.3, pp. 22-23
+> [[genetic medicine]] applies genetics to medical care. [[personalized medicine]] uses a person's genetic variation and other factors to guide prevention, diagnosis, or treatment. [[gene therapy]] introduces or changes genetic material to treat disease, while [[predictive medicine]] estimates future disease risk.
+T genetic medicine = application of genetics to medical care
+T personalized medicine = prevention or treatment tailored to a person's genetic and other individual characteristics
+T gene therapy = treatment that introduces, removes, or changes genetic material in a patient's cells
+T predictive medicine = use of genetic and other information to estimate future disease risk
+
+## Tissues, Organs, and Organ Systems
+@source 24-29 | Textbook section 2.4, pp. 24-29
 > There are four basic tissue types. [[epithelial tissue]] covers surfaces and lines organs and cavities, like
 > the skin's outer layer. [[connective tissue]] supports and binds other tissues; bone, fat, cartilage and even
 > blood are connective tissues. [[muscle tissue]] contracts to create movement, and [[nervous tissue]] sends
@@ -76,7 +90,34 @@ T malignant = cancerous, able to invade and spread
 P -plasia = formation, development
 P -plasm = formed substance
 
-## Anatomical position and directions
+> The body's organ systems each have a main job. The [[integumentary system]] of skin, hair and nails protects
+> the body. The [[musculoskeletal system]] supports and moves it. The [[cardiovascular system]] pumps blood, the
+> [[respiratory system]] exchanges oxygen and carbon dioxide, and the [[digestive system]] breaks down food. The
+> [[urinary system]] filters the blood, the [[nervous system]] controls and coordinates, and the [[endocrine
+> system]] releases hormones. When disease strikes, a germ that causes disease is a [[pathogen]], and its
+> invasion of the body is an [[infection]]. The body responds with [[inflammation]]: redness, heat, swelling and
+> pain. Swelling from excess fluid in tissues is called [[edema]], and the death of cells or tissue is
+> [[necrosis]].
+T integumentary system = the skin, hair, nails and skin glands; protects the body
+T musculoskeletal system = the bones, joints and muscles; supports and moves the body
+T cardiovascular system = the heart and blood vessels; moves blood through the body
+T respiratory system = the airways and lungs; exchanges oxygen and carbon dioxide
+T digestive system = the organs that break down food and absorb nutrients
+T urinary system = the kidneys, ureters, bladder and urethra; filters blood and removes wastes
+T nervous system = the brain, spinal cord and nerves; controls and coordinates the body
+T endocrine system = glands that release hormones into the blood
+T lymphatic system = vessels and organs that return fluid to the blood and help fight infection
+T inflammation = the body's protective response to injury or infection, with redness, heat, swelling and pain
+T infection = invasion of the body by disease-causing organisms
+T pathogen = a microorganism that causes disease | path/o + -gen
+T edema = swelling caused by excess fluid in the tissues
+T necrosis = death of cells or tissue | necr/o + -osis
+P path/o = disease
+P necr/o = death
+
+
+## Anatomical Positions, Planes, and Directions
+@source 30-33 | Textbook section 2.5, pp. 30-33
 > All directional terms assume [[anatomical position]]: standing upright, facing forward, arms at the sides with
 > palms forward. From there, [[superior]] means toward the head and [[inferior]] means toward the feet.
 > [[anterior]] means toward the front and [[posterior]] means toward the back; in humans these match [[ventral]]
@@ -114,7 +155,6 @@ P cephal/o = head
 P ventr/o = belly side
 P dors/o = back
 
-## Planes and body cavities
 > Imaging and anatomy often slice the body along planes. The [[sagittal plane]] is vertical and divides the body
 > into right and left parts; when it runs exactly down the middle it is the midsagittal plane. The [[frontal
 > plane]], also called the coronal plane, divides the body into front and back. The [[transverse plane]] is
@@ -145,7 +185,6 @@ P abdomin/o = abdomen
 P pelv/i = pelvis
 P viscer/o = internal organs
 
-## Abdominal quadrants and regions
 > To describe where pain or a finding is, the abdomen is divided into quadrants by two lines that cross at the
 > navel, or [[umbilicus]]. Remember that right and left are the patient's sides. The [[right upper quadrant]]
 > holds most of the liver and the gallbladder, and the [[left upper quadrant]] holds the stomach and spleen. The
@@ -170,33 +209,6 @@ T left iliac region = the lower left abdominal region near the groin; also calle
 T umbilicus = the navel, where the umbilical cord was attached
 T inguinal = relating to the groin
 
-## Body systems and disease
-> The body's organ systems each have a main job. The [[integumentary system]] of skin, hair and nails protects
-> the body. The [[musculoskeletal system]] supports and moves it. The [[cardiovascular system]] pumps blood, the
-> [[respiratory system]] exchanges oxygen and carbon dioxide, and the [[digestive system]] breaks down food. The
-> [[urinary system]] filters the blood, the [[nervous system]] controls and coordinates, and the [[endocrine
-> system]] releases hormones. When disease strikes, a germ that causes disease is a [[pathogen]], and its
-> invasion of the body is an [[infection]]. The body responds with [[inflammation]]: redness, heat, swelling and
-> pain. Swelling from excess fluid in tissues is called [[edema]], and the death of cells or tissue is
-> [[necrosis]].
-T integumentary system = the skin, hair, nails and skin glands; protects the body
-T musculoskeletal system = the bones, joints and muscles; supports and moves the body
-T cardiovascular system = the heart and blood vessels; moves blood through the body
-T respiratory system = the airways and lungs; exchanges oxygen and carbon dioxide
-T digestive system = the organs that break down food and absorb nutrients
-T urinary system = the kidneys, ureters, bladder and urethra; filters blood and removes wastes
-T nervous system = the brain, spinal cord and nerves; controls and coordinates the body
-T endocrine system = glands that release hormones into the blood
-T lymphatic system = vessels and organs that return fluid to the blood and help fight infection
-T inflammation = the body's protective response to injury or infection, with redness, heat, swelling and pain
-T infection = invasion of the body by disease-causing organisms
-T pathogen = a microorganism that causes disease | path/o + -gen
-T edema = swelling caused by excess fluid in the tissues
-T necrosis = death of cells or tissue | necr/o + -osis
-P path/o = disease
-P necr/o = death
-
-## Abbreviations
 A A&P = anatomy and physiology
 A RUQ = right upper quadrant
 A LUQ = left upper quadrant

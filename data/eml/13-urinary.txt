@@ -1,0 +1,34 @@
+# 13 | The Urinary System: The Essentials of the Language of Urology
+
+## Urinary System, Kidneys, and Ureters
+@source 360-363 | Textbook section 13.1, pp. 360-363
+> The [[urinary system]] includes two kidneys, two ureters, one bladder, and one urethra. Each kidney contains about a million [[nephrons|nephron]]. Blood is filtered in the [[glomerulus]], urine drains into the [[renal pelvis]], and each [[ureter]] carries it to the bladder.
+T urinary system = organs that form, transport, store, and eliminate urine
+T nephron = functional filtration unit of the kidney
+T glomerulus = capillary network in a nephron where blood filtration begins
+T renal pelvis = funnel-shaped kidney cavity that collects urine for the ureter
+T ureter = tube carrying urine from a kidney to the urinary bladder
+T urinary bladder = muscular sac that stores urine
+T urethra = tube carrying urine from the bladder to the outside
+T excretion = removal of metabolic waste products from the body
+
+## Disorders of the Urinary System
+@source 364-369 | Textbook section 13.2, pp. 364-369
+> A [[urinary tract infection]] can affect urinary organs. [[cystitis]] inflames the bladder, [[pyelonephritis]] infects the kidney and renal pelvis, and [[nephrolithiasis]] is the condition of kidney stones. [[renal failure]] means the kidneys cannot adequately filter wastes.
+T urinary tract infection = infection involving one or more organs of the urinary tract
+T cystitis = inflammation of the urinary bladder | cyst/o + -itis
+T pyelonephritis = inflammation or infection of the kidney and renal pelvis | pyel/o + nephr/o + -itis
+T nephrolithiasis = condition of stones in the kidney | nephr/o + lith/o + -iasis
+T renal failure = loss of kidney function sufficient to impair waste and fluid regulation
+T incontinence = inability to control urination
+A UTI = urinary tract infection
+
+## Diagnostic and Therapeutic Procedures of the Urinary System
+@source 370-377 | Textbook section 13.3, pp. 370-377
+> [[urinalysis]] examines urine chemically and microscopically. [[cystoscopy]] visually examines the bladder and urethra. [[dialysis]] removes wastes and excess fluid when kidneys fail, while [[lithotripsy]] fragments urinary stones.
+T urinalysis = physical, chemical, and microscopic examination of urine
+T cystoscopy = visual examination of the bladder and urethra with a cystoscope
+T dialysis = artificial removal of wastes and excess fluid from the blood
+T lithotripsy = use of energy waves to break urinary stones into smaller fragments
+T renal transplantation = surgical placement of a donor kidney
+A UA = urinalysis

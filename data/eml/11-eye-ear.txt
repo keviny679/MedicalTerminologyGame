@@ -1,0 +1,54 @@
+# 11 | Special Senses of the Eye and Ear: The Essentials of the Languages of Ophthalmology and Otology
+
+## Structure and Function of the Accessory Structures of the Eye
+@source 293-298 | Textbook section 11.1, pp. 293-298
+> The [[conjunctiva]] lines the eyelids and covers the exposed eye except the cornea. The [[lacrimal apparatus]] produces and drains tears. The [[orbit]] is the bony socket, and [[stereopsis]] is three-dimensional vision.
+T conjunctiva = transparent mucous membrane lining the eyelids and covering the front of the eye except the cornea
+T lacrimal apparatus = structures that produce and drain tears
+T orbit = bony socket that holds the eyeball
+T stereopsis = three-dimensional vision
+T cornea = transparent anterior covering of the eye
+
+## Disorders of the Eye
+@source 299-306 | Textbook section 11.2, pp. 299-306
+> [[cataract]] is clouding of the lens. [[glaucoma]] damages the optic nerve, often with raised intraocular pressure. [[myopia]] impairs distance vision, while [[hyperopia]] impairs near vision.
+T cataract = clouding of the crystalline lens of the eye
+T glaucoma = group of diseases that damage the optic nerve, often associated with increased intraocular pressure
+T myopia = refractive error in which distant objects appear blurred
+T hyperopia = refractive error in which near objects appear blurred
+T conjunctivitis = inflammation of the conjunctiva
+
+## Diagnostic and Therapeutic Procedures and Pharmacology for the Eye
+@source 307-313 | Textbook section 11.3, pp. 307-313
+> [[ophthalmoscopy]] examines the interior of the eye. [[tonometry]] measures intraocular pressure, and [[visual acuity]] testing measures clarity of vision. [[LASIK]] reshapes the cornea to correct refractive error.
+T ophthalmoscopy = visual examination of the interior of the eye with an ophthalmoscope
+T tonometry = measurement of intraocular pressure
+T visual acuity = sharpness or clarity of vision
+T LASIK = laser procedure that reshapes the cornea to correct refractive error
+
+## Structure and Function of the Ear and Hearing
+@source 314-318 | Textbook section 11.4, pp. 314-318
+> The [[external ear]] collects sound, the [[middle ear]] transmits vibrations through the ossicles, and the [[inner ear]] contains receptors for hearing and balance. The [[cochlea]] supports hearing and the [[vestibular apparatus]] supports equilibrium.
+T external ear = outer portion that collects and channels sound
+T middle ear = air-filled chamber containing auditory ossicles
+T inner ear = portion containing sensory organs for hearing and equilibrium
+T cochlea = spiral inner-ear structure containing receptors for hearing
+T vestibular apparatus = inner-ear structures responsible for equilibrium
+
+## Disorders of the Ear and Hearing
+@source 319-324 | Textbook section 11.5, pp. 319-324
+> [[otitis media]] is inflammation of the middle ear. [[tinnitus]] is perceived sound without an external source. [[conductive hearing loss]] blocks sound transmission, while [[sensorineural hearing loss]] results from inner-ear or auditory-nerve damage.
+T otitis media = inflammation or infection of the middle ear
+T tinnitus = perception of ringing or other sound without an external source
+T conductive hearing loss = impaired sound transmission through the external or middle ear
+T sensorineural hearing loss = hearing loss caused by damage to the inner ear or auditory nerve
+T vertigo = false sensation of spinning or movement
+
+## Diagnostic and Therapeutic Procedures and Pharmacology for Disorders of the Ear
+@source 325-330 | Textbook section 11.6, pp. 325-330
+> [[otoscopy]] inspects the ear canal and tympanic membrane. [[audiometry]] measures hearing, and [[tympanometry]] evaluates middle-ear function. A [[cochlear implant]] can provide sound signals when severe sensorineural loss is present.
+T otoscopy = visual examination of the ear canal and tympanic membrane
+T audiometry = measurement of hearing acuity across sound frequencies
+T tympanometry = test of tympanic membrane movement and middle-ear function
+T cochlear implant = electronic device that stimulates the auditory nerve
+

@@ -71,7 +71,7 @@ test("priming from a brain dump queues missed terms early without granting maste
 test("hints quote the lesson with the term hidden; feedback quotes it in full", () => {
   const keratin = chapters[2].entries.find((e) => e.name === "keratin");
   const notes = lessonNotes(keratin);
-  assert.equal(notes.title, "Structure and functions of the skin");
+  assert.equal(notes.title, "Functions and Structure of the Skin");
   assert.match(notes.html, /<b>keratin<\/b>/);
   assert.ok(notes.html.split(/[.!?](\s|$)/).filter((x) => x && x.trim()).length <= 3 * 2);
   let n = 0;

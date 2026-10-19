@@ -1153,7 +1153,7 @@ async function studyMenu(lookKey) {
           const m = sec.entries.filter((e) => S.progress[e.key]?.r >= 2 && S.progress[e.key]?.l === 1).length / sec.entries.length;
           return {
             value: sec, color: m >= 0.8 ? "#59d98e" : "#5ab0ff",
-            html: cardHtml({ icon: `${ch.num}.${i + 1}`, name: sec.title, tag: `${sec.entries.length} terms${sec.lesson ? " · 📖 lesson" : ""}`, body: `Seen ${pctText(seenShare(sec.entries))} · mastered ${pctText(m)}` }),
+            html: cardHtml({ icon: `${ch.num}.${i + 1}`, name: sec.title, tag: `${sec.entries.length} terms${sec.lesson ? " · 📖 lesson" : ""}`, body: `${sec.source ? `${esc(sec.source.label)} · ` : ""}Seen ${pctText(seenShare(sec.entries))} · mastered ${pctText(m)}` }),
           };
         }),
       ],
@@ -1261,7 +1261,7 @@ async function lessonPhase(section, deck) {
   const dg = lessonDiagram(section);
   const read = await choose({
     title: `Lesson: ${section.title}`,
-    sub: `<span class="kind">Read carefully. Afterwards you'll write down every key term you can remember.</span>` +
+    sub: `<span class="kind">Read carefully. Afterwards you'll write down every key term you can remember.${section.source ? ` Source: ${esc(section.source.label)}.` : ""}</span>` +
       `<span class="lesson">${lesson.html}</span>` +
       (dg ? renderDiagram(dg, null, { labels: "all" }) : ""),
     buttons: [

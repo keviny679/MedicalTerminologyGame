@@ -1,6 +1,8 @@
-# 6 | The Cardiovascular System
+# 6 | The Cardiovascular and Circulatory Systems: The Essentials of the Language of Cardiology
+// Aligned to Essentials of Medical Language (2024), supplied educational PDF.
 
-## Structure of the heart
+## The Heart
+@source 116-121 | Textbook section 6.1, pp. 116-121
 > The [[heart]] is a muscular pump about the size of a fist, sitting in the chest between the lungs with its
 > pointed [[apex|apex of the heart]] aimed down and to the left. It has four chambers. The two upper chambers
 > receive blood: the [[right atrium]] and [[left atrium]]. The two lower chambers pump blood out: the [[right
@@ -29,7 +31,6 @@ P ventricul/o = ventricle
 P coron/o = crown; coronary arteries
 P pericardi/o = pericardium
 
-## Heart valves and blood flow
 > Blood flows through the heart in one direction, kept on track by four valves. Oxygen-poor blood returns from
 > the body through the [[superior vena cava]] and [[inferior vena cava]] into the right atrium. It passes
 > through the [[tricuspid valve]] into the right ventricle, then through the [[pulmonary valve]] into the
@@ -58,7 +59,6 @@ P valv/o, valvul/o = valve
 P aort/o = aorta
 P pulmon/o = lung
 
-## Conduction system and heart rhythm
 > The heart has its own electrical system. Each beat starts in the [[sinoatrial node]], the natural pacemaker in
 > the wall of the right atrium. The signal spreads across both atria, making them contract, and reaches the
 > [[atrioventricular node]], which pauses it briefly so the ventricles can fill. The signal then travels down
@@ -89,7 +89,9 @@ T heart block = a delay or blockage of the electrical signal through the AV node
 T palpitations = an awareness of a pounding, fluttering or racing heartbeat
 T cardiac arrest = sudden loss of heart function, breathing and consciousness
 
-## Blood vessels and blood pressure
+
+## Circulatory Systems
+@source 122-124 | Textbook section 6.2, pp. 122-124
 > Blood travels away from the heart in each [[artery]], which branches into smaller vessels, each an
 > [[arteriole]]. The arterioles feed the [[capillary]] networks, tiny thin-walled vessels where oxygen and
 > nutrients pass into the tissues. Blood then drains into each [[venule]], which joins larger veins returning
@@ -128,7 +130,9 @@ P thromb/o = clot
 P ather/o = fatty plaque
 P embol/o = plug
 
-## Heart disorders
+
+## Disorders and Diseases of the Heart and Circulatory System
+@source 125-134 | Textbook section 6.3, pp. 125-134
 > The most common heart disease is [[coronary artery disease]]. It is usually caused by [[atherosclerosis]], the
 > buildup of fatty plaque inside the arteries; hardening of the arteries in general is [[arteriosclerosis]].
 > When narrowed arteries cannot deliver enough blood, the tissue suffers [[ischemia]], and the patient may feel
@@ -162,7 +166,6 @@ T congenital heart defect = a heart problem present at birth, such as a hole in 
 T rheumatic heart disease = heart valve damage caused by rheumatic fever after strep infection
 T cardiac tamponade = compression of the heart by fluid in the pericardial sac
 
-## Vascular disorders
 > An [[aneurysm]] is a bulging, weakened spot in an artery wall that can burst. A [[thrombus]] is a blood clot
 > that forms in a vessel and stays there, while an [[embolus]] is a clot or other mass that breaks loose and
 > travels; when it blocks a vessel, the blockage is an [[embolism]]. A clot in a deep leg vein is [[deep vein
@@ -192,7 +195,9 @@ T hemorrhage = heavy bleeding | hem/o + -rrhage
 T stroke = brain damage from a blocked or burst blood vessel; also called cerebrovascular accident
 P lip/o = fat
 
-## Diagnostic tests
+
+## Diagnostic and Therapeutic Procedures and Pharmacology of the Heart and Circulatory Systems
+@source 135-143 | Textbook section 6.4, pp. 135-143
 > The [[electrocardiogram]] records the heart's electrical activity using electrodes on the skin and shows
 > rhythm problems and heart attacks. A [[Holter monitor]] is a portable ECG worn for a day or more to catch
 > irregular beats that come and go. An [[echocardiogram]] uses ultrasound to make moving images of the heart's
@@ -218,7 +223,6 @@ T HDL cholesterol = high-density lipoprotein; the good cholesterol that removes 
 T BNP test = a blood test that rises in heart failure
 P ech/o = sound
 
-## Procedures and treatments
 > To open a narrowed coronary artery, doctors perform [[angioplasty]], inflating a balloon inside the vessel,
 > and usually leave a [[stent]], a small mesh tube that holds the artery open. Done through a catheter, this is
 > called [[percutaneous coronary intervention]]. When blockages are severe, a [[coronary artery bypass graft]]
@@ -255,7 +259,6 @@ T antiarrhythmic = a drug that controls irregular heart rhythms
 P -lytic = destroying, dissolving
 P coagul/o = clotting
 
-## Abbreviations
 A BP = blood pressure
 A HR = heart rate
 A bpm = beats per minute
