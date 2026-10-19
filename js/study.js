@@ -64,6 +64,7 @@ export function parseChapter(text, file = "") {
       parts: extra.find((x) => !x.startsWith("@")) || null,
       img: (extra.find((x) => x.startsWith("@")) || "").slice(1) || null,
       section: section.title,
+      source: section.source || null,
       chapter: ch.num,
     };
     entry.key = `${ch.num}|${entry.kind}|${entry.name}`;
@@ -133,7 +134,7 @@ export function lessonNotes(entry) {
       if (s && !out.some((o) => o.s === s) && out.length < 3) out.push({ s, title: lesson.title });
     }
   }
-  return { title: out[0].title, html: out.map((o) => o.s).join(" ") };
+  return { title: out[0].title, html: out.map((o) => o.s).join(" "), source: entry.source || null };
 }
 
 // A hint that teaches: a lesson sentence about the term with the term blanked

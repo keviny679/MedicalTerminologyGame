@@ -637,6 +637,16 @@ function notesHtml(entry) {
   return n ? `<span class="lesson-note"><span class="kind">📖 From the lesson “${esc(n.title)}”:</span> ${n.html}</span>` : "";
 }
 
+// A wrong answer can be traced back to the exact textbook section and its
+// explanatory lesson excerpt without taking the learner out of the battle.
+function sourceExcerptHtml(entry) {
+  const n = lessonNotes(entry);
+  if (!n) return "";
+  const source = n.source?.label ? ` · ${esc(n.source.label)}` : "";
+  return `<details class="source-excerpt"><summary>Open chapter excerpt${source}</summary>` +
+    `<div><span class="kind">From “${esc(n.title)}”</span><br>${n.html}</div></details>`;
+}
+
 async function animateHeroHits(enemy, res) {
   const run = play(S.hero, "attack", 800);
   await sleep(330);
@@ -765,7 +775,7 @@ async function fight(enemy) {
         : q.entry
         ? (q.options[q.answer] === q.entry.def ? `${choice === null ? "Here it is:" : "Not quite."} ${note}` : `${choice === null ? "Here it is:" : "Not quite."} The answer is “${esc(q.options[q.answer])}”.<br>${note}`) + esc(what)
         : `Not quite. <b>${esc(q.affix)}</b> means “${esc(q.options[q.answer])}”.${esc(what)}`;
-      if (R.study) fb.innerHTML += notesHtml(q.entry);
+      if (R.study) fb.innerHTML += sourceExcerptHtml(q.entry);
       await animateEnemyHit(enemy, res);
     }
 
@@ -1332,7 +1342,7 @@ async function relearnRound() {
     } else {
       sfx.wrong();
       fb.className = "feedback bad";
-      fb.innerHTML = `The answer: <b>${esc(q.answerText || q.options[q.answer])}</b>. ${esc(entry.def)}. It'll come up again.${notesHtml(entry)}`;
+      fb.innerHTML = `The answer: <b>${esc(q.answerText || q.options[q.answer])}</b>. ${esc(entry.def)}. It'll come up again.${sourceExcerptHtml(entry)}`;
       show("continueBtn");
       $("continueBtn").focus();
       await new Promise((resolve) => { S.pending = { type: "continue", resolve }; });
