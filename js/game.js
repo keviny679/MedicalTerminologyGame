@@ -637,14 +637,13 @@ function notesHtml(entry) {
   return n ? `<span class="lesson-note"><span class="kind">📖 From the lesson “${esc(n.title)}”:</span> ${n.html}</span>` : "";
 }
 
-// A wrong answer can be traced back to the exact textbook section and its
-// explanatory lesson excerpt without taking the learner out of the battle.
+// A wrong answer immediately shows its explanatory study excerpt and the
+// exact textbook section it was adapted from—no extra click required.
 function sourceExcerptHtml(entry) {
   const n = lessonNotes(entry);
   if (!n) return "";
-  const source = n.source?.label ? ` · ${esc(n.source.label)}` : "";
-  return `<details class="source-excerpt"><summary>Open chapter excerpt${source}</summary>` +
-    `<div><span class="kind">From “${esc(n.title)}”</span><br>${n.html}</div></details>`;
+  const source = n.source?.label ? `<span class="excerpt-source">${esc(n.source.label)}</span>` : "";
+  return `<div class="source-excerpt"><span class="kind">Textbook review · ${esc(n.title)}</span>${source}${n.html}</div>`;
 }
 
 async function animateHeroHits(enemy, res) {

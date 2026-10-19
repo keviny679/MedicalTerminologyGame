@@ -404,9 +404,9 @@ h2 { font-size: clamp(12px, 3vw, 20px); }
 .explain { color: var(--ink); }
 .unsure.on { background: #c77dff; color: #12051f; box-shadow: inset -3px -3px 0 #7a3fb0, 0 0 0 3px #05060f; }
 .feedback.surprise { border-left: 4px solid var(--bad); padding-left: 8px; }
-.source-excerpt { margin-top: 9px; color: var(--text); }
-.source-excerpt summary { color: #8fc9ff; cursor: pointer; text-decoration: underline; text-underline-offset: 3px; }
-.source-excerpt div { margin-top: 7px; padding: 9px 11px; border-left: 3px solid #5ab0ff; background: #101a2b; line-height: 1.45; }
+.source-excerpt { margin-top: 9px; padding: 9px 11px; color: var(--text); border-left: 3px solid #5ab0ff; background: #101a2b; line-height: 1.45; }
+.source-excerpt .kind { display: block; color: #8fc9ff; }
+.excerpt-source { display: block; margin: 2px 0 5px; color: #a9b6cb; font-size: .84em; }
 
 footer { margin-top: 14px; font-size: 16px; color: var(--muted); text-align: center; }
 footer a { color: var(--ink); }
