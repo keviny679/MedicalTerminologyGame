@@ -1111,13 +1111,39 @@ const airway = {
   overlay: [214, 226, 238, 250, 262, 274].map((y) => `<path d="M138,${y} h22" class="detail"/>`).join(""),
 };
 
+/* =========================================================== DIGESTIVE */
+
+const digestive = {
+  title: "Digestive system, anterior schematic",
+  ask: "Name the highlighted digestive structure.",
+  viewBox: "0 0 330 430",
+  crop: [54, 4, 222, 420],
+  base: '<path d="M118,10 C92,26 88,62 102,82 L116,92 L116,176 C86,188 76,230 82,286 C88,344 108,404 165,420 C222,404 242,344 248,286 C254,230 244,188 214,176 L214,92 L228,82 C242,62 238,26 212,10 Z" class="base"/>',
+  regions: {
+    mouth: { label: "Mouth (oral cavity)", c: "#e88f9c", d: "M118,44 C136,34 158,36 170,48 C154,60 132,62 116,54 Z", tip: [140, 50], lab: [38, 42] },
+    pharynx: { label: "Pharynx", c: "#9a8fd8", d: "M168,48 L184,54 L181,88 L166,82 Z", tip: [176, 68], lab: [292, 66] },
+    esophagus: { label: "Esophagus", c: "#e8b090", d: "M169,82 L181,86 L178,190 L166,190 Z", tip: [173, 136], lab: [292, 124] },
+    liver: { label: "Liver", c: "#a95757", d: "M96,184 C120,166 174,166 204,184 L194,224 C160,232 120,226 94,210 Z", tip: [132, 194], lab: [38, 188] },
+    gallbladder: { label: "Gallbladder", c: "#77b66e", d: "M164,214 C174,212 180,222 176,244 C170,252 162,244 164,214 Z", tip: [170, 232], lab: [292, 218] },
+    stomach: { label: "Stomach", c: "#ee9f86", d: "M178,186 C214,180 230,202 218,238 C208,266 176,260 170,236 C190,226 194,206 178,186 Z", tip: [204, 218], lab: [292, 188] },
+    pancreas: { label: "Pancreas", c: "#f0c867", d: "M142,244 C164,232 202,234 216,246 C194,256 164,258 142,252 Z", tip: [182, 248], lab: [292, 254] },
+    duodenum: { label: "Duodenum", c: "#d8a97a", d: "M194,250 C226,250 232,280 210,292 L198,284 C214,274 214,260 194,260 Z", tip: [216, 270], lab: [292, 286] },
+    small: { label: "Small intestine", c: "#efb28e", line: "M126,270 C196,254 210,284 136,292 C112,296 116,320 190,310 C220,306 214,340 140,340 C112,340 118,366 198,356", w: 9, tip: [164, 314], lab: [38, 314] },
+    large: { label: "Large intestine (colon)", c: "#c98f6f", line: "M112,260 L104,354 C104,378 126,388 150,388 L204,388 C224,382 230,362 226,342 L220,270 L204,258", w: 14, tip: [108, 318], lab: [38, 364] },
+    rectum: { label: "Rectum", c: "#b97b68", d: "M156,382 L176,382 L174,414 L158,414 Z", tip: [166, 400], lab: [292, 402] },
+  },
+  groups: {
+    tract: { label: "Alimentary canal (digestive tract)", members: ["mouth", "pharynx", "esophagus", "stomach", "duodenum", "small", "large", "rectum"], tip: [166, 300], lab: [292, 330] },
+  },
+};
+
 /* ================================================================== EXPORTS */
 
 export const DIAGRAMS = {
   skullLateral, skullAnterior, skullInferior, skeleton, spine: spine(), longBone: longBoneDiagram,
   fractures: fractures(), joint, skin, burns, lesions: lesions(), planes: planes(), quadrants, regions: nineRegions(),
   cavities: cavities(), cell, heart, conduction, vessels,
-  bloodCells: bloodCells(), bloodTube, lymphatic, respiratory, alveolus, airway,
+  bloodCells: bloodCells(), bloodTube, lymphatic, respiratory, alveolus, airway, digestive,
 };
 
 // Label of a region or group.

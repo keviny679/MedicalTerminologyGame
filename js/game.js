@@ -14,7 +14,8 @@ import { FLOORS } from "./art.js";
 import { Music } from "./music.js";
 import {
   CHAPTER_FILES, parseChapter, StudyDeck, chapterMastery, roomsFor, gradeTyped, letterHint, dueEntries,
-  STYLES, STYLE_LABEL, isMastered, MASTERY_DAYS, gradeBrainDump, lessonNotes, lessonClue,
+  buildMidtermEntries, buildMidtermFocusEntries, makeStudyQuestion, makeRecallQuestion,
+  STYLES, STYLE_LABEL, isMastered, MASTERY_DAYS, gradeBrainDump, lessonNotes, lessonClue, explainEntry,
 } from "./study.js";
 import { countAnswer, goalMet, recordGoal, liveStreak, makeBackup, applyBackup, GOAL_MIN_ANSWERS, migrateProgress, PROGRESS_VERSION } from "./progress.js";
 import * as DG from "./diagrams.js";
@@ -78,6 +79,7 @@ const music = new Music();
 
 const META_KEY = "rb.meta";
 const EML_KEY = "rb.eml";
+const MIDTERM_KEY = "rb.midterm1";
 const S = {
   terms: [],
   deck: null,
@@ -637,13 +639,24 @@ function notesHtml(entry) {
   return n ? `<span class="lesson-note"><span class="kind">📖 From the lesson “${esc(n.title)}”:</span> ${n.html}</span>` : "";
 }
 
+function explanationHtml(entry) {
+  if (!entry) return "";
+  const all = (S.chapters || []).flatMap((chapter) => chapter.entries);
+  const text = explainEntry(entry, all);
+  const lead = `${entry.name} ${entry.kind === "abbr" ? "stands for" : "means"} ${entry.def}.`;
+  return `<b>${esc(entry.name)}</b> ${entry.kind === "abbr" ? "stands for" : "means"} <b>${esc(entry.def)}</b>.${esc(text.slice(lead.length))}`;
+}
+
 // A wrong answer immediately shows its explanatory study excerpt and the
 // exact textbook section it was adapted from—no extra click required.
 function sourceExcerptHtml(entry) {
   const n = lessonNotes(entry);
-  if (!n) return "";
-  const source = n.source?.label ? `<span class="excerpt-source">${esc(n.source.label)}</span>` : "";
-  return `<div class="source-excerpt"><span class="kind">Textbook review · ${esc(n.title)}</span>${source}${n.html}</div>`;
+  if (!entry) return "";
+  const sourceData = n?.source || entry.source;
+  const source = sourceData?.label ? `<span class="excerpt-source">${esc(sourceData.label)}</span>` : "";
+  const title = n?.title || entry.section;
+  const explanation = n?.html || explanationHtml(entry);
+  return `<div class="source-excerpt"><span class="kind">Textbook review · ${esc(title)}</span>${source}${explanation}</div>`;
 }
 
 async function animateHeroHits(enemy, res) {
@@ -766,7 +779,7 @@ async function fight(enemy) {
       const res = enemyStrike(R, enemy, rng);
       fb.className = R.study && !guess ? "feedback bad surprise" : "feedback bad";
       let what = res.forgiven ? " Your charm shielded you." : res.dodged ? " You dodged!" : res.heavy ? " A crushing blow!" : "";
-      const note = q.entry && `<b>${esc(q.entry.name)}</b>: ${esc(q.entry.def)}${q.entry.parts ? ` (${esc(q.entry.parts)})` : ""}.`;
+      const note = q.entry && explanationHtml(q.entry);
       const def = `${esc(q.entry?.def || "")}${q.entry?.parts ? ` (${esc(q.entry.parts)})` : ""}`;
       if (R.study && !guess) what += " You felt sure, so take a close look; it's coming back in a moment.";
       fb.innerHTML = typed
@@ -1118,7 +1131,13 @@ async function studyMenu(lookKey) {
         `A term counts as mastered once you've typed it correctly from memory on ${MASTERY_DAYS} different days. ` +
         `<br>Question style: <b>${STYLE_LABEL[studyStyle()]}</b> · 🔥 Streak: <b>${liveStreak(store.get(STREAK_KEY, null))}</b> day(s)` +
         `<br><span class="kind">Tip: tap “Unsure” before answering when you're guessing, so a lucky guess isn't counted as known.</span>`,
-      cards: reviewCard.concat(chapters.map((c) => ({
+      cards: reviewCard.concat([{
+        value: "midterm1", color: "#c77dff",
+        html: cardHtml({
+          icon: "50", name: "Midterm 1 Practice", tag: "Chapters 1-8 · multiple choice",
+          body: "50 questions · 100 points · extra emphasis on Chapters 6, 7, and 8 · unlimited practice attempts",
+        }),
+      }], chapters.map((c) => ({
         value: c,
         color: chapterMastery(c, S.progress) >= 0.8 ? "#59d98e" : "#ffd36b",
         html: cardHtml({
@@ -1152,6 +1171,7 @@ async function studyMenu(lookKey) {
       const list = dueEntries(allEntries, S.progress).slice(0, 60);
       return startStudy({ num: 0, title: "Daily review", entries: list, sections: [] }, null);
     }
+    if (ch === "midterm1") { await midtermMenu(chapters); continue; }
     if (ch === "atlas") { await atlas(); continue; }
     const section = await choose({
       title: `Chapter ${ch.num}: ${ch.title}`,
@@ -1169,8 +1189,139 @@ async function studyMenu(lookKey) {
       buttons: [{ label: "Back", value: "back", ghost: true }],
     });
     if (section === "back") continue;
+    if (section) {
+      const path = await choose({
+        title: `${ch.num}.${ch.sections.indexOf(section) + 1} ${section.title}`,
+        sub: "Choose <b>Learn first</b> if these terms are new or easy to forget. It teaches one concept at a time, then checks typed recall without battle damage.",
+        buttons: [
+          { label: "Learn first · no damage", value: "learn" },
+          { label: "Lesson + battle", value: "battle" },
+          { label: "Back", value: "back", ghost: true },
+        ],
+      });
+      if (path === "back") continue;
+      if (path === "learn") { await learnSection(ch, section); continue; }
+    }
     return startStudy(ch, section);
   }
+}
+
+async function startMidterm1(chapters) {
+  return runMidtermPractice(chapters, false);
+}
+
+async function midtermMenu(chapters) {
+  for (;;) {
+    const pick = await choose({
+      title: "Midterm 1 preparation",
+      sub: "Use guided study when material is unfamiliar, focused practice to strengthen Chapters 3-7, and the full simulation when you are ready to test all Chapters 1-8.",
+      cards: [
+        { value: "full", color: "#c77dff", html: cardHtml({ icon: "50", name: "Full exam simulation", tag: "Chapters 1-8 · 100 points", body: "50 multiple-choice questions with extra emphasis on Chapters 6-8." }) },
+        { value: "focus", color: "#59d98e", html: cardHtml({ icon: "25", name: "Chapters 3-7 focus practice", tag: "25 questions · detailed teaching feedback", body: "Five balanced questions per chapter: terminology, anatomy, disorders, procedures, and word parts." }) },
+        { value: "learn", color: "#5ab0ff", html: cardHtml({ icon: "📖", name: "Guided study for Chapters 3-7", tag: "One section at a time · no damage", body: "Definitions, textbook context, diagrams, typed recall, and delayed retries." }) },
+      ],
+      buttons: [{ label: "Back to chapters", value: "back", ghost: true }],
+    });
+    if (pick === "back") return;
+    if (pick === "full") { await runMidtermPractice(chapters, false); continue; }
+    if (pick === "focus") { await runMidtermPractice(chapters, true); continue; }
+    const chapter = await choose({
+      title: "Guided study · Chapters 3-7",
+      sub: "Pick the body system you want to learn in detail.",
+      cards: chapters.filter((c) => c.num >= 3 && c.num <= 7).map((c) => ({
+        value: c,
+        color: "#5ab0ff",
+        html: cardHtml({ icon: String(c.num), name: c.title, tag: `${c.entries.length} terms · ${c.sections.length} sections`, body: `${pctText(seenShare(c.entries))} seen · ${pctText(chapterMastery(c, S.progress))} mastered` }),
+      })),
+      buttons: [{ label: "Back", value: "back", ghost: true }],
+    });
+    if (chapter === "back") continue;
+    const section = await choose({
+      title: `Chapter ${chapter.num}: ${chapter.title}`,
+      sub: "Each section teaches one concept at a time before requiring typed recall.",
+      cards: chapter.sections.map((sec, i) => ({
+        value: sec,
+        color: "#5ab0ff",
+        html: cardHtml({ icon: `${chapter.num}.${i + 1}`, name: sec.title, tag: `${sec.entries.length} terms`, body: sec.source?.label || "Textbook-aligned lesson" }),
+      })),
+      buttons: [{ label: "Back", value: "back", ghost: true }],
+    });
+    if (section !== "back") await learnSection(chapter, section);
+  }
+}
+
+async function runMidtermPractice(chapters, focused) {
+  const all = chapters.flatMap((c) => c.entries);
+  const entries = focused ? buildMidtermFocusEntries(chapters, rng) : buildMidtermEntries(chapters, rng);
+  const total = entries.length;
+  const pointsEach = focused ? 1 : 2;
+  const label = focused ? "Chapters 3-7 Focus" : "Midterm 1";
+  const byChapter = new Map(chapters.map((c) => [c.num, c]));
+  let correct = 0;
+  const missed = [];
+  const results = new Map();
+  show("hud", false);
+  show("statsRow", false);
+  show("panel");
+  for (let i = 0; i < entries.length; i++) {
+    const entry = entries[i];
+    const chapter = byChapter.get(entry.chapter);
+    const sameSection = chapter.entries.filter((e) => e.section === entry.section);
+    const q = makeStudyQuestion(entry, [sameSection, chapter.entries, all], DG, rng);
+    if (!q) throw new Error(`Couldn't build Midterm 1 question for ${entry.key}`);
+    const picture = q.image ? renderDiagram(q.image.diagram, q.image.region, { labels: q.image.labelled ? "one" : "none" }) : "";
+    const answer = await choose({
+      title: `${label} · Question ${i + 1} of ${total}`,
+      sub: `<span class="kind">Chapter ${entry.chapter} · ${esc(entry.section)}${focused ? "" : " · 2 points"}</span>${picture}<p>${q.prompt}</p>`,
+      buttons: q.options.map((option, index) => ({ label: `${index + 1}. ${option}`, value: index })),
+    });
+    const right = answer === q.answer;
+    const chapterResult = results.get(entry.chapter) || { correct: 0, total: 0 };
+    chapterResult.total++;
+    if (right) chapterResult.correct++;
+    results.set(entry.chapter, chapterResult);
+    if (right) {
+      correct++;
+      sfx.right();
+      await choose({
+        title: "Correct",
+        sub: explanationHtml(entry),
+        buttons: [{ label: i === total - 1 ? "See results" : "Next question", value: 1 }],
+      });
+    } else {
+      sfx.wrong();
+      missed.push(entry);
+      await choose({
+        title: "Review this one",
+        sub: `The correct answer is <b>${esc(q.options[q.answer])}</b>.<br>${explanationHtml(entry)}${sourceExcerptHtml(entry)}`,
+        buttons: [{ label: i === total - 1 ? "See results" : "Next question", value: 1 }],
+      });
+    }
+  }
+  const history = store.get(MIDTERM_KEY, []);
+  if (!focused) {
+    history.push({ at: Date.now(), correct, points: correct * 2 });
+    store.set(MIDTERM_KEY, history.slice(-2));
+  }
+  const chapterMisses = [...new Set(missed.map((e) => e.chapter))].sort((a, b) => a - b);
+  const prior = history.slice(-2).map((x, i) => `Attempt ${Math.max(1, history.length - 1 + i)}: ${x.points}/100`).join(" · ");
+  const breakdown = [...results.entries()].sort((a, b) => a[0] - b[0])
+    .map(([chapter, score]) => `<b>Ch ${chapter}</b>: ${score.correct}/${score.total}`).join(" · ");
+  const missedList = missed.length
+    ? `<ul class="review">${missed.slice(0, 15).map((e) => `<li><b>${esc(e.name)}</b> — ${esc(e.def)} <span class="kind">Ch ${e.chapter}, ${esc(e.source?.label || e.section)}</span></li>`).join("")}</ul>`
+    : "";
+  const next = await choose({
+    title: focused ? `Focus practice: ${correct}/${total}` : `Midterm 1 score: ${correct * pointsEach}/100`,
+    sub: `${correct}/${total} correct (${Math.round(correct / total * 100)}%).<br>${breakdown}` +
+      (chapterMisses.length ? `<br>Review Chapters ${chapterMisses.join(", ")}.` : "<br>Perfect score!") +
+      missedList +
+      (!focused && prior ? `<br><span class="kind">Recent practice: ${esc(prior)}</span>` : ""),
+    buttons: [
+      { label: focused ? "Practice Chapters 3-7 again" : "Take another full attempt", value: "again" },
+      { label: "Back to Midterm 1 preparation", value: "menu", ghost: true },
+    ],
+  });
+  return next === "again" ? runMidtermPractice(chapters, focused) : null;
 }
 
 // Browse every diagram fully labelled.
@@ -1261,6 +1412,94 @@ function lessonDiagram(section) {
   }
   const best = [...count.entries()].sort((a, b) => b[1] - a[1])[0];
   return best && best[1] >= 2 ? best[0] : null;
+}
+
+// A calm first-exposure path for students who do not know the vocabulary yet.
+// Concepts are taught individually, then recalled from memory. Misses wait until
+// the rest of the section has been attempted before returning, so the answer is
+// not merely copied from short-term visual memory.
+async function learnSection(chapter, section) {
+  const all = S.chapters.flatMap((c) => c.entries);
+  const deck = new StudyDeck(section.entries, all, DG, S.progress, Math.random, "typed");
+  show("hud", false);
+  show("statsRow", false);
+  show("panel");
+
+  for (let i = 0; i < section.entries.length; i++) {
+    const entry = section.entries[i];
+    const picture = entry.img ? renderDiagram(entry.img.split(".")[0], entry.img.split(".")[1], { labels: "all" }) : "";
+    const notes = lessonNotes(entry);
+    await choose({
+      title: `Learn ${i + 1} of ${section.entries.length}: ${entry.name}`,
+      sub: `<span class="kind">${esc(section.source?.label || `Chapter ${chapter.num}`)}</span>` +
+        `<div class="learn-definition">${esc(explainEntry(entry, all))}</div>` +
+        (entry.parts ? `<p><b>Build the word:</b> ${esc(entry.parts)}</p>` : "") +
+        (notes ? `<span class="lesson-note"><span class="kind">In context:</span>${notes.html}</span>` : "") +
+        picture,
+      buttons: [{ label: i + 1 === section.entries.length ? "Start recall" : "Next concept", value: 1 }],
+    });
+  }
+
+  let queue = [...section.entries];
+  const recalled = new Set();
+  for (let round = 1; round <= 3 && queue.length; round++) {
+    const missed = [];
+    for (let i = 0; i < queue.length; i++) {
+      const entry = queue[i];
+      const q = makeRecallQuestion(entry, all, DG, Math.random);
+      if (!q) continue;
+      const picture = q.image ? renderDiagram(q.image.diagram, q.image.region, { labels: "none" }) : "";
+      const pending = choose({
+        title: round === 1 ? `Recall ${i + 1} of ${queue.length}` : `Delayed retry ${i + 1} of ${queue.length}`,
+        sub: `${picture}<p>${q.prompt}</p>` +
+          `<input id="learnAnswer" class="dump learn-answer" autocomplete="off" autocapitalize="off" spellcheck="false" aria-label="Your answer">`,
+        buttons: [
+          { label: "Check answer", value: "check" },
+          { label: "I don't know", value: "idk", ghost: true },
+        ],
+      });
+      $("learnAnswer")?.focus();
+      const action = await pending;
+      const typed = action === "check" ? $("learnAnswer")?.value || "" : "";
+      const grade = action === "check" ? gradeTyped(typed, q.accept, deck.vocab) : "wrong";
+      const correct = grade !== "wrong";
+      deck.record(entry, correct, true, Date.now(), { guess: action === "idk" });
+      store.set(EML_KEY, S.progress);
+      store.set(TODAY_KEY, countAnswer(store.get(TODAY_KEY, null)));
+      if (correct) {
+        recalled.add(entry.key);
+        await choose({
+          title: grade === "typo" ? "Correct idea · check the spelling" : "Recalled correctly",
+          sub: explanationHtml(entry),
+          buttons: [{ label: "Continue", value: 1 }],
+        });
+      } else {
+        missed.push(entry);
+        await choose({
+          title: "Learn this one again",
+          sub: `<p>The answer is <b>${esc(q.answerText || entry.name)}</b>.</p>${explanationHtml(entry)}${sourceExcerptHtml(entry)}`,
+          buttons: [{ label: "Continue", value: 1 }],
+        });
+      }
+    }
+    queue = missed;
+    if (queue.length && round < 3) {
+      await choose({
+        title: `${queue.length} term${queue.length === 1 ? "" : "s"} to retry`,
+        sub: "They will return now, after the other concepts have had time to get between seeing the answer and recalling it.",
+        buttons: [{ label: "Begin delayed retry", value: 1 }],
+      });
+    }
+  }
+
+  const unresolved = [...new Map(queue.map((e) => [e.key, e])).values()];
+  await choose({
+    title: unresolved.length ? "Learning pass complete" : "Section recalled!",
+    sub: unresolved.length
+      ? `You recalled ${recalled.size} of ${section.entries.length} terms. These still need another session:</p><ul class="review">${unresolved.map((e) => `<li><b>${esc(e.name)}</b> ${esc(e.def)}</li>`).join("")}</ul><p>They are saved for review; stopping after three attempts prevents answer memorization from masquerading as learning.`
+      : `You recalled every term without battle damage. ${nextReviewText()}`,
+    buttons: [{ label: "Back to chapters", value: 1 }],
+  });
 }
 
 // Read a short lesson, write down every key term remembered (free recall),

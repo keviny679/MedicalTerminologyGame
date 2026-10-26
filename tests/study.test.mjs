@@ -1,7 +1,7 @@
 import test from "node:test";
 import assert from "node:assert/strict";
 import { readFileSync } from "node:fs";
-import { CHAPTER_FILES, parseChapter, makeStudyQuestion, StudyDeck, chapterMastery, roomsFor, tooSimilar, questionTypes } from "../js/study.js";
+import { CHAPTER_FILES, parseChapter, makeStudyQuestion, StudyDeck, chapterMastery, roomsFor, tooSimilar, questionTypes, buildMidtermEntries, buildMidtermFocusEntries, explainEntry } from "../js/study.js";
 import * as DG from "../js/diagrams.js";
 const { DIAGRAMS } = DG;
 
@@ -96,6 +96,41 @@ test("bigger chapters get longer runs", () => {
   assert.equal(roomsFor(10), 3);
   assert.equal(roomsFor(1000), 12);
   console.log(chapters.map((c) => `ch${c.num}: ${c.entries.length} entries, ${c.sections.length} sections, ${roomsFor(c.entries.length)} rooms`).join("\n"));
+});
+
+test("Midterm 1 builds 50 unique questions with extra weight on Chapters 6-8", () => {
+  let s = 91;
+  const seeded = () => ((s = (s * 16807) % 2147483647) / 2147483647);
+  const entries = buildMidtermEntries(chapters, seeded);
+  assert.equal(entries.length, 50);
+  assert.equal(new Set(entries.map((e) => e.key)).size, 50);
+  const counts = Object.fromEntries(Array.from({ length: 8 }, (_, i) => [i + 1, entries.filter((e) => e.chapter === i + 1).length]));
+  assert.deepEqual(counts, { 1: 4, 2: 4, 3: 4, 4: 4, 5: 4, 6: 10, 7: 10, 8: 10 });
+  assert.ok(entries.some((e) => e.kind === "abbr"));
+  assert.ok(entries.some((e) => e.kind === "part"));
+  assert.ok(entries.some((e) => e.img));
+  assert.ok(entries.some((e) => /diagnostic|therapeutic|procedure|pharmacology/i.test(e.section)));
+});
+
+test("focused Midterm practice balances Chapters 3-7", () => {
+  let s = 131;
+  const seeded = () => ((s = (s * 16807) % 2147483647) / 2147483647);
+  const entries = buildMidtermFocusEntries(chapters, seeded);
+  assert.equal(entries.length, 25);
+  assert.equal(new Set(entries.map((e) => e.key)).size, 25);
+  for (let chapter = 3; chapter <= 7; chapter++) {
+    assert.equal(entries.filter((e) => e.chapter === chapter).length, 5);
+  }
+  assert.ok(entries.some((e) => e.kind === "part"));
+  assert.ok(entries.some((e) => e.img));
+  assert.ok(entries.some((e) => /diagnostic|therapeutic|procedure|pharmacology/i.test(e.section)));
+});
+
+test("feedback expands a terse abbreviation into the concept it names", () => {
+  const cxr = chapters[7].entries.find((e) => e.name === "CXR");
+  const explanation = explainEntry(cxr, all);
+  assert.match(explanation, /stands for chest x-ray/i);
+  assert.match(explanation, /image of the lungs, heart and chest bones/i);
 });
 
 test("diagram paths contain no malformed numbers", () => {

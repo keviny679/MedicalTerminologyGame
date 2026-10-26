@@ -313,6 +313,15 @@ h2 { font-size: clamp(12px, 3vw, 20px); }
   border-left: 4px solid var(--accent);
 }
 .lesson-note b { color: var(--accent); font-weight: normal; }
+.learn-definition {
+  margin: 10px 0;
+  padding: 11px 13px;
+  font: 20px/1.35 var(--read);
+  color: var(--ink);
+  background: #141a3e;
+  border-left: 4px solid #59d98e;
+}
+.learn-answer { max-width: 620px; margin-left: auto; margin-right: auto; }
 
 /* study-mode diagrams */
 .dg { margin: 8px auto 4px; max-width: 560px; text-align: center; }

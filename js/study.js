@@ -137,6 +137,20 @@ export function lessonNotes(entry) {
   return { title: out[0].title, html: out.map((o) => o.s).join(" "), source: entry.source || null };
 }
 
+// Expand terse table labels—especially abbreviations—into a useful teaching
+// explanation by following the expanded name to its full term definition.
+export function explainEntry(entry, entries = []) {
+  if (!entry) return "";
+  const target = entry.def.replace(/\s*\([^)]*\)\s*$/, "").trim().toLowerCase();
+  const related = entry.kind === "abbr" && entries.find((candidate) =>
+    candidate.kind === "term" && candidate !== entry &&
+    (candidate.name.toLowerCase() === target || target.startsWith(`${candidate.name.toLowerCase()} `)));
+  let text = `${entry.name} ${entry.kind === "abbr" ? "stands for" : "means"} ${entry.def}.`;
+  if (related && related.def.toLowerCase() !== entry.def.toLowerCase()) text += ` ${related.name} is ${related.def}.`;
+  else if (entry.parts) text += ` Word analysis: ${entry.parts}.`;
+  return text;
+}
+
 // A hint that teaches: a lesson sentence about the term with the term blanked
 // out. Avoids the sentence a fill-in-the-blank question is already showing.
 export function lessonClue(entry, q = null, rng = Math.random) {
@@ -423,6 +437,66 @@ export function chapterMastery(chapter, progress) {
 // Chapter size drives run length: more material, more rooms.
 export function roomsFor(entryCount) {
   return Math.max(3, Math.min(12, Math.round(entryCount / 20)));
+}
+
+// A 50-question Midterm 1 practice set. Chapters 1-5 contribute four
+// questions each; Chapters 6-8 contribute ten each, matching the instructor's
+// stated extra emphasis on the material that has not yet been quizzed.
+export function buildMidtermEntries(chapters, rng = Math.random) {
+  const wanted = new Map([[1, 4], [2, 4], [3, 4], [4, 4], [5, 4], [6, 10], [7, 10], [8, 10]]);
+  const selected = [];
+  const pickOne = (pool, used) => {
+    const left = pool.filter((e) => !used.has(e.key));
+    if (!left.length) return null;
+    return left[Math.floor(rng() * left.length)];
+  };
+  for (const chapter of chapters.filter((c) => wanted.has(c.num))) {
+    const count = wanted.get(chapter.num);
+    const used = new Set();
+    const categories = [
+      (e) => e.kind === "part",
+      (e) => e.kind === "abbr",
+      (e) => !!e.img,
+      (e) => /diagnostic|therapeutic|procedure|pharmacology/i.test(e.section),
+      (e) => e.kind === "term",
+    ];
+    for (let i = 0; i < count; i++) {
+      const preferred = chapter.entries.filter(categories[i % categories.length]);
+      const entry = pickOne(preferred, used) || pickOne(chapter.entries, used);
+      if (!entry) throw new Error(`Chapter ${chapter.num} has too few unique entries for Midterm 1`);
+      used.add(entry.key);
+      selected.push(entry);
+    }
+  }
+  if (selected.length !== 50) throw new Error(`Midterm 1 requires 50 questions; built ${selected.length}`);
+  return shuffle(selected, rng);
+}
+
+// A shorter study set for the content the student identified as highest
+// priority. Five unique questions from each of Chapters 3-7 keeps the practice
+// balanced instead of letting the largest chapter dominate.
+export function buildMidtermFocusEntries(chapters, rng = Math.random) {
+  const selected = [];
+  const categories = [
+    (e) => e.kind === "part",
+    (e) => !!e.img,
+    (e) => /disorder|injur|disease/i.test(e.section),
+    (e) => /diagnostic|therapeutic|procedure|pharmacology/i.test(e.section),
+    (e) => e.kind === "term" || e.kind === "abbr",
+  ];
+  for (const chapter of chapters.filter((c) => c.num >= 3 && c.num <= 7)) {
+    const used = new Set();
+    for (const category of categories) {
+      const preferred = chapter.entries.filter((e) => category(e) && !used.has(e.key));
+      const fallback = chapter.entries.filter((e) => !used.has(e.key));
+      const pool = preferred.length ? preferred : fallback;
+      if (!pool.length) throw new Error(`Chapter ${chapter.num} has too few terms for focused practice`);
+      const entry = pool[Math.floor(rng() * pool.length)];
+      used.add(entry.key);
+      selected.push(entry);
+    }
+  }
+  return selected.sort(() => rng() - 0.5);
 }
 
 const DAY = 24 * 60 * 60 * 1000;

@@ -4,7 +4,7 @@
 ## The Digestive System
 @source 210-212 | Textbook section 9.1, pp. 210-212
 > The [[alimentary canal]] carries food from mouth to anus. [[ingestion]] takes food in, [[deglutition]] swallows it, [[peristalsis]] propels it, and [[digestion]] breaks it down so [[absorption]] can move nutrients into blood or lymph. [[defecation]] eliminates indigestible residue.
-T alimentary canal = digestive tract extending from the mouth to the anus
+T alimentary canal = digestive tract extending from the mouth to the anus | @digestive.tract
 T ingestion = selective intake of food into the mouth
 T deglutition = swallowing a bolus from the mouth into the esophagus
 T peristalsis = waves of contraction and relaxation that move material through the digestive tract
@@ -16,32 +16,32 @@ T defecation = elimination of indigestible material as feces
 @source 213-216 | Textbook section 9.2, pp. 213-216
 > [[mastication]] begins mechanical digestion in the [[oral cavity]]. The [[palate]] forms the roof of the mouth, the [[uvula]] helps close the nasopharynx during swallowing, and [[saliva]] begins chemical digestion. The [[pharynx]] directs the bolus toward the [[esophagus]].
 T mastication = chewing that mechanically breaks food into smaller particles
-T oral cavity = the mouth; the first site of mechanical and chemical digestion
+T oral cavity = the mouth; the first site of mechanical and chemical digestion | @digestive.mouth
 T palate = roof of the mouth, with hard anterior and soft posterior portions
 T uvula = projection of the soft palate that helps close the nasopharynx during swallowing
 T saliva = secretion that lubricates food and begins chemical digestion
-T pharynx = throat passage shared by the digestive and respiratory systems
-T esophagus = muscular tube that carries food from the pharynx to the stomach
+T pharynx = throat passage shared by the digestive and respiratory systems | @digestive.pharynx
+T esophagus = muscular tube that carries food from the pharynx to the stomach | @digestive.esophagus
 
 ## Digestion—Stomach, Small Intestine, and Large Intestine
 @source 217-222 | Textbook section 9.3, pp. 217-222
 > The [[stomach]] mixes food into [[chyme]]. Most digestion and absorption occur in the [[small intestine]], whose parts are the [[duodenum]], [[jejunum]], and [[ileum]]. The [[large intestine]] absorbs water and forms feces, which pass through the [[rectum]].
-T stomach = muscular sac that mixes food with gastric secretions
+T stomach = muscular sac that mixes food with gastric secretions | @digestive.stomach
 T chyme = semifluid mixture of partially digested food and gastric juice
-T small intestine = digestive tract segment where most digestion and nutrient absorption occur
-T duodenum = first section of the small intestine
+T small intestine = digestive tract segment where most digestion and nutrient absorption occur | @digestive.small
+T duodenum = first section of the small intestine | @digestive.duodenum
 T jejunum = middle section of the small intestine
 T ileum = third and final section of the small intestine
-T large intestine = bowel segment that absorbs water and forms feces
-T rectum = terminal storage portion of the large intestine before the anus
+T large intestine = bowel segment that absorbs water and forms feces | @digestive.large
+T rectum = terminal storage portion of the large intestine before the anus | @digestive.rectum
 
 ## Digestion—Liver, Gallbladder, and Pancreas
 @source 223-225 | Textbook section 9.4, pp. 223-225
 > The [[liver]] produces [[bile]], the [[gallbladder]] stores and concentrates it, and the [[pancreas]] supplies digestive enzymes and bicarbonate to the duodenum. Bile helps [[emulsification]] of fats before absorption.
-T liver = large accessory organ that produces bile and performs metabolic functions
+T liver = large accessory organ that produces bile and performs metabolic functions | @digestive.liver
 T bile = liver secretion that aids digestion and absorption of fats
-T gallbladder = sac that stores and concentrates bile
-T pancreas = gland that supplies digestive enzymes and bicarbonate to the small intestine
+T gallbladder = sac that stores and concentrates bile | @digestive.gallbladder
+T pancreas = gland that supplies digestive enzymes and bicarbonate to the small intestine | @digestive.pancreas
 T emulsification = breaking large fat globules into small droplets to aid digestion
 
 ## Disorders of the Digestive System
